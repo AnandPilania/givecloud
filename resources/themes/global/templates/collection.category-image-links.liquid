@@ -1,0 +1,33 @@
+{% include 'header-image', header_title: category.name, header_image: category.feature_image.full %}
+
+<div class="page-content">
+
+{% if category.body %}
+    {{ category.body }}
+{% endif %}
+
+{% if category.sub_categories.size == 1 %}
+    {% assign category_col_classes = "col-12" %}
+{% elsif category.sub_categories.size == 2 %}
+    {% assign category_col_classes = "col-sm-6 col-12" %}
+{% elsif category.sub_categories.size == 3 %}
+    {% assign category_col_classes = "col-md-4 col-sm-6 col-12" %}
+{% else %}
+    {% assign category_col_classes = "col-lg-3 col-md-4 col-sm-6 col-12" %}
+{% endif %}
+
+{% if category.sub_categories.size > 0 %}
+    <section class="section-light section-sm">
+        <div class="container">
+            <div class="row">
+                {% for cat in category.sub_categories %}
+                    <div class="{{ category_col_classes }} my-3 {% if settings.animations %}wow fadeInUp{% endif %}" {% if settings.animations %}data-wow-delay="0.{{ forloop.index }}s"{% endif %}>
+                        {% include 'image-link-item', size: 'md', text: cat.name, link: cat.url, image: cat.feature_image.thumb %}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endif %}
+
+</div>

@@ -1,0 +1,27 @@
+.root {
+  @apply flex items-center justify-center space-x-2;
+  @apply w-full mt-2 px-5 py-2.5;
+  @apply transition-colors ease-in-out duration-300;
+  @apply text-lg leading-normal rounded-md;
+  background-color: var(--primary-colour-500);
+  color: var(--primary-colour-white-or-black);
+
+  &.outline {
+    @apply border;
+    background-color: transparent;
+    border-color: var(--primary-colour-500);
+    color: var(--primary-text-colour);
+  }
+
+  strong {
+    @apply font-bold;
+  }
+
+  > strong {
+    @apply mx-2;
+  }
+
+  &[disabled] {
+    @apply opacity-50;
+  }
+}

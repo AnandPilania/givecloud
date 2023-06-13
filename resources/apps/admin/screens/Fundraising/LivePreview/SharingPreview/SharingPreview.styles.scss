@@ -1,0 +1,38 @@
+.root {
+  @apply bg-white shadow-lg rounded-lg;
+  @apply w-[280px] h-[301px];
+
+  .previewImageWrapper {
+    @apply w-full mb-1;
+
+    .previewImageContainer {
+      @apply aspect-w-12 aspect-h-9;
+
+      .previewImage {
+        @apply object-cover object-center rounded-t-lg;
+      }
+    }
+  }
+
+  .imgPlaceholder {
+    @apply bg-gray-400 rounded-t-lg;
+    @apply w-full h-[210px] mb-1;
+  }
+
+  .title {
+    @apply relative;
+    @apply font-bold text-sm truncate;
+    @apply mb-1;
+  }
+
+  .description {
+    @apply relative;
+    @apply text-sm truncate;
+  }
+
+  .overlay {
+    @apply absolute -top-0.5 -right-1 pt-8 pr-72 rounded-md;
+    @apply bg-blue-300 border-blue-400 opacity-40;
+    @apply hover:cursor-pointer hover:bg-brand-blue hover:border-2 hover:border-blue-400;
+  }
+}

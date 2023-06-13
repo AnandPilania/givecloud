@@ -1,0 +1,9 @@
+<?php
+
+namespace PayPal\Types\Perm;
+
+class GetPermissionsResponse
+{
+    /** @var \PayPal\Types\Common\ResponseEnvelope */
+    public $responseEnvelope; // @phpstan-ignore-line
+}

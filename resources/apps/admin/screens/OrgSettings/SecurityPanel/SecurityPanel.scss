@@ -1,0 +1,15 @@
+.root {
+  @apply flex flex-col justify-between;
+
+  .heading {
+    @apply mr-2 md:w-fit mdlg:w-full lg:w-fit;
+  }
+
+  .buttonContainer {
+    @apply flex justify-end w-full mt-2;
+  }
+
+  .textContainer {
+    @apply flex flex-wrap-reverse;
+  }
+}

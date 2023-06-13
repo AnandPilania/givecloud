@@ -1,0 +1,11 @@
+.center {
+  @apply items-center justify-center;
+}
+
+.end {
+  @apply flex-row justify-end;
+}
+
+.errorIcon {
+  @apply absolute top-0 -right-8 text-white bg-red-600 rounded-full inline-flex items-center justify-center;
+}

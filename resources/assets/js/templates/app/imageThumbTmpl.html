@@ -1,0 +1,14 @@
+
+<div class="col-sm-3 col-md-2 imgThumb-wrap" id="imgThumb-<%= id %>" search="<%= filename %>">
+    <div class="thumbnail">
+        <a title="<%= filename %>" class="imgThumb" tabindex="0">
+            <span class="imgThumb-background" style="background-image:url(<%= thumbnail_url %>)"></span>
+        </a>
+        <div class="imgThumb-btns">
+            <a href="<%= public_url %>" target="_blank" class="btn btn-xs btn-info"><i class="fa fa-search"></i></a>
+            <% if (Givecloud.settings.user_can_edit) { %>
+                <a class="btn btn-xs btn-danger" data-images-remove><i class="fa fa-times"></i></a>
+            <% } %>
+        </div>
+    </div>
+</div>

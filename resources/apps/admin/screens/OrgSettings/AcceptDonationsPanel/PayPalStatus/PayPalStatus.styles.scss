@@ -1,0 +1,12 @@
+.root {
+  @apply border-b border-gray-300 pb-2;
+  @apply items-center;
+
+  .column {
+    @apply flex-row items-baseline flex-wrap-reverse;
+
+    .text {
+      @apply mr-2 mt-2;
+    }
+  }
+}

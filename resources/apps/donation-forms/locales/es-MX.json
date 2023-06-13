@@ -1,0 +1,220 @@
+{
+  "components": {
+    "app": {
+      "social_proof_notifications": {
+        "someone": "Alguien",
+        "from": "de",
+        "recent_html": "<strong>{{ who }}</strong> dio <strong>{{ amount }}</strong> <small>{{ when }}</small>",
+        "largest_amount_html": "<strong>{{ who }}</strong> dio el máximo, <strong>{{ amount }}</strong> <small>{{ when }}</small>"
+      }
+    },
+    "amount_selector": {
+      "done_button": "Hecho",
+      "variant_button": {
+        "monthly": "Mensual",
+        "today_only": "Hoy solo"
+      }
+    },
+    "badge_preview": {
+      "top_x_of_donors_html": "<strong>{{ percentage }}% SUPERIOR</strong> de los donantes"
+    },
+    "cover_costs_selector": {
+      "information": {
+        "help_cover_costs_fees": "Ayuda a cubrir costos y tarifas",
+        "one_of_the_most_cost_effective_ways": "Los pagos en línea son una de las formas más rentables para nosotros de recaudar fondos. La automatización elimina el error humano y agiliza nuestras operaciones financieras para que podamos concentrarnos en nuestra misión.",
+        "help_make_the_most_of_your_donation": "Ayude a aprovechar al máximo su donación eliminando los pocos costos restantes en los que incurrimos cuando recaudamos fondos en línea, que incluyen:",
+        "processing_bank_fees": "Comisiones bancarias y de procesamiento",
+        "it_security_costs": "Costos de TI y seguridad",
+        "software_costs": "Costo del software"
+      },
+      "description_html": "Agregar {{ amount }} para ayudarnos a cubrir las tarifas",
+      "most_costs": "{{ amount }} - La mayoría de los costos",
+      "more_costs": "{{ amount }} - Más costos",
+      "minimum_costs": "{{ amount }} - Costos mínimos",
+      "no_thank_you": "no, gracias"
+    },
+    "footer_navigation": {
+      "faq": "PMF",
+      "privacy_and_legal": "Privacidad y Legal"
+    },
+    "screen": {
+      "exit_confirm_modal": {
+        "message": "Su impacto aún no ha sido procesado. Si sales ahora, perderás tu progreso.",
+        "are_you_sure": "Estas seguro?",
+        "cancel": "Cancelar",
+        "close": "Cerca",
+        "exit": "Salida"
+      },
+      "test_mode_warning": "Formulario de donación en modo de prueba"
+    },
+    "next_button": {
+      "label": "Próximo"
+    }
+  },
+  "screens": {
+    "choose_payment_method": {
+      "amount_stepper": {
+        "tap_to_change": "Toque para cambiar"
+      },
+      "payment_method_selector": {
+        "amount_html": "{{ amount }}",
+        "monthly_amount_html": "{{ amount }}/mes",
+        "donate": "Donar",
+        "donate_with": "Donar con",
+        "pay_with": "Pagar con",
+        "credit": "Crédito",
+        "bank": "Banco",
+        "paypal_unknown_error": "Hubo un problema al usar PayPal. Asegúrate de que tus ventanas emergentes no estén bloqueadas. O pruebe una forma diferente de donar."
+      },
+      "transparency_promise": {
+        "title": "Promesa de impacto"
+      }
+    },
+    "pay_with_credit_card": {
+      "heading": "Pago seguro",
+      "description": "Puede estar seguro de que su información siempre está protegida por nuestro cifrado de nivel bancario.",
+      "credit_card": "Tarjeta de crédito",
+      "donate": "Donar",
+      "amount": "{{ amount }}",
+      "monthly_amount": "{{ amount }}/mes",
+      "bank_ach": "Banco / ACH",
+      "credit": "Crédito",
+      "ach": "ACH",
+      "cardholder_name": "Nombre del titular de la tarjeta.",
+      "cardholder_name_required": "Se requiere un nombre.",
+      "cardholder_last_name_required": "Se requiere un apellido.",
+      "name_on_account": "Nombre en la cuenta",
+      "card_number": "Número de tarjeta",
+      "card_number_invalid": "Su número de tarjeta está incompleto.",
+      "card_number_required": "Se requiere un número de tarjeta.",
+      "card_exp": "MM / AA",
+      "card_exp_invalid": "La fecha de vencimiento de su tarjeta es incorrecta.",
+      "card_exp_required": "Se requiere una fecha de vencimiento de la tarjeta.",
+      "card_cvv": "CVC",
+      "card_cvv_invalid": "El código de seguridad de su tarjeta está incompleto.",
+      "card_cvv_required": "Se requiere un código de seguridad de la tarjeta.",
+      "bank_transfer": "Transferencia bancaria",
+      "account_type": "Tipo de cuenta",
+      "checking": "Comprobación",
+      "savings": "Ahorros",
+      "routing_number": "Número de ruta",
+      "transit_number": "Número de Tránsito",
+      "institution_number": "Institución #",
+      "routing_number_required": "Se requiere un número de ruta.",
+      "routing_number_cad_required": "Se requiere un número de tránsito/institución.",
+      "account_number": "Número de cuenta",
+      "account_number_required": "Se requiere un número de cuenta.",
+      "is_a_business_account_html": "Esta es una <strong>cuenta comercial</strong>.",
+      "ach_placeholder_usd": "Ruta / Cuenta",
+      "ach_placeholder_cad": "Tránsito / Institución / Cuenta",
+      "continue": "Continuar",
+      "email_address": "Correo electrónico",
+      "email_address_invalid": "La dirección de correo electrónico que ha introducido no es válido.",
+      "email_address_required": "Se requiere una dirección de correo electrónico.",
+      "billing_address_placeholder": "Dirección de Envio",
+      "billing_address_required": "Se requiere una dirección de facturación.",
+      "edit_manually": "Editar manualmente",
+      "search_for_address": "Buscar dirección",
+      "placeholder_address": "123 Ejemplo de calle",
+      "placeholder_city": "Ciudad",
+      "placeholder_state": "Provincia del estado",
+      "placeholder_zip": "Código postal",
+      "placeholder_country": "País",
+      "ach_mandate": "Al hacer clic en [\"Dar ahora\"], autorizo a {{ gateway }} en nombre de {{ organization }} (i) a verificar la información de mi cuenta bancaria utilizando información bancaria e informes de consumidores y (ii) a debitar mi cuenta bancaria .",
+      "must_accept_mandate": "Debe aceptar los términos del mandato.",
+      "donate_button": "Dar ahora"
+    },
+    "complete_checkout": {
+      "heading": "Último paso",
+      "description": "Si nos proporciona su información de contacto, podremos enviarle la confirmación y el recibo de su donación.",
+      "contact_info": "Información del contacto",
+      "first_and_last_name": "Primer apellido",
+      "give": "Dar",
+      "amount": "{{ amount }}",
+      "monthly_amount": "{{ amount }}/mes"
+    },
+    "are_you_a_robot": {
+      "heading": "¿Eres un robot?",
+      "description": "Este paso nos ayuda a prevenir el\nfraude y nos protege de costosas tarifas\ny devoluciones de cargo."
+    },
+    "payment_approved": {
+      "heading": "Aprobado",
+      "description": "Se ha enviado un correo electrónico de confirmación a {{ email }}."
+    },
+    "payment_declined": {
+      "heading": "Eso no funcionó",
+      "error_from_bank": "Error del banco: {{ error }}",
+      "try_again": "Vuelve a intentarlo"
+    },
+    "processing_payment": {
+      "description": "Procesando el pago",
+      "messages": {
+        "contacting_bank": "Banco de contacto",
+        "authorizing_payment": "Autorización de pago",
+        "waiting_on_bank": "esperando en el banco",
+        "processing": "Procesando"
+      }
+    },
+    "monthly_upsell": {
+      "heading": "Mejora tu impacto",
+      "description_html": "¡Convierta su {{ from }} en <strong>{{ into }}</strong> o más al donar mensualmente!",
+      "starts_on": "Empieza {{ date }}",
+      "make_per_month_html": "Hazlo <strong>{{ amount }}/lun</strong>",
+      "per_month_html": "{{ amount }}/lun",
+      "every_little_bit": "♥️ ¡Cada poquito cuenta!",
+      "no_thanks": "No, gracias"
+    },
+    "double_the_donation_search": {
+      "heading": "Duplicar mi impacto",
+      "description": "Vea si su empleador igualará su donación.",
+      "new_employer": "Nuevo empleador",
+      "no_thanks": "No, gracias"
+    },
+    "double_the_donation_match": {
+      "heading": "Duplicaremos tu donación",
+      "description": "Verifique su correo electrónico para conocer el siguiente paso para enviar su solicitud de regalo correspondiente a:"
+    },
+    "email_opt_in": {
+      "heading": "¿Podemos enviarle actualizaciones?",
+      "description_html": "Nos gustaría compartir exactamente cómo hemos invertido sus <strong>{{ amount }}.</strong>",
+      "keep_me_up_to_date": "Mantenme al tanto",
+      "no_thanks": "No, gracias"
+    },
+    "thank_you": {
+      "heading": "¡Gracias, {{ name }}!",
+      "description_html": "Su donación de <strong>{{ amount }}</strong> ayudará a brindar la atención que tanto necesitan las personas necesitadas de nuestra comunidad.",
+      "spread_the_word": "Difundir la palabra"
+    },
+    "frequently_asked_questions": {
+      "heading": "PMF",
+      "bank_level_security_html": "La <strong>seguridad a nivel bancario</strong> mantiene su pago seguro y protegido.",
+      "tax_deductible_html": "<strong>100 % deducible de impuestos</strong> en {{ country }} a través de nuestro número de <span class='whitespace-nowrap'>{{ type }}</span> organización benéfica {{ number }}.",
+      "instant_tax_receipt_html": "<strong>Recibo fiscal instantáneo</strong> enviado por correo electrónico inmediatamente después de la donación.",
+      "transparency_promise_html": "<strong>Promesa de impacto</strong> garantiza que el 100 % de su donación se utilice según lo prometido.",
+      "give_by_check_html": "<strong>¿Puedo donar con cheque?</strong><br />El uso del formulario en línea nos permite agilizar nuestras operaciones financieras para que podamos concentrar todos nuestros recursos en nuestra misión. Si el cheque es lo mejor, por favor hágalo a nombre de:",
+      "other_ways_to_donate": "¿Hay otras formas en que puedo donar?",
+      "contact_us_html": "<strong>¿A quién puedo contactar acerca de mi donación?</strong><br />Puede comunicarse con nuestro equipo en:",
+      "close": "Cerca"
+    },
+    "privacy_and_legal": {
+      "heading": "Privacidad y Legal",
+      "your_personal_information": "Tu información personal y tus datos de pago están seguros y protegidos.",
+      "we_are": "Estamos:",
+      "charity_number": "Caridad #{{ number }}",
+      "bank_level_encryption_html": "Usamos <strong>cifrado de nivel bancario</strong> para procesar su pago.",
+      "information_security_standards_html": "Nuestros proveedores se adhieren a los altos estándares de seguridad de la información del <strong>cumplimiento de SOC y PCI</strong>.",
+      "never_share_your_information_html": "<strong>Nunca compartimos su información</strong> con <strong>ningún</strong> tercero.",
+      "we_are_gdpr_compliant_html": "Cumplimos con <strong>GDPR</strong>. Administre sus datos {{ logging_in }} o comunicándose con nuestro oficial de privacidad en",
+      "logging_in": "Iniciando sesión",
+      "access_privacy_policy": "Se puede acceder a nuestra política de privacidad completa en:",
+      "reach_privacy_officer": "Nuestro oficial de privacidad puede ser contactado en:",
+      "powered_and_secured_by": "Este formulario está alimentado y protegido por:",
+      "payment_safely_processed_by": "Su pago es procesado de forma segura por:",
+      "close": "Cerca"
+    },
+    "landing": {
+      "donate": "Donar"
+    }
+  },
+  "unknown_error_521": "Error desconocido (521)"
+}

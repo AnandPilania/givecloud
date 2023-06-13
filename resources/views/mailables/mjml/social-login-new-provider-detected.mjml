@@ -1,0 +1,22 @@
+{% layout "layouts/app" %}
+
+{% block head %}
+<mj-preview>Linked accounts confirmation</mj-preview>
+{% endblock %}
+
+{% block content %}
+<mj-section css-class="box">
+  <mj-column>
+    <mj-text padding-bottom="0">
+      <h1>Hey {{ $member->first_name }},</h1>
+    </mj-text>
+    <mj-text color="#474747" font-size="18px" font-weight="300" padding-top="0">
+      We have detected a new login to your account using {{ ucfirst($provider) }}.
+    </mj-text>
+    <mj-text color="#474747" font-size="16px">
+     If this was not you, please contact us.
+    </mj-text>
+
+  </mj-column>
+</mj-section>
+{% endblock %}

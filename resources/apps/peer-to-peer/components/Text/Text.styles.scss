@@ -1,0 +1,55 @@
+.root {
+  @apply font-inter mt-0;
+
+  &.bold {
+    @apply font-semibold;
+  }
+
+  &.h1 {
+    @apply text-6xl font-extrabold leading-tight mb-6;
+  }
+
+  &.h2 {
+    @apply text-2xl font-normal;
+
+    &.bold {
+      @apply font-bold;
+    }
+  }
+
+  &.h3 {
+    @apply text-xl font-semibold;
+  }
+
+  &.h4 {
+    @apply text-lg font-bold;
+  }
+
+  &.p {
+    @apply text-base font-medium;
+
+    &.bold {
+      @apply font-bold;
+    }
+  }
+
+  &.footnote {
+    @apply text-sm font-medium;
+  }
+
+  &.secondary {
+    @apply text-gray-600;
+  }
+
+  &.custom {
+    @apply text-theme;
+  }
+}
+
+.marginBottom {
+  @apply mb-2;
+}
+
+.noMargin {
+  @apply m-0;
+}

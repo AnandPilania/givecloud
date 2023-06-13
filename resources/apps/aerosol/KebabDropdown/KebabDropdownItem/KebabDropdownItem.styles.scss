@@ -1,0 +1,15 @@
+.root {
+  @apply w-full text-left p-2 no-underline text-black inline-block;
+
+  &.disabled {
+    @apply text-gray-600;
+  }
+
+  &.active {
+    @apply bg-blue-600 text-white font-bold cursor-pointer;
+
+    &.disabled {
+      @apply bg-gray-600 text-white font-bold cursor-not-allowed;
+    }
+  }
+}

@@ -1,0 +1,152 @@
+{
+  "id": "pi_3LN0R4EF6XkQa2YL05RWA0mu",
+  "object": "payment_intent",
+  "amount": 2699,
+  "amount_capturable": 0,
+  "amount_details": {
+    "tip": []
+  },
+  "amount_received": 2699,
+  "application": null,
+  "application_fee_amount": null,
+  "automatic_payment_methods": null,
+  "canceled_at": null,
+  "cancellation_reason": null,
+  "capture_method": "automatic",
+  "charges": {
+    "object": "list",
+    "data": [{
+      "id": "ch_3LN0R4EF6XkQa2YL0QmBQbsh",
+      "object": "charge",
+      "amount": 2699,
+      "amount_captured": 2699,
+      "amount_refunded": 0,
+      "application": null,
+      "application_fee": null,
+      "application_fee_amount": null,
+      "balance_transaction": "txn_3LN0R4EF6XkQa2YL0ewN4rRy",
+      "billing_details": {
+        "address": {
+          "city": "Henderson",
+          "country": "US",
+          "line1": "12300 Bermuda Road",
+          "line2": null,
+          "postal_code": "89044",
+          "state": "NV"
+        },
+        "email": "bob@example.com",
+        "name": "Bob Hope",
+        "phone": null
+      },
+      "calculated_statement_descriptor": "TIM ROBERTSON",
+      "captured": true,
+      "created": 1658175658,
+      "currency": "usd",
+      "customer": "cus_M5TWaPJ8l2uJIC",
+      "description": null,
+      "destination": null,
+      "dispute": null,
+      "disputed": false,
+      "failure_balance_transaction": null,
+      "failure_code": null,
+      "failure_message": null,
+      "fraud_details": [],
+      "invoice": null,
+      "livemode": false,
+      "metadata": [],
+      "on_behalf_of": null,
+      "order": null,
+      "outcome": {
+        "network_status": "approved_by_network",
+        "reason": null,
+        "risk_level": "normal",
+        "risk_score": 8,
+        "seller_message": "Payment complete.",
+        "type": "authorized"
+      },
+      "paid": true,
+      "payment_intent": "pi_3LN0R4EF6XkQa2YL05RWA0mu",
+      "payment_method": "pm_1LMMOdEF6XkQa2YLzuSY3jIz",
+      "payment_method_details": {
+        "card": {
+          "brand": "visa",
+          "checks": {
+            "address_line1_check": "pass",
+            "address_postal_code_check": "pass",
+            "cvc_check": null
+          },
+          "country": "US",
+          "exp_month": 12,
+          "exp_year": 2023,
+          "fingerprint": "rxk2CQZWnyOGjQo6",
+          "funding": "credit",
+          "installments": null,
+          "last4": "4242",
+          "mandate": null,
+          "network": "visa",
+          "three_d_secure": null,
+          "wallet": null
+        },
+        "type": "card"
+      },
+      "receipt_email": null,
+      "receipt_number": null,
+      "receipt_url": "https:\/\/pay.stripe.com\/receipts\/payment\/CAcaFwoVYWNjdF8xNUE1bUNFRjZYa1FhMllMKKuB15YGMgZfNStFr806LBZZdPv-95vNxbhjnTVMBHuCmmgaY14wD5JDfsPWcTKLu5zBhD7nfkdj8oAo",
+      "refunded": false,
+      "refunds": {
+        "object": "list",
+        "data": [],
+        "has_more": false,
+        "total_count": 0,
+        "url": "\/v1\/charges\/ch_3LN0R4EF6XkQa2YL0QmBQbsh\/refunds"
+      },
+      "review": null,
+      "shipping": null,
+      "source": null,
+      "source_transfer": null,
+      "statement_descriptor": null,
+      "statement_descriptor_suffix": null,
+      "status": "succeeded",
+      "transfer_data": null,
+      "transfer_group": null
+    }],
+    "has_more": false,
+    "total_count": 1,
+    "url": "\/v1\/charges?payment_intent=pi_3LN0R4EF6XkQa2YL05RWA0mu"
+  },
+  "client_secret": "pi_3LN0R4EF6XkQa2YL05RWA0mu_secret_ZCkhYxHHazF4GTWbq5DIlw1r8",
+  "confirmation_method": "automatic",
+  "created": 1658175658,
+  "currency": "usd",
+  "customer": "cus_M5TWaPJ8l2uJIC",
+  "description": null,
+  "invoice": null,
+  "last_payment_error": null,
+  "livemode": false,
+  "metadata": [],
+  "next_action": null,
+  "on_behalf_of": null,
+  "payment_method": "pm_1LMMOdEF6XkQa2YLzuSY3jIz",
+  "payment_method_options": {
+    "card": {
+      "installments": null,
+      "mandate_options": null,
+      "network": null,
+      "request_three_d_secure": "automatic"
+    }
+  },
+  "payment_method_types": [
+    "card"
+  ],
+  "processing": null,
+  "receipt_email": null,
+  "review": null,
+  "setup_future_usage": null,
+  "shipping": null,
+  "source": null,
+  "statement_descriptor": null,
+  "statement_descriptor_suffix": null,
+  "status": "succeeded",
+  "transfer_data": null,
+  "transfer_group": null
+}

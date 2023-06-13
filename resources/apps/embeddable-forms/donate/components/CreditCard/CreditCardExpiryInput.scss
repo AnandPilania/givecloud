@@ -1,0 +1,14 @@
+.root {
+  .input {
+    width: 8rem;
+    height: 42px;
+  }
+
+  .inputsContainer {
+    @apply flex items-center;
+
+    .slash {
+      @apply px-2;
+    }
+  }
+}

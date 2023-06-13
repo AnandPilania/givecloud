@@ -1,0 +1,64 @@
+.root {
+  @apply relative overflow-visible shadow rounded-md w-full mb-2;
+
+  &.dark {
+    @apply bg-black bg-opacity-50;
+
+    .content {
+      @apply text-gray-400;
+
+      .name {
+        @apply text-white;
+      }
+    }
+  }
+
+  &.light {
+    @apply bg-white bg-opacity-50;
+
+    .content {
+      @apply text-gray-600;
+
+      .name {
+        @apply text-black;
+      }
+    }
+  }
+
+  &.bigDonation {
+    @apply bg-opacity-100;
+
+    &.blue {
+      @apply bg-blue-700;
+    }
+    &.green {
+      @apply bg-green-700;
+    }
+    &.indigo {
+      @apply bg-indigo-700;
+    }
+    &.purple {
+      @apply bg-purple-700;
+    }
+    &.pink {
+      @apply bg-pink-700;
+    }
+
+    .party {
+      @apply absolute pr-2 text-3xl top-0 left-0 -ml-2 -mt-5;
+    }
+
+    .content {
+      @apply text-white;
+
+      .name {
+        @apply text-yellow-200;
+      }
+    }
+  }
+
+  .content {
+    @apply text-lg px-4 py-4 flex items-center justify-center leading-5 font-medium text-center;
+    @apply sm:px-6;
+  }
+}

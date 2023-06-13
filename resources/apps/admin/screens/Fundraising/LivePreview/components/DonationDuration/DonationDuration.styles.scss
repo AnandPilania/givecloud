@@ -1,0 +1,8 @@
+.root {
+  @apply relative flex justify-center;
+
+  .overlay {
+    @apply absolute -top-2 w-56 h-full rounded-md pt-9;
+    @apply bg-blue-300 border-blue-400 opacity-40 hover:cursor-pointer hover:bg-brand-blue hover:border-2 hover:border-blue-400;
+  }
+}

@@ -1,0 +1,28 @@
+.root {
+  @apply relative inline-flex items-center whitespace-nowrap;
+  @apply bg-[#ffca6b] rounded-full overflow-hidden p-3;
+  will-change: transform;
+  backface-visibility: hidden;
+
+  .shineEffect {
+    @apply absolute top-[50%] left-7 w-[600px] h-[600px] bg-[#ffd487] rounded-full;
+    animation: shine 1s linear;
+    animation-delay: 0.3s;
+    transform: translate(-50%, -50%) scale(0);
+  }
+
+  .icon {
+    @apply mr-1;
+  }
+
+  .fontNormal {
+    @apply font-normal;
+  }
+}
+
+@keyframes shine {
+  to {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(2);
+  }
+}

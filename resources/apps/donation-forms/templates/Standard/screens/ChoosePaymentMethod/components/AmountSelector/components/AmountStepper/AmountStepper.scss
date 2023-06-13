@@ -1,0 +1,59 @@
+.root {
+  @apply flex justify-center flex-col items-center;
+  @apply w-full mb-5;
+
+  .amountStepper {
+    @apply flex justify-center items-center;
+    @apply w-full font-medium;
+
+    button {
+      @apply relative;
+      @apply text-lg;
+      @apply mt-2 rounded-full;
+
+      .icon {
+        @apply flex justify-center items-center;
+        @apply w-7 h-7;
+        @apply rounded-full opacity-25;
+        background-color: rgba(var(--primary-colour-500-rgb), 0.3);
+
+        &.darkPrimaryColour {
+          background-color: rgba(var(--primary-colour-500-rgb), 0.15);
+        }
+
+        path {
+          fill: var(--primary-text-colour);
+        }
+
+        &.pulseAnimation:before {
+          @apply rings;
+        }
+
+        &.pulseAnimation:after {
+          @apply rings;
+          animation-delay: 0.5s;
+        }
+      }
+
+      &.clickable .icon {
+        @apply opacity-100;
+      }
+    }
+  }
+
+  .prevButton {
+    @apply mr-6;
+  }
+
+  .nextButton {
+    @apply ml-6;
+  }
+}
+
+// prettier-ignore
+@keyframes pulse {
+  0% { opacity: 0; transform: scale(0.75); filter: blur(0); }
+  25% { opacity: 1; }
+  50% { opacity: 0; transform: scale(1.75); filter: blur(1px); }
+  100% { opacity: 0; }
+}

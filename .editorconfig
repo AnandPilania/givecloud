@@ -1,0 +1,31 @@
+
+root = true
+
+[*]
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+end_of_line = lf
+
+[*.json]
+indent_style = space
+indent_size = 2
+
+[*.{css,js,liquid,php,scss}]
+indent_style = space
+indent_size = 4
+
+[resources/apps/**.{css,js,jsx,scss,ts,tsx}]
+indent_size = 2
+
+[*.config.js]
+indent_style = space
+indent_size = 2
+
+[composer.json]
+indent_style = space
+indent_size = 4
+
+[*.mjml]
+indent_style = space
+indent_size = 2

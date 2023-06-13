@@ -1,0 +1,109 @@
+{% for field in product.form_fields %}
+
+    {% if field.type == 'hidden' %}
+
+        <input type="hidden" name="form_fields[{{ field.id }}]" value="{{ request.input[field.param_name] | default: field.default_value}}">
+
+    {% elsif field.type == 'html' %}
+
+        <div id="p{{ product.id }}-f{{ field.id }}-container">{{ field.body }}</div>
+
+    {% elsif field.type == 'multi-select' %}
+
+        <div id="p{{ product.id }}-f{{ field.id }}-container" class="form-group {% if field.is_required %}multi-select-required{% endif %}">
+            <label>{{ field.label }}{% if field.is_required %}<span class="asterisk-required">*</span>{% endif %}</label>
+            <div class="row">
+                {% for choice in field.choices %}
+                    <div class="col-12 col-sm-6">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" name="form_fields[{{ field.id }}][]" value="{{ choice.value|escape }}" id="f{{ field.id }}-opt-{{ forloop.index }}" {% if field.is_required %}required{% endif %}>
+                            <label class="custom-control-label" for="f{{ field.id }}-opt-{{ forloop.index }}">{{ choice.label }}</label>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            {% if field.hint %}
+                <small class="mt-2 text-muted">{{ field.hint }}</small>
+            {% endif %}
+        </div>
+
+    {% elsif field.type == 'check' %}
+        <div id="p{{ product.id }}-f{{ field.id }}-container" class="form-group">
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" name="form_fields[{{ field.id }}]" value="1" id="f{{ field.id }}" {% if field.is_required %}required{% endif %} {% if request.input[field.param_name] %}checked{% endif %}>
+                <label class="custom-control-label" for="f{{ field.id }}">{{ field.label }}{% if field.is_required %}<span class="asterisk-required">*</span>{% endif %}</label>
+            </div>
+            {% if field.hint %}
+                <small class="text-muted">{{ field.hint }}</small>
+            {% endif %}
+        </div>
+
+    {% else %}
+
+        {% assign input_type = '' %}
+        {% assign input_classes = '' %}
+        {% assign label_icon = '' %}
+
+        {% if field.type == 'email' %}
+            {% assign input_type = 'email' %}
+        {% elsif field.type == 'date' %}
+            {% assign input_type = 'text' %}
+        {% elsif field.type == 'phone' %}
+            {% assign input_type = 'tel' %}
+        {% else %}
+            {% assign input_type = 'text' %}
+        {% endif %}
+
+        {% if field.type == 'date' %}
+            {% assign input_classes = 'date-picker' %}
+        {% endif %}
+
+        {% if field.type == 'email' %}
+            {% assign label_icon = 'fa-envelope-o' %}
+        {% elsif field.type == 'date' %}
+            {% assign label_icon = 'fa-calendar-o' %}
+        {% elsif field.type == 'phone' %}
+            {% assign label_icon = 'fa-phone-o' %}
+        {% endif %}
+
+        <div id="p{{ product.id }}-f{{ field.id }}-container" class="form-group {% unless show_labels %}labelify{% endunless %}">
+            <label for="p{{ product.id }}-f{{ field.id }}">{% if label_icon %}<i class="fa {{ label_icon }}"></i> {% endif %}{{ field.label }}{% if field.is_required %}<span class="asterisk-required">*</span>{% endif %}</label>
+
+            {% if field.type == 'select' %}
+                <select name="form_fields[{{ field.id }}]" class="form-control" {% if field.is_required %}required{% endif %}>
+                    {% if field.default_value == nil %}
+                        <option value="" selected>Select</option>
+                    {% endif %}
+
+                    {% for choice in field.choices %}
+                        <option
+                            value="{{ choice.value | escape }}"
+                            {% if request.input[field.param_name] == nil and choice.value == field.default_value or request.input[field.param_name] == choice.value %}selected{% endif %}>
+                            {{ choice.label }}
+                        </option>
+                    {% endfor %}
+                </select>
+            {% elsif field.type == 'lg_text' %}
+                <textarea id="p{{ product.id }}-f{{ field.id }}" class="form-control {{ input_classes }}" name="form_fields[{{ field.id }}]" rows="3" placeholder="{{ field.placeholder | escape }}" {% if field.is_required %}required{% endif %}>{{ request.input[field.param_name] | default: field.default_value | escape }}</textarea>
+            {% else %}
+                <input id="p{{ product.id }}-f{{ field.id }}" type="{{ input_type }}" class="form-control {{ input_classes }}" name="form_fields[{{ field.id }}]" value="{{ request.input[field.param_name] | default: field.default_value | escape }}" placeholder="{{ field.placeholder | escape }}" {% if field.is_required %}required{% endif %}>
+            {% endif %}
+
+            {% if input_type == 'email' %}
+                <div class="invalid-feedback">{{ 'snippets.product_form_fields.we_need_a_valid_email' | t }}</div>
+            {% elsif input_type == 'date' %}
+                <div class="invalid-feedback">{{ 'snippets.product_form_fields.we_need_a_valid_date' | t }}</div>
+            {% elsif input_type == 'phone' %}
+                <div class="invalid-feedback">{{ 'snippets.product_form_fields.we_need_a_valid_phone' | t }}</div>
+            {% elsif input_type == 'text' %}
+                <div class="invalid-feedback">{{ 'snippets.product_form_fields.this_field_is_required' | t }}</div>
+            {% endif %}
+
+            {% if field.hint %}
+                <small class="text-muted">{{ field.hint }}</small>
+            {% endif %}
+        </div>
+
+    {% endif %}
+
+{% endfor %}

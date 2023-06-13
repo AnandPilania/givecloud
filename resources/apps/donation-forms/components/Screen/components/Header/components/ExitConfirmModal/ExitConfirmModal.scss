@@ -1,0 +1,93 @@
+.root {
+  @apply fixed inset-0;
+  @apply flex items-center justify-center;
+  @apply min-h-screen;
+  @apply p-4;
+  @apply overflow-y-auto;
+  @apply z-20;
+
+  .overlay {
+    @apply fixed inset-0;
+    @apply bg-gray-500 bg-opacity-75;
+  }
+
+  .content {
+    @apply bg-white;
+    @apply w-full;
+    @apply p-5;
+    @apply rounded-lg;
+    @apply shadow-xl;
+    @apply overflow-hidden;
+    @apply z-20;
+    max-width: 300px;
+
+    .title {
+      @apply text-center text-2xl leading-8 font-bold;
+      @apply mt-6 mb-12 px-10;
+    }
+
+    .text {
+      @apply mt-2;
+      @apply text-center text-sm text-gray-500;
+    }
+
+    .actions {
+      @apply mt-4 mx-5;
+      @apply flex flex-col;
+
+      button {
+        @apply w-full;
+        @apply inline-flex justify-center;
+        @apply px-4 py-2;
+        @apply border rounded-md;
+        @apply shadow-sm;
+        @apply text-base font-medium;
+
+        &:focus {
+          @apply outline-none ring-2 ring-offset-1;
+        }
+      }
+
+      .exitButton {
+        @apply mb-3;
+        @apply border-none shadow-none;
+        @apply bg-transparent;
+
+        &:focus {
+          --tw-ring-color: var(--primary-colour-300);
+        }
+
+        span {
+          @apply text-gray-400 font-normal;
+          @apply border-b border-b-gray-400;
+        }
+      }
+
+      .remindButton {
+        @apply mb-3;
+        @apply font-bold;
+        color: var(--primary-colour-500);
+        border-color: var(--primary-colour-500);
+      }
+
+      .cancelButton {
+        @apply mb-3;
+        @apply border-transparent;
+        @apply font-bold;
+        background-color: var(--primary-colour-500);
+        color: var(--primary-colour-white-or-black);
+
+        &:hover {
+          background-color: var(--primary-colour-500);
+        }
+
+        &:focus {
+          outline: 2px solid transparent;
+          outline-offset: 2px;
+          --tw-ring-color: var(--primary-colour-500);
+          border-color: var(--primary-colour-500);
+        }
+      }
+    }
+  }
+}

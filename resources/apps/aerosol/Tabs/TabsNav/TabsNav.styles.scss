@@ -1,0 +1,37 @@
+.root {
+  @apply flex items-center;
+  @apply -ml-2 -mr-2;
+
+  &.horizontalScroll {
+    @apply overflow-x-auto;
+    @apply py-1;
+
+    /* Chrome, Safari and Opera */
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+
+  &.start {
+    @apply justify-start;
+  }
+
+  &.center {
+    @apply justify-center;
+  }
+
+  &.end {
+    @apply justify-end;
+  }
+
+  &.evenly {
+    @apply justify-evenly;
+  }
+
+  &.between {
+    @apply justify-between;
+  }
+}

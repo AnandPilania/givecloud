@@ -1,0 +1,41 @@
+
+{% layout "layouts/app" %}
+
+{% block head %}
+<mj-preview>The have been {{ $failedCount }} payment failures over the last {{ $evaluationWindow }} minutes.</mj-preview>
+{% endblock %}
+
+{% block content %}
+<mj-section css-class="box">
+  <mj-column>
+    <mj-headline icon="fa-dark-exclamation-circle">
+      <h1>Payment Failure Spike Detected</h1>
+    </mj-headline>
+    <mj-text color="#474747" font-size="16px" font-weight="300" padding-top="0">
+      <p>There has been {{ $failedCount }} payment failures over the last {{ $evaluationWindow }} minutes. Which has dropped your Authorization Rate below the acceptable threshold of {{ $rateThreshold }}%. It's possible you've been targeted by a Carding Bot or someone manually testing cards.</p>
+    </mj-text>
+    <mj-text font-size="16px" font-weight="300">
+      <p style="padding:30px;background-color:#fcedee;color:#eb5757;border-radius:8px;">
+        <strong>To prevent fraud, all credit card donations on your forms have been <u>restricted for 15min</u>.</strong> Your donors will still be able to pay by PayPal, ACH, Apple Pay or Google Pay (if you have any of these enabled).
+      </p>
+    </mj-text>
+    <mj-text color="#474747" font-size="16px" font-weight="300">
+      <p><strong>What do I do now?</strong><br /> Once your Authorization Rate has recovered it's important to review your Contributions and identify and refund any suspicious contributions. If left unrefunded they could lead to expensive chargebacks.</p>
+    </mj-text>
+    <mj-button align="left" background-color="#fc58af" color="white" font-weight="500" font-size="16px" padding="20px" border-radius="30px" href="{{ url('jpanel/reports/payments?fp=failed') }}">
+      Review Contributions
+    </mj-button>
+  </mj-column>
+</mj-section>
+<mj-section css-class="spacer"></mj-section>
+<mj-section css-class="box">
+  <mj-column>
+    <mj-text color="#989898" font-size="13px" font-weight="300" padding-top="0" padding-bottom="0">
+      <p>For more information on Carding Bots & Preventing Fraud can be found in our helpdesk.</p>
+      <a href="https://help.givecloud.com/en/articles/3508435-carding-bots-preventing-fraud">
+        https://help.givecloud.com/en/articles/3508435-carding-bots-preventing-fraud
+      </a>
+    </mj-text>
+  </mj-column>
+</mj-section>
+{% endblock %}

@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "jsx": "react",
+    "baseUrl": "./",
+    "paths": {
+      "@/root/*": ["/*"],
+      "@components": ["components/index.js"],
+      "@/screens/*": ["screens/*"],
+      "@/fields/*": ["components/fields/*"],
+      "@/navigation/*": ["navigation/*"],
+      "@/atoms/*": ["atoms/*"],
+      "@/context/*": ["context/*"],
+      "@/constants/*": ["constants/*"],
+      "@/hooks/*": ["hooks/*"],
+      "@/utilities/*": ["utilities/*"],
+      "@/mocks/*": ["mocks/*"],
+      "@/aerosol/*": ["../aerosol/*"],
+      "@/shared/*": ["../shared/*"]
+    }
+  },
+  "exclude": ["node_modules", "dist", "vendor"]
+}

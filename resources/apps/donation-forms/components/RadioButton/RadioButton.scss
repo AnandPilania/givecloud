@@ -1,0 +1,26 @@
+.root {
+  @apply relative flex items-start;
+
+  .input {
+    @apply flex items-center h-5;
+
+    input[type='radio'] {
+      @apply appearance-none p-0 align-middle bg-origin-border select-none flex-shrink-0 w-5 h-5 bg-white border-gray-300 rounded-full;
+      color: var(--primary-colour-500);
+
+      &:checked {
+        @apply border-transparent;
+        background-color: var(--primary-colour-500);
+      }
+
+      &:focus-visible {
+        @apply ring-2;
+        --tw-ring-color: black;
+      }
+    }
+  }
+
+  .label {
+    @apply ml-2 text-lg select-none leading-tight;
+  }
+}

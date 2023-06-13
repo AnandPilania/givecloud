@@ -1,0 +1,24 @@
+<div id="{{ id }}" class="owl-carousel">
+
+  {% for post in posts %}
+    <div class="text-center">
+
+      {% if post.url %}
+        <a href="{{ post.url }}">
+            <span class="circle-avatar-bg" style="background-image:url('{{ post.feature_image.thumb }}');"></span>
+        </a>
+      {% else %}
+        <span class="circle-avatar-bg" style="background-image:url('{{ post.feature_image.thumb }}');"></span>
+      {% endif %}
+
+      <div>
+        <p>
+            <strong>{{ post.title }}&nbsp;</strong><br>
+            <small>{{ post.excerpt }}&nbsp;</small>
+        </p>
+      </div>
+
+    </div>
+  {% endfor %}
+
+</div>

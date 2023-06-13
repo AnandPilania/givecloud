@@ -1,0 +1,314 @@
+
+name: Givecloud
+
+on: [pull_request]
+
+jobs:
+
+  givecloud:
+    name: Givecloud
+    runs-on: ubuntu-20.04
+
+    env:
+      FONTAWESOME_NPM_AUTH_TOKEN: ${{ secrets.FONTAWESOME_NPM_AUTH_TOKEN }}
+
+    services:
+      redis:
+        image: redis:4.0.14-alpine
+        ports:
+          - 6379
+
+    steps:
+
+    # Having the cleanup step is important because our a previous styleci
+    # job may have retriggered this workflow run after committing style fixes
+    - name: Cleanup previous runs
+      uses: styfle/cancel-workflow-action@0.11.0
+      with:
+        access_token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        ref: ${{ github.head_ref }}
+        token: ${{ secrets.GH_BOT_TOKEN }}
+
+    - uses: actions/setup-node@v2
+      with:
+        node-version: '16.15.0'
+
+    - id: filters
+      name: Create filters based on changes
+      uses: dorny/paths-filter@v2.2.1
+      with:
+        filters: |
+          js:
+            - '**/*.js'
+            - '**/*.jsx'
+            - '**/*.ts'
+            - '**/*.tsx'
+            - '**/*.vue'
+          php:
+            - '**/*.php'
+          styleci:
+            - '**/*.js'
+            - '**/*.jsx'
+            - '**/*.ts'
+            - '**/*.tsx'
+            - '**/*.php'
+            - '**/*.vue'
+          apps:
+            - 'resources/apps/**/*.js'
+            - 'resources/apps/**/*.jsx'
+          apps-admin:
+            - 'resources/apps/admin/**/*.js'
+            - 'resources/apps/admin/**/*.jsx'
+            - 'resources/apps/admin/**/*.ts'
+            - 'resources/apps/admin/**/*.tsx'
+          apps-aerosol:
+            - 'resources/apps/aerosol/**/*.js'
+            - 'resources/apps/aerosol/**/*.jsx'
+            - 'resources/apps/aerosol/**/*.ts'
+            - 'resources/apps/aerosol/**/*.tsx'
+          apps-peer-to-peer:
+            - 'resources/apps/peer-to-peer/**/*.js'
+            - 'resources/apps/peer-to-peer/**/*.jsx'
+            - 'resources/apps/peer-to-peer/**/*.ts'
+            - 'resources/apps/peer-to-peer/**/*.tsx'
+          storybook:
+            - 'resources/apps/admin/**/*.stories.jsx'
+          legacy-js:
+            - 'resources/assets/js/**/*.js'
+            - 'resources/assets/js/**/*.vue'
+
+    - id: auth
+      uses: google-github-actions/auth@v1
+      with:
+        credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+    - name: Setup gcloud SDK
+      if: steps.filters.outputs.styleci == 'true'
+      uses: google-github-actions/setup-gcloud@v1
+      with:
+        version: '410.0.0'
+        project_id: 'infrastructure-161602'
+
+    - name: Use gcloud as Docker credential helper
+      if: steps.filters.outputs.styleci == 'true'
+      run: gcloud --quiet auth configure-docker
+
+    - name: Retrieve image from Container Registry
+      if: steps.filters.outputs.styleci == 'true'
+      run: docker pull gcr.io/infrastructure-161602/styleci:2
+
+    - id: file_changes_newline
+      name: Collect added and changed files
+      if: steps.filters.outputs.styleci == 'true'
+      uses: trilom/file-changes-action@v1.2.4
+      with:
+        output: "\n"
+
+    - name: Run php-cs-fixer
+      if: steps.filters.outputs.php == 'true'
+      env:
+        FILE_CHANGES: ${{ steps.file_changes_newline.outputs.files }}
+      run: |-
+        docker run \
+          -e FILE_CHANGES \
+          -e 'FILE_PATTERN=**.php' \
+          -v "$GITHUB_WORKSPACE:/application" \
+          gcr.io/infrastructure-161602/styleci:2 \
+          php-cs-fixer
+
+    - name: Run prettier
+      if: steps.filters.outputs.js == 'true'
+      env:
+        FILE_CHANGES: ${{ steps.file_changes_newline.outputs.files }}
+      run: |-
+        docker run \
+          -e FILE_CHANGES \
+          -e 'FILE_PATTERN=**/*.(js|jsx|ts|tsx|vue)' \
+          -v "$GITHUB_WORKSPACE:/application" \
+          gcr.io/infrastructure-161602/styleci:2 \
+          prettier
+
+    - name: Auto commit any changes
+      if: steps.filters.outputs.styleci == 'true'
+      uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        add_options: '-u'
+        status_options: '--untracked-files=no'
+        file_pattern: ''
+        commit_message: Apply coding style changes
+        commit_user_name: gcb0t
+        commit_user_email: bot@givecloud.com
+        commit_author: gcb0t <bot@givecloud.com>
+
+    - id: file_changes_space
+      name: Collect added and changed files
+      if: steps.filters.outputs.php == 'true'
+      uses: trilom/file-changes-action@v1.2.4
+      with:
+        output: ' '
+
+    - name: Run phpcs
+      if: steps.filters.outputs.php == 'true'
+      env:
+        FILE_CHANGES: ${{ steps.file_changes_space.outputs.files }}
+      run: |-
+        docker run \
+          -e RUNNER_TEMP \
+          -e FILE_CHANGES \
+          -e 'FILE_PATTERN=**.php' \
+          -v "$GITHUB_WORKSPACE:/application" \
+          -v "$RUNNER_TEMP/_github_workflow:/github/workflow" \
+          gcr.io/infrastructure-161602/styleci:2 \
+          phpcs
+
+    - name: Setup PHP
+      if: steps.filters.outputs.php == 'true'
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '7.4'
+        coverage: none
+        extensions: bcmath, curl, gd, imagick, intl, json, mbstring, mysql, opcache, readline, redis, soap, sqlite3, xml, zip
+        tools: composer:2.1.1
+
+    - name: Login to Givecloud Composer
+      if: steps.filters.outputs.php == 'true'
+      run: composer config http-basic.givecloud.dev composer ${GC_COMPOSER_PWD}
+      env:
+        GC_COMPOSER_PWD: ${{ secrets.GC_COMPOSER_PWD }}
+
+    - id: composer-cache-files
+      name: Get composer cache directory
+      if: steps.filters.outputs.php == 'true'
+      run: echo "directory=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+    - name: Cache composer dependencies
+      if: steps.filters.outputs.php == 'true'
+      uses: actions/cache@v3
+      with:
+        path: ${{ steps.composer-cache-files.outputs.directory }}
+        key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+        restore-keys: ${{ runner.os }}-composer-
+
+    - id: cache_composer_vendor
+      name: Cache composer vendor directory
+      if: steps.filters.outputs.php == 'true'
+      uses: actions/cache@v3
+      with:
+        path: vendor
+        key: ${{ runner.os }}-composer-vendor-${{ hashFiles('**/composer.lock') }}
+
+    - name: Dump composer autoloader
+      if: ${{ steps.filters.outputs.php == 'true' && steps.cache_composer_vendor.outputs.cache-hit == 'true' }}
+      run: |-
+        composer dump-autoload \
+          --no-ansi \
+          --no-interaction
+
+    - name: Run composer install
+      if: ${{ steps.filters.outputs.php == 'true' && steps.cache_composer_vendor.outputs.cache-hit != 'true' }}
+      run: |-
+        composer install \
+          --no-ansi \
+          --no-interaction \
+          --no-suggest \
+          --no-progress \
+          --prefer-dist
+
+    - name: Setup env file
+      if: steps.filters.outputs.php == 'true'
+      run: |-
+        gcloud secrets versions access \
+          --secret=TESTING_ENV_FEATURE_AFFINITY latest > .env
+
+    - name: Start MySQL server
+      if: steps.filters.outputs.php == 'true'
+      run: sudo systemctl start mysql.service
+
+    - name: Create MySQL timezone tables
+      if: steps.filters.outputs.php == 'true'
+      run: mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -uroot -h127.0.0.1 -proot mysql
+
+    - name: Create MySQL default database
+      if: steps.filters.outputs.php == 'true'
+      run: mysql -uroot -h127.0.0.1 -proot -e 'CREATE DATABASE IF NOT EXISTS `sys-backend`;'
+
+    - name: Cache config
+      if: steps.filters.outputs.php == 'true'
+      env:
+        APP_ENV: testing
+        BCRYPT_ROUNDS: 4
+        CACHE_DRIVER: array
+        DB_CONNECTION: testing
+        DB_HOST: 127.0.0.1
+        DB_PORT: 3306
+        DB_USERNAME: root
+        DB_PASSWORD: root
+        GIVECLOUD_DB_0: 127.0.0.1
+        GIVECLOUD_DB_1: 127.0.0.1
+        MAIL_MAILER: array
+        QUEUE_CONNECTION: sync
+        REDIS_HOST: 127.0.0.1
+        REDIS_PORT: ${{ job.services.redis.ports[6379] }}
+        SESSION_DRIVER: array
+        TELESCOPE_ENABLED: false
+      run: php artisan config:cache
+
+    - name: Cache routes
+      if: steps.filters.outputs.php == 'true'
+      run: php artisan route:cache
+
+    - name: Setup PHPUnit matchers
+      if: steps.filters.outputs.php == 'true'
+      uses: mheap/phpunit-matcher-action@v1
+
+    - name: Run phpunit
+      if: steps.filters.outputs.php == 'true'
+      run: ./vendor/bin/phpunit --teamcity --no-coverage --stop-on-failure
+
+    - id: cache_root_node_modules
+      name: Cache node_modules directory for project root
+      if: steps.filters.outputs.apps == 'true'
+      uses: actions/cache@v3
+      with:
+        path: node_modules
+        key: ${{ runner.os }}-root-node-modules-${{ hashFiles('**/package-lock.json') }}
+
+    - name: Install deps for project root
+      if: ${{ steps.filters.outputs.js == 'true' && steps.cache_root_node_modules.outputs.cache-hit != 'true' }}
+      run: npm ci
+
+    - name: Run eslint on legacy javascript
+      if: steps.filters.outputs.legacy-js == 'true'
+      run: npx eslint resources/assets/js
+
+    - name: Run front end linter
+      if: steps.filters.outputs.apps == 'true'
+      run: npm run lint-fe
+
+    - name: Run front end admin tests
+      if: steps.filters.outputs.apps-admin == 'true'
+      run: npm run test-admin -- --ci --runInBand
+
+    - name: Run front end aerosol tests
+      if: steps.filters.outputs.apps-aerosol == 'true'
+      run: npm run test-aerosol -- --ci --runInBand
+
+    - name: Run front end P2P tests
+      if: steps.filters.outputs.apps-peer-to-peer == 'true'
+      run: npm run test-peer-to-peer -- --ci --runInBand
+
+    - name: Publish Storybook for branch
+      if: ${{ steps.filters.outputs.storybook == 'true' && success() }}
+      run: |-
+        npm run build-storybook && \
+        zip -rj storybook.zip storybook-static/* && \
+        curl -H "Authorization: Bearer ${STORYBOOK_TOKEN}" -X POST -F file=@storybook.zip \
+          "https://givecloud.dev/storybooks/upload?repo=givecloud&branch=${BRANCH_NAME}&pull=${PR_NUMBER}"
+      env:
+        BRANCH_NAME: ${{ github.head_ref }}
+        PR_NUMBER: ${{ github.event.pull_request.number }}
+        STORYBOOK_TOKEN: ${{ secrets.STORYBOOK_TOKEN }}

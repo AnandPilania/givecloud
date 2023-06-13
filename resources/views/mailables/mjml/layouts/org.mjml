@@ -1,0 +1,67 @@
+<mjml background-color="#F0F0F0">
+  <mj-head>
+    <mj-font name="Poppins" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;800&display=swap" />
+    {% block head %}{% endblock %}
+    <mj-attributes>
+      <mj-all font-family="Poppins, Arial" />
+      <mj-all line-height="1.4" />
+    </mj-attributes>
+    <mj-style inline="inline">
+      .box {
+        background-color: #FFF;
+        border-radius: 10px;
+        padding: 10px 20px;
+      }
+      .spacer {
+        padding: 0px;
+        height: 20px;
+      }
+      .logo {
+        margin:auto;
+        max-height: 100%;
+        max-width: 100%;
+      }
+    </mj-style>
+  </mj-head>
+  <mj-body background-color="#F0F0F0">
+    <mj-wrapper padding="50px 20px">
+      {% block header %}
+      <mj-section css-class="box">
+        <mj-column width="300px">
+          <mj-image css-class="logo" src="{{ $brandingLogo }}" alt="{{ $org['name'] }}"></mj-image>
+        </mj-column>
+      </mj-section>
+      <mj-section css-class="spacer"></mj-section>
+      {% endblock %}
+
+      {% block content %}
+      {% endblock %}
+
+      {% block footer %}
+      <mj-section css-class="spacer"></mj-section>
+      <mj-section>
+        <mj-column>
+          <mj-text align="center" color="#BCBCBC">
+            {{ __('frontend/mailables.reason') }}:
+          </mj-text>
+          <mj-text align="center" color="#BCBCBC">
+            {{ $org['name']}} <br>
+
+            @if($org['url'])
+            <a href="{{ $org['url'] }}">{{ $org['url'] }}</a><br>
+            @endif
+
+            @if($org['phone'])
+            <a href="tel:{{ $org['phone'] }}">{{ $org['phone'] }}</a><br>
+            @endif
+
+            @if($org['phone'])
+            <a href="mailto:{{ $org['email'] }}">{{ $org['email'] }}</a><br>
+            @endif
+          </mj-text>
+        </mj-column>
+      </mj-section>
+      {% endblock %}
+    </mj-wrapper>
+  </mj-body>
+</mjml>

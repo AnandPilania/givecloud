@@ -1,0 +1,436 @@
+
+<div class="modal fade modal-info" tabindex="-1" role="dialog" id="variant-modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><% if (id) { %><%= variantname %><% } else { %>Add Variant<% } %></h4>
+            </div>
+            <form>
+                <input type="hidden" name="id" value="<%= id %>">
+                <div class="modal-body variant-fixed-section">
+
+                    <div class="row row-padding-sm">
+                        <div class="form-group col-xs-5">
+                            <label>Name</label>
+                            <input type="text" class="form-control" name="variantname" value="<%= variantname %>" placeholder="Option Name">
+                            <div class="checkbox" style="margin:0;margin-top:2px">
+                                <label><input name="redirects_to_check" type="checkbox" value="1" <% if (metadata.redirects_to) { %>checked<% } %>>Redirect to another product</label>
+                            </div>
+                        </div>
+                        <div class="form-group col-xs-7 redirects-to-show hide">
+                            <label>Product</label>
+                            <input class="form-control ds-products" name="metadata[redirects_to]" value="<%= metadata.redirects_to %>">
+                        </div>
+                        <div class="form-group col-xs-4 redirects-to-hide">
+                            <label>Payment</label>
+                            <select class="form-control" name="billing_period">
+                                <option value="onetime" <% if (billing_period == 'onetime') { %>selected<% } %>>One-Time</option>
+                                <option value="weekly" <% if (billing_period == 'weekly') { %>selected<% } %>>Recurring Weekly</option>
+                                <option value="biweekly" <% if (billing_period == 'biweekly') { %>selected<% } %>>Recurring Bi-Weekly</option>
+                                <option value="monthly" <% if (billing_period == 'monthly') { %>selected<% } %>>Recurring Monthly</option>
+                                <option value="quarterly" <% if (billing_period == 'quarterly') { %>selected<% } %>>Recurring Quarterly</option>
+                                <option value="biannually" <% if (billing_period == 'biannually') { %>selected<% } %>>Recurring Bi-Annually</option>
+                                <option value="annually" <% if (billing_period == 'annually') { %>selected<% } %>>Recurring Annually</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-xs-3 redirects-to-hide">
+                            <label>Fair Market Value</label>
+                            <div class="input-group input-group-transparent">
+                                <div class="input-group-addon"><%= php.base_currency_symbol %></div>
+                                <input class="form-control text-right" name="fair_market_value" value="<% if (fair_market_value) { %><%= fair_market_value.formatMoney() %><% } %>" placeholder="0.00">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row row-padding-sm redirects-to-hide">
+                        <div class="form-group col-sm-3">
+                            <label>Price Type</label>
+                            <select class="form-control" name="is_donation">
+                                <option value="0" <% if (is_donation == false) { %>selected<% } %>>Fixed Price</option>
+                                <option value="1" <% if (is_donation == true) { %>selected<% } %>>Donation</option>
+                            </select>
+                        </div>
+                        <div class="hide fixed-price-options">
+                            <div class="form-group col-sm-3 col-xs-4">
+                                <label>Regular Price</label>
+                                <div class="input-group input-group-transparent">
+                                    <div class="input-group-addon"><%= php.base_currency_symbol %></div>
+                                    <input class="form-control text-right" name="price" value="<% if (price) { %><%= price.formatMoney() %><% } %>" placeholder="0.00">
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-3 col-xs-4">
+                                <label>Sale Price</label>
+                                <div class="input-group input-group-transparent">
+                                    <div class="input-group-addon"><%= php.base_currency_symbol %></div>
+                                    <input class="form-control text-right" name="saleprice" value="<% if (saleprice) { %><%= saleprice.formatMoney() %><% } %>" placeholder="0.00">
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-3 col-xs-4">
+                                <label>Cost</label>
+                                <div class="input-group input-group-transparent">
+                                    <div class="input-group-addon"><%= php.base_currency_symbol %></div>
+                                    <input class="form-control text-right" name="cost" value="<% if (cost) { %><%= cost.formatMoney() %><% } %>" placeholder="0.00">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hide donation-price-options">
+                            <div class="form-group col-sm-6 col-xs-8">
+                                <label>Amount Presets</label>
+                                <input class="selectize" name="price_presets" value="<%= price_presets %>" placeholder="Comma-separated amounts...">
+                                <small class="text-muted"></small>
+                            </div>
+                            <div class="form-group col-sm-3 col-xs-4">
+                                <label>Min. Amount</label>
+                                <div class="input-group input-group-transparent">
+                                    <div class="input-group-addon"><%= php.base_currency_symbol %></div>
+                                    <input class="form-control text-right" name="price_minimum" value="<% if (price_minimum) { %><%= price_minimum.formatMoney() %><% } %>" placeholder="0.00">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="modal-body modal-body-faded redirects-to-hide" style="margin-top:-14px;">
+
+                    <div class="clearfix">
+                        <ul class="nav nav-pills pills-sm nav-stacked" role="tablist">
+                            <li role="presentation" class="active"><a href="#variant-media" aria-controls="variant-media" role="tab" data-toggle="tab" aria-expanded="true">Images</a></li>
+                            <li role="presentation"><a href="#variant-shipping" aria-controls="variant-shipping" role="tab" data-toggle="tab">Shipping</a></li>
+                            <li role="presentation"><a href="#variant-inventory" aria-controls="variant-inventory" role="tab" data-toggle="tab">Inventory</a></li>
+                            <% if (php.memberships.length > 0) { %>
+                                <li role="presentation"><a href="#variant-membership" aria-controls="variant-membership" role="tab" data-toggle="tab">Group</a></li>
+                            <% } %>
+                            <li role="presentation"><a href="#variant-download" aria-controls="variant-download" role="tab" data-toggle="tab">Media</a></li>
+                            <li role="presentation" style="display:none;"><a href="#variant-codes" aria-controls="variant-codes" role="tab" data-toggle="tab">Coding</a></li>
+                            <li role="presentation"><a href="#variant-bundle" aria-controls="variant-bundle" role="tab" data-toggle="tab">Bundles <% if (linked_variants.length) { %><span class="badge text-sm badge-danger" id="linked-variant-count"><%= linked_variants.length %></span><% } %></a></li>
+                            <li role="presentation" class="hide recurring-price-options">
+                                <a href="#variant-billingcycle" aria-controls="variant-billingcycle" role="tab" data-toggle="tab">Billing Cycle</a>
+                            </li>
+                            <% if (Givecloud.settings.dpo_is_enabled) { %>
+                                <li role="presentation">
+                                    <a href="#variant-codes" aria-controls="variant-codes" role="tab" data-toggle="tab">DP Codes</a>
+                                </li>
+                            <% } %>
+                        </ul>
+
+                        <div class="tab-content tab-content-min">
+                            <div role="tabpanel" class="tab-pane active" id="variant-media">
+                                <div class="media-listing" id="media-list-<%= id %>"></div>
+                                <div id="media-upload-list-<%= id %>"></div>
+                                <a href="#" class="btn btn-sm btn-info media-upload"
+                                    data-media-parent-id="<%= id %>"
+                                    data-media-parent-type="Ds\Models\Variant"
+                                    data-media-collection-name="products"
+                                    data-media-list="#media-list-<%= id %>"
+                                    data-media-upload-container="#variant-modal-<%= id %>"><i class="fa fa-upload"></i> Upload Images</a>
+                            </div>
+
+                            <div role="tabpanel" class="tab-pane" id="variant-shipping">
+                                <div class="row row-padding-sm">
+                                    <div class="form-group form-group-sm col-sm-6 col-xs-6">
+                                        <label>Shipping</label>
+                                        <select class="form-control" name="isshippable">
+                                            <option value="0" <% if (isshippable == "0") { %>selected<% } %>>No</option>
+                                            <option value="1" <% if (isshippable == "1" && is_shipping_free == "0") { %>selected<% } %>>Yes</option>
+                                            <option value="2" <% if (isshippable == "1" && is_shipping_free == "1") { %>selected<% } %>>Yes - Free</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group form-group-sm col-sm-6 col-xs-6">
+                                        <label>Weight</label>
+                                        <div class="input-group">
+                                            <input class="form-control text-right" name="weight" value="<% if (weight) { %><%= weight.formatMoney() %><% } %>" placeholder="0.00">
+                                            <div class="input-group-addon">lbs</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row row-padding-sm">
+                                    <div class="col-sm-12">
+                                        <hr style="margin:6px 0 14px">
+                                        <strong>Shipping Expectations</strong>
+                                        <small class="help-block" style="max-width:90%;font-size:13px;">
+                                            Display a notice regarding shipping expectations to the customer when available stock reaches a certain threshold.
+                                            You can change the defaults from the <a href="/jpanel/settings/shipping#shipping-expectations">shipping settings</a> screen.
+                                        </small>
+                                    </div>
+                                    <div class="form-group form-group-sm col-sm-12">
+                                        <label>Stock Threshold</label>
+                                        <input class="form-control" type="number" name="shipping_expectation_threshold" value="<%= shipping_expectation_threshold %>">
+                                    </div>
+                                    <div class="form-group form-group-sm col-sm-6 col-xs-6">
+                                        <label>Over Threshold Notice</label>
+                                        <input class="form-control" type="text" name="shipping_expectation_over" value="<%= shipping_expectation_over %>" placeholder="Ex: <%= php.shipping_expectation_over %>" maxlength="255">
+                                    </div>
+                                    <div class="form-group form-group-sm col-sm-6 col-xs-6">
+                                        <label>Under Threshold Notice</label>
+                                        <input class="form-control" type="text" name="shipping_expectation_under" value="<%= shipping_expectation_under %>" placeholder="Ex: <%= php.shipping_expectation_under %>" maxlength="255">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div role="tabpanel" class="tab-pane" id="variant-inventory">
+                                <div class="row row-padding-sm">
+                                    <div class="form-group form-group-sm col-xs-4">
+                                        <label>Code (SKU)</label>
+                                        <input class="form-control" name="sku" value="<%= sku %>">
+                                    </div>
+                                    <div class="form-group form-group-sm col-xs-4">
+                                        <label data-placement="top" data-toggle="popover" data-trigger="hover" data-content="<% if (quantity_modified_by_full_name) { %>(<%= quantity %>) left as of <%= $.formatDate(quantitymodifieddatetime) %>. (<%= quantity_modified_by_full_name %>)<% } else { %>Enter the current available inventory as of this moment. Givecloud will automatically reduce your available inventory with every transaction that is processed afterwards.<% } %>">
+                                            Remaining Stock
+                                            <span class="text-primary"><i class="fa fa-question-circle-o fa-fw"></i></span>
+                                        </label>
+                                        <% if (_is_new) { %>
+                                            <input type="hidden" name="_update_quantity" value="1">
+                                            <input type="numeric" class="form-control" name="quantity" value="<%= quantity %>">
+                                        <% } else { %>
+                                            <input type="hidden" name="_update_quantity" value="<%= (_update_quantity)?'1':'0' %>">
+                                            <div class="input-group">
+                                                <input type="numeric" class="form-control <% if (_update_quantity == 0) { %>disabled<% } %>" <% if (_update_quantity == 0) { %>disabled<% } %> name="quantity" value="<% if (_update_quantity) { %><%= quantity %><% } else { %><%= quantity %><% } %>" placeholder="0">
+                                                <div class="input-group-btn"><a href="#" class="btn btn-sm btn-default edit-quantity-remaining"><i class="fa fa-fw fa-<% if (_update_quantity) { %>times<% } else { %>pencil<% } %>"></i></a></div>
+                                            </div>
+                                        <% } %>
+                                        <small class="text-muted"></small>
+                                    </div>
+                                    <div class="form-group form-group-sm col-xs-4">
+                                        <label>Restock At</label>
+                                        <input class="form-control" name="quantityrestock" value="<%= quantityrestock %>" placeholder="n/a">
+                                    </div>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="variant-membership">
+                                <div class="row row-padding-sm">
+                                    <div class="form-group form-group-sm col-md-12">
+                                        <label>Group or Membership</label>
+                                        <% if (php.memberships.length > 0) { %>
+                                            <select class="form-control" name="membership_id">
+                                                <option value="">[ None ]</option>
+                                                <% php.memberships.forEach(function(membership) { %>
+                                                    <option value="<%= membership.id %>" <% if (membership_id == membership.id) { %>selected<% } %> ><%= membership.name %></option>
+                                                <% }) %>
+                                            </select>
+                                        <% } else { %>
+                                            <input name="membership_id" type="hidden" value="">
+                                            <div class="form-control-static text-center"><span class="text-warning"><i class="fa fa-exclamation-triangle"></i> You have no membership levels setup.</span></div>
+                                        <% } %>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div role="tabpanel" class="tab-pane" id="variant-download">
+                                <div class="row row-padding-sm">
+                                    <div class="form-group col-md-12">
+                                        <label style="font-weight:normal; font-size:12px;">Type of Media</label>
+                                        <select class="form-control" name="file_type">
+                                            <option value="file" <% if ((file && file.type == "file")) { %>selected<% } %>>File for Download</option>
+                                            <option value="external" <% if ((file && file.type == "external")) { %>selected<% } %>>Youtube or Vimeo URL</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row row-padding-sm file-to-deliver">
+                                    <div class="form-group col-md-12">
+                                        <label style="font-weight:normal; font-size:12px;">File to Deliver</label>
+                                        <select class="form-control input-sm ds-downloads" name="fileid" placeholder="No file chosen">
+                                            <% if (file) { %><option value="<%= file.fileid %>" selected><%= file.filename %></option><% } %>
+                                        </select>
+                                        <small class="text-muted"><a href="#" data-toggle="collapse" data-target="#download-options">Security Options</a></small>
+                                    </div>
+                                </div>
+                                <div class="row row-padding-sm external-uri">
+                                    <div class="form-group col-md-12">
+                                        <label style="font-weight:normal; font-size:12px;">File to Stream</label>
+                                        <input name="external_resource_uri" class="form-control" placeholder="Youtube or Vimeo URL..." value="<% if (file && file.external_resource_uri) { %><%= file.external_resource_uri %><% } %>" />
+                                        <small class="text-muted"><a href="#" data-toggle="collapse" data-target="#download-options">Security Options</a></small>
+                                    </div>
+                                </div>
+                                <div class="row row-padding-sm collapse" id="download-options">
+                                    <div class="form-group form-group-sm col-md-4">
+                                        <label>Expires In</label>
+                                        <select class="form-control" name="file_expiry">
+                                            <option value="-1">Unlimited</option>
+                                            <option value="3600" <% if ((file && file.expiry_time == "3600")) { %>selected<% } %>>1hr</option>
+                                            <option value="7200" <% if ((file && file.expiry_time == "7200")) { %>selected<% } %>>2hr</option>
+                                            <option value="18000" <% if ((file && file.expiry_time == "18000")) { %>selected<% } %>>5hr</option>
+                                            <option value="43200" <% if ((file && file.expiry_time == "43200")) { %>selected<% } %>>12hr</option>
+                                            <option value="86400" <% if ((file && file.expiry_time == "86400")) { %>selected<% } %>>1 Day</option>
+                                            <option value="172800" <% if ((file && file.expiry_time == "172800")) { %>selected<% } %>>2 Days</option>
+                                            <option value="432000" <% if ((file && file.expiry_time == "432000")) { %>selected<% } %>>5 Days</option>
+                                            <option value="864000" <% if ((file && file.expiry_time == "864000")) { %>selected<% } %>>10 Days</option>
+                                            <option value="2592000" <% if ((file && file.expiry_time == "2592000")) { %>selected<% } %>>30 Days</option>
+                                            <option value="15552000" <% if ((file && file.expiry_time == "15552000")) { %>selected<% } %>>6 Months</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group form-group-sm col-md-4 download-options-devices">
+                                        <label>Devices</label>
+                                        <select class="form-control" name="file_address_limit">
+                                            <option value="-1">Unlimited</option>
+                                            <option value="1" <% if ((file && file.address_limit == "1")) { %>selected<% } %>>1 IP</option>
+                                            <option value="2" <% if ((file && file.address_limit == "2")) { %>selected<% } %>>2 IPs</option>
+                                            <option value="3" <% if ((file && file.address_limit == "3")) { %>selected<% } %>>3 IPs</option>
+                                            <option value="4" <% if ((file && file.address_limit == "4")) { %>selected<% } %>>4 IPs</option>
+                                            <option value="5" <% if ((file && file.address_limit == "5")) { %>selected<% } %>>5 IPs</option>
+                                            <option value="10" <% if ((file && file.address_limit == "10")) { %>selected<% } %>>10 IPs</option>
+                                            <option value="15" <% if ((file && file.address_limit == "15")) { %>selected<% } %>>15 IPs</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group form-group-sm col-md-4 download-options-limit">
+                                        <label>Downloads</label>
+                                        <select class="form-control" name="file_download_limit">
+                                            <option value="-1">Unlimited</option>
+                                            <option value="1" <% if ((file && file.download_limit == "1")) { %>selected<% } %>>1x</option>
+                                            <option value="2" <% if ((file && file.download_limit == "2")) { %>selected<% } %>>2x</option>
+                                            <option value="3" <% if ((file && file.download_limit == "3")) { %>selected<% } %>>3x</option>
+                                            <option value="4" <% if ((file && file.download_limit == "4")) { %>selected<% } %>>4x</option>
+                                            <option value="5" <% if ((file && file.download_limit == "5")) { %>selected<% } %>>5x</option>
+                                            <option value="10" <% if ((file && file.download_limit == "10")) { %>selected<% } %>>10x</option>
+                                            <option value="15" <% if ((file && file.download_limit == "15")) { %>selected<% } %>>15x</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row row-padding-sm">
+                                    <div class="form-group col-md-12">
+                                        <label style="font-weight:normal; font-size:12px;">Short Description</label>
+                                        <input name="file_description" class="form-control" placeholder="A few words describing this resource..." value="<% if (file && file.description) { %><%= file.description %><% } %>" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div role="tabpanel" class="tab-pane" id="variant-bundle">
+
+                                <table class="table table-sm striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Variant</th>
+                                            <th class="text-center" style="width:70px">Qty</th>
+                                            <th class="text-right" style="width:120px;">Price</th>
+                                            <th style="width:40px;"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="linked-variants"></tbody>
+                                    <tbody>
+                                        <tr>
+                                            <td><input type="text" id="linked-variant-id" class="ds-variants form-control input-sm" data-exclude="<%= id %>" placeholder="Variant"></td>
+                                            <td><input type="text" id="linked-variant-qty" class="form-control input-sm text-center" placeholder="Qty" value="1"></td>
+                                            <td><input type="text" id="linked-variant-price" class="form-control input-sm text-right" placeholder="0.00" value="0.00"></td>
+                                            <td class="text-center"><button type="button" class="btn btn-success btn-sm linked-variant-add"><i class="fa fa-plus"></i></button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+
+                            <div role="tabpanel" class="tab-pane" id="variant-codes">
+                                <div class="row row-padding-sm">
+                                    <div class="form-group col-sm-6 col-xs-6">
+                                        <label class="text-sm">General Ledger</label>
+                                        <input type="text" autocomplete="off" class="form-control <%= Givecloud.settings.dpo_is_enabled ? 'dpo-codes' : '' %>" data-code="GL_CODE" name="metadata[dp_gl_code]" id="metadata-dp_gl_code" value="<%= metadata.dp_gl_code %>" maxlength="200" />
+                                    </div>
+                                    <div class="form-group col-sm-6 col-xs-6">
+                                        <label class="text-sm">Campaign</label>
+                                        <input type="text" autocomplete="off" class="form-control <%= Givecloud.settings.dpo_is_enabled ? 'dpo-codes' : '' %>" data-code="CAMPAIGN" name="metadata[dp_campaign]" id="metadata-dp_campaign" value="<%= metadata.dp_campaign %>" maxlength="200" />
+                                    </div>
+                                    <div class="form-group col-sm-6 col-xs-6">
+                                        <label class="text-sm">Solicitation</label>
+                                        <input type="text" autocomplete="off" class="form-control <%= Givecloud.settings.dpo_is_enabled ? 'dpo-codes' : '' %>" data-code="SOLICIT_CODE" name="metadata[dp_solicit]" id="metadata-dp_solicit" value="<%= metadata.dp_solicit %>" maxlength="200" />
+                                    </div>
+                                    <div class="form-group col-sm-6 col-xs-6">
+                                        <label class="text-sm">Sub Solicitation</label>
+                                        <input type="text" autocomplete="off" class="form-control <%= Givecloud.settings.dpo_is_enabled ? 'dpo-codes' : '' %>" data-code="SUB_SOLICIT_CODE" name="metadata[dp_subsolicit]" id="metadata-dp_subsolicit" value="<%= metadata.dp_subsolicit %>" maxlength="200" />
+                                    </div>
+                                    <div class="form-group col-sm-6 col-xs-6">
+                                        <label class="text-sm">TY Letter Code</label>
+                                        <input type="text" autocomplete="off" class="form-control <%= Givecloud.settings.dpo_is_enabled ? 'dpo-codes' : '' %>" data-code="TY_LETTER_NO" name="metadata[dp_ty_letter_no]" id="metadata-dp_ty_letter_no" value="<%= metadata.dp_ty_letter_no %>" maxlength="200" />
+                                    </div>
+                                    <div class="form-group col-sm-6 col-xs-6">
+                                        <label class="text-sm">Fair Mkt. Value</label>
+                                        <select name="metadata[dp_fair_market_value]" id="metadata-dp_fair_market_value" class="form-control">
+                                            <option value=""></option>
+                                            <option <%= metadata.dp_fair_market_value == '0' ? 'selected="selected"' : '' %> value="0">Do Not Use</option>
+                                            <option <%= metadata.dp_fair_market_value == '1' ? 'selected="selected"' : '' %> value="1">Populate with Purchase Value</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-sm-6 col-xs-6">
+                                        <label class="text-sm">Gift Memo</label>
+                                        <input type="text" autocomplete="off" class="form-control" name="metadata[dp_gift_narrative]" id="metadata-dp_gift_narrative" value="<%= metadata.dp_gift_narrative %>" maxlength="200" />
+                                    </div>
+                                    <div class="form-group col-sm-6 col-xs-6">
+                                        <label class="text-sm">Acknowledge Preference</label>
+                                        <input type="text" autocomplete="off" class="form-control <%= Givecloud.settings.dpo_is_enabled ? 'dpo-codes' : '' %>" data-code="ACKNOWLEDGEPREF" name="metadata[dp_acknowledgepref]" id="metadata-dp_acknowledgepref" value="<%= metadata.dp_acknowledgepref %>" maxlength="200" />
+                                    </div>
+                                    <div class="form-group col-sm-6 col-xs-6 <%= php.dp_use_nocalc ? '' : 'hidden' %>">
+                                        <label class="text-sm">NoCalc</label>
+                                        <select name="metadata[dp_no_calc]" id="metadata-dp_no_calc" class="form-control">
+                                            <option value=""></option>
+                                            <option value="N" <%= metadata.dp_no_calc === 'N' ? 'selected="selected"' : '' %> >N</option>
+                                            <option value="Y" <%= metadata.dp_no_calc === 'Y' ? 'selected="selected"' : '' %> >Y</option>
+                                        </select>
+                                    </div>
+
+                                    <% php.dp_custom_fields.forEach(function(field) { %>
+                                        <% if (field.dp_field) { %>
+                                            <div class="form-group col-sm-6 col-xs-6">
+                                                <label class="text-sm"><%= field.dp_label %></label>
+                                                <input type="text" <% if (field.dp_autocomplete && Givecloud.settings.dpo_is_enabled) { %>class="form-control dpo-codes" data-code="<%= field.dp_field %>"<% } else { %>class="form-control"<% } %>
+                                                    name="metadata[<%= field.name %>]" id="metadata-<%= field.name %>" value="<%= metadata[field.name] %>" maxlength="200" />
+                                            </div>
+                                        <% } %>
+                                    <% }) %>
+                                </div>
+                            </div>
+
+                            <div role="tabpanel" class="tab-pane hide recurring-price-options" id="variant-billingcycle">
+                                <div class="row row-padding-sm">
+                                    <div class="form-group form-group-sm col-xs-4">
+                                        <label># of Cycles</label>
+                                        <input type="number" class="form-control" name="total_billing_cycles" value="<%= total_billing_cycles %>" min="1">
+                                    </div>
+                                    <div class="form-group form-group-sm col-xs-1">
+                                        <div class="text-center" style="margin-top:28px">or</div>
+                                    </div>
+                                    <div class="form-group form-group-sm col-xs-7">
+                                        <label>Stop Billing On</label>
+                                        <div class="input-group date">
+                                            <input type="text" class="form-control input-date" name="billing_ends_on" value="<%= billing_ends_on %>">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-calendar fa-fw"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row row-padding-sm">
+                                    <div class="form-group form-group-sm col-xs-7">
+                                        <label>Delay Billing Until After</label>
+                                        <div class="input-group date">
+                                            <input type="text" class="form-control input-date" name="billing_starts_on" value="<%= billing_starts_on %>">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-calendar fa-fw"></i>
+                                            </span>
+                                        </div>
+                                        <p class="help-block text-sm">
+                                            <i class="fa fa-question-circle"></i>
+                                            If set billing won't take place before this date. If set the option to make a first payment will not be available.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <div class="pull-left">
+                        <% if (isdefault) { %>
+                            <span class="btn disabled btn-default btn-outline"><i class="fa fa-fw fa-check-square-o"></i> Default</span>
+                        <% } else { %>
+                            <span class="btn set-as-default btn-default"><i class="fa fa-check fa-fw fa-check-square-o"></i> Set as Default</span>
+                        <% } %>
+                    </div>
+
+                    <button type="submit" class="btn btn-info"><% if (_is_new && !name) { %>Add<% } else { %>Update<% } %></button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

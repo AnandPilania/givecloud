@@ -1,0 +1,22 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/root/*": ["/*"],
+      "@/types": ["types.ts"],
+      "@/atoms/*": ["atoms/*"],
+      "@/router/*": ["router/*"],
+      "@/utilities/*": ["utilities/*"],
+      "@/components": ["components/index.ts"],
+      "@/components/*": ["components/*"],
+      "@/aerosol": ["../aerosol/index.ts"],
+      "@/aerosol/*": ["../aerosol/*"],
+      "@/shared/*": ["../shared/*"],
+      "@/screens/*": ["screens/*"],
+      "@/constants/*": ["constants/*"],
+      "@/mocks/*": ["mocks/*"]
+    }
+  },
+  "include": ["../aerosol/**/*", "./**/*", "../shared/**/*"]
+}

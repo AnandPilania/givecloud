@@ -1,0 +1,1 @@
+export { JoinGoalScreen } from './JoinGoalScreen'

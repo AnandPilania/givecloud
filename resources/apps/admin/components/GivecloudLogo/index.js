@@ -1,0 +1,1 @@
+export { GivecloudLogo } from './GivecloudLogo'

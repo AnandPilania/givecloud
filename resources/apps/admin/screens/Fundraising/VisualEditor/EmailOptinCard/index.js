@@ -1,0 +1,1 @@
+export { EmailOptinCard } from './EmailOptinCard'

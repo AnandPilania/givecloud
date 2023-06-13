@@ -1,0 +1,15 @@
+.root {
+  @apply w-full mt-0 mb-4 mx-auto bg-gray-200 h-1;
+
+  > .bar {
+    @apply h-1;
+
+    &.primary {
+      @apply bg-blue-600;
+    }
+
+    &.error {
+      @apply bg-red-600;
+    }
+  }
+}

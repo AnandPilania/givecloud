@@ -1,0 +1,44 @@
+.root {
+  @apply px-4 py-2.5 rounded-lg relative text-base font-sans font-bold;
+
+  &.custom {
+    @apply text-white bg-theme hover:bg-theme-dark;
+    @apply outline-none focus:ring-theme focus:ring-offset-2 focus:ring-2;
+
+    &.clean {
+      @apply bg-transparent text-theme hover:bg-theme hover:text-white;
+      box-shadow: 0 0 0 1px transparent;
+    }
+  }
+
+  &.disabled {
+    @apply bg-gray-400 text-white cursor-not-allowed hover:bg-gray-400;
+  }
+
+  &.primary {
+    @apply bg-blue-600 text-white font-bold hover:bg-blue-700;
+    @apply outline-none focus:ring-blue-600 focus:ring-offset-2 focus:ring-2;
+
+    &.selected {
+      @apply bg-white text-blue-600 hover:bg-blue-700 hover:text-white;
+    }
+  }
+
+  &.clean {
+    @apply bg-white text-blue-600 hover:bg-blue-600 hover:text-white border border-blue-600;
+    @apply outline-none focus:ring-blue-600 focus:ring-offset-2 focus:ring-2;
+
+    &.selected {
+      @apply bg-blue-600 text-white hover:text-blue-600 hover:bg-white;
+    }
+  }
+
+  &.rounded {
+    @apply rounded-full;
+  }
+}
+
+.link {
+  @apply contents;
+  @apply text-brand-blue text-base;
+}

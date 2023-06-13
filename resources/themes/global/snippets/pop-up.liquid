@@ -1,0 +1,54 @@
+{% if settings.pop_up_option == 'message' %}
+
+    {% capture 'pop_up_id' %}{{ settings.pop_up_headline }}{{ settings.pop_up_body }}{% endcapture %}
+
+    <div class="modal fade" data-pop-up-id="{{ pop_up_id | md5 }}" data-pop-up-delay="{{ settings.pop_up_delay }}" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="close close-pop-up" data-dismiss="modal" aria-label="{{ 'general.actions.close' | t }}">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h1 class="modal-title text-primary text-center">{{ settings.pop_up_headline }}</h1>
+                    <p class="text-center text-muted text-lg">{{ settings.pop_up_body }}</p>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-primary close-pop-up" rel="button" {% if settings.pop_up_url %}href="{{ settings.pop_up_url }}"{% else %}data-dismiss="modal"{% endif %}>{{ settings.pop_up_label }}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+
+{% comment %}
+<div class="modal fade modal-popup" id="pop-up" data-popup="email_signup" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+                <h1 class="modal-title text-primary text-center">Sign-Up Today</h1>
+                <p class="text-center text-muted text-lg">Modal body text goes here.</p>
+                
+                <form class="" name="" action="" method="">
+                    <div class="form-group form-group-lg mt-4 mb-0">
+                        <div class="input-group input-group-lg">
+                            <input type="email" class="form-control" placeholder="Your Email" aria-label="Your email">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button">Sign-Up</button>
+                            </div>
+                        </div>
+                        <div class="custom-control custom-checkbox mt-2">
+                            <input type="checkbox" class="custom-control-input" name="pop_up_opt_in" id="pop-ip-check">
+                            <label class="custom-control-label" for="pop-ip-check">Send me news and updates.</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endcomment %}

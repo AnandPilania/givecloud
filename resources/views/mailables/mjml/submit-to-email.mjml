@@ -1,0 +1,25 @@
+
+{% layout "layouts/app" %}
+
+{% block content %}
+<mj-section css-class="box">
+  <mj-column>
+    <mj-headline icon="fa-dark-question-circle">
+      <h1>Form Submission</h1>
+    </mj-headline>
+    <mj-text color="#474747" font-size="20px" font-weight="700" line-height="1.2" padding-top="0">
+      <p>{{ $subject }}</p>
+    </mj-text>
+    <mj-raw>@if (count($fields))</mj-raw>
+      <mj-table color="#474747" font-size="16px" font-weight="300">
+        @foreach ($fields as $field => $value)
+          <tr>
+              <td width="100" style="vertical-align:top;padding-bottom:10px;"><strong>{{ $field }}</strong></td>
+              <td style="vertical-align:top;padding-bottom:10px;">{{ $value }}</td>
+          </tr>
+        @endforeach
+      </mj-table>
+    <mj-raw>@endif</mj-raw>
+  </mj-column>
+</mj-section>
+{% endblock %}

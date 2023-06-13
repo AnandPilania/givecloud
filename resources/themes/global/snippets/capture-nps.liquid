@@ -1,0 +1,30 @@
+{% if site.nps.enabled and account %}
+    {% unless account.nps %}
+
+        <div class="capture-nps-wrap">
+            <div class="container">
+                <form name="capture-nps" class="card bg-success p-3 mb-4 text-light d-flex align-items-center">
+                    <div class="font-weight-bold mb-2">
+                        {{ 'snippets.capture_nps.recommend_us_to_your_friends_and_family' | t }}
+                    </div>
+
+                    <div class="rating rating-heart d-flex justify-content-center flex-row-reverse">
+                        <input type="radio" id="nps-10" name="nps" value="10" /><label for="nps-10" title="10">10<br>{{ 'snippets.capture_nps.very_likely' | t }}</label>
+                        <input type="radio" id="nps-9" name="nps" value="9" /><label for="nps-9" title="9">9</label>
+                        <input type="radio" id="nps-8" name="nps" value="8" /><label for="nps-8" title="8">8</label>
+                        <input type="radio" id="nps-7" name="nps" value="7" /><label for="nps-7" title="7">7</label>
+                        <input type="radio" id="nps-6" name="nps" value="6" /><label for="nps-6" title="5">6</label>
+                        <input type="radio" id="nps-5" name="nps" value="5" /><label for="nps-5" title="5">5</label>
+                        <input type="radio" id="nps-4" name="nps" value="4" /><label for="nps-4" title="4">4</label>
+                        <input type="radio" id="nps-3" name="nps" value="3" /><label for="nps-3" title="3">3</label>
+                        <input type="radio" id="nps-2" name="nps" value="2" /><label for="nps-2" title="2">2</label>
+                        <input type="radio" id="nps-1" name="nps" value="1" /><label for="nps-1" title="1">1<br>{{ 'snippets.capture_nps.not_likely' | t }}</label>
+                    </div>
+
+                    <button type="submit" class="btn btn-light">{{ 'snippets.capture_nps.submit' | t }}</button>
+                </form>
+            </div>
+        </div>
+
+    {% endunless %}
+{% endif %}

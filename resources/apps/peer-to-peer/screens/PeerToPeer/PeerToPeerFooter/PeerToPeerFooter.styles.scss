@@ -1,0 +1,13 @@
+.root {
+  @apply flex w-full;
+  @apply justify-end mt-3 lg:justify-start lg:mt-0;
+
+  .separator {
+    @apply mx-2 lg:mx-6;
+    @apply text-xs lg:text-base;
+  }
+
+  .text {
+    @apply text-xs lg:text-base;
+  }
+}

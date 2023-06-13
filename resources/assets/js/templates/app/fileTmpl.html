@@ -1,0 +1,13 @@
+
+<div class="fileRow-wrap" id="fileRow-<%= id %>">
+    <div class="col-xs-9">
+        <a class="btn btn-xs show-in-choose-mode" data-download-choose><i class="fa fa-check"></i> Choose</a>
+        <a href="<%= url %>" target="_blank"><i class="fa <%= fa_icon %>"></i> <%= name %></a>
+    </div>
+    <div class="col-xs-2" style="color:#ccc;"><%= size_formatted %></div>
+    <% if (Givecloud.settings.user_can_edit) { %>
+        <div class="col-xs-1 text-right" style="color:#ccc;">
+            <a data-download-remove><i class="fa fa-times"></i></a>
+        </div>
+    <% } %>
+</div>

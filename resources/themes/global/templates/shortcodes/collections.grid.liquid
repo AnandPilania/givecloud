@@ -1,0 +1,17 @@
+{% if categories.size == 1 %}
+    {% assign grid_item_wrap_classes = "col-12" %}
+{% elsif categories.size == 2 %}
+    {% assign grid_item_wrap_classes = "col-sm-6 col-12" %}
+{% elsif categories.size == 3 %}
+    {% assign grid_item_wrap_classes = "col-md-4 col-sm-6 col-12" %}
+{% elsif categories.size > 3 %}
+    {% assign grid_item_wrap_classes = "col-lg-3 col-md-4 col-sm-6 col-12" %}
+{% endif%}
+
+<div class="row">
+    {% for cat in categories %}
+        <div class="{{ grid_item_wrap_classes }}">
+            {% include 'collection-grid-item', category: cat %}
+        </div>
+    {% endfor %}
+</div>

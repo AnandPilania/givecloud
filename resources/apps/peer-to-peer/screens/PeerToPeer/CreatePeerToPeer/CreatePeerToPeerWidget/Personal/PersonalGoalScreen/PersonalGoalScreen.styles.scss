@@ -1,0 +1,23 @@
+.root {
+  @apply items-center;
+
+  .text {
+    @apply max-w-[16rem] text-center;
+  }
+
+  .badgeContainer {
+    @apply w-full flex justify-center mt-4 mb-6;
+
+    .spacingDiv {
+      @apply h-11 invisible;
+    }
+  }
+
+  .amountSelector {
+    @apply mb-4;
+  }
+}
+
+.logo {
+  @apply object-cover h-8;
+}

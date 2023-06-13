@@ -1,0 +1,11 @@
+.root {
+  @apply items-center py-6 mt-16;
+
+  .text {
+    @apply max-w-[16rem] text-center;
+  }
+}
+
+.button {
+  @apply w-full inline-flex justify-center items-center;
+}

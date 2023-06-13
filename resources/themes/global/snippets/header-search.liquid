@@ -1,0 +1,12 @@
+
+{% if settings.menu_include_search %}
+    <div class="site-search">
+    <form class="site-search__form" role="search" action="{% if settings.menu_search_scope == 'everything' %}/search{% else %}/products/search{% endif %}" method="get">
+        <div class="site-search__row">
+        <input type="text" name="keywords" placeholder="{% if settings.menu_search_scope == 'everything' %}{{ 'snippets.header_search.search_everything' | t }}{% else %}{{ 'snippets.header_search.search_shop' | t }}{% endif %}">
+        <button type="submit" class="reset"><span class="fa fa-search"></span></button>
+        </div>
+    </form>
+    <button class="site-search__close"><span class="fa fa-times"></span></button>
+    </div>
+{% endif %}

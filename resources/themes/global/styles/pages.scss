@@ -1,0 +1,30 @@
+.multi-item-checkout, 
+.split-fund-donations {
+
+    .card-cart {
+
+        .spinner {
+            width: 100px;
+            height:100px;
+            margin: 40px auto 60px;
+        }
+
+        @include media-breakpoint-up(md) {
+            
+        }
+    }
+}
+
+.split-fund-donations .fund-thumb {
+
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    width: 100%;
+    height: 150px;
+
+    @include media-breakpoint-up(md) {
+        width: 80px;
+        height: 80px;
+    }
+}

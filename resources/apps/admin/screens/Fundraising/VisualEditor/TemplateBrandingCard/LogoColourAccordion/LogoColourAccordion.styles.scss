@@ -1,0 +1,15 @@
+.accordionHeader {
+  @apply mb-4 text-center rounded-lg text-brand-blue;
+
+  &:hover {
+    box-shadow: 0 0 0 1px #2563eb;
+  }
+
+  .optionsIcon {
+    @apply ml-2 transition-all;
+
+    &.open {
+      @apply rotate-90;
+    }
+  }
+}

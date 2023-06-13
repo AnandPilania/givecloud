@@ -1,0 +1,15 @@
+.root {
+  @apply w-full flex flex-col justify-center items-center mt-5 mb-10;
+
+  .party {
+    @apply text-4xl mt-2 mb-4;
+  }
+
+  .title {
+    @apply font-bold tracking-wider text-2xl;
+  }
+
+  .donateAgainLink {
+    @apply cursor-pointer mt-4;
+  }
+}

@@ -1,0 +1,72 @@
+.root {
+  @apply relative w-full max-h-52;
+
+  > .hidden {
+    @apply sr-only;
+  }
+
+  > .charCount {
+    @apply absolute right-0 -top-6 font-sans text-sm text-gray-500;
+
+    &.default {
+      @apply top-0;
+    }
+
+    &.noLabel {
+      @apply -top-6;
+    }
+  }
+
+  > .errorMessage {
+    @apply mt-2 text-sm text-red-600 font-bold;
+  }
+
+  > .iconContainer {
+    @apply absolute mr-4 top-4 right-0 flex items-center pointer-events-none;
+
+    > .icon {
+      @apply h-5 w-5 text-gray-400;
+    }
+
+    > .errorIcon {
+      @apply h-5 w-5 text-red-500;
+    }
+  }
+}
+
+.input {
+  @apply px-4 py-3 block w-full font-sans bg-transparent leading-6 h-auto;
+  @apply border border-gray-400 rounded-md;
+
+  &.default {
+    @apply focus:ring-1 focus:border-brand-blue;
+  }
+
+  &.disabled {
+    @apply bg-zinc-50 border-gray-100 cursor-not-allowed text-gray-400;
+  }
+
+  &.paddingRight {
+    @apply pr-10;
+  }
+
+  &.error {
+    @apply border-red-600 text-red-700 focus:border-red-600 outline-none;
+  }
+
+  &.autoGrow {
+    @apply resize-none overflow-hidden h-full;
+  }
+}
+
+.label {
+  @apply flex items-center text-sm font-bold text-black font-sans mb-3;
+
+  > .optional {
+    @apply uppercase text-xxs text-gray-600 ml-2;
+  }
+
+  &.disabled {
+    @apply text-gray-500;
+  }
+}

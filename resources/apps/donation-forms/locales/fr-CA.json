@@ -1,0 +1,220 @@
+{
+  "components": {
+    "app": {
+      "social_proof_notifications": {
+        "someone": "Quelqu'un",
+        "from": "de",
+        "recent_html": "<strong>{{ who }}</strong> donné <strong>{{ amount }}</strong> <small>{{ when }}</small>",
+        "largest_amount_html": "<strong>{{ who }}</strong> a donné le plus, <strong>{{ amount }}</strong> <small>{{ when }}</small>"
+      }
+    },
+    "amount_selector": {
+      "done_button": "Terminer",
+      "variant_button": {
+        "monthly": "Mensuellement",
+        "today_only": "Aujourd'hui seulement"
+      }
+    },
+    "badge_preview": {
+      "top_x_of_donors_html": "<strong>{{ percentage }} % LES PLUS ÉLEVÉS</strong> des donateurs"
+    },
+    "cover_costs_selector": {
+      "information": {
+        "help_cover_costs_fees": "Aidez à couvrir les coûts et les frais",
+        "one_of_the_most_cost_effective_ways": "Les paiements en ligne sont l'un des moyens les plus rentables pour nous de collecter des fonds. L'automatisation élimine les erreurs humaines et rationalise nos opérations financières afin que nous puissions nous concentrer sur notre mission.",
+        "help_make_the_most_of_your_donation": "Aidez à tirer le meilleur parti de votre don en éliminant les très rares coûts restants que nous encourons lors de la collecte de fonds en ligne, notamment :",
+        "processing_bank_fees": "Frais de traitement et frais bancaires",
+        "it_security_costs": "Coûts informatiques et de sécurité",
+        "software_costs": "Coût du logiciel"
+      },
+      "description_html": "Ajouter {{ amount }} pour nous aider à couvrir les frais",
+      "most_costs": "{{ amount }} - La plupart des coûts",
+      "more_costs": "{{ amount }} - Plus de coûts",
+      "minimum_costs": "{{ amount }} - Coûts minimaux",
+      "no_thank_you": "Non merci"
+    },
+    "footer_navigation": {
+      "faq": "FAQ",
+      "privacy_and_legal": "Confidentialité et juridique"
+    },
+    "screen": {
+      "exit_confirm_modal": {
+        "message": "Votre impact n'a pas encore été traité. Si vous quittez maintenant, vous perdrez votre progression.",
+        "are_you_sure": "Êtes-vous sûr?",
+        "cancel": "Annuler",
+        "close": "Sortir",
+        "exit": "Quitter cette page"
+      },
+      "test_mode_warning": "Formulaire de don en mode test"
+    },
+    "next_button": {
+      "label": "Suivant"
+    }
+  },
+  "screens": {
+    "choose_payment_method": {
+      "amount_stepper": {
+        "tap_to_change": "Appuyez pour changer"
+      },
+      "payment_method_selector": {
+        "amount_html": "{{ amount }}",
+        "monthly_amount_html": "{{ amount }}/mois",
+        "donate": "Payer",
+        "donate_with": "Payer avec",
+        "pay_with": "Payer avec",
+        "credit": "Crédit",
+        "bank": "Banque",
+        "paypal_unknown_error": "Un problème est survenu lors de l'utilisation de PayPal. Assurez-vous que vos fenêtres contextuelles (pop-ups) ne sont pas bloquées. Sinon, essayez de faire un don d'une autre façon."
+      },
+      "transparency_promise": {
+        "title": "Promesse d'impact"
+      }
+    },
+    "pay_with_credit_card": {
+      "heading": "Paiement sécurisé",
+      "description": "Vous pouvez être assuré que vos informations sont toujours protégées par notre cryptage de niveau bancaire.",
+      "credit_card": "Carte de crédit",
+      "donate": "Faire un don",
+      "amount": "{{ amount }}",
+      "monthly_amount": "{{ amount }}/mois",
+      "bank_ach": "Banque / ACH",
+      "credit": "Crédit",
+      "ach": "ACH",
+      "cardholder_name": "Nom du titulaire",
+      "cardholder_name_required": "Un nom est requis.",
+      "cardholder_last_name_required": "Un nom de famille est requis.",
+      "name_on_account": "Titulaire du compte",
+      "card_number": "Numéro de carte",
+      "card_number_invalid": "Votre numéro de carte est incomplet.",
+      "card_number_required": "Un numéro de carte est requis.",
+      "card_exp": "MM / AA",
+      "card_exp_invalid": "La date d'expiration de votre carte est incorrecte.",
+      "card_exp_required": "Une date d'expiration de la carte est requise.",
+      "card_cvv": "CVC",
+      "card_cvv_invalid": "Le code de sécurité de votre carte est incomplet.",
+      "card_cvv_required": "Un code de sécurité de la carte est requis.",
+      "bank_transfer": "Virement",
+      "account_type": "Type de compte",
+      "checking": "Chèque",
+      "savings": "Épargne",
+      "routing_number": "Numéro de routage",
+      "transit_number": "Numéro de transit",
+      "institution_number": "# d'institution",
+      "routing_number_required": "Un numéro d'acheminement est requis.",
+      "routing_number_cad_required": "Un numéro de transit/institution est requis.",
+      "account_number": "Numéro de compte",
+      "account_number_required": "Un numéro de compte est requis.",
+      "is_a_business_account_html": "Il s'agit d'un <strong>compte professionnel</strong>.",
+      "ach_placeholder_usd": "Routage / Compte",
+      "ach_placeholder_cad": "Transit / Établissement / Compte",
+      "continue": "Continuer",
+      "email_address": "Adresse courriel",
+      "email_address_invalid": "l'adresse courriel que vous avez entrée est invalide.",
+      "email_address_required": "Une adresse courriel est requise.",
+      "billing_address_placeholder": "Adresse de facturation",
+      "billing_address_required": "Une adresse de facturation est requise.",
+      "edit_manually": "Modifier manuellement",
+      "search_for_address": "Rechercher une adresse",
+      "placeholder_address": "123 Rue Exemple",
+      "placeholder_city": "Ville",
+      "placeholder_state": "État/Province",
+      "placeholder_zip": "Code postal",
+      "placeholder_country": "Pays",
+      "ach_mandate": "En cliquant sur [\"Donner maintenant\"], j'autorise {{ gateway }} au nom de {{ organization }} (i) à vérifier mes informations de compte bancaire à l'aide des informations bancaires et des rapports sur les consommateurs et (ii) à débiter mon compte bancaire .",
+      "must_accept_mandate": "Vous devez accepter les termes du mandat.",
+      "donate_button": "Donnez maintenant"
+    },
+    "complete_checkout": {
+      "heading": "Dernière étape",
+      "description": "Le fait de nous donner vos coordonnées nous permet de vous envoyer votre confirmation de don et votre reçu.",
+      "contact_info": "Coordonnées",
+      "first_and_last_name": "Premier nom de famille",
+      "give": "Donner",
+      "amount": "{{ amount }}",
+      "monthly_amount": "{{ amount }}/mois"
+    },
+    "are_you_a_robot": {
+      "heading": "Etes-vous un robot?",
+      "description": "Cette étape nous aide à prévenir la fraude\net nous protège des frais coûteux\net des rétrofacturations."
+    },
+    "payment_approved": {
+      "heading": "Approuvé",
+      "description": "Un courriel de confirmation a été envoyé à {{ email }}."
+    },
+    "payment_declined": {
+      "heading": "Cela n'a pas fonctionné",
+      "error_from_bank": "Erreur de la banque : {{ error }}",
+      "try_again": "Réessayer"
+    },
+    "processing_payment": {
+      "description": "Traitement du paiement",
+      "messages": {
+        "contacting_bank": "Contacter la banque",
+        "authorizing_payment": "Autorisation de paiement",
+        "waiting_on_bank": "En attente par la banque",
+        "processing": "Traitement"
+      }
+    },
+    "monthly_upsell": {
+      "heading": "Améliorez votre impact",
+      "description_html": "Transformez votre {{ from }} en <strong>{{ into }}</strong> ou plus en faisant un don mensuel !",
+      "starts_on": "Départs {{ date }}",
+      "make_per_month_html": "Faites-le à <strong>{{ amount }}/mois</strong>",
+      "per_month_html": "{{ amount }}/lun",
+      "every_little_bit": "♥️ Chaque petit geste compte !",
+      "no_thanks": "Non, merci"
+    },
+    "double_the_donation_search": {
+      "heading": "Doubler mon impact",
+      "description": "Voyez si votre employeur égalera votre don.",
+      "new_employer": "Nouvel employeur",
+      "no_thanks": "Non, merci"
+    },
+    "double_the_donation_match": {
+      "heading": "Nous doublerons votre don",
+      "description": "Consultez vous courriels pour finaliser l'envoi de votre demande d'équivalence de cadeau à :"
+    },
+    "email_opt_in": {
+      "heading": "Pouvons-nous vous envoyer des mises à jour ?",
+      "description_html": "Nous aimerions partager exactement comment nous avons investi vos <strong>{{ amount }}.</strong>",
+      "keep_me_up_to_date": "Tenez-moi au courant",
+      "no_thanks": "Non, merci"
+    },
+    "thank_you": {
+      "heading": "Merci, {{ name }} !",
+      "description_html": "Votre don de <strong>{{ amount }}</strong> aidera à fournir des soins indispensables aux personnes dans le besoin de notre communauté.",
+      "spread_the_word": "Parlez-en"
+    },
+    "frequently_asked_questions": {
+      "heading": "FAQ",
+      "bank_level_security_html": "La <strong>sécurité au niveau de la banque</strong> assure la sécurité de votre paiement.",
+      "tax_deductible_html": "<strong>100 % déductible d'impôt</strong> dans {{ country }} via notre association <span class='whitespace-nowrap'>{{ type }}</span> caritative numéro {{ number }}.",
+      "instant_tax_receipt_html": "Un <strong>reçu fiscal instantané</strong> vous est envoyé par e-mail juste après votre don.",
+      "transparency_promise_html": "<strong>Promesse d'impact</strong> garantit que 100 % de votre don est utilisé comme promis.",
+      "give_by_check_html": "<strong>Puis-je donner par chèque ?</strong><br />L'utilisation du formulaire en ligne nous permet de rationaliser nos opérations financières afin que nous puissions concentrer toutes nos ressources sur notre mission. Si le chèque est le meilleur, veuillez le faire à :",
+      "other_ways_to_donate": "Existe-t-il d'autres façons de faire un don ?",
+      "contact_us_html": "<strong>Qui puis-je contacter au sujet de mon don ?</strong><br />Vous pouvez joindre notre équipe à :",
+      "close": "Close"
+    },
+    "privacy_and_legal": {
+      "heading": "Confidentialité et juridique",
+      "your_personal_information": "Vos informations personnelles et vos données de paiement sont sûres et sécurisées.",
+      "we_are": "Nous sommes:",
+      "charity_number": "Charité #{{ number }}",
+      "bank_level_encryption_html": "Nous utilisons le <strong>cryptage de niveau bancaire</strong> pour traiter votre paiement.",
+      "information_security_standards_html": "Nos fournisseurs adhèrent aux normes élevées de sécurité des informations de <strong>conformité SOC et PCI</strong>.",
+      "never_share_your_information_html": "Nous <strong>ne partageons jamais vos informations</strong> avec <strong>tout</strong> tiers.",
+      "we_are_gdpr_compliant_html": "Nous sommes <strong>conformes au RGPD</strong>. Gérez vos données en {{ logging_in }} ou en contactant notre responsable de la confidentialité à",
+      "logging_in": "Se connecter",
+      "access_privacy_policy": "Notre politique de confidentialité complète peut être consultée sur :",
+      "reach_privacy_officer": "Notre responsable de la protection de la vie privée est joignable à :",
+      "powered_and_secured_by": "Ce formulaire est propulsé et sécurisé par :",
+      "payment_safely_processed_by": "Votre paiement est traité en toute sécurité par :",
+      "close": "Close"
+    },
+    "landing": {
+      "donate": "Payer"
+    }
+  },
+  "unknown_error_521": "Erreur inconnue (521)"
+}

@@ -1,0 +1,11 @@
+.root {
+  @apply flex h-full w-full gap-2;
+
+  .input {
+    @apply !m-0 !mb-4 h-5 w-5 rounded border-brand-blue text-brand-blue focus:ring-brand-blue;
+
+    &.isDisabled {
+      @apply border-grey-300 text-grey-300 hover:cursor-not-allowed;
+    }
+  }
+}

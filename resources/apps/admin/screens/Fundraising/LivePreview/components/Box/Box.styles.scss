@@ -1,0 +1,14 @@
+.root {
+  @apply flex flex-col items-center relative;
+  @apply px-6 pt-4 bg-white rounded-3xl;
+
+  &.large {
+    @apply shadow-xl;
+    @apply h-[500px] w-[262px];
+  }
+
+  &.small {
+    @apply shadow-lg;
+    @apply h-[300px] w-[220px];
+  }
+}

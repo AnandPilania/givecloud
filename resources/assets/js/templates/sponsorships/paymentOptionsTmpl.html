@@ -1,0 +1,78 @@
+
+<tr id="payment_group-table-row-<%= _dom_id %>">
+    <td>
+        <input type="hidden" class="text-m" name="payment_group_options[<%= _dom_id %>][id]" value="<%= id %>" />
+        <input type="hidden" class="text-m" name="payment_group_options[<%= _dom_id %>][_isnew]" value="<%= _isnew %>" />
+        <input type="hidden" class="text-m" name="payment_group_options[<%= _dom_id %>][is_recurring]" id="payment_group_option_<%= _dom_id %>_is_recurring" value="<%= is_recurring %>" />
+        <input type="hidden" class="text-m" name="payment_group_options[<%= _dom_id %>][is_custom]" id="payment_group_option_<%= _dom_id %>_is_custom" value="<%= is_custom %>" />
+        <input type="text" class="form-control" style="width:80px;" name="payment_group_options[<%= _dom_id %>][sequence]" id="payment_group_option_<%= _dom_id %>_sequence" value="<%= sequence %>" style="text-align:center;" />
+    </td>
+    <td>
+        <select class="form-control" style="width:140px;" name="payment_group_options[<%= _dom_id %>][type]" id="payment_group_option_<%= _dom_id %>_type" onchange="j.payment_group.options.onRowChange(<%= _dom_id %>);">
+            <option value="fixed_onetime" <% if (is_recurring == 0 && is_custom == 0) { %> selected="selected" <% } %>>One Time</option>
+            <option value="fixed_recurring" <% if (is_recurring == 1 && is_custom == 0) { %> selected="selected" <% } %>>Recurring</option>
+            <option value="custom_onetime" <% if (is_recurring == 0 && is_custom == 1) { %> selected="selected" <% } %>>One Time Custom</option>
+            <option value="custom_recurring" <% if (is_recurring == 1 && is_custom == 1) { %> selected="selected" <% } %>>Recurring Custom</option>
+        </select>
+    </td>
+    <td><span id="payment_group_option_<%= _dom_id %>_recurring_options_wrap">
+            <select class="form-control" style="width:140px; display:inline;" id="payment_group_option_<%= _dom_id %>_recurring_frequency" name="payment_group_options[<%= _dom_id %>][recurring_frequency]" onchange="j.payment_group.options.onRowChange(<%= _dom_id %>);">
+                <option value="weekly" <% if (recurring_frequency == 'weekly') { %> selected="selected" <% } %>>Weekly</option>
+                <option value="biweekly" <% if (recurring_frequency == 'biweekly') { %> selected="selected" <% } %>>Bi-Weekly</option>
+                <option value="monthly" <% if (recurring_frequency == 'monthly') { %> selected="selected" <% } %>>Monthly</option>
+                <option value="quarterly" <% if (recurring_frequency == 'quarterly') { %> selected="selected" <% } %>>Quarterly</option>
+                <option value="biannually" <% if (recurring_frequency == 'biannually') { %> selected="selected" <% } %>>Bi-Annually</option>
+                <option value="annually" <% if (recurring_frequency == 'annually') { %> selected="selected" <% } %>>Annually</option>
+            </select>
+            <span id="payment_group_option_<%= _dom_id %>_recurring_connector"> on day </span>
+            <select style="width:140px; display:inline;" class="form-control" id="payment_group_option_<%= _dom_id %>_recurring_day" name="payment_group_options[<%= _dom_id %>][recurring_day]">
+                <option <% if (recurring_day == 1) { %> selected="selected" <% } %>>1</option>
+                <option <% if (recurring_day == 2) { %> selected="selected" <% } %>>2</option>
+                <option <% if (recurring_day == 3) { %> selected="selected" <% } %>>3</option>
+                <option <% if (recurring_day == 4) { %> selected="selected" <% } %>>4</option>
+                <option <% if (recurring_day == 5) { %> selected="selected" <% } %>>5</option>
+                <option <% if (recurring_day == 6) { %> selected="selected" <% } %>>6</option>
+                <option <% if (recurring_day == 7) { %> selected="selected" <% } %>>7</option>
+                <option <% if (recurring_day == 8) { %> selected="selected" <% } %>>8</option>
+                <option <% if (recurring_day == 9) { %> selected="selected" <% } %>>9</option>
+                <option <% if (recurring_day == 10) { %> selected="selected" <% } %>>10</option>
+                <option <% if (recurring_day == 11) { %> selected="selected" <% } %>>11</option>
+                <option <% if (recurring_day == 12) { %> selected="selected" <% } %>>12</option>
+                <option <% if (recurring_day == 13) { %> selected="selected" <% } %>>13</option>
+                <option <% if (recurring_day == 14) { %> selected="selected" <% } %>>14</option>
+                <option <% if (recurring_day == 15) { %> selected="selected" <% } %>>15</option>
+                <option <% if (recurring_day == 16) { %> selected="selected" <% } %>>16</option>
+                <option <% if (recurring_day == 17) { %> selected="selected" <% } %>>17</option>
+                <option <% if (recurring_day == 18) { %> selected="selected" <% } %>>18</option>
+                <option <% if (recurring_day == 19) { %> selected="selected" <% } %>>19</option>
+                <option <% if (recurring_day == 20) { %> selected="selected" <% } %>>20</option>
+                <option <% if (recurring_day == 21) { %> selected="selected" <% } %>>21</option>
+                <option <% if (recurring_day == 22) { %> selected="selected" <% } %>>22</option>
+                <option <% if (recurring_day == 23) { %> selected="selected" <% } %>>23</option>
+                <option <% if (recurring_day == 24) { %> selected="selected" <% } %>>24</option>
+                <option <% if (recurring_day == 25) { %> selected="selected" <% } %>>25</option>
+                <option <% if (recurring_day == 26) { %> selected="selected" <% } %>>26</option>
+                <option <% if (recurring_day == 27) { %> selected="selected" <% } %>>27</option>
+                <option <% if (recurring_day == 28) { %> selected="selected" <% } %>>28</option>
+            </select>
+            <select class="form-control" style="width:140px; display:inline;" id="payment_group_option_<%= _dom_id %>_recurring_day_of_week" name="payment_group_options[<%= _dom_id %>][recurring_day_of_week]">
+                <option value="7" <% if (recurring_day_of_week == 7) { %> selected="selected" <% } %>>Sun</option>
+                <option value="1" <% if (recurring_day_of_week == 1) { %> selected="selected" <% } %>>Mon</option>
+                <option value="2" <% if (recurring_day_of_week == 2) { %> selected="selected" <% } %>>Tue</option>
+                <option value="3" <% if (recurring_day_of_week == 3) { %> selected="selected" <% } %>>Wed</option>
+                <option value="4" <% if (recurring_day_of_week == 4) { %> selected="selected" <% } %>>Thu</option>
+                <option value="5" <% if (recurring_day_of_week == 5) { %> selected="selected" <% } %>>Fri</option>
+                <option value="6" <% if (recurring_day_of_week == 6) { %> selected="selected" <% } %>>Sat</option>
+            </select>
+        </span></td>
+    <td>
+        <span id="payment_group_option_<%= _dom_id %>_amount_wrap">
+            <div class="input-group">
+                <div class="input-group-addon">$</div>
+                <input type="text" class="form-control text-right" style="width:100px;" name="payment_group_options[<%= _dom_id %>][amount]" value="<%= j.toFixed(amount) %>" />
+            </div>
+        </span>
+        <span id="payment_group_option_<%= _dom_id %>_amount_na" class="grey">Custom</span>
+    </td>
+    <td><a href="javascript:void(0);" onclick="j.payment_group.options.remove(<%= _dom_id %>);" class="btn btn-danger btn-sm"><i class="fa fa-times"></i></a></td>
+</tr>

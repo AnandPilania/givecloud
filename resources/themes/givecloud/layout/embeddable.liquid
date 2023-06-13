@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns#">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="icon" type="image/png" href="{{ settings.favicon }}">
+  {{ content_for_header }}
+  {% for css_file in css_files %}
+    <link rel="stylesheet" href="{{ css_file }}">
+  {% endfor %}
+</head>
+<body class="bg-transparent">
+  {{ content_for_layout }}
+  {{ content_for_footer }}
+
+  {% if site.embeddable_donate_custom_snippet %}
+    {% shortcode "snippet", id: site.embeddable_donate_custom_snippet %}
+  {% endif %}
+
+  <script>
+      Givecloud.setContext({{ context | json }});
+  </script>
+  {% for script_file in script_files %}
+    <script charset="utf-8" src="{{ script_file }}"></script>
+  {% endfor %}
+</body>
+</html>

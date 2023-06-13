@@ -1,0 +1,11 @@
+.root {
+  @apply flex items-center border border-grey-200 py-1.5 rounded-lg text-grey-200 w-full;
+
+  .icon {
+    @apply mx-2;
+  }
+
+  .text {
+    @apply font-bold text-xs font-sans;
+  }
+}

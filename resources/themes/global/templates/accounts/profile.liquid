@@ -1,0 +1,382 @@
+{% assign active_profile_menu = 'profile' %}
+
+{% layout 'theme.profile' %}
+
+{% asset async: true, ext: js, defer: true, 'https://maps.googleapis.com/maps/api/js?key={google_maps_api_key}&libraries=places&callback=loadLookup' %}
+
+<div id="profile-app" v-cloak account="{{ account | json | escape }}">
+
+    {% if request.data.success %}
+        <div class="alert alert-success" role="alert">{{ request.data.success | escape }}</div>
+    {% endif %}
+    {%  if request.data.error %}
+        <div class="alert alert-danger" role="alert">{{ request.data.error | escape }}</div>
+    {% endif %}
+
+    <form @submit.prevent="submitProfileForm" :class="{ 'was-validated': formValidated }" method="post" autocomplete="no" novalidate>
+
+        <div class="row">
+            <div class="col-lg-8">
+
+                {% if site.account_features contains 'view-profile' %}
+                    <div class="mb-5">
+                        <h3 class="mb-4 text-left">{{ 'templates.accounts.profile.profile' | t }}</h3>
+
+                        <div class="row gutter-sm">
+                            {% if site.donor_title != 'hidden' %}
+                                <div class="form-group col-2 labelify">
+                                    <label for="inputTitle">{{ 'general.forms.title' | t }}</label>
+                                    {% if site.donor_title_options %}
+                                        <select id="inputTitle" class="form-control" :class="{ 'has-errors': errors.has('title') }" name="title" v-model="input.title" {% if site.account_features contains 'edit-profile' %}{% if site.donor_title == 'required' %}v-validate.initial="'required'"{% endif %}{% else %}readonly{% endif %} x-autocompletetype="honorific-prefix" autocompletetype="honorific-prefix">
+                                            <option value=""></option>
+                                            <option v-for="title in donor_title_options" :value="title">${ title }</option>
+                                        </select>
+                                    {% else %}
+                                        <input type="text" id="inputTitle" class="form-control" :class="{ 'has-errors': errors.has('title') }" name="title" v-model="input.title" {% if site.account_features contains 'edit-profile' %}{% if site.donor_title == 'required' %}v-validate.initial="'required'"{% endif %}{% else %}readonly{% endif %} x-autocompletetype="honorific-prefix" autocompletetype="honorific-prefix" autocorrect="off" spellcheck="off">
+                                    {% endif %}
+                                </div>
+                            {% endif %}
+                            <div class="col">
+                                <div class="form-group labelify">
+                                    <label for="inputFirstName">{{ 'general.forms.first_name' | t }}</label>
+                                    <input type="text" v-model="input.first_name" id="inputFirstName" class="form-control" {% if site.account_features contains 'edit-profile' %}required{% else %}readonly{% endif %} name="first_name">
+                                </div>
+                            </div>
+                            <div class="col-5">
+                                <div class="form-group labelify">
+                                    <label for="inputLastName">{{ 'general.forms.last_name' | t }}</label>
+                                    <input type="text" v-model="input.last_name" id="inputLastName" class="form-control" {% if site.account_features contains 'edit-profile' %}required{% else %}readonly{% endif %} name="last_name">
+                                </div>
+                            </div>
+                        </div>
+
+                        {% if account.account_type.is_organization  %}
+                            <div class="form-group labelify">
+                                <label for="inputOrganizationName">{{ 'general.forms.organization_name' | t }}</label>
+                                <input type="text" v-model="input.organization_name" id="inputOrganizationName" class="form-control" {% if site.account_features contains 'edit-profile' %}required{% else %}readonly{% endif %} name="organization_name">
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endif %}
+
+                <div class="mb-5">
+                    <h3 class="mb-4 text-left">{{ 'templates.accounts.profile.login' | t }}</h3>
+                    <input type="email" class="__honeypot" name="_email" autocomplete="no" value="">
+                    <input type="email" class="__honeypot" name="_password" autocomplete="no" value="">
+
+                    <div class="row gutter-sm">
+                        <div class="col-12">
+                            <div class="form-group labelify">
+                                <label for="inputEmail"><i class="fa fa-envelope-o"></i> {{ 'general.forms.email' | t }}</label>
+                                <input type="email" v-model="input.email" id="inputEmail" class="form-control" name="email" {% if site.account_features contains 'edit-profile' %}required{% else %}readonly{% endif %} autocomplete="no">
+                            </div>
+                            <div class="form-group">
+                                <div class="custom-control custom-checkbox">
+                                    <input
+                                        id="inputEmailOptIn"
+                                        type="checkbox"
+                                        class="custom-control-input"
+                                        v-model="input.email_opt_in">
+                                    <label for="inputEmailOptIn" class="custom-control-label">
+                                        {{ settings.optin_label }}
+                                    </label>
+                                </div>
+                            </div>
+                            <div
+                                v-if="! input.email_opt_in && was_opted_in"
+                                class="form-group labelify"
+                                :class="{ 'has-errors': errors.has('email_opt_out_reason') }">
+                                <label for="inputEmailOptOutReason" class="custom-control-label">
+                                    {{ settings.optout_reason_label }}
+                                </label>
+                                <select
+                                    id="inputEmailOptOutReason"
+                                    class="form-control"
+                                    v-model="input.email_opt_out_reason"
+                                    {% if marketing_optout_reason_required %}required{% endif %}>
+                                    <option></option>
+                                    {% for option in marketing_optout_options %}
+                                        <option value="{{ option | escape }}">{{ option }}</option>
+                                    {% endfor %}
+                                    {% if marketing_optout_other %}
+                                        <option value="other">{{ 'templates.accounts.profile.opt_out_reason_other' | t }}</option>
+                                    {% endif %}
+                                </select>
+                            </div>
+                            <div
+                                v-if="! input.email_opt_in && was_opted_in && this.input.email_opt_out_reason === 'other'"
+                                class="form-group">
+                                <input
+                                    id="inputEmailOptOutReasonOther"
+                                    type="text"
+                                    class="form-control"
+                                    v-model="input.email_opt_out_reason_other"
+                                    ref="email_opt_out_reason_other"
+                                    {% if marketing_optout_reason_required %}required{% endif %}>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div id="changePasswordSection">
+                                <div v-if="changePassword">
+                                    <div class="form-group labelify">
+                                        <label for="inputNewPassword"><i class="fa fa-lock"></i> {{ 'templates.accounts.profile.new_password' | t }}</label>
+                                        <input ref="password" type="password" v-model="credentials.password" id="inputNewPassword" class="form-control" name="password" value="">
+                                    </div>
+                                    <div class="form-group labelify">
+                                        <label for="inputConfirmPassword"><i class="fa fa-lock"></i> {{ 'templates.accounts.profile.confirm_password' | t }}</label>
+                                        <input type="password" v-model="credentials.password_confirmation" id="inputConfirmPassword" class="form-control" name="password_confirmation" value="">
+                                    </div>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary" @click="cancelCredentials()"><i class="fa fa-times"></i> {{ 'templates.accounts.profile.cancel' | t }}</button>
+                                </div>
+                                <template v-else>
+                                    <button type="button" class="btn btn-secondary collapsed" @click="editCredentials()"><i class="fa fa-lock"></i>
+                                        {% if account.has_password %}
+                                            {{ 'templates.accounts.profile.change_password' | t }}
+                                        {% else %}
+                                            {{ 'templates.accounts.profile.create_password' | t }}
+                                        {% endif %}
+                                    </button>
+                                </template>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {% if site.social_login_is_enabled %}
+                <div class="mb-5">
+                    <h3 class="mb-4 text-left">{{ 'templates.accounts.profile.connected_accounts' | t }}</h3>
+                    <ul class="list-group p-0">
+                        {% for provider in account.social_login_providers  %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <div class="d-flex align-items-center">
+                                <div class="mr-4" style="width: 32px; height: 32px">
+                                    {% case provider %}
+                                        {% when "google" %}
+                                            {% include "social-login/icons/google" %}
+                                        {% when "facebook" %}
+                                            {% include "social-login/icons/facebook" %}
+                                        {% when "microsoft" %}
+                                            {% include "social-login/icons/microsoft" %}
+                                    {% endcase %}
+                                </div>
+                                <div class="d-flex flex-column">
+                                    <span>{{ provider | capitalize }}</span>
+                                    <span class="text-sm font-weight-light">
+                                        {% if account.social_identities[provider] %}
+                                            Last used {{  account.social_identities[provider].updated_at |  date }}
+                                        {% else %}
+                                            Not connected
+                                        {% endif %}
+                                    </span>
+                                </div>
+                            </div>
+                            {% if account.social_identities[provider] and account.can_revoke_social_identity %}
+                                <a class="btn btn-outline-danger btn-sm" href="/account/social/revoke/{{ provider }}"                                    >
+                                    {{ 'templates.accounts.profile.revoke' | t }}
+                                </a>
+                            {% elsif account.social_identities[provider] %}
+                                <div data-toggle="tooltip" data-placement="top" title="Please add a password or connect another account before disconnecting this account.">
+                                    <a class="btn btn-outline-danger btn-sm disabled" href="/account/social/revoke/{{ provider }}">
+                                        {{ 'templates.accounts.profile.revoke' | t }}
+                                    </a>
+                                </div>
+                            {% else %}
+                                {% comment %}
+                                <a class="btn btn-outline-primary btn-sm" href="/account/social/redirect/{{ provider }}">
+                                    {{ 'templates.accounts.profile.connect' | t }}
+                                </a>
+                                {% endcomment %}
+                            {% endif %}
+                        </li>
+                        {% endfor %}
+                    </ul>
+
+                </div>
+                {% endif %}
+
+                {% comment %}
+                <div class="mb-5">
+                    <h3 class="mb-4 text-left">Preferences</h3>
+
+                    {% for group in groups %}
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="inputGroups_{{ group.id }}">
+                            <label class="custom-control-label" for="inputGroups_{{ group.id }}">
+                                {{ group.name }}
+                                <br><small>{{ group.description }}</small>
+                                <br><small class="text-muted">Opted-In Jun 3, 2019 when you placed a Contribution.</small>
+                            </label>
+                        </div>
+                    {% endfor %}
+
+                    <a href="#" class="btn btn-outline-secondary active mr-1 mb-2 font-weight-bold"><i class="fa fa-check"></i> Subscribed <small>(May 3, 2015)</small></a>
+                    <a href="#unsub-modal" data-toggle="modal" class="btn btn-outline-secondary mr-1 mb-2">Unsubscribe</a>
+
+                    <p>
+                        You opted-in to receiving news &amp; updates on May 3, 2015 when you made a donation.
+                    </p>
+
+                    <div class="modal fade" id="unsub-modal" tabindex="-1" role="dialog" aria-labelledby="unsub-modal-label" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header bg-secondary text-white" id="unsub-modal-label">
+                                    Unsubscribe
+                                </div>
+                                <div class="modal-body">
+                                    Are you sure you want to stop receiving news and updates?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" data-dismiss="modal" class="btn btn-secondary">Cancel</button>
+                                    <button type="button" class="btn btn-outline-secondary">Unsubscribe</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endcomment %}
+
+                {% if site.account_features contains 'view-billing' %}
+
+                    <div class="mb-5">
+                        <h3 class="mb-4 text-left">{{ 'general.forms.billing_address' | t }}</h3>
+
+                        <div class="form-group labelify" :class="{ 'has-errors': errors.has('billing_address_01') }">
+                            <address-lookup-input
+                                id="inputBillingAddress01"
+                                name="billing_address_01"
+                                v-model="input.billing_address_01"
+                                label="{{ 'general.forms.address' | t | escape }}"
+                                placeholder="{{ 'general.forms.address_placeholder' | t | escape }}"
+                                @place-change="fillAddressFields"
+                            />
+                        </div>
+                        <div class="form-group labelify">
+                            <label for="inputBillingAddress02">{{ 'general.forms.address_2' | t }}</label>
+                            <input id="inputBillingAddress02" type="text" class="form-control" placeholder="{{ 'general.forms.address_2_placeholder' | t }}" name="billing_address_02" v-model="input.billing_address_02" x-autocompletetype="address-line2" autocompletetype="address-line2" autocorrect="off" spellcheck="off" autocapitalize="off">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-8 labelify" :class="{ 'has-errors': errors.has('billing_city') }">
+                                <label for="inputBillingCity">{{ 'general.forms.city' | t }}</label>
+                                <input id="inputBillingCity" type="text" class="form-control" name="billing_city" v-model="input.billing_city" x-autocompletetype="city" autocompletetype="city" autocorrect="off" spellcheck="off" autocapitalize="off">
+                            </div>
+                            <div class="form-group col-4 labelify" :class="{ 'has-errors': errors.has('billing_zip') }">
+                                <label for="inputBillingZip">
+                                    <template v-if="input.billing_country_code == 'US'">{{ 'general.forms.zip' | t }}</template>
+                                    <template v-else>{{ 'general.forms.postal' | t }}</template>
+                                </label>
+                                <input id="inputBillingZip" type="text" class="form-control" name="billing_zip" v-model="input.billing_zip" x-autocompletetype="postal-code" autocompletetype="postal-code" autocorrect="off" spellcheck="off" autocapitalize="off">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-7 labelify" :class="{ 'has-errors': errors.has('billing_country_code') }">
+                                <label for="inputBillingCountry">{{ 'general.forms.country' | t }}</label>
+                                <select id="inputBillingCountry" class="form-control" name="billing_country_code" v-model="input.billing_country_code">
+                                    <option></option>
+                                    <option v-for="country in countries" :value="country.value">${ country.label }</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-5 labelify" :class="{ 'has-errors': errors.has('billing_province_code') }">
+                                <label for="inputBillingProvince">${ billing_province_label }</label>
+                                <select v-if="billing_subdivisions" id="inputBillingProvince" class="form-control" name="billing_province_code" v-model="input.billing_province_code">
+                                    <option></option>
+                                    <option v-for="(name, code) in billing_subdivisions" :value="code">${ name }</option>
+                                </select>
+                                <input v-else type="text" id="inputBillingProvince" class="form-control" name="billing_province_code" v-model="input.billing_province_code">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-7 labelify" :class="{ 'has-errors': errors.has('billing_phone') }">
+                                <label for="inputBillingPhone"><i class="fa fa-phone fa-fw"></i> {{ 'templates.accounts.profile.phone' | t }}</label>
+                                <input id="inputBillingPhone" type="text" class="form-control" name="billing_phone" v-model="input.billing_phone" x-autocompletetype="phone" autocompletetype="phone" autocorrect="off" spellcheck="off" autocapitalize="off">
+                            </div>
+                        </div>
+                    </div>
+
+                {% endif %}
+
+                {% if site.account_features contains 'view-shipping' %}
+
+                    <div class="mb-5">
+                        <h3 class="mb-4 text-left">{{ 'templates.accounts.profile.shipping_address' | t }}</h3>
+
+                        <div class="text-sm mb-3">
+                            <a href="#" v-on:click.stop.prevent="copyBillingToShipping"><i class="fa fa-copy"></i> {{ 'templates.accounts.profile.copy_billing' | t }}</a>
+                        </div>
+
+                        <div class="form-group labelify" :class="{ 'has-errors': errors.has('shipping_country_code') }">
+                            <label for="inputShippingCountry">{{ 'general.forms.country' | t }}</label>
+                            <select id="inputShippingCountry" class="form-control" name="shipping_country_code" v-model="input.shipping_country_code">
+                                <option></option>
+                                <option v-for="country in countries" :value="country.value">${ country.label }</option>
+                            </select>
+                        </div>
+                        <div class="form-group labelify" :class="{ 'has-errors': errors.has('shipping_address_01') }">
+                            <label for="inputShippingAddress01">{{ 'general.forms.address' | t }}</label>
+                            <input id="inputShippingAddress01" type="text" class="form-control" placeholder="{{ 'general.forms.address_placeholder' | t }}" name="shipping_address_01" v-model="input.shipping_address_01" x-autocompletetype="address-line1" autocompletetype="address-line1" autocorrect="off" spellcheck="off" autocapitalize="off">
+                        </div>
+                        <div class="form-group labelify">
+                            <label for="inputShippingAddress02">{{ 'general.forms.address_2' | t }}</label>
+                            <input id="inputShippingAddress02" type="text" class="form-control" placeholder="{{ 'general.forms.address_2_placeholder' | t }}" name="shipping_address_02" v-model="input.shipping_address_02" x-autocompletetype="address-line2" autocompletetype="address-line2" autocorrect="off" spellcheck="off" autocapitalize="off">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-7 labelify" :class="{ 'has-errors': errors.has('shipping_city') }">
+                                <label for="inputShippingCity">{{ 'general.forms.city' | t }}</label>
+                                <input id="inputShippingCity" type="text" class="form-control" name="shipping_city" v-model="input.shipping_city" x-autocompletetype="city" autocompletetype="city" autocorrect="off" spellcheck="off" autocapitalize="off">
+                            </div>
+                            <div class="form-group col-5 labelify" :class="{ 'has-errors': errors.has('shipping_province_code') }">
+                                <label for="inputShippingProvince">${ shipping_province_label }</label>
+                                <select v-if="shipping_subdivisions" id="inputShippingProvince" class="form-control" name="shipping_province_code" v-model="input.shipping_province_code">
+                                    <option></option>
+                                    <option v-for="(name, code) in shipping_subdivisions" :value="code">${ name }</option>
+                                </select>
+                                <input v-else type="text" id="inputShippingProvince" class="form-control" name="shipping_province_code" v-model="input.shipping_province_code">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-7 labelify" :class="{ 'has-errors': errors.has('shipping_zip') }">
+                                <label for="inputShippingZip">
+                                    <template v-if="input.shipping_country_code == 'US'">{{ 'general.forms.zip' | t }}</template>
+                                    <template v-else>{{ 'general.forms.postal' | t }}</template>
+                                </label>
+                                <input id="inputShippingZip" type="text" class="form-control" name="shipping_zip" v-model="input.shipping_zip" x-autocompletetype="postal-code" autocompletetype="postal-code" autocorrect="off" spellcheck="off" autocapitalize="off">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-7 labelify" :class="{ 'has-errors': errors.has('shipping_phone') }">
+                                <label for="inputShippingPhone"><i class="fa fa-phone fa-fw"></i> {{ 'templates.accounts.profile.phone' | t }}</label>
+                                <input id="inputShippingPhone" type="text" class="form-control" name="shipping_phone" v-model="input.shipping_phone" x-autocompletetype="phone" autocompletetype="phone" autocorrect="off" spellcheck="off" autocapitalize="off">
+                            </div>
+                        </div>
+                    </div>
+
+                {% endif %}
+
+                <!-- desktop buttons -->
+                <div class="d-none d-md-block">
+                    <button type="submit" class="btn btn-lg btn-pill btn-primary mb-3 px-5" data-style="slide-up"><i class="fa fa-check"></i> {{ 'templates.accounts.profile.update_my_profile' | t }}</button>
+                </div>
+
+                <!-- mobile buttons (fixed to bottom) -->
+                <div class="d-flex d-sm-flex d-md-none shadow-sm fixed-bottom p-3 text-center bg-white align-items-center justify-content-center">
+                    <button type="submit" class="btn btn-pill btn-primary px-5" data-style="slide-up"><i class="fa fa-check"></i> {{ 'templates.accounts.profile.update_my_profile' | t }}</button>
+                </div>
+
+            </div>
+        </div>
+
+    </form>
+
+</div>
+
+<div class="modal fade" id="status-overlay" tabindex="-1" role="dialog" aria-label="Saving" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+
+                <img class="spinner" src="{{ 'spinner.gif' | asset_url }}" alt="">
+                <h2>{{ 'templates.accounts.profile.saving' | t }}</h2>
+
+            </div>
+        </div>
+    </div>
+</div>

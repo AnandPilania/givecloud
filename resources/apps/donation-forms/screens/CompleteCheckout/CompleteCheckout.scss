@@ -1,0 +1,48 @@
+.root {
+  .content {
+    @apply relative;
+    @apply flex flex-col flex-grow items-center;
+    @apply w-full;
+  }
+
+  .components {
+    @apply flex flex-col flex-grow items-center justify-center;
+    @apply w-full transition-opacity;
+  }
+
+  h3 {
+    @apply text-2xl font-extrabold leading-tight;
+    @apply text-center whitespace-pre-line;
+  }
+
+  p {
+    @apply mt-5 mb-6 mx-8 text-lg leading-snug;
+    @apply text-center whitespace-pre-wrap;
+  }
+
+  .formContainer {
+    @apply w-full mt-4;
+
+    .formTitle {
+      @apply font-bold;
+    }
+  }
+
+  .formContainer > div,
+  .formContainer > button {
+    @apply mb-2;
+  }
+
+  .giveContainer {
+    @apply flex-grow-0;
+    @apply w-full;
+  }
+
+  .giveButton {
+    @apply mt-4 mb-8 font-bold;
+
+    svg {
+      @apply mr-2;
+    }
+  }
+}

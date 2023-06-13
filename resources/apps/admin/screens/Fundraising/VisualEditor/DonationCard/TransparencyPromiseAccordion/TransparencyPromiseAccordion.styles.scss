@@ -1,0 +1,15 @@
+.root {
+  .header {
+    @apply w-full flex justify-between;
+  }
+
+  .icon {
+    &.enabled {
+      @apply text-blue-600;
+    }
+
+    &.disabled {
+      @apply text-gray-300;
+    }
+  }
+}

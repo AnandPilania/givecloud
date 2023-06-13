@@ -1,0 +1,37 @@
+{
+  "id": "cus_M5TWaPJ8l2uJIC",
+  "object": "customer",
+  "address": {
+    "city": "Ottawa",
+    "country": "CA",
+    "line1": "123 Anywhere Str",
+    "line2": "",
+    "postal_code": "ON",
+    "state": "K2E6T7"
+  },
+  "balance": 0,
+  "created": 1658006185,
+  "currency": null,
+  "default_currency": null,
+  "default_source": null,
+  "delinquent": false,
+  "description": null,
+  "discount": null,
+  "email": "bob.hope@example.com",
+  "invoice_prefix": "CA96048C",
+  "invoice_settings": {
+    "custom_fields": null,
+    "default_payment_method": null,
+    "footer": null,
+    "rendering_options": null
+  },
+  "livemode": false,
+  "metadata": [],
+  "name": "Bob Hope",
+  "next_invoice_sequence": 1,
+  "phone": null,
+  "preferred_locales": [],
+  "shipping": null,
+  "tax_exempt": "none",
+  "test_clock": null
+}

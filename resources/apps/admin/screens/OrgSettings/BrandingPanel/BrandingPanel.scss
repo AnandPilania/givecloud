@@ -1,0 +1,15 @@
+.tooltipIcon {
+  @apply text-blue-600;
+}
+
+.tooltipIconError {
+  @apply text-red-600;
+}
+
+.textContainer {
+  @apply flex items-center mb-3;
+}
+
+.overflow {
+  @apply !overflow-visible;
+}

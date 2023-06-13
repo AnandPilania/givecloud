@@ -1,0 +1,121 @@
+.root {
+  @apply text-xs;
+
+  .list {
+    @apply list-none p-0 m-0 w-72 max-h-96 overflow-x-hidden overflow-y-auto;
+
+    .listItem {
+      @apply px-4 py-3;
+
+      &:not(:last-child) {
+        @apply border-b border-gray-200;
+      }
+
+      .header {
+        @apply flex;
+
+        .link {
+          @apply flex-grow font-bold relative;
+
+          .bullet {
+            @apply absolute -left-2.5 text-red-500;
+          }
+        }
+
+        .type {
+          @apply rounded-full flex items-center justify-center text-white font-bold px-2 bg-gray-500 -mr-2 -mt-1 h-6 whitespace-nowrap ml-1;
+
+          font-size: 0.5rem;
+          padding-top: 1px;
+        }
+      }
+
+      .summary {
+        @apply pt-1;
+      }
+
+      .betaTag {
+        @apply mt-1;
+
+        .betaLabel {
+          @apply bg-red-500 text-white font-bold rounded-sm px-1 py-0.5 mr-1;
+
+          font-size: 0.5rem;
+          line-height: 0.5rem;
+        }
+
+        .betaNote {
+          @apply text-red-500;
+        }
+      }
+
+      &.is_unread {
+        .header {
+          .type {
+            &.new,
+            &.improvement {
+              @apply bg-blue-500;
+            }
+
+            &.service {
+              @apply bg-green-600;
+            }
+
+            &.in-development {
+              @apply bg-yellow-400;
+            }
+
+            &.bug,
+            &.bugfix {
+              @apply bg-gray-500;
+            }
+          }
+        }
+      }
+
+      &.is_read {
+        @apply bg-gray-50;
+
+        .header {
+          .type {
+            @apply border border-solid bg-transparent;
+
+            &.new,
+            &.improvement {
+              @apply border-blue-500 text-blue-500;
+            }
+
+            &.service {
+              @apply border-green-600 text-green-600;
+            }
+
+            &.in-development {
+              @apply border-yellow-400 text-yellow-400;
+            }
+
+            &.bug,
+            &.bugfix {
+              @apply border-gray-500 text-gray-500;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .noUpdates {
+    @apply flex flex-col items-center text-center text-gray-500 py-8 px-20;
+
+    .icon {
+      @apply text-3xl mb-2;
+    }
+  }
+
+  .viewAllUpdates {
+    @apply text-center px-2 py-2 border-t border-gray-200;
+
+    .externalLinkIcon {
+      @apply ml-2;
+    }
+  }
+}

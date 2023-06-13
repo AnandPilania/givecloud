@@ -1,0 +1,27 @@
+{% asset '~/scripts/templates/product.js' %}
+
+{% if options.columns == 1 %}
+    {% assign masonry_classes = "w-100" %}
+{% elsif options.columns == 2 %}
+    {% assign masonry_classes = "masonry-2" %}
+{% elsif options.columns == 3 %}
+    {% assign masonry_classes = "masonry-3" %}
+{% else %}
+    {% assign masonry_classes = "masonry-4" %}
+{% endif%}
+
+<div class="{{ masonry_classes }}">
+  {% for product in products %}
+    <div class="brick-container">
+      <div class="brick">
+        <div class="wow fadeInUp" data-wow-delay="0s">
+          {% include 'product-grid-item' %}
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+
+{% for product in products %}
+  {% include 'product-add-modal', product: product %}
+{% endfor %}

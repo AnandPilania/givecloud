@@ -1,0 +1,24 @@
+.root {
+  @apply bg-blue-200 rounded-full p-2 inline-flex justify-center items-center;
+
+  .icon {
+    @apply bg-inherit text-brand-blue;
+  }
+
+  &.top {
+    @apply absolute top-5 right-5;
+  }
+
+  &.center {
+    @apply absolute top-1/2 right-5;
+    transform: translateY(-50%);
+  }
+
+  &.bottom {
+    @apply absolute bottom-5 right-5;
+  }
+
+  &.static {
+    position: static;
+  }
+}

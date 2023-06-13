@@ -1,0 +1,23 @@
+{% asset '~/scripts/templates/product.js' %}
+
+{% if products.size == 1 %}
+    {% assign grid_item_wrap_classes = "col-12" %}
+{% elsif products.size == 2 %}
+    {% assign grid_item_wrap_classes = "col-sm-6 col-12" %}
+{% elsif products.size == 3 %}
+    {% assign grid_item_wrap_classes = "col-md-4 col-sm-6 col-12" %}
+{% elsif products.size > 3 %}
+    {% assign grid_item_wrap_classes = "col-lg-3 col-md-4 col-sm-6 col-12" %}
+{% endif%}
+
+<div class="products-grid-with-summary row">
+    {% for product in products %}
+        <div class="{{ grid_item_wrap_classes }}">
+            {% include 'product-grid-item', product: product, show_summary: true, match_height: 'product-grid' %}
+        </div>
+    {% endfor %}
+</div>
+
+{% for product in products %}
+  {% include 'product-add-modal', product: product %}
+{% endfor %}

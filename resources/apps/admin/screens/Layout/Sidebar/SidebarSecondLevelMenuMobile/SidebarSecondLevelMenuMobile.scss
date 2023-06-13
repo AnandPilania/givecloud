@@ -1,0 +1,27 @@
+.root {
+  @apply bg-white;
+  @apply h-full;
+
+  width: calc(100vw - 120px);
+
+  @media (max-width: 360px) {
+    width: calc(100vw - 40px);
+  }
+
+  .closeButtonContainer {
+    @apply fixed top-8 right-8;
+    @apply flex items-center justify-center;
+    @apply w-12 h-12;
+    @apply bg-transparent;
+    @apply rounded-full;
+    @apply transition duration-300 ease-in-out;
+
+    svg {
+      @apply w-6 h-6;
+    }
+
+    &:active {
+      @apply bg-gray-100;
+    }
+  }
+}

@@ -1,0 +1,19 @@
+.root {
+  .iconContainer {
+    @apply inline-block bg-slate-200 p-10 rounded-sm;
+  }
+
+  .embedCodeContainer {
+    @apply inline-block;
+    @apply bg-slate-100 w-full rounded-md my-6 p-4 overflow-auto max-h-64;
+    @apply text-left whitespace-pre-wrap font-mono text-sm;
+  }
+}
+
+.buttons {
+  @apply justify-end md:flex-row;
+
+  .column {
+    @apply pb-0;
+  }
+}

@@ -1,0 +1,197 @@
+{% if post.metadata.business_location_latitude and post.metadata.business_location_longitude %}
+    {% asset async: true, ext: js, defer: true, 'https://maps.googleapis.com/maps/api/js?key={google_maps_api_key}&callback=initMap' %}
+{% endif %}
+
+{% if post.alternate_image %}
+    {% assign _header_image = post.alternate_image.full %}
+{% else %}
+    {% assign _header_image = post_type.feature_image.full %}
+{% endif %}
+
+{% if post_type.metadata.map_view_back_to_main_button_text %}
+    {% assign back_button_text = post_type.metadata.map_view_back_to_main_button_text %}
+{% else %}
+    {% assign back_button_text = 'Back to all locations' %}
+{% endif %}
+
+{% capture side_link %}
+    <a href="/{{ post_type.handle }}" class="float-right btn btn-sm btn-outline-secondary mt-2">{{ back_button_text }}</a>
+{% endcapture %}
+
+{% include 'header-image', header_title: post.type_name, right_side_links: side_link, header_image: _header_image, header_crumb_1: post.type_name, header_crumb_1_url: post.type_handle %}
+
+<div class="page-content">
+
+    <section class="py-5 container">
+        <div class="row">
+            <div class="col-sm-5 col-lg-4">
+                <div class="">
+                    <div class="d-block d-sm-none mb-3">
+                        <h1 class="my-0">{{ post.title }}</h1>
+                    </div>
+
+                    <img class="mb-3" style="width: 100%; height: auto;" src="{{ post.feature_image.thumb }}" alt="" />
+
+                    {% unless post.metadata.business_location_type == 'Private' %}
+                        {% if post.metadata.business_website %}
+                            <a href="{{ post.metadata.business_website }}" target="_blank" class="mb-3 btn btn-primary btn-block mb-3">{{ 'templates.post_type.visit_website' | t }}</a>
+                        {% endif %}
+
+                        <ul class="fa-ul mb-3 text-break">
+                            {% if post.metadata.business_location %}<li><i class="fa fa-li fa-map-marker"><!-- --></i> {{ post.metadata.business_location }}</li>{% endif %}
+                            {% if post.metadata.business_phone %}<li><i class="fa fa-li fa-phone"><!-- --></i> {{ post.metadata.business_phone }}</li>{% endif %}
+                            {% if post.metadata.business_email %}<li><i class="fa fa-li fa-envelope-o"><!-- --></i> <a href="mailto:{{ post.metadata.business_email }}">{{ post.metadata.business_email }}</a></li>{% endif %}
+                            {% if post.metadata.business_facebook %}<li><i class="fa fa-li fa-facebook"><!-- --></i> {{ post.metadata.business_facebook }}</li>{% endif %}
+                            {% if post.metadata.business_instagram %}<li><i class="fa fa-li fa-instagram"><!-- --></i> {{ post.metadata.business_instagram }}</li>{% endif %}
+                        </ul>
+                    {% endunless %}
+
+                    {% if post.metadata.business_location_latitude and post.metadata.business_location_longitude %}
+                        <div id="map">{{ 'templates.post_type.loading_location' | t }}</div>
+                    {% endif %}
+
+                </div>
+            </div>
+            <div class="col-sm-7 col-lg-8">
+                <div class="mb-3">
+                    <h1 class="mb-3 mt-0 d-none d-sm-block">
+                        {{ post.title }}
+                    </h1>
+
+                    {% if post.categories.size > 0 %}
+                        <div class="mb-3 text-sm">
+                            {% for cat in post.categories %}
+                                <a href="{{ post.type_handle }}/categories/{{ cat.handle }}" class="btn btn-sm btn-outline-secondary mr-2">{{ cat.name }}</a>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                    <p class="text-lg text-info">{{ post.excerpt }}</p>
+
+                    {{ post.content }}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% if post.show_sharing_links %}
+        <div class="container pb-4">{% sharing_links title: post.title, channels: settings.post_sharing_links_channels %}</div>
+    {% endif %}
+
+</div>
+
+<style>
+    #map {
+        width: 100%;
+        height: 200px;
+        background-color: #CCC;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+</style>
+
+<script>
+    // Initialize and add the map
+    function initMap() {
+        var coords = {
+            lat: {{ post.metadata.business_location_latitude | json }},
+            lng: {{ post.metadata.business_location_longitude | json }}
+        };
+
+        var type = {{ post.metadata.business_location_type | json }};
+
+        var colorScheme = "{{ post_type.metadata.map_view_color_scheme }}";
+        var publicColor = "{{ post_type.metadata.map_view_marker_color }}" || 'red';
+        var privateColor = "{{ post_type.metadata.map_view_private_marker_color }}" || 'purple';
+
+        var map = mapHelper.init('map', {
+            styles: (colorScheme ? mapHelper.styles[colorScheme] : 'default'),
+            assetBaseUrl: "{{ '' | asset_url }}",
+            color: publicColor,
+            fullscreenControl: false,
+            mapTypeControl: false,
+            minimumMarkerZoom: 13
+        });
+
+        map.addMarker(coords, null, type === 'Private' ? privateColor : publicColor);
+        map.fitMapToMarkers();
+    }
+</script>
+
+{% schema %}
+[
+    {
+        "name": "Location",
+        "settings": [
+            {
+                "type": "header",
+                "content": "Profile"
+            },
+            {
+                "type": "text",
+                "name": "business_location",
+                "label": "Location",
+                "info": "Ex: Cleveland, OH, USA",
+                "size":"sm"
+            },
+            {
+                "type": "select",
+                "name": "business_location_type",
+                "label": "Location Type",
+                "options": {
+                    "Public": "Public",
+                    "Private": "Private"
+                },
+                "default": "Public",
+                "size":"sm"
+            },
+            {
+                "type": "text",
+                "name": "business_phone",
+                "label": "Phone",
+                "info": "Ex: +1 613 555 5555",
+                "size":"sm"
+            },
+            {
+                "type": "text",
+                "name": "business_email",
+                "label": "Email",
+                "info": "Ex: info@business.com",
+                "size":"sm"
+            },
+            {
+                "type": "text",
+                "name": "business_website",
+                "label": "Website",
+                "info": "Ex: business.com",
+                "size":"sm"
+            },
+            {
+                "type": "map-pin",
+                "name": "business_location",
+                "label": "Map Location"
+            },
+            {
+                "type": "header",
+                "content": "Social Media"
+            },
+            {
+                "type": "text",
+                "name": "business_facebook",
+                "label": "Facebook",
+                "info": "Ex: @facebookuser",
+                "size":"sm"
+            },
+            {
+                "type": "text",
+                "name": "business_instagram",
+                "label": "Instagram",
+                "info": "Ex: @instauser",
+                "size":"sm"
+            }
+        ]
+    }
+]
+{% endschema %}

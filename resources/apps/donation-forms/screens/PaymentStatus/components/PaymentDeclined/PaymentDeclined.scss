@@ -1,0 +1,38 @@
+.root {
+  @apply flex flex-col items-center justify-center w-full p-8;
+
+  .warningIcon {
+    @apply relative;
+    @apply inline-flex items-center justify-center;
+    @apply mb-4 p-5 rounded-full overflow-hidden;
+    @apply bg-[#fee1e3] text-[#f93d4c];
+
+    svg {
+      @apply w-6 h-6;
+    }
+  }
+
+  .content {
+    @apply w-full;
+  }
+
+  h3 {
+    @apply mb-4 text-2xl font-bold text-[#f93d4c];
+  }
+
+  p {
+    @apply mb-4 mx-10 text-base leading-snug whitespace-pre-wrap;
+  }
+
+  .tryAgainBtn {
+    @apply mt-8 mb-4 font-bold text-base;
+
+    svg {
+      @apply mr-2;
+    }
+  }
+
+  .errorMessage {
+    @apply text-xs text-gray-400;
+  }
+}

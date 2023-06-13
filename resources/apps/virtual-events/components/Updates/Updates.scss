@@ -1,0 +1,23 @@
+.root {
+  @apply flex flex-col w-full items-center justify-center;
+
+  .totalContainer {
+    @apply flex-1 py-8;
+
+    .totalText {
+      @apply text-center uppercase text-base leading-6 font-medium text-gray-500;
+    }
+  }
+
+  .donorListContainer {
+    @apply px-2 py-2 mx-4 flex-1;
+
+    -webkit-mask-image: -webkit-gradient(
+      linear,
+      left 90%,
+      left bottom,
+      from(rgba(0, 0, 0, 1)),
+      to(rgba(0, 0, 0, 0))
+    );
+  }
+}

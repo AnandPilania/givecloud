@@ -1,0 +1,183 @@
+{% schema %}
+[
+    {
+        "name": "Event Fields",
+        "config": {
+            "hide_content_editor": true
+        },
+        "settings": [
+            {
+                "type": "header",
+                "content": "Event Details"
+            },
+            {
+                "type": "event-date",
+                "name": "event_date",
+                "label": "Time & Date"
+            },
+            {
+                "type": "text",
+                "name": "event_cost",
+                "label": "Cost",
+                "placeholder": "Ex: $20-100 at the door"
+            },
+            {
+                "type": "html",
+                "name": "event_description",
+                "label": "Description"
+            },
+            {
+                "type": "header",
+                "content": "Event Location"
+            },
+            {
+                "type": "text",
+                "name": "event_location_name",
+                "label": "Name",
+                "info": "Ex: Staples Center",
+                "size":"sm"
+            },
+            {
+                "type": "text",
+                "name": "event_location_address",
+                "label": "Address",
+                "info": "Ex: 1111 S Figueroa St, Los Angeles, CA",
+                "size":"sm"
+            },
+            {
+                "type": "map-pin",
+                "name": "event_location_map",
+                "label": "Map"
+            },
+            {
+                "type": "header",
+                "content": "Event Organizer"
+            },
+            {
+                "type": "text",
+                "name": "event_organizer_name",
+                "label": "Name",
+                "info": "Ex: Jacob Marley",
+                "size":"sm"
+            },
+            {
+                "type": "text",
+                "name": "event_organizer_phone",
+                "label": "Phone",
+                "info": "Ex: +1 613 555 5555",
+                "size":"sm"
+            },
+            {
+                "type": "text",
+                "name": "event_organizer_email",
+                "label": "Email",
+                "info": "Ex: info@example.com",
+                "size":"sm"
+            },
+            {
+                "type": "text",
+                "name": "event_organizer_website",
+                "label": "Website",
+                "info": "Ex: example.com",
+                "size":"sm"
+            }
+        ]
+    },
+    {
+        "include": "multi-item-checkout"
+    }
+]
+{% endschema %}
+
+{% include 'header-image-lg', header_title: post.title, header_image: post.feature_image.full %}
+
+<div class="page-content">
+    <div class="container">
+
+        {% if post.metadata.event_description %}
+            <div class="my-4 event-description">{{ post.metadata.event_description }}</div>
+        {% endif %}
+
+        <div class="card mb-4 border-left-0 {% if settings.animations %}wow fadeInUp{% endif %}" {% if settings.animations %}data-wow-delay="0s"{% endif %}>
+            <div class="row no-gutters">
+                <div class="col-12 col-sm-5 border-left">
+                    <div class="card-body">
+                        <div class="card-title-sm font-weight-bold"><i class="fa fa-calendar-o fa-fw"></i> {{ 'templates.post_event.date_and_time' | t }}</div>
+                        <p class="card-text">
+                            {% assign event_start_date = post.metadata.event_date_start | date: 'month_day_year' %}
+                            {% assign event_end_date = post.metadata.event_date_end | date: 'month_day_year' %}
+
+                            {% if post.metadata.event_date_all_day %}
+                                {% if event_start_date == event_end_date %}
+                                    {{ post.metadata.event_date_start | date: 'month_day_year' }}
+                                {% else %}
+                                    {{ 'templates.post_event.all_day_event_dates' | t: event_start: post.metadata.event_date_start, event_end: post.metadata.event_date_end }}
+                                {% endif %}
+                            {% elsif event_start_date == event_end_date %}
+                                {{ 'templates.post_event.event_date' | t: event_start: post.metadata.event_date_start, event_end: post.metadata.event_date_end }}
+                            {% else %}
+                                {{ 'templates.post_event.event_dates' | t: event_start: post.metadata.event_date_start, event_end: post.metadata.event_date_end }}
+                            {% endif %}
+                        </p>
+                    </div>
+                    {% if post.metadata.event_cost %}
+                        <div class="border-top"></div>
+                        <div class="card-body">
+                            <div class="card-title-sm font-weight-bold"><i class="fa fa-money fa-fw"></i> {{ 'templates.post_event.cost' | t }}</div>
+                            <p class="card-text">{{ post.metadata.event_cost }}</p>
+                        </div>
+                    {% endif %}
+                    {% if post.metadata.event_organizer_name or post.metadata.event_organizer_phone or post.metadata.event_organizer_email or post.metadata.event_organizer_website %}
+                        <div class="border-top"></div>
+                        <div class="card-body">
+                            <div class="card-title-sm font-weight-bold"><i class="fa fa-user fa-fw"></i> {{ 'templates.post_event.organizer' | t }}</div>
+                            <div class="card-text">
+                                {% if post.metadata.event_organizer_name %}
+                                    <p class="card-text">{{ post.metadata.event_organizer_name }}</p>
+                                {% endif %}
+                                {% if post.metadata.event_organizer_phone %}
+                                    <p class="card-text mb-0"><strong>{{ 'templates.post_event.phone' | t }}</strong> {{ post.metadata.event_organizer_phone }}</p>
+                                {% endif %}
+                                {% if post.metadata.event_organizer_email %}
+                                    <p class="card-text mb-0"><strong>{{ 'templates.post_event.email' | t }}</strong> {{ post.metadata.event_organizer_email }}</p>
+                                {% endif %}
+                                {% if post.metadata.event_organizer_website %}
+                                    <p class="card-text mb-0"><strong>{{ 'templates.post_event.website' | t }}</strong> {{ post.metadata.event_organizer_website }}</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="d-block d-sm-none border-bottom"></div>
+                    {% endif %}
+                </div>
+                {% if post.metadata.event_location_name or post.metadata.event_location_address %}
+                    <div class="col-12 col-sm-7 border-left">
+                        <div class="card-body">
+                            <div class="card-title-sm font-weight-bold"><i class="fa fa-map-marker fa-fw"></i> {{ 'templates.post_event.location' | t }}</div>
+                            {% if post.metadata.event_location_name %}
+                                <p class="card-text mb-0">{{ post.metadata.event_location_name }}</p>
+                            {% endif %}
+                            {% if post.metadata.event_location_address %}
+                                <p class="card-text mt-0 font-italic small">
+                                    {{ post.metadata.event_location_address }}
+                                    {% if post.metadata.event_location_map_latitude and post.metadata.event_location_map_longitude %}
+                                        &ndash; <a href="https://www.google.com/maps/search/{{ post.metadata.event_location_address | url_encode }}/@{{ post.metadata.event_location_map_latitude }},{{ post.metadata.event_location_map_longitude }},14z" target="_blank" rel="noopener noreferrer">Google&nbsp;Map</a>
+                                    {% endif %}
+                                </p>
+                            {% endif %}
+                            {% if post.metadata.event_location_map_latitude and post.metadata.event_location_map_longitude %}
+                                <div class="iframe-container">
+                                    <iframe width="480" height="270" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key={{ settings.google_maps_api_key | url_encode }}&q={{ post.metadata.event_location_map_latitude }},{{ post.metadata.event_location_map_longitude }}" allowfullscreen></iframe>
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    {% if post.metadata.products.size %}
+        {% include 'multi-item-checkout', id: post.id, metadata: post.metadata %}
+    {% endif %}
+</div>

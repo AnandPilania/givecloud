@@ -1,0 +1,34 @@
+{
+    "env": {
+        "browser": true
+    },
+    "extends": "eslint:recommended",
+    "parserOptions": {
+        "ecmaVersion": 5,
+        "sourceType": "script"
+    },
+    "globals": {
+        "$": "readonly",
+        "AsyncComputed": "readonly",
+        "Cookies": "readonly",
+        "Givecloud": "readonly",
+        "google": "readonly",
+        "grecaptcha": "readonly",
+        "hcaptcha": "readonly",
+        "Headroom": "readonly",
+        "jQuery": "readonly",
+        "Ladda": "readonly",
+        "Macy": "readonly",
+        "MarkerClusterer": "readonly",
+        "Promise": "readonly",
+        "Quill": "readonly",
+        "Sugar": "readonly",
+        "theme": "writable",
+        "Toasted": "readonly",
+        "URI": "readonly",
+        "VeeValidate": "readonly",
+        "Vue": "readonly",
+        "VueTheMask": "readonly",
+        "WOW": "readonly"
+    }
+}

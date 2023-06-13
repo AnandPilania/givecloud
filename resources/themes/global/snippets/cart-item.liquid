@@ -1,0 +1,41 @@
+<div class="row no-gutters mb-3 pb-3 border-bottom" id="line-item-{{ item.id }}">
+    <div class="col-md-8 col-12">
+        <div class="media">
+          <img class="mr-3" src="{{ item.thumbnail }}" style="width:80px; height:auto;" alt="{{ item.name }} ({{ item.sku }})">
+          <div class="media-body">
+            <h5 class="mt-0">{{ item.name }} <small class="text-muted">{{ item.sku }}</small></h5>
+            
+            {% if item.recurring_amount %}
+                <div class="mt-1">
+                    {{ 'snippets.cart_item.recurring_amount_on' | t : amount: item.recurring_amount, frequency: item.recurring_frequency_short, day: item.recurring_day }}
+                </div>
+            {% endif %}
+
+          </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="row no-gutters">
+            <div class="col-md-3 col-4 text-right">{{ item.price | money }}</div>
+            <div class="col-md-6 col-4 text-center">
+                {% if item.is_donation %}
+                    {{ item.quantity }}
+                {% elsif %}
+                    <select class="form-control d-inline-block" style="width:80px;">
+                        <option>1</option>
+                        <option selected>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                    </select>
+                {% endif %}
+            </div>
+            <div class="col-md-3 col-4 text-right">
+                <div>{{ item.line_price | money }}</div>
+            </div>
+        </div>
+
+        <div class="text-right mt-1">
+            <small><a href="#" data-cart-remove-item="{{ item.id }}"><i class="fa fa-times"></i> {{ 'snippets.cart_item.remove' | t }}</a></small>
+        </div>  
+    </div>
+</div>

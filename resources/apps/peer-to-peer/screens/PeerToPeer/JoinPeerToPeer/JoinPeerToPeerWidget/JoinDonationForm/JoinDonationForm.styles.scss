@@ -1,0 +1,31 @@
+.root {
+  @apply items-center w-full;
+
+  .challengeName {
+    @apply flex items-center justify-center gap-4;
+  }
+
+  .thermometerContainer {
+    @apply flex w-full justify-center items-center mt-6;
+
+    .thermometer {
+      @apply mx-2 max-w-[14rem];
+    }
+  }
+
+  .badgeContainer {
+    @apply flex w-full justify-center my-6;
+
+    .spacingDiv {
+      @apply h-11 invisible;
+    }
+  }
+
+  .amountContainer {
+    @apply h-full flex flex-col justify-center;
+  }
+}
+
+.logo {
+  @apply object-cover h-8;
+}

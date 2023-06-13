@@ -1,0 +1,29 @@
+.root {
+  @apply select-none;
+  @apply flex justify-center items-center;
+
+  .numbersContainer {
+    @apply min-w-[11rem];
+  }
+
+  .button {
+    @apply flex items-center justify-center w-10 h-10;
+
+    .icon {
+      @apply p-1 w-4 h-4 rounded-full;
+      @apply text-theme bg-theme-light;
+
+      &.disabled {
+        @apply text-gray-500 bg-gray-200;
+      }
+    }
+
+    &.marginRight {
+      @apply mr-3;
+    }
+
+    &.marginLeft {
+      @apply ml-3;
+    }
+  }
+}

@@ -1,0 +1,112 @@
+
+{% schema %}
+[
+    {
+        "include": "header-menu"
+    },
+    {
+        "name": "Customizations",
+        "settings": [
+            {
+                "type": "header",
+                "content": "Page Content"
+            },
+            {
+                "type": "html",
+                "name": "page_content",
+                "label": "Page Content"
+            }
+        ]
+    }
+]
+{% endschema %}
+
+<div class="template--page-header-menu">
+    {% include 'header-menu', title: post_type.name, feature_image: post_type.feature_image, metadata: post_type.metadata %}
+</div>
+
+{% if post_type.metadata.page_content %}
+    <div class="page-content" style="min-height:0">
+        <div class="container py-5">
+            {{ post_type.metadata.page_content }}
+        </div>
+    </div>
+{% endif %}
+
+{% assign categories = category.sub_categories | default: post_type.categories %}
+{% if categories.size > 0 %}
+    <section class="title-bar-xl py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <select id="category-dropdown" class="d-none" multiple>
+                        {% for cat in categories %}
+                            <option value="{{ cat.id }}" {% if category.id == cat.id %}selected{% endif %}>{{ cat.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endif %}
+
+<div id="posts">
+    <div class="page-content" style="min-height:0">
+        <div class="container py-5">
+            {% if posts.size > 0 %}
+                <div class="">
+                    {% for post in posts %}
+                        <div class="">{{ post.content }}</div>
+                        <hr>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        {% if pagination.lastPage > 1 %}
+            {% include 'paging-links' %}
+        {% endif %}
+    </div>
+</div>
+
+<div id="posts-loading" class="d-none text-center p-5">
+    <img class="spinner spinner-spin" src="{{ 'spinner.gif' | asset_url }}" alt="">
+</div>
+
+{% asset footer: true, 'https://cdn.givecloud.co/npm/bootstrap-multiselect@0.9.15/dist/css/bootstrap-multiselect.css' %}
+{% asset 'https://cdn.givecloud.co/npm/bootstrap-multiselect@0.9.15/dist/js/bootstrap-multiselect.min.js' %}
+
+{% javascript %}
+$('#category-dropdown').multiselect({
+    nonSelectedText: theme.trans('scripts.templates.post_type_content.filter_by_category'),
+    onChange: function(option, checked, select) {
+        var cats = $('#category-dropdown').val();
+        $('#posts').empty();
+        $('#posts-loading').removeClass('d-none');
+        $('#posts').load(window.location.pathname + '?categories=' + cats.join(',') + ' #posts', function() {
+            $('#posts-loading').addClass('d-none');
+        });
+    }
+});
+
+(function(){
+    var groups = theme.getUrlSearchParam('categories').split(',');
+    if (groups.length) {
+        $('#category-dropdown').multiselect('select', groups, false);
+    }
+})();
+{% endjavascript %}
+
+<style>
+body .multiselect-native-select .btn {
+    font-weight: normal;
+}
+body .multiselect-container {
+    padding: 8px 0;
+}
+body .multiselect-container > li > a > label {
+    padding: 3px 15px;
+    white-space: nowrap;
+    color: #000;
+}
+</style>

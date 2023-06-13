@@ -1,0 +1,15 @@
+.label {
+  @apply hidden text-base md:block;
+}
+
+.badge {
+  @apply px-2 py-0.5 -ml-2 rounded-full text-xs font-bold leading-4 bg-red-700 text-white transition-colors;
+
+  &.muted {
+    @apply bg-gray-200 text-gray-600;
+  }
+}
+
+.icon {
+  @apply ml-0 hidden text-xs md:ml-2 lg:block;
+}

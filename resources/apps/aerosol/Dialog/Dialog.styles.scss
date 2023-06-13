@@ -1,0 +1,19 @@
+.root {
+  @apply h-screen md:p-4 flex flex-col items-center justify-center;
+
+  .dialogPanel {
+    @apply w-full lg:my-4;
+  }
+
+  .small {
+    @apply max-w-sm;
+  }
+
+  .medium {
+    @apply max-w-2xl;
+  }
+
+  .large {
+    @apply max-w-5xl;
+  }
+}

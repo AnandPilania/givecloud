@@ -1,0 +1,9 @@
+{% if settings.cookie_alert %}
+    <div id="cookie-alert">
+        <div class="cookie-alert-container alert alert-dismissible text-center" role="alert">
+            {{ settings.cookie_message }}
+            <a href="{{ settings.cookie_learn_more_url }}" target="_blank" rel="noopener" class="ml-2 btn btn-outline-light btn-sm">{{ 'snippets.cookie_notice.learn_more' | t }}</a>
+            <button type="button" class="ml-2 btn btn-light btn-sm" aria-label="Close">{{ 'snippets.cookie_notice.i_agree' | t }}</button>
+        </div>
+    </div>
+{% endif %}

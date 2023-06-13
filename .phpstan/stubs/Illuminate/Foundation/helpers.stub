@@ -1,0 +1,9 @@
+<?php
+
+/**
+ * @param \DateTimeZone|string|null $tz
+ * @return \Ds\Domain\Shared\DateTime
+ */
+function now($tz = null)
+{
+}

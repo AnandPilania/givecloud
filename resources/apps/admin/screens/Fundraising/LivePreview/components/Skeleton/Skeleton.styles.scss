@@ -1,0 +1,24 @@
+.root {
+  @apply relative flex flex-col items-center justify-center;
+
+  .line {
+    @apply bg-grey-100 rounded-md;
+
+    &.short {
+      @apply w-16 h-4;
+    }
+
+    &.medium {
+      @apply w-28 h-4;
+    }
+
+    &.long {
+      @apply w-36 h-4;
+    }
+  }
+
+  .overlay {
+    @apply absolute w-40 h-20 rounded-md pt-14;
+    @apply bg-blue-300 border-blue-400 opacity-40 hover:cursor-pointer hover:bg-brand-blue hover:border-2 hover:border-blue-400;
+  }
+}

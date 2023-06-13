@@ -1,0 +1,51 @@
+{
+  "id": "pm_1LMPHxEF6XkQa2YLSfv6F2qP",
+  "object": "payment_method",
+  "billing_details": {
+    "address": {
+      "city": "Ottawa",
+      "country": "CA",
+      "line1": "116 Albert Street",
+      "line2": "Suite 300",
+      "postal_code": "K1P 5G3",
+      "state": "ON"
+    },
+    "email": "tim@givecloud.com",
+    "name": "Joshua Bloomfield",
+    "phone": "+1 613-555-5555"
+  },
+  "card": {
+    "brand": "visa",
+    "checks": {
+      "address_line1_check": "pass",
+      "address_postal_code_check": "pass",
+      "cvc_check": null
+    },
+    "country": "US",
+    "exp_month": 2,
+    "exp_year": 2025,
+    "fingerprint": "rxk2CQZWnyOGjQo6",
+    "funding": "credit",
+    "generated_from": null,
+    "last4": "4271",
+    "networks": {
+      "available": [
+        "visa"
+      ],
+      "preferred": null
+    },
+    "three_d_secure_usage": {
+      "supported": true
+    },
+    "wallet": {
+      "dynamic_last4": "4242",
+      "google_pay": [],
+      "type": "google_pay"
+    }
+  },
+  "created": 1658032865,
+  "customer": "cus_M4Wdk5lVrmYPAH",
+  "livemode": false,
+  "metadata": [],
+  "type": "card"
+}

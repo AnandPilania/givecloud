@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<customer>
+  <id>681486890</id>
+  <merchant-id>sv69j8b22qb44qr4</merchant-id>
+  <first-name>Bob</first-name>
+  <last-name>Hope</last-name>
+  <company nil="true"/>
+  <email>bob@example.com</email>
+  <phone>555-555-5555</phone>
+  <fax nil="true"/>
+  <website nil="true"/>
+  <created-at type="datetime">2022-07-27T14:59:33Z</created-at>
+  <updated-at type="datetime">2022-07-27T14:59:33Z</updated-at>
+  <custom-fields/>
+  <global-id>Y3VzdG9tZXJfNjgxNDg2ODkw</global-id>
+  <credit-cards type="array"/>
+  <addresses type="array"/>
+</customer>

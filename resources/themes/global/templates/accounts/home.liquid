@@ -1,0 +1,218 @@
+{% assign active_profile_menu = 'home' %}
+
+{% layout 'theme.profile' %}
+
+<h1 class="mt-0">{{ 'templates.accounts.home.my_home' | t }}</h1>
+
+<div class="masonry-3">
+
+    {% if site.account_features contains 'view-billing' %}
+        <div class="brick-container">
+            <div class="brick">
+                <div class="card mb-4 border-secondary wow fadeInUp">
+                    <div class="card-header bg-secondary border-secondary text-white text-center">
+                        {{ 'general.forms.billing_address' | t }}
+                    </div>
+                    <div class="card-body py-5 px-3 text-center text-info">
+                        <i class="fa fa-envelope-o fa-3x mb-3"></i>
+                        <p class="">
+                            {% if account.billing_address.address1 %}
+                                {{ account.billing_address.address1 | escape }}
+                                {% if account.billing_address.address2 %}<br>{{ account.billing_address.address2 | escape }}{% endif %}
+                                <br>{{ account.billing_address.city | escape }}, {{ account.billing_address.province_code | escape }} {{ account.billing_address.zip | escape }}
+                                <br>{{ account.billing_address.country | escape }}
+                            {% else %}
+                                {{ 'templates.accounts.home.not_provided' | t }}
+                            {% endif %}
+                        </p>
+                        {% if site.account_features contains 'edit-billing' %}
+                            <p><a href="/account/profile" class="btn btn-sm btn-pill px-3 btn-outline-primary"><i class="fa fa-pencil"></i> {{ 'templates.accounts.home.edit' | t }}</a></p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if site.account_features contains 'view-shipping' %}
+        <div class="brick-container">
+            <div class="brick">
+                <div class="card mb-4 border-secondary wow fadeInUp">
+                    <div class="card-header bg-secondary border-secondary text-white text-center">
+                        {{ 'templates.accounts.home.shipping_address' | t }}
+                    </div>
+                    <div class="card-body py-5 px-3 text-center text-info">
+                        <i class="fa fa-truck fa-3x mb-3"></i>
+                        <p class="">
+                            {% if account.shipping_address.address1 %}
+                                {{ account.shipping_address.address1 | escape }}
+                                {% if account.shipping_address.address2 %}<br>{{ account.shipping_address.address2 | escape }}{% endif %}
+                                <br>{{ account.shipping_address.city | escape }}, {{ account.shipping_address.province_code | escape }} {{ account.shipping_address.zip | escape }}
+                                <br>{{ account.shipping_address.country | escape }}
+                            {% else %}
+                                {{ 'templates.accounts.home.not_provided' | t }}
+                            {% endif %}
+                        </p>
+                        {% if site.account_features contains 'edit-shipping' %}
+                            <p><a href="/account/profile" class="btn btn-sm btn-pill px-3 btn-outline-primary"><i class="fa fa-pencil"></i> {{ 'templates.accounts.home.edit' | t }}</a></p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if site.account_features contains 'view-orders' %}
+        <div class="brick-container">
+            <div class="brick">
+                <div class="card mb-4 border-secondary wow fadeInUp">
+                    <div class="card-header bg-secondary border-secondary text-white text-center">
+                        {{ 'templates.accounts.home.last_payment' | t }}
+                    </div>
+                    <div class="card-body py-5 px-3 text-center text-info">
+                        <i class="fa fa-clock-o fa-3x mb-3"></i>
+                        {% if account.last_payment %}
+                            <p class="">
+                                {{ 'templates.accounts.home.thank_you_for_last_payment_html' | t: amount: account.last_payment.amount, currency: account.last_payment.currency, captured_date: account.last_payment.captured_at }}
+                            </p>
+                        {% else %}
+                            <p>{{ 'templates.accounts.home.no_payments_received' | t }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if site.account_features contains 'view-pledges' %}
+        <div class="brick-container">
+            <div class="brick">
+                <div class="card mb-4 border-secondary wow fadeInUp">
+                    <div class="card-header bg-secondary border-secondary text-white text-center">
+                        {{ 'templates.accounts.home.my_pledges' | t }}
+                    </div>
+                    <div class="card-body py-5 px-3 text-center text-info">
+                        {% if account.pledges.size > 0 %}
+                            {% for pledge in account.pledges %}
+                                <div class="my-3 py-3 {% unless forloop.last %}border-bottom{% endunless %}">
+                                    <div class="">{{ pledge.name }}</div>
+                                    <div>
+                                        {% include 'goal', goal_percent: pledge.funded_percent, goal_progress: pledge.funded_amount, goal_amount: pledge.amount %}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <p class="my-0">{{ 'templates.accounts.home.no_pledges' | t }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if site.account_features contains 'view-sponsorships' %}
+        <div class="brick-container">
+            <div class="brick">
+                <div class="card mb-4  border-secondary wow fadeInUp">
+                    <div class="card-header bg-secondary border-secondary text-white text-center">
+                        {{ 'templates.accounts.home.sponsorships' | t }}
+                    </div>
+                    <div class="card-body py-5 px-3 text-center text-info">
+                        <i class="fa fa-users fa-3x mb-3"></i>
+                        {% if account.sponsorship_count > 0 %}
+                            <p class="">
+                                {{ 'templates.accounts.home.sponsoring_x_children_html' | t: count: account.sponsorship_count, children_term: site.synonyms.sponsorship_children }}
+                            </p>
+                            <p><a href="/account/sponsorships" class="btn btn-sm btn-pill px-3 btn-outline-primary"><i class="fa fa-search"></i> {{ 'templates.accounts.home.view_sponsorhsip' | t }}</a></p>
+                        {% else %}
+                            <p class="">
+                                {{ 'templates.accounts.home.you_have_no_sponsorships' | t }}
+                            </p>
+                            {{ assign children_term = site.synonyms.sponsorship_child | capitalize | indefinite_article }}
+                            <p><a href="/sponsorship" class="btn btn-sm btn-pill px-3 btn-outline-primary whitespace-normal"><i class="fa fa-search"></i> {{ 'templates.accounts.home.find_sponsorhsips' | t: children_term: children_term }}</a></p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if site.account_features contains 'view-receipts' %}
+        <div class="brick-container">
+            <div class="brick">
+                <div class="card mb-4  border-secondary wow fadeInUp">
+                    <div class="card-header bg-secondary border-secondary text-white text-center">
+                        {{ 'templates.accounts.home.tax_receipts' | t }}
+                    </div>
+                    <div class="card-body py-5 px-3 text-center text-info">
+                        <i class="fa fa-file-o fa-3x mb-3"></i>
+                        {% if account.tax_receipt_count %}
+                            <p class="">
+                                {% assign count_badge = '<span class="badge badge-dark badge-pill">' | append: account.tax_receipt_count | append: '</span>' %}
+                                {{ 'templates.accounts.home.tax_receipt_donations_count_html' | t: count_badge: count_badge }}
+                            </p>
+                        {% else %}
+                            <p>
+                                {{ 'templates.accounts.home.no_receipts' | t }}
+                            </p>
+                        {% endif %}
+                        <p><a href="/account/tax-receipts" class="btn btn-sm btn-pill px-3 btn-outline-primary"><i class="fa fa-search"></i> {{ 'templates.accounts.home.view_tax_receipt' | t }}</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if site.account_features contains 'view-payment-methods' %}
+        <div class="brick-container">
+            <div class="brick">
+                <div class="card mb-4  border-secondary wow fadeInUp">
+                    <div class="card-header bg-secondary border-secondary text-white text-center">
+                        {{ 'templates.accounts.home.payment_methods' | t }}
+                    </div>
+                    <div class="card-body py-5 px-3 text-center text-info">
+                        <i class="fa fa-credit-card fa-3x mb-3"></i>
+                        {% if account.payment_method_count %}
+                            <p class="">
+                                {% assign count_badge = '<span class="badge badge-dark badge-pill">' | append: account.payment_method_count | append: '</span>' %}
+                                {{ 'templates.accounts.home.saved_accounts_count_html' | t: count_badge: count_badge }}
+                            </p>
+                        {% else %}
+                            <p>
+                                {{ 'templates.accounts.home.no_saved_accounts' | t }}
+                            </p>
+                        {% endif %}
+                        <p><a href="/account/payment-methods" class="btn btn-sm btn-pill px-3 btn-outline-primary"><i class="fa fa-search"></i> {{ 'templates.accounts.home.view_payment_methods' | t }}</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if site.account_features contains 'view-subscriptions' %}
+        <div class="brick-container">
+            <div class="brick">
+                <div class="card mb-4  border-secondary wow fadeInUp">
+                    <div class="card-header bg-secondary border-secondary text-white text-center">
+                        {{ 'templates.accounts.home.recurring_payments' | t }}
+                    </div>
+                    <div class="card-body py-5 px-3 text-center text-info">
+                        <i class="fa fa-refresh fa-3x mb-3"></i>
+                        {% if account.subscription_count %}
+                            <p class="">
+                                {% assign count_badge = '<span class="badge badge-dark badge-pill">' | append: account.subscription_count | append: '</span>' %}
+                                {{ 'templates.accounts.home.subscriptions_count_html' | t: count_badge: count_badge }}
+                            </p>
+                        {% else %}
+                            <p class="">
+                                {{ 'templates.accounts.home.no_payments' | t }}
+                            </p>
+                        {% endif %}
+                        <p><a href="/account/subscriptions" class="btn btn-sm btn-pill px-3 btn-outline-primary"><i class="fa fa-search"></i> {{ 'templates.accounts.home.view_subscriptions' | t }}</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+</div>

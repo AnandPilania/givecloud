@@ -1,0 +1,30 @@
+.root {
+  @apply flex flex-col grow shrink p-3;
+
+  &.isPaddingless {
+    @apply p-0;
+  }
+
+  &.one {
+    @apply w-full md:w-1/6 mdlg:w-full;
+  }
+  &.two {
+    @apply w-full md:w-2/6 mdlg:w-full;
+  }
+  &.three {
+    @apply w-full md:w-3/6 mdlg:w-full;
+  }
+  &.four {
+    @apply w-full md:w-4/6 mdlg:w-full;
+  }
+  &.five {
+    @apply w-full md:w-5/6 mdlg:w-full;
+  }
+  &.six {
+    @apply w-full;
+  }
+
+  &.small {
+    @apply grow-0;
+  }
+}

@@ -1,0 +1,9 @@
+.root {
+  .content {
+    @apply bg-white border border-gray-300;
+    @apply rounded;
+    @apply shadow-md;
+    @apply text-sm text-gray-600;
+    @apply cursor-auto;
+  }
+}

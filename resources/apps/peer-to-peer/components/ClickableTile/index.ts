@@ -1,0 +1,1 @@
+export { ClickableTile } from './ClickableTile'

@@ -1,0 +1,17 @@
+.root {
+  .buttonOne {
+    @apply pr-0 sm:pr-4 pb-4;
+  }
+
+  .buttonTwo {
+    @apply pb-4 sm:pr-4 lg:!pr-0;
+  }
+
+  .buttonThree {
+    @apply pr-0 sm:pr-4 pb-4;
+  }
+
+  .buttonFour {
+    @apply pb-4;
+  }
+}

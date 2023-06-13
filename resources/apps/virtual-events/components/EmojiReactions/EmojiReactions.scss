@@ -1,0 +1,7 @@
+.root {
+  @apply fixed inset-0 pointer-events-none;
+
+  .reaction {
+    @apply text-6xl;
+  }
+}

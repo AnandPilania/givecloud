@@ -1,0 +1,30 @@
+/* zoom in on the centered item */
+.owl-carousel.owl-center-zoom .owl-item.center.active {
+    z-index:99;
+    -ms-transform: scale(1, 1); /* IE 9 */
+    -webkit-transform: scale(1,1); /* Safari */
+    transform: scale(1,1);
+    opacity:1.0;
+    transition:transform opacity 0.3s;
+}
+.owl-carousel.owl-center-zoom .owl-item {
+    z-index:1;
+    -ms-transform: scale(0.8, 0.8); /* IE 9 */
+    -webkit-transform: scale(0.8, 0.8); /* Safari */
+    transform: scale(0.8, 0.8);
+    opacity:0.8;
+    transition:transform opacity 0.3s;
+}
+
+/* veritally centered items */
+.owl-carousel.owl-centered-heights .owl-wrapper {
+    display: table !important;
+}
+.owl-carousel.owl-centered-heights .owl-item {
+    display: table-cell;
+    float: none;
+    vertical-align: middle;
+}
+.owl-carousel.owl-centered-heights .owl-item div {
+    text-align:center;
+}

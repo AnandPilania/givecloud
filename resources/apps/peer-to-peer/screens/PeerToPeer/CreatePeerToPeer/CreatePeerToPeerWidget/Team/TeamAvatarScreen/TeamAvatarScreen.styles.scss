@@ -1,0 +1,30 @@
+.root {
+  @apply items-center;
+
+  .text {
+    @apply max-w-[11rem] text-center;
+  }
+
+  .imgAvatar {
+    @apply w-14 h-14;
+  }
+
+  .initialsAvatar {
+    @apply flex items-center justify-center;
+    @apply font-semibold;
+    @apply h-full w-full;
+    @apply bg-theme-light text-theme;
+  }
+
+  .columns {
+    @apply xs:max-w-xs max-w-[15rem];
+
+    .column {
+      @apply !pb-0;
+    }
+  }
+}
+
+.logo {
+  @apply object-cover h-8;
+}

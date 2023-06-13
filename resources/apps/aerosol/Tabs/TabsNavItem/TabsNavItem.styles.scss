@@ -1,0 +1,27 @@
+.root {
+  @apply px-3 lg:px-4 rounded-3xl bg-white text-blue-600 mx-2 py-2.5 outline-none relative;
+  @apply ring-offset-2 focus:outline-none;
+  @apply text-sm font-sans font-bold;
+
+  &:hover {
+    box-shadow: 0 0 0 2px #0066ff;
+  }
+
+  &.selected {
+    @apply bg-blue-600 text-white;
+    @apply ring-brand-blue ring-offset-white focus:ring-1;
+  }
+
+  &.disabled {
+    @apply bg-gray-400 text-white cursor-not-allowed hover:bg-gray-400 hover:border-gray-400;
+  }
+
+  &.inverted {
+    @apply bg-blue-600  hover:bg-blue-700 text-white border-white;
+
+    &.selected {
+      @apply bg-white text-blue-600;
+      @apply ring-white  ring-offset-brand-blue focus:ring-2;
+    }
+  }
+}

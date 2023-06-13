@@ -1,0 +1,60 @@
+@mixin background-image {
+  background-image: var(--app-bg-image);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.background {
+  @apply fixed inset-0;
+
+  filter: blur(40px);
+  transform: scale(1.1);
+  @include background-image;
+}
+
+.root {
+  @apply flex flex-col items-center justify-center w-full h-full bg-white;
+
+  .inner {
+    @apply relative w-full min-h-full bg-white;
+  }
+
+  &.inlineWidgetType {
+    @apply bg-transparent;
+
+    .inner {
+      @apply relative w-full h-full overflow-hidden;
+      will-change: transform; /* fix for safari border-radius issues */
+    }
+  }
+}
+
+@media (min-width: 450px) {
+  .root {
+    background-color: var(--app-bg-colour);
+    @include background-image;
+
+    .inner {
+      @apply relative h-full min-h-0 shadow-2xl overflow-hidden;
+      width: 412px;
+      will-change: transform; /* fix for safari border-radius issues */
+
+      @media (min-height: 728px) {
+        @apply rounded-2xl;
+        max-height: 636px;
+      }
+
+      @screen 2xl {
+        width: 475px;
+        @media (min-height: 828px) {
+          max-height: 736px;
+        }
+      }
+
+      &.standardLayout {
+        @apply rounded-2xl;
+      }
+    }
+  }
+}

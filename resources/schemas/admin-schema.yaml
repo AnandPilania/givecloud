@@ -1,0 +1,352 @@
+openapi: 3.0.0
+info:
+  title: 'Givecloud API'
+  version: 1.0.0
+paths:
+  /donation-form:
+    get:
+      tags:
+        - DonationForm
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DonationFormResource'
+components:
+  schemas:
+    DonationFormResource:
+      required:
+        - template
+        - id
+        - name
+        - layout
+        - isDefaultForm
+        - brandingColour
+        - billingPeriods
+        - socialProofEnabled
+        - defaultAmountValue
+        - brandingLogo
+        - brandingMonthlyLogo
+        - socialPreviewImage
+        - backgroundImage
+        - landingPageHeadline
+        - landingPageDescription
+        - transparencyPromiseEnabled
+        - transparencyPromiseValue
+        - transparencyPromiseType
+        - defaultAmountValues
+        - exitConfirmationDescription
+        - embedOptionsReminderDescription
+        - upsellEnabled
+        - upsellDescription
+        - emailOptinDescription
+        - emailOptinEnabled
+        - thankYouEmailMessage
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        template:
+          type: string
+        layout:
+          type: string
+        isDefaultForm:
+          type: boolean
+        brandingLogo:
+          required:
+            - id
+            - full
+          properties:
+            createdAt:
+              type: string
+            full:
+              type: string
+            id:
+              type: string
+            isAudio:
+              type: boolean
+            isImage:
+              type: boolean
+            isVideo:
+              type: boolean
+            thumb:
+              type: string
+            updatedAt:
+              type: string
+          type: object
+        brandingMonthlyLogo:
+          required:
+            - id
+            - full
+          properties:
+            createdAt:
+              type: string
+            full:
+              type: string
+            id:
+              type: string
+            isAudio:
+              type: boolean
+            isImage:
+              type: boolean
+            isVideo:
+              type: boolean
+            thumb:
+              type: string
+            updatedAt:
+              type: string
+          type: object
+        brandingColour:
+          type: string
+        backgroundImage:
+          properties:
+            createdAt:
+              type: string
+            full:
+              type: string
+            id:
+              type: string
+            isAudio:
+              type: boolean
+            isImage:
+              type: boolean
+            isVideo:
+              type: boolean
+            thumb:
+              type: string
+            updatedAt:
+              type: string
+          type: object
+        landingPageHeadline:
+          type: string
+        landingPageDescription:
+          type: string
+        billingPeriods:
+          type: string
+        defaultAmountType:
+          type: string
+        defaultAmountValue:
+          type: integer
+        defaultAmountValues:
+          type: array
+          items:
+            type: integer
+        badgesEnabled:
+          type: boolean
+        socialProofEnabled:
+          type: boolean
+        socialProofPrivacy:
+          type: string
+        transparencyPromiseEnabled:
+          type: boolean
+        transparencyPromiseType:
+          type: string
+        transparencyPromise1Percentage:
+          type: integer
+        transparencyPromise1Description:
+          type: string
+        transparencyPromise2Percentage:
+          type: integer
+        transparencyPromise2Description:
+          type: string
+        transparencyPromiseStatement:
+          type: string
+        emailOptinDescription:
+          type: string
+        emailOptinNagMessage:
+          type: string
+          nullable: true
+        emailOptinEnabled:
+          type: boolean
+        upsellEnabled:
+          type: boolean
+        upsellHeading:
+          type: string
+          nullable: true
+        upsellDescription:
+          type: string
+        upsellConfirmation:
+          type: string
+          nullable: true
+        socialLinkTitle:
+          type: string
+        socialLinkDescription:
+          type: string
+        socialPreviewImage:
+          properties:
+            createdAt:
+              type: string
+            full:
+              type: string
+            custom:
+              properties:
+                socialPreview:
+                  type: string
+              type: object
+            id:
+              type: string
+            isAudio:
+              type: boolean
+            isImage:
+              type: boolean
+            isVideo:
+              type: boolean
+            thumb:
+              type: string
+            updatedAt:
+              type: string
+          type: object
+        doubleTheDonationConnected:
+          type: boolean
+        doubleTheDonationEnabled:
+          type: boolean
+        thankYouOnscreenMessage:
+          type: string
+        thankYouOnscreenMonthlyMessage:
+          type: string
+          nullable: true
+        thankYouEmailMessage:
+          type: string
+        thankYouEmailMonthlyMessage:
+          type: string
+          nullable: true
+        navigationFooterCtaEnabled:
+          type: boolean
+        navigationFooterCtaLabel:
+          type: string
+          nullable: true
+        navigationFooterCtaLink:
+          type: string
+          nullable: true
+        exitConfirmationDescription:
+          type: string
+        requireBillingAddress:
+          type: boolean
+        gtmContainerId:
+          type: string
+        metaPixelId:
+          type: string
+        dpEnabled:
+          type: boolean
+        dpGlCode:
+          type: string
+        dpCampaign:
+          type: string
+        dpSolicitCode:
+          type: string
+        dpSubSolicitCode:
+          type: string
+        dpMeta9:
+          type: string
+        dpMeta10:
+          type: string
+        dpMeta11:
+          type: string
+        dpMeta12:
+          type: string
+        dpMeta13:
+          type: string
+        dpMeta14:
+          type: string
+        dpMeta15:
+          type: string
+        dpMeta16:
+          type: string
+        dpMeta17:
+          type: string
+        dpMeta18:
+          type: string
+        dpMeta19:
+          type: string
+        dpMeta20:
+          type: string
+        dpMeta21:
+          type: string
+        dpMeta22:
+          type: string
+        embedOptionsReminderEnabled:
+          type: boolean
+        embedOptionsReminderDescription:
+          type: string
+        embedOptionsReminderBackgroundColour:
+          type: string
+        embedOptionsReminderPosition:
+          type: string
+        isTaxReceiptable:
+          type: boolean
+        publicUrl:
+          type: string
+        shortlinkUrl:
+          type: string
+        previewImageUrl:
+          type: string
+        testmodeUrl:
+          type: string
+        stats:
+          properties:
+            donorCount:
+              type: number
+            revenueAmount:
+              type: number
+            conversion:
+              type: number
+            currency:
+              type: string
+            views:
+              type: number
+            trends:
+              properties:
+                revenues:
+                  properties:
+                    data:
+                      properties:
+                       date:
+                        format: date
+                        type: string
+                      type: object
+                      minProperties: 60
+                  type: object
+                views:
+                  properties:
+                    data:
+                      properties:
+                       date:
+                        format: date
+                        type: string
+                      type: object
+                      minProperties: 60
+                  type: object
+                donors:
+                  properties:
+                    trend:
+                      type: number
+                    previousPeriod:
+                      type: number
+                    lastPeriod:
+                      type: number
+                  type: object
+                conversions:
+                  properties:
+                    trend:
+                      type: number
+                    previousPeriod:
+                      type: number
+                    lastPeriod:
+                      type: number
+                  type: object
+              type: object
+          type: object
+        qrCode:
+          type: string
+        createdBy:
+          type: string
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
+      type: object
+      xml:
+        name: DonationFormResource

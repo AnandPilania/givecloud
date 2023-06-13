@@ -1,0 +1,19 @@
+
+<div id="{{ id }}" class="posts-events-shortcode my-5">
+
+  {% for post in posts %}
+    <article class="d-flex mb-4">
+      <img src="{{ post.feature_image | img_url: '120x90', crop: 'entropy' }}" width="120" alt="">
+      <div class="ml-3">
+        {% if post.metadata.event_date_start %}
+          <small class="text-secondary text-uppercase font-weight-bold">{{ post.metadata.event_date_start | date: 'month_day_year' }}</small>
+        {% endif %}
+        <h5 class="text-primary font-weight-bold mb-0">{{ post.title }}</h5>
+        {% if post.metadata.event_location_name %}
+          <div class="text-primary font-italic">{{ post.metadata.event_location_name }}</p>
+        {% endif %}
+      </div>
+    </article>
+  {% endfor %}
+
+</div>

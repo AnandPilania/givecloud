@@ -1,0 +1,150 @@
+{% assign active_profile_menu = 'subscriptions' %}
+
+{% layout 'theme.profile' %}
+
+{% asset '~/scripts/templates/subscription-cancel.js' %}
+
+<div class="subscription-page-cancel">
+
+    <h1 class="mt-0">{{ 'templates.accounts.subscriptions.cancel.cancel_recurring_payment' | t }}</h1>
+
+    <form id="subscription-cancel" method="post" autocomplete="no" novalidate>
+        <input type="hidden" name="id" value="{{ subscription.id }}">
+        <input type="hidden" name="next_payment_date" value="{% if subscription.next_payment_date %}{{ subscription.next_payment_date | date: 'Y-m-d' }}{% else %}{{ 'today' | date: 'Y-m-d' }}{% endif %}">
+
+        <div class="row mb-5">
+            <div class="col-12 col-sm-6 col-lg-5 offset-lg-1">
+
+                <div class="card ml-auto">
+                    {% include 'payment-method-card', method: subscription.payment_method %}
+                </div>
+
+            </div>
+            <div class="col-12 col-sm-6 pt-3">
+
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="m-0 text-left">{{ subscription.amount | money : subscription.currency }}<small>/{{ subscription.billing_period | downcase }}</small></h2>
+                        <div class="text-sm text-muted">{{ 'templates.accounts.subscriptions.cancel.payment' | t }}</div>
+                    </div>
+
+                    <div class="col-12 mb-2">
+                        <hr>
+                        {% if subscription.feature_image %}
+                            <img src="{{ subscription.feature_image.thumb }}" height="44" width="44" class="mr-2 pull-left rounded-circle object-fit-cover">
+                        {% endif %}
+                        <div class="font-weight-bold">{{ subscription.description }}</div>
+                        <div class="text-sm text-muted">{{ 'templates.accounts.subscriptions.cancel.description' | t }}</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-12 col-sm-8 offset-sm-2 col-md-8 offset-md-2 col-xl-6 offset-xl-3">
+
+                <p>{{ settings.cancel_subscription_message }}</p>
+
+                <div class="form-group">
+                    <div class="custom-control custom-radio">
+                        <input type="radio" id="cancelPeriod1" name="cancel_period" value="1" checked class="custom-control-input">
+                        <label class="custom-control-label" for="cancelPeriod1"><strong>{{ 'templates.accounts.subscriptions.cancel.pause_my_payment_for_count' | t: count: 1 }}</strong></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="custom-control custom-radio">
+                        <input type="radio" id="cancelPeriod3" name="cancel_period" value="3" class="custom-control-input">
+                        <label class="custom-control-label" for="cancelPeriod3"><strong>{{ 'templates.accounts.subscriptions.cancel.pause_my_payment_for_count' | t: count: 3 }}</strong></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="custom-control custom-radio">
+                        <input type="radio" id="cancelPeriodForever" name="cancel_period" value="forever" class="custom-control-input">
+                        <label class="custom-control-label" for="cancelPeriodForever"><strong>{{ 'templates.accounts.subscriptions.cancel.cancel_my_payment_forever' | t }}</strong></label>
+                    </div>
+                </div>
+
+                <div id="cancelReasonsContainer" class="collapse">
+
+                    <div class="pt-4 mt-4 border-top">
+                        <p>{{ 'templates.accounts.subscriptions.cancel.sharing_why' | t }}</p>
+
+                        {% for reason in site.subscription_cancel_reasons.reasons %}
+                            <div class="form-group">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="cancelReason{{ forloop.index }}" name="cancel_reason" value="{{ reason | escape }}" class="custom-control-input">
+                                    <label class="custom-control-label" for="cancelReason{{ forloop.index }}"><strong>{{ reason }}</strong></label>
+                                </div>
+                            </div>
+                        {% endfor %}
+
+                        {% if site.subscription_cancel_reasons.allow_other %}
+                            <div class="form-group">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="cancelReasonOther" name="cancel_reason" value="other" class="custom-control-input">
+                                    <label class="custom-control-label" for="cancelReasonOther"><strong>{{ 'templates.accounts.subscriptions.cancel.other' | t }}</strong></label>
+                                </div>
+                            </div>
+                            <div id="cancelReasonOtherContainer" class="form-group pl-4 collapse">
+                                <input type="text" class="form-control" id="inputCancelReasonOther" placeholder="{{ 'templates.accounts.subscriptions.cancel.reason_placeholder' | t }}" name="cancel_reason_other" maxlength="64">
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    {% if site.nps.enabled %}
+                        <div class="pt-4 mt-4 border-top">
+                            <p>{{ 'templates.accounts.subscriptions.cancel.recommend_us' | t }}</p>
+
+                            <div class="rating rating-check d-flex justify-content-center flex-row-reverse">
+                                <input type="radio" id="nps-10" name="nps" value="10" /><label for="nps-10" title="10">10<br>{{ 'templates.accounts.subscriptions.cancel.recommend_very_likely' | t }}</label>
+                                <input type="radio" id="nps-9" name="nps" value="9" /><label for="nps-9" title="9">9</label>
+                                <input type="radio" id="nps-8" name="nps" value="8" /><label for="nps-8" title="8">8</label>
+                                <input type="radio" id="nps-7" name="nps" value="7" /><label for="nps-7" title="7">7</label>
+                                <input type="radio" id="nps-6" name="nps" value="6" /><label for="nps-6" title="5">6</label>
+                                <input type="radio" id="nps-5" name="nps" value="5" /><label for="nps-5" title="5">5</label>
+                                <input type="radio" id="nps-4" name="nps" value="4" /><label for="nps-4" title="4">4</label>
+                                <input type="radio" id="nps-3" name="nps" value="3" /><label for="nps-3" title="3">3</label>
+                                <input type="radio" id="nps-2" name="nps" value="2" /><label for="nps-2" title="2">2</label>
+                                <input type="radio" id="nps-1" name="nps" value="1" /><label for="nps-1" title="1">1<br>{{ 'templates.accounts.subscriptions.cancel.recommend_not_likely' | t }}</label>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!--<div class="modal fade" id="modal-confirm-stop" tabindex="-1" role="dialog" aria-labelledby="modal-confirm-stop-label" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modal-confirm-stop-label">Cancel My Payment</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+
+                                <div class="form-group">
+                                    <label>{{ settings.cancel_subscription_feedback_message }}</label>
+                                    <textarea class="form-control" name="comments"></textarea>
+                                    <div class="form-text text-muted">(Optional)</div>
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="m-1 btn btn-danger"><i class="fa fa-check"></i> Save Changes</button>
+                                <a href="#" data-dismiss="modal" class="m-1 btn btn-outline-dark">Close</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>-->
+
+                <div class="mt-4 text-center">
+                    <button type="submit" class="m-1 btn btn-danger"><i class="fa fa-check"></i> {{ 'templates.accounts.subscriptions.cancel.update_my_payment' | t }}</button>
+                    <a href="/account/subscriptions/{{ subscription.id }}" class="m-1 btn btn-outline-dark"><i class="fa fa-arrow-left"></i> {{ 'templates.accounts.subscriptions.cancel.back' | t }}</a>
+                </div>
+
+            </div>
+        </div>
+    </form>
+</div>

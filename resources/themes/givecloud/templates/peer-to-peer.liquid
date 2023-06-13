@@ -1,0 +1,43 @@
+{% layout none %}
+
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns#" lang="{{ site.locale.iso }}">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+
+  <title>P2P</title>
+
+  {% if settings.favicon -%}
+    <link rel="icon" type="image/png" href="{{ settings.favicon }}">
+  {%- endif %}
+
+  <meta name="csrf-token" content="{{ site.csrf_token }}">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  {{ content_for_header }}
+
+  {% for css_file in css_files -%}
+    <link rel="stylesheet" href="{{ css_file }}">
+  {% endfor -%}
+
+  <script>
+    window.peerToPeerConfig = {{ config | json }};
+  </script>
+</head>
+<body>
+
+<div id="app"></div>
+
+{{ content_for_footer }}
+
+{% for script_file in script_files -%}
+  <script charset="utf-8" src="{{ script_file }}"></script>
+{% endfor -%}
+
+</body>
+</html>

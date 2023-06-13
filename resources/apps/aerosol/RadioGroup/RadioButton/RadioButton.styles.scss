@@ -1,0 +1,36 @@
+.root {
+  @apply flex h-full w-full;
+
+  .inputDefault {
+    @apply h-4 w-4 mr-3;
+    @apply border-2;
+    @apply focus:ring-1;
+    @apply hover:cursor-pointer;
+    @apply border-brand-blue;
+    @apply active:ring-brand-blue focus:ring-brand-blue checked:bg-brand-blue;
+    @apply disabled:bg-gray-300 disabled:border-gray-300 disabled:ring-gray-300 disabled:cursor-not-allowed;
+
+    &:disabled {
+      &:hover {
+        @apply bg-gray-300;
+      }
+    }
+  }
+
+  .label {
+    @apply leading-tight;
+    @apply hover:cursor-pointer;
+
+    &.disabled {
+      @apply text-gray-500 cursor-not-allowed;
+    }
+  }
+
+  .description {
+    @apply text-gray-500;
+
+    &.disabled {
+      @apply text-gray-500 cursor-not-allowed;
+    }
+  }
+}

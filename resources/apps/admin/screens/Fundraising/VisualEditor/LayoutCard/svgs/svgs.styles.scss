@@ -1,0 +1,10 @@
+.overlay {
+  fill: #d3e7fd;
+  opacity: 0.6;
+
+  &:hover {
+    fill: #0066ff;
+    opacity: 0.3;
+    cursor: pointer;
+  }
+}

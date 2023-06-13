@@ -1,0 +1,7 @@
+.root {
+  @apply flex w-full flex-wrap-reverse items-baseline;
+
+  .text {
+    @apply whitespace-nowrap mr-2;
+  }
+}

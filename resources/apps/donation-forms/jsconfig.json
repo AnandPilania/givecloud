@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/atoms/*": ["./atoms/*"],
+      "@/components/*": ["./components/*"],
+      "@/constants/*": ["./constants/*"],
+      "@/context/*": ["./context/*"],
+      "@/hooks/*": ["./hooks/*"],
+      "@/routes": ["./routes.jsx"],
+      "@/screens/*": ["./screens/*"],
+      "@/templates/*": ["./templates/*"],
+      "@/utilities/*": ["./utilities/*"]
+    }
+  },
+  "exclude": ["node_modules", "dist"]
+}

@@ -1,0 +1,101 @@
+{% asset async: true, ext: js, defer: true, 'https://maps.googleapis.com/maps/api/js?key={google_maps_api_key}&libraries=places&callback=loadLookup' %}
+
+<div class="row {% if product.require_tributes or product.enable_tributes == false %}d-none{% endif %}">
+    <div class="col-12">
+        <div class="form-group">
+            <label for="">{% if settings.tribute_question %}{{ settings.tribute_question }}{% else %}Do you want to dedicate this donation or donate as a gift to someone?{% endif %}</label>
+            <div data-toggle="buttons">
+                <div class="btn-group-toggle btn-group-checked mb-3">
+                  <label class="btn btn-outline-secondary {% if product.require_tributes %}active{% endif %}"><input type="radio" name="is_tribute" {% if product.require_tributes %}checked{% endif %} value="1"> {{ 'snippets.product_tribute_fields.yes' | t }}</small></label>
+                  <label class="btn btn-outline-secondary {% unless product.require_tributes %}active{% endunless %}"><input type="radio" name="is_tribute" {% unless product.require_tributes %}checked{% endunless %} value="0"> {{ 'snippets.product_tribute_fields.no' | t }}</small></label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="tribute-wrap collapse">
+    <label>{{ 'snippets.product_tribute_fields.dedicate_this_donation' | t }}</label>
+    <div class="row gutter-sm">
+        <div class="col-sm-6 col-md-5 {{ (product.tribute_types.size <= 1) ? 'collapse' : '' }}">
+            <div class="form-group labelify">
+                <label for="tribute_type_id">{% if settings.tribute_type_label %}{{ settings.tribute_type_label }}{% else %}{{ 'snippets.product_tribute_fields.dedication_type' | t }}{% endif %}</label>
+                <select id="tribute_type_id" class="form-control" name="tribute_type_id">
+                    {% for type in product.tribute_types %}
+                        <option value="{{ type.id }}">{{ type.label }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-7">
+            <div class="form-group labelify">
+                <label for="tribute_name">{% if settings.tribute_name_label %}{{ settings.tribute_name_label }}{% else %}{{ 'snippets.product_tribute_fields.individual_name' | t }}{% endif %}<span class="asterisk-required">*</span></label>
+                <input id="tribute_name" type="text" class="form-control" name="tribute_name">
+                <div class="invalid-feedback">{{ 'snippets.product_tribute_fields.who_are_you_dedicating_this_to' | t }}</div>
+            </div>
+        </div>
+    </div>
+
+    {% if product.tribute_notification_types.size >= 1 %}
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <div data-toggle="buttons">
+                        <div class="btn-group-toggle btn-group-checked mb-3">
+                            {% if product.tribute_notification_types contains 'email' %}
+                                <label class="btn btn-outline-secondary mb-1 {% if product.require_email_tribute or product.require_some_tribute %}active{% endif %}">
+                                    <input type="radio" {% if product.require_email_tribute or product.require_some_tribute %}checked{% endif %} name="tribute_notify" value="email" autocomplete="off"> {% if settings.tribute_notification_send_email_label %}{{ settings.tribute_notification_send_email_label }}{% else %}{{ 'snippets.product_tribute_fields.send_an_email' | t }}{% endif %}
+                                </label>
+                            {% endif %}
+                            {% if product.tribute_notification_types contains 'letter' %}
+                                <label class="btn btn-outline-secondary mb-1 {% if product.require_letter_tribute %}active{% endif %}">
+                                    <input type="radio" {% if product.require_letter_tribute %}checked{% endif %} name="tribute_notify" value="letter" autocomplete="off"> {% if settings.tribute_notification_send_a_letter_label %}{{ settings.tribute_notification_send_a_letter_label }}{% else %}{{ 'snippets.product_tribute_fields.send_a_letter' | t }}{% endif %}
+                                </label>
+                            {% endif %}
+                           {% unless product.require_tributes %}
+                                <label class="btn btn-outline-secondary mb-1 active">
+                                    <input type="radio" name="tribute_notify" value="" autocomplete="off" checked> {% if settings.tribute_notification_none_label %}{{ settings.tribute_notification_none_label }}{% else %}{{ 'snippets.product_tribute_fields.none' | t }}{% endif %}
+                                </label>
+                           {% endunless %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="tribute-recipient-wrap collapse {% if requires_vue_app %} product-tribute-fields-app {% endif %}">
+        <label>{% if settings.tribute_recipient_label %}{{ settings.tribute_recipient_label }}{% else %}{{ 'snippets.product_tribute_fields.recipient' | t }}{% endif %}<span class="asterisk-required">*</span></label>
+
+        <div class="row gutter-sm">
+            <div class="tribute-mail tribute-email col-sm-6">
+                <div class="form-group labelify">
+                    <label for="tribute_notify_name">{{ 'snippets.product_tribute_fields.full_name' | t }}<span class="asterisk-required">*</span></label>
+                    <input id="tribute_notify_name" type="text" class="form-control" name="tribute_notify_name" data-bv-notEmpty data-bv-notempty-message="{{ 'snippets.product_tribute_fields.name_is_missing' | t }}">
+                    <div class="invalid-feedback">{{ 'snippets.product_tribute_fields.who_is_receiving_the_dedication_notice' | t }}</div>
+                </div>
+            </div>
+            <div class="tribute-email col-sm-6">
+                <div class="form-group labelify">
+                    <label for="tribute_notify_email"><i class="fa fa-envelope-o"></i> {{ 'general.forms.email' | t }}<span class="asterisk-required">*</span></label>
+                    <input id="tribute_notify_email" type="email" class="form-control" name="tribute_notify_email" data-bv-notEmpty data-bv-notempty-message="{{ 'snippets.product_tribute_fields.email_is_missing' | t }}">
+                    <div class="invalid-feedback">{{ 'snippets.product_tribute_fields.what_is_their_email_address' | t }}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tribute-mail">
+            <product-tribute-mail-fields :required="false" :product-id="{{ product.id }}"></product-tribute-mail-fields>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group tribute-mail tribute-email">
+                    <label for="tribute_message">{% if settings.custom_message_label %}{{ settings.custom_message_label }}{% else %}{{ 'snippets.product_tribute_fields.personal_message' | t }}{% endif %}</label>
+                    <textarea id="tribute_message" class="form-control" rows="3" name="tribute_message">{{ settings.default_custom_message }}</textarea>
+                    <small class="text-muted">{{ 'snippets.product_tribute_fields.write_personal_note_to_the_recipient' | t }}</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,38 @@
+.root {
+  @apply relative;
+  @apply flex flex-col items-center justify-center;
+
+  h3 {
+    @apply text-2xl font-extrabold leading-tight;
+    @apply text-center whitespace-pre-line;
+  }
+
+  p {
+    @apply mt-5 mb-6 mx-8 text-lg leading-snug;
+    @apply text-center whitespace-pre-wrap;
+  }
+
+  .company {
+    @apply relative w-full mt-2.5 px-6 py-3 text-left;
+    @apply bg-transparent font-bold border-none rounded;
+    background-color: rgba(var(--primary-colour-500-rgb), 0.15);
+    color: var(--primary-text-colour);
+
+    .details {
+      @apply text-center;
+
+      div,
+      small {
+        @apply whitespace-nowrap text-ellipsis overflow-hidden;
+      }
+    }
+
+    small {
+      @apply block text-sm font-normal;
+    }
+  }
+}
+
+.confetti {
+  @apply fixed inset-0 pointer-events-auto z-20 overflow-hidden;
+}

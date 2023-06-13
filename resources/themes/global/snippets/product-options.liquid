@@ -1,0 +1,190 @@
+
+<div class="product-options {% if options_style == 'list' %}product-options-list pb-3{% endif %}">
+    {% if options_style == 'list' %}
+        {% for variant in product.variants %}
+            {% if option_quantities %}
+                <div class="border-bottom p-3 d-flex align-items-center justify-content-between">
+                    <div class="">
+                        {{ variant.title }}
+                        {% if product.hide_price == false %}
+                            <br>
+                            <small class="text-muted">{% if variant.on_sale %}<strong>{{ variant.sale_price | money : variant.currency }}</strong> <span class="line-thru">{{ variant.price | money : variant.currency }}</span>{% else %}{{ variant.price | money : variant.currency }}{% endif %}</small>
+                        {% endif %}
+                    </div>
+
+                    <div class="" style="width:70px;">
+                        <input type="numeric" class="form-control text-center" name="" placeholder="0">
+                    </div>
+                </div>
+            {% else %}
+                <div class="border-bottom p-3">
+                    <div class="custom-control custom-radio">
+                        <input type="radio" id="p{{ product.id }}-variant-{{ variant.id }}" name="variant_id" value="{{ variant.id }}" class="custom-control-input"
+                            data-price="{{ variant.price }}"
+                            data-on-sale="{{ variant.on_sale }}"
+                            data-sale-price="{{ variant.sale_price }}"
+                            data-donation="{{ variant.is_donation }}"
+                            data-billing-period="{{ variant.billing_period }}"
+                            data-price-presets="{{ variant.price_presets }}"
+                            data-minimum-price="{{ variant.minimum_price }}"
+                            data-other-amount="{{ request.input.amount }}"
+                            data-recurring-first-payment="{{ variant.recurring_first_payment }}"
+                            data-redirect="{{ variant.redirects_to }}"
+                            data-available="{{ variant.available }}"
+                            data-out-of-stock-message="{{ product.out_of_stock_message | escape }}"
+                            data-shipping-expectation="{{ variant.shipping_expectation | escape }}"
+                            data-preserve-amount="{{ site.preserve_amount_on_variant_change | escape }}"
+                            {% if variant.available == false -%} disabled
+                            {%- elsif variant.available and variant.is_default %} checked{% endif -%}
+                        >
+                        <label class="custom-control-label" for="p{{ product.id }}-variant-{{ variant.id }}">{{ variant.title }}<br>
+                            {% if variant.is_donation %}
+                                <div class="pricing-container donation-only d-flex flex-wrap align-items-center" data-hide-pricing="{% if product.hide_price %}true{% else %}false{% endif %}"></div>
+                            {% else %}
+                                <small class="text-muted">
+                                    {%- if product.hide_price == false -%}
+                                        {%- if variant.on_sale -%}
+                                            <strong>{{ variant.sale_price | money : variant.currency }}</strong>
+                                            <span class="line-thru">{{ variant.price | money : variant.currency }}</span>
+                                        {%- else -%}
+                                            {{ variant.price | money : variant.currency }}
+                                        {%- endif -%}
+                                    {%- endif -%}
+                                    {%- if variant.available == false and product.out_of_stock_message -%}
+                                        {{' '}}({{ product.out_of_stock_message }})
+                                    {%- endif -%}
+                                </small>
+                            {% endif %}
+                        </label>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+
+    {% else %}
+
+        <div class="row gutter-sm">
+            <div class="col-md-9 col-xl-7 {% unless product.variants.size > 1 %}d-none{% endunless %}">
+                <div class="form-group labelify">
+                    <label for="p{{ product.id }}-variant-id">{{ 'snippets.product_options.choose_an_option' | t }}</label>
+                    <select class="form-control" id="p{{ product.id }}-variant-id" name="variant_id" required>
+                        {% for variant in product.variants %}
+                            {% assign recurring_desc = '' %}
+                            {% if variant.billing_period == 'weekly' %}
+                                {% assign recurring_desc = '/week' %}
+                            {% elsif variant.billing_period == 'biweekly' %}
+                                {% assign recurring_desc = '/bi-weekly' %}
+                            {% elsif variant.billing_period == 'monthly' %}
+                                {% assign recurring_desc = '/mth' %}
+                            {% elsif variant.billing_period == 'quarterly' %}
+                                {% assign recurring_desc = '/qr' %}
+                            {% elsif variant.billing_period == 'biannually' %}
+                                {% assign recurring_desc = '/bi-annually' %}
+                            {% elsif variant.billing_period == 'annually' %}
+                                {% assign recurring_desc = '/yr' %}
+                            {% endif %}
+
+                            <option value="{{ variant.id }}"
+                                data-price="{{ variant.price }}"
+                                data-on-sale="{{ variant.on_sale }}"
+                                data-sale-price="{{ variant.sale_price }}"
+                                data-donation="{{ variant.is_donation }}"
+                                data-billing-period="{{ variant.billing_period }}"
+                                data-price-presets="{{ variant.price_presets }}"
+                                data-price-preset-other="{{ settings.product_preset_other_label }}"
+                                data-minimum-price="{{ variant.minimum_price }}"
+                                data-recurring-first-payment="{{ variant.recurring_first_payment }}"
+                                data-redirect="{{ variant.redirects_to }}"
+                                data-available="{{ variant.available }}"
+                                data-out-of-stock-message="{{ product.out_of_stock_message | escape }}"
+                                data-shipping-expectation="{{ variant.shipping_expectation | escape }}"
+                                data-preserve-amount="{{ site.preserve_amount_on_variant_change | escape }}"
+                                {% if variant.available == false -%} disabled
+                                {%- elsif variant.available and variant.is_default %} selected{% endif -%}
+                            >
+                                {{ variant.title }}
+                                {%- unless variant.is_donation -%}
+                                    {%- if product.hide_price == false -%}
+                                        {{' '}}
+                                        {%- if variant.on_sale -%}
+                                            - {{ variant.sale_price | money : variant.currency }}
+                                        {%- else -%}
+                                            - {{ variant.price | money : variant.currency }}
+                                        {%- endif -%}{{ recurring_desc }}
+                                    {%- endif -%}
+                                {%- endunless -%}
+                                {%- if variant.available == false and product.out_of_stock_message -%}
+                                    {{' '}}({{ product.out_of_stock_message }})
+                                {%- endif -%}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    <input type="hidden" name="amt" value="">
+
+    {% if options_style != 'list' %}
+        <div class="pricing-container d-flex flex-wrap align-items-center" data-hide-pricing="{% if product.hide_price %}true{% else %}false{% endif %}"><i class="fa fa-spin fa-spinner fa-2x text-muted"></i></div>
+    {% endif %}
+
+    {% if site.currencies.size > 1 %}
+        <div class="mt-2 {% if options_style == 'list' %}pt-2 px-3{% endif %}">
+            <select class="form-control" onchange="location.href = this.value">
+            {% for currency in site.currencies %}
+                <option value="/cart/currency/{{ currency.code | downcase }}" {% if currency.code == cart.currency.iso_code %}selected{% endif %}>{{ currency.code }} ({{ currency.symbol }}) - {{ currency.name }}</option>
+            {% endfor %}
+            </select>
+        </div>
+    {% endif %}
+
+    {% if product.recurring_schedule == 'natural' %}
+        <input type="hidden" name="recurring_day" value="{{ 'now' | date: 'j' }}">
+        <input type="hidden" name="recurring_day_of_week" value="{{ 'now' | date: 'N' }}">
+    {% elsif product.recurring_schedule == 'fixed' %}
+        {% if site.payment_day_options.size == 1 %}
+            <input type="hidden" name="recurring_day" value="{{ site.payment_day_options.0 }}">
+        {% else %}
+
+            <div class="row gutter-sm mb-1 d-none product-recurring-day {% if options_style == 'list' %}pt-3 px-3{% endif %}">
+                <div class="col-md-9 col-xl-6">
+                    <div class="labelify">
+                        <label for="p-{{ product.id }}-recurring-day">{{ 'snippets.product_options.payment_day' | t }}</label>
+                        <select id="p-{{ product.id }}-recurring-day" name="recurring_day" class="form-control">
+                        {% for day in site.payment_day_options %}
+                            <option value="{{ day }}">{{ 'snippets.product_options.day_of_month' | t: day: day }}</option>
+                        {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row gutter-sm mb-1 d-none product-recurring-weekday {% if options_style == 'list' %}pt-3 px-3{% endif %}">
+                <div class="col-md-9 col-xl-6">
+                    <div class="labelify">
+                        <label for="p-{{ product.id }}-recurring-weekday">{{ 'snippets.product_options.payment_day' | t }}</label>
+                        <select id="p-{{ product.id }}-recurring-weekday" name="recurring_day_of_week" class="form-control">
+                        {% for day in site.payment_weekday_options %}
+                            <option value="{{ forloop.index }}">{{ day }}</option>
+                        {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+        {% endif %}
+    {% endif %}
+
+    {% if product.recurring_first_payment == 2 %}
+        <input id="p-{{ product.id }}-first-payment" type="hidden" name="recurring_with_initial_charge" value="{{ settings.product_recurring_first_payment_default }}">
+    {% elsif product.recurring_first_payment %}
+        <div class="form-check d-none product-recurring-first-payment {% if options_style == 'list' %}ml-3{% endif %}">
+            <input id="p-{{ product.id }}-first-payment" class="form-check-input" type="checkbox" name="recurring_with_initial_charge" value="1" {% if settings.product_recurring_first_payment_default %} checked {% endif %}>
+            <label for="p-{{ product.id }}-first-payment" class="form-check-label">
+                {{ 'snippets.product_options.make_my_first_payment_today' | t }}
+            </label>
+        </div>
+    {% endif %}
+</div>

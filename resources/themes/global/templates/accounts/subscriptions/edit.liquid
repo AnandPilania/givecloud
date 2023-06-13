@@ -1,0 +1,133 @@
+{% assign active_profile_menu = 'subscriptions' %}
+{% layout 'theme.profile' %}
+
+{% asset '~/scripts/templates/subscription-edit.js' %}
+
+{% if site.cover_costs_enabled and subscription.can_cover_costs %}
+    {% assign can_cover_costs = true %}
+{% else %}
+    {% assign can_cover_costs = false %}
+{% endif %}
+
+<div class="subscription-page-edit">
+
+    <form id="subscription-edit" @submit.prevent="submit" method="post" autocomplete="no" data-subscription="{{ subscription | json | escape }}" data-payment-methods="{{ payment_methods | json | escape }}" data-site-account-features="{{ site.account_features | json | escape }}" data-can-cover-costs="{{ can_cover_costs }}" novalidate>
+
+        <h1 class="mt-0">Change My Recurring Payment</h1>
+
+        <div class="form-group row">
+            <label for="inputAmount" class="col-sm-3 col-lg-5 col-form-label text-sm-right">Amount</label>
+            <div class="col-sm-9 col-lg-4">
+                    <div v-if="permissions.can_edit_subscription_amount" class="input-group mb-3">
+                        <input type="numeric" class="form-control" id="inputAmount" name="amount" v-model="input.amount" placeholder="Amount" required min="5">
+                        <div class="input-group-append">
+                            <span class="input-group-text">${ currencyCode }</span>
+                        </div>
+                    </div>
+                    <div v-else class="form-control-plaintext">${ input.amount | money } ${ currencyCode }</div>
+            </div>
+        </div>
+
+        {% unless site.cover_costs_ai_enabled %}
+        <div v-if="canCoverCosts" class="form-group row">
+            <label for="inputCoverFees" class="col-sm-3 col-lg-5 col-form-label text-sm-right">
+                {{ site.cover_costs_invoice_label }}
+                <a class="ml-1" style="color:inherit" href="#" data-toggle="modal" data-target="#dcc-information-modal"><i class="fa fa-info-circle small"></i></a>
+            </label>
+            <div class="col-sm-9 col-lg-4">
+                <div v-if="permissions.can_edit_subscription_amount" class="custom-control custom-checkbox mt-2">
+                    <input id="inputCoverFees" type="checkbox" class="custom-control-input" v-model="input.cover_fees">
+                    <label class="custom-control-label" for="inputCoverFees">
+                        {{ site.cover_costs_checkout_description_with_amount | replace: "[$$$]", "<span class='font-weight-bold'>${ total_fees | money }</span>" }}
+                    </label>
+                </div>
+                <div v-else class="form-control-plaintext">${ total_fees | money } {{ subscription.currency.iso_code }}</div>
+            </div>
+        </div>
+        {% endunless %}
+        {% if site.cover_costs_ai_enabled %}
+            <div class="form-group row">
+                <label for="inputCoverCostsType" class="col-sm-3 col-lg-5 col-form-label text-sm-right">
+                    {{ site.cover_costs_checkout_label }}
+                    <a class="ml-1" style="color:inherit" href="#" data-toggle="modal" data-target="#dcc-information-modal"><i class="fa fa-info-circle small"></i></a>
+                </label>
+
+                <div class="col-sm-9 col-lg-4">
+                    <div v-if="permissions.can_edit_subscription_amount">
+                        <select id="inputCoverCostsType" class="form-control" name="cover_costs_type" v-model="input.cover_costs_type">
+                            <option value="most_costs">{{ 'general.forms.cover_costs.most_costs' | t: amount: '${ cover_costs_amounts.most_costs | money(currencyCode) }' }}</option>
+                            <option value="more_costs">{{ 'general.forms.cover_costs.more_costs' | t: amount: '${ cover_costs_amounts.more_costs | money(currencyCode) }' }}</option>
+                            <option value="minimum_costs">{{ 'general.forms.cover_costs.minimum_costs' | t: amount: '${ cover_costs_amounts.minimum_costs | money(currencyCode) }' }}</option>
+                            {% if subscription.has_legacy_cover_costs %}
+                                <option value="original">{{ 'general.forms.cover_costs.original' | t: amount: '${ subscription.cover_costs_amount | money(currencyCode) }' }}</option>
+                            {% endif %}
+                            <option value="">{{ 'general.forms.cover_costs.no_thank_you' | t }}</option>
+                        </select>
+                    </div>
+                    <div v-else class="form-control-plaintext">${ total_fees | money } {{ subscription.currency.iso_code }}</div>
+                </div>
+            </div>
+        {% endif %}
+
+        <div class="form-group row">
+            <label for="inputBillingPeriod" class="col-sm-3 col-lg-5 col-form-label text-sm-right">{{ 'templates.accounts.subscriptions.edit.frequency' | t }}</label>
+            <div class="col-sm-9 col-lg-4">
+                <div v-if="permissions.can_edit_subscription_frequency">
+                    <select class="form-control" id="inputBillingPeriod" name="billing_period" v-model="input.billing_period">
+                        <option v-for="period in billing_periods" v-if="period[0] != 'Day' || input.billing_period == 'Day'" v-bind:value="period[0]">${period[1]}</option>
+                    </select>
+                </div>
+                <div v-else class="form-control-plaintext">${ billing_period_name }</div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="inputNextPaymentDate" class="col-sm-3 col-lg-5 col-form-label text-sm-right">{{ 'templates.accounts.subscriptions.edit.next_bill_date' | t }}</label>
+            <div class="col-sm-9 col-lg-7">
+                <div v-if="permissions.can_edit_subscription_date" ref="paymentDate" id="inputNextPaymentDate-wrap" data-date-format="{{ 'date_formats.calendar_short_month_day_year' | t }}" data-date-start-date="{{ 'today' | date: 'short_month_day_year' }}" data-payment-day-options="{{ site.payment_day_options | json | escape }}" data-payment-weekday-options="{{ site.payment_weekday_options | json | escape}}">
+                    <input type="hidden" id="inputNextPaymentDate" name="next_payment_date" value="{{ subscription.next_payment_date | date: 'short_month_day_year' }}">
+                </div>
+                <div v-else class="form-control-plaintext">${ input.next_payment_date | date }</div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-3 col-lg-5 col-form-label text-sm-right">{{ 'templates.accounts.subscriptions.edit.payment_method' | t }}</label>
+            <div class="col-sm-9 col-lg-7">
+                <template v-if="paymentMethods.length > 0">
+                    <div v-for="paymentMethod in paymentMethods" :class="{ 'text-danger': paymentMethod.is_expired }" class="custom-control mt-2 custom-radio">
+                        <input type="radio" :id="'inputPaymentMethodId' + paymentMethod.id" name="payment_method_id" v-model="input.payment_method_id" :value="paymentMethod.id" class="custom-control-input">
+                        <label class="custom-control-label" :for="'inputPaymentMethodId' + paymentMethod.id">
+                            <template v-if="paymentMethod.card">
+                                {{ 'templates.accounts.subscriptions.edit.payment_methods_descriptions.card_html' | t: brand: '${ paymentMethod.card.brand }', last_4: '${ paymentMethod.card.last4 }', expiry_month: '${ paymentMethod.card.exp_month }', expiry_year: '${ paymentMethod.card.exp_year }' }}</small>
+                            </template>
+                            <template v-else-if="paymentMethod.bank">
+                                {{ 'general.forms.bank' | t: bank_name: '${ paymentMethod.bank.name }', last_4: '${ paymentMethod.bank.last4 }' }}
+                            </template>
+                            <template v-else>
+                                ${ paymentMethod.name } - ${ paymentMethod.account_number }
+                            </template>
+                        </label>
+                    </div>
+                </template>
+                <a v-else href="/account/payment-methods/add" class="btn btn-outline-primary btn-sm"><i class="fa fa-plus"></i> {{ 'templates.accounts.subscriptions.edit.add' | t }}</a>
+            </div>
+        </div>
+
+        <div class="my-5 text-center">
+            <button type="submit" ref="submitBtn" class="m-1 px-3 btn btn-primary">
+                <i class="fa fa-check"></i>
+                {% if subscription.status == 'suspended' %}
+                    {{ 'templates.accounts.subscriptions.edit.save_changes_and_reactivate' | t }}
+                {% else %}
+                    {{ 'templates.accounts.subscriptions.edit.save_changes' | t }}
+                {% endif %}
+            </button>
+            <a :href="'/account/subscriptions/' + subscription.id" class="m-1 px-3 btn btn-outline-dark"><i class="fa fa-arrow-left"></i> {{ 'templates.accounts.subscriptions.edit.back' | t }}</a>
+        </div>
+
+    </form>
+
+</div>
+
+{% include 'dcc-information-modal' %}

@@ -1,0 +1,9 @@
+{% if site.social_login_is_enabled %}
+    <div class="social-login">
+        {% include 'social-login/google' %}
+        {% include 'social-login/microsoft' %}
+        {% include 'social-login/facebook' %}
+   </div>
+
+   {% include 'social-login/seperator' %}
+{% endif  %}

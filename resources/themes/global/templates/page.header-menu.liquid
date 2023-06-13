@@ -1,0 +1,16 @@
+{% schema %}
+[
+    {
+        "include": "header-menu"
+    }
+]
+{% endschema %}
+
+
+{% include 'header-menu', title: page.title, feature_image: page.feature_image, metadata: page.metadata %}
+
+<div class="page-content">
+    <div class="container body-text clearfix">
+        {{ page.content }}
+    </div>
+</div>

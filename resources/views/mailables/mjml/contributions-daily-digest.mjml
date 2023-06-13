@@ -1,0 +1,257 @@
+
+{% layout "layouts/app", includes_wrapper: true %}
+
+{% block head %}
+<mj-preview>Yesterday's Fundraising: {{ money($new_revenue)->format('$0,0[.]00 $$$') }} {{ $random_emoji() }}</mj-preview>
+{% endblock %}
+
+{% block style %}
+<mj-style inline="inline">
+  .52x-thumbnail {
+    width: 52px;
+    height: 52px;
+    border-radius: 100%;
+  }
+  .table-row-divider {
+    margin: 8px 0;
+    border-bottom: 1px solid #dedede;
+  }
+  .keep-your-eyes-on--content {
+    padding: 0;
+    font-size: 14px;
+    word-break: break-word;
+  }
+</mj-style>
+<mj-style>
+  @media (max-width: 479px) {
+    .hide-on-mobile {
+      display: none;
+    }
+    .vertical-align-top-on-mobile {
+      vertical-align: top !important;
+    }
+    .collapse-columns-on-mobile > table > tbody > tr > td {
+        display: block !important;
+        width: 100% !important;
+    }
+    .collapse-columns-on-mobile > table > tbody > tr > td > table > tbody > tr > td {
+      padding-top: 10px !important;
+      text-align: left !important;
+    }
+  }
+</mj-style>
+{% endblock %}
+
+{% block content %}
+<mj-wrapper padding="0 10px">
+  <mj-section padding="0">
+    <mj-column padding-left="10px" padding-right="10px">
+      <mj-text css-class="box">
+        <p>{{ $greeting }}, <strong>{{ $user->firstname }}</strong> {{ $random_emoji() }}</p>
+        <p>Here's your Givecloud review of yesterday, {{ $date->format('M j, Y') }}.</p>
+      </mj-text>
+    </mj-column>
+  </mj-section>
+  <mj-section padding="0">
+    <mj-column padding-left="10px" padding-right="10px" padding-top="20px">
+      <mj-text css-class="box">
+        <div style="margin:10px 0 28px">
+          <strong>{{ $currency_code }} Revenue</strong><br />
+          <strong style="font-size:24px">{{ money($combine_revenue)->format('$0,0[.]00') }}</strong>
+          @if ($combine_revenue_change !== null)
+            <div style="color:{{ $combine_revenue_change >= 0 ? '#55b494' : '#ed706f' }}">
+              <img width="10" src="https://cdn.givecloud.co/s/assets/icons/trend-{{ $combine_revenue_change >= 0 ? 'up-green' : 'down-red' }}.png" alt="" />
+              {{ numeral(abs($combine_revenue_change))->format('0,0a') }}% Last Month
+            </div>
+          @else
+            <div style="color:#828282">No Data for Last Month</div>
+          @endif
+        </div>
+        <table width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="margin-bottom:8px">
+          <tbody>
+            <tr>
+              <td align="left" valign="middle">New</td>
+              <td align="right" valign="middle">{{ money($new_revenue)->format('$0,0[.]00') }}</td>
+            </tr>
+            <tr>
+              <td colspan="2" valign="middle">
+                <div class="table-row-divider"></div>
+              </td>
+            </tr>
+            <tr>
+              <td align="left" valign="middle">Recurring</td>
+              <td align="right" valign="middle">{{ money($recurring_revenue)->format('$0,0[.]00') }}</td>
+            </tr>
+            <tr>
+              <td colspan="2" valign="middle">
+                <div class="table-row-divider"></div>
+              </td>
+            </tr>
+            <tr>
+              <td align="left" valign="middle">Repeat</td>
+              <td align="right" valign="middle">{{ money($repeat_revenue)->format('$0,0[.]00') }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </mj-text>
+    </mj-column>
+    <mj-column padding-left="10px" padding-right="10px" padding-top="20px">
+      <mj-text css-class="box">
+        <div style="margin:10px 0 28px">
+          <strong>Supporters</strong><br />
+          <strong style="font-size:24px">{{ numeral($combine_supporters)->format('0,0') }}</strong>
+          @if ($combine_supporters_change !== null)
+            <div style="color:{{ $combine_supporters_change >= 0 ? '#55b494' : '#ed706f' }}">
+              <img width="10" src="https://cdn.givecloud.co/s/assets/icons/trend-{{ $combine_supporters_change >= 0 ? 'up-green' : 'down-red' }}.png" alt="" />
+              {{ numeral(abs($combine_supporters_change))->format('0,0a') }}% Last Month
+            </div>
+          @else
+            <div style="color:#828282">No Data for Last Month</div>
+          @endif
+        </div>
+        <table width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="margin-bottom:8px">
+          <tbody>
+            <tr>
+              <td align="left" valign="middle">New</td>
+              <td align="right" valign="middle">{{ numeral($new_supporters)->format('0,0') }}</td>
+            </tr>
+            <tr>
+              <td colspan="2" valign="middle">
+                <div class="table-row-divider"></div>
+              </td>
+            </tr>
+            <tr>
+              <td align="left" valign="middle">Recurring</td>
+              <td align="right" valign="middle">{{ numeral($recurring_supporters)->format('0,0') }}</td>
+            </tr>
+            <tr>
+              <td colspan="2" valign="middle">
+                <div class="table-row-divider"></div>
+              </td>
+            </tr>
+            <tr>
+              <td align="left" valign="middle">Repeat</td>
+              <td align="right" valign="middle">{{ numeral($repeat_supporters)->format('0,0') }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </mj-text>
+    </mj-column>
+  </mj-section>
+  <mj-section padding="0">
+    <mj-column padding-left="10px" padding-right="10px" padding-top="20px">
+      <mj-text css-class="box">
+        <div style="margin:10px 0 8px">
+          <strong>{{ $date->format('F') }}'s {{ $currency_code }} Revenue</strong><br />
+          <strong style="font-size:24px">{{ money($month_revenue)->format('$0,0[.]00') }}</strong>
+          @if ($month_revenue_change !== null)
+            <div style="color:{{ $month_revenue_change >= 0 ? '#55b494' : '#ed706f' }}">
+              <img width="10" src="https://cdn.givecloud.co/s/assets/icons/trend-{{ $month_revenue_change >= 0 ? 'up-green' : 'down-red' }}.png" alt="" />
+              {{ numeral(abs($month_revenue_change))->format('0,0a') }}% Last Year
+            </div>
+          @else
+            <div style="color:#828282">No Data for Last Year</div>
+          @endif
+        </div>
+      </mj-text>
+    </mj-column>
+    <mj-column padding-left="10px" padding-right="10px" padding-top="20px">
+      <mj-text css-class="box">
+        <div style="margin:10px 0 8px">
+          <strong>{{ $date->format('F') }}'s Supporters</strong><br />
+          <strong style="font-size:24px">{{ numeral($month_supporters)->format('0,0') }}</strong>
+          @if ($month_supporters_change !== null)
+            <div style="color:{{ $month_supporters_change >= 0 ? '#55b494' : '#ed706f' }}">
+              <img width="10" src="https://cdn.givecloud.co/s/assets/icons/trend-{{ $month_supporters_change >= 0 ? 'up-green' : 'down-red' }}.png" alt="" />
+              {{ numeral(abs($month_supporters_change))->format('0,0a') }}% Last Year
+            </div>
+          @else
+            <div style="color:#828282">No Data for Last Year</div>
+          @endif
+        </div>
+      </mj-text>
+    </mj-column>
+  </mj-section>
+</mj-wrapper>
+<mj-raw>@if ($notable_activity_best_revenue || $notable_activity_best_engagement || $notable_activity_highest_conversion_rate || $notable_activity_best_p2p_fundraiser || $notable_activity_largest_contribution)</mj-raw>
+<mj-wrapper padding="20px 20px 0">
+  <mj-section css-class="tight-box" padding="20px 25px 10px">
+    <mj-column padding="0">
+      <mj-text padding="0 0 10px 0">
+        <strong>Notable Activity Yesterday...</strong>
+      </mj-text>
+      <mj-table width="100%" padding="0" font-size="14px" font-weight="300">
+        {%
+          render 'contributions-daily-digest/notable-activity',
+            item: '$notable_activity_best_revenue',
+            activity_name: 'BEST REVENUE',
+            value_subheading: 'CONTRIBUTIONS'
+        %}
+        {%
+          render 'contributions-daily-digest/notable-activity',
+            item: '$notable_activity_best_engagement',
+            activity_name: 'BEST ENGAGEMENT',
+            value_subheading: 'ENGAGEMENT',
+            value_units: '%'
+        %}
+        {%
+          render 'contributions-daily-digest/notable-activity',
+            item: '$notable_activity_highest_conversion_rate',
+            activity_name: 'HIGHEST CONVERSION RATE',
+            value_subheading: 'CONVERSION',
+            value_units: '%'
+        %}
+        {%
+          render 'contributions-daily-digest/notable-activity',
+            item: '$notable_activity_best_p2p_fundraiser',
+            activity_name: 'BEST P2P FUNDRAISER',
+            value_subheading: 'CONTRIBUTIONS'
+        %}
+        {%
+          render 'contributions-daily-digest/notable-activity',
+            item: '$notable_activity_largest_contribution',
+            activity_name: 'LARGEST CONTRIBUTION'
+        %}
+      </mj-table>
+    </mj-column>
+  </mj-section>
+</mj-wrapper>
+<mj-raw>@endif @if (count($keep_your_eyes_on))</mj-raw>
+  <mj-wrapper padding="20px 20px 0">
+    <mj-section css-class="tight-box" padding="20px 25px">
+      <mj-column padding="0">
+        <mj-text padding="0 0 20px 0">
+          <strong>Keep Your Eyes On...</strong>
+        </mj-text>
+        <mj-table css-class="collapse-columns-on-mobile" width="100%" padding="0" font-size="14px" font-weight="300">
+          <tr>
+            @foreach ($keep_your_eyes_on as $index => $item)
+              @php
+                if ($loop->index && $loop->index % 2 === 0) echo '</tr><tr>'
+              @endphp
+              <td width="50%" style="padding:4px 0">
+                <table border="0" cellpadding="0" cellspacing="0" role="presentation">
+                  <tbody>
+                    <tr>
+                      <td width="72" align="left" valign="middle" style="padding:0;word-break:break-word;">
+                        <div class="52x-thumbnail" style="background-color:{{ $item->icon_background_colour }};color:{{ $item->icon_colour }};text-align:center;">
+                          @if ($item->icon_image_url)
+                            <img width="52" height="52" src="{{ $item->icon_image_url }}" alt="" />
+                          @endif
+                        </div>
+                      </td>
+                      <td align="left" valign="middle" class="keep-your-eyes-on--content">
+                        <a class="text-blue no-underline" href="{{ $item->permalink }}" target="_blank">{{ $item->content }}</a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            @endforeach
+          </tr>
+        </mj-table>
+      </mj-column>
+    </mj-section>
+  </mj-wrapper>
+<mj-raw>@endif</mj-raw>
+{% endblock %}

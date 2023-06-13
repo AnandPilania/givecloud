@@ -1,0 +1,36 @@
+
+<div class="modal fade" id="dlg_images">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <div class="pull-right">
+                    <button type="button" style="display:none" class="btn btn-primary btn-sm" data-insert-into-post>Insert Image</button>
+                    <button type="button" style="display:none" class="btn btn-primary btn-sm" data-create-a-new-gallery>Create a New Gallery</button>
+                </div>
+                <h4 class="modal-title"><i class="fa fa-camera"></i> Images Library</h4>
+            </div>
+            <div class="modal-body">
+                <div class="img-library-search bottom-gutter">
+                    <div class="input-group input-group-transparent">
+                        <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+
+                <div id="imageThumbWrp" class="row imageThumbWrp" style="margin-right:0; overflow-x:hidden; overflow-y:auto;">
+                    <div style="padding:20px; text-align:center;"><i class="fa fa-spinner fa-spin"></i> Loading...</div>
+                </div>
+            </div>
+            <% if (Givecloud.settings.user_can_add) { %>
+                <form class="modal-footer dropzone">
+                    <div class="dz-message">
+                        <div>Drop files here</div>
+                        <small>or</small>
+                        <div><button type="button">Select Files</button></div>
+                        </div>
+                </form>
+            <% } %>
+        </div>
+    </div>
+</div>

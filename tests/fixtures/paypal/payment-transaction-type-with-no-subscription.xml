@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:cc="urn:ebay:apis:CoreComponentTypes" xmlns:wsu="http://schemas.xmlsoap.org/ws/2002/07/utility"
+    xmlns:saml="urn:oasis:names:tc:SAML:1.0:assertion" xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
+    xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext" xmlns:ed="urn:ebay:apis:EnhancedDataTypes"
+    xmlns:ebl="urn:ebay:apis:eBLBaseComponents" xmlns:ns="urn:ebay:api:PayPalAPI">
+    <SOAP-ENV:Body>
+        <PaymentTransactionDetails xmlns="urn:ebay:apis:eBLBaseComponents" xsi:type="ebl:PaymentTransactionType">
+            <ReceiverInfo xsi:type="ebl:ReceiverInfoType">
+                <Business xsi:type="ebl:EmailAddressType">admin@example.com</Business>
+                <Receiver xsi:type="ebl:EmailAddressType">admin@example.com</Receiver>
+                <ReceiverID xsi:type="ebl:UserIDType">R5M6WPLMXLPH2</ReceiverID>
+            </ReceiverInfo>
+            <PayerInfo xsi:type="ebl:PayerInfoType">
+                <Payer xsi:type="ebl:EmailAddressType">bob@example.com</Payer>
+                <PayerID xsi:type="ebl:UserIDType">9EKEP2345BGYQ</PayerID>
+                <PayerStatus xsi:type="ebl:PayPalUserStatusCodeType">verified</PayerStatus>
+                <PayerName xsi:type="ebl:PersonNameType">
+                    <Salutation xmlns="urn:ebay:apis:eBLBaseComponents"></Salutation>
+                    <FirstName xmlns="urn:ebay:apis:eBLBaseComponents">Bob</FirstName>
+                    <MiddleName xmlns="urn:ebay:apis:eBLBaseComponents"></MiddleName>
+                    <LastName xmlns="urn:ebay:apis:eBLBaseComponents">Hope</LastName>
+                    <Suffix xmlns="urn:ebay:apis:eBLBaseComponents"></Suffix>
+                </PayerName>
+                <PayerCountry xsi:type="ebl:CountryCodeType">US</PayerCountry>
+                <PayerBusiness xsi:type="xs:string"></PayerBusiness>
+                <Address xsi:type="ebl:AddressType">
+                    <Name xsi:type="xs:string"></Name>
+                    <Street1 xsi:type="xs:string"></Street1>
+                    <Street2 xsi:type="xs:string"></Street2>
+                    <CityName xsi:type="xs:string"></CityName>
+                    <StateOrProvince xsi:type="xs:string"></StateOrProvince>
+                    <CountryName></CountryName>
+                    <PostalCode xsi:type="xs:string"></PostalCode>
+                    <AddressOwner xsi:type="ebl:AddressOwnerCodeType">PayPal</AddressOwner>
+                    <AddressStatus xsi:type="ebl:AddressStatusCodeType">Unconfirmed</AddressStatus>
+                </Address>
+                <ContactPhone xsi:type="xs:string"></ContactPhone>
+            </PayerInfo>
+            <TPLReferenceID xsi:type="xs:string"></TPLReferenceID>
+            <PaymentInfo xsi:type="ebl:PaymentInfoType">
+                <TransactionID>3SV5328047123451F</TransactionID>
+                <ParentTransactionID xsi:type="ebl:TransactionId"></ParentTransactionID>
+                <ReceiptID></ReceiptID>
+                <TransactionType xsi:type="ebl:PaymentTransactionCodeType">cart</TransactionType>
+                <PaymentType xsi:type="ebl:PaymentCodeType">instant</PaymentType>
+                <PaymentDate xsi:type="xs:dateTime">2019-08-19T21:52:41Z</PaymentDate>
+                <GrossAmount xsi:type="cc:BasicAmountType" currencyID="USD">15.00</GrossAmount>
+                <FeeAmount xsi:type="cc:BasicAmountType" currencyID="USD">0.81</FeeAmount>
+                <TaxAmount xsi:type="cc:BasicAmountType" currencyID="USD">0.00</TaxAmount>
+                <ExchangeRate xsi:type="xs:string"></ExchangeRate>
+                <PaymentStatus xsi:type="ebl:PaymentStatusCodeType">Completed</PaymentStatus>
+                <PendingReason xsi:type="ebl:PendingStatusCodeType">none</PendingReason>
+                <ReasonCode xsi:type="ebl:ReversalReasonCodeType">none</ReasonCode>
+                <ShippingMethod xsi:type="xs:string">Default</ShippingMethod>
+                <ProtectionEligibility xsi:type="xs:string">Ineligible</ProtectionEligibility>
+                <ProtectionEligibilityType xsi:type="xs:string">None</ProtectionEligibilityType>
+                <ShipAmount xsi:type="xs:string">0.00</ShipAmount>
+                <ShipHandleAmount xsi:type="xs:string">0.00</ShipHandleAmount>
+                <ShipDiscount xsi:type="xs:string"></ShipDiscount>
+                <InsuranceAmount xsi:type="xs:string">0.00</InsuranceAmount>
+                <Subject xsi:type="xs:string">Donation type: &lt;p&gt;Personal donation&lt;/p&gt;&#xA;</Subject>
+                <ReceiptReferenceNumber xsi:type="xs:string"></ReceiptReferenceNumber>
+                <POSTransactionType xsi:type="xs:string"></POSTransactionType>
+                <StoreID xsi:type="xs:string"></StoreID>
+                <TerminalID xsi:type="xs:string"></TerminalID>
+                <BinEligibility xsi:type="xs:string"></BinEligibility>
+            </PaymentInfo>
+            <PaymentItemInfo xsi:type="ebl:PaymentItemInfoType">
+                <InvoiceID xsi:type="xs:string">WC-1234567</InvoiceID>
+                <Custom xsi:type="xs:string"></Custom>
+                <Memo xsi:type="xs:string"></Memo>
+                <SalesTax xsi:type="xs:string">0.00</SalesTax>
+                <PaymentItem xmlns="urn:ebay:apis:eBLBaseComponents" xsi:type="ebl:PaymentItemType">
+                    <EbayItemTxnId xsi:type="xs:string"></EbayItemTxnId>
+                    <Name xsi:type="xs:string">Donation</Name>
+                    <Number xsi:type="xs:string"></Number>
+                    <Quantity xsi:type="xs:string">1</Quantity>
+                    <SalesTax xsi:type="xs:string">0.00</SalesTax>
+                    <ShippingAmount xsi:type="xs:string">0.00</ShippingAmount>
+                    <HandlingAmount xsi:type="xs:string">0.00</HandlingAmount>
+                    <CouponID xsi:type="xs:string"></CouponID>
+                    <CouponAmount xsi:type="xs:string"></CouponAmount>
+                    <CouponAmountCurrency xsi:type="xs:string"></CouponAmountCurrency>
+                    <LoyaltyCardDiscountAmount xsi:type="xs:string"></LoyaltyCardDiscountAmount>
+                    <LoyaltyCardDiscountCurrency xsi:type="xs:string"></LoyaltyCardDiscountCurrency>
+                    <InvoiceItem xsi:type="ebl:InvoiceItemType">
+                        <ItemCountUnit xsi:type="ebl:UnitOfMeasure"></ItemCountUnit>
+                        <Taxable xsi:type="xs:string">false</Taxable>
+                        <TaxRate xsi:type="xs:string">0.0</TaxRate>
+                        <MPN xsi:type="xs:string"></MPN>
+                        <ISBN xsi:type="xs:string"></ISBN>
+                        <PLU xsi:type="xs:string"></PLU>
+                        <ModelNumber xsi:type="xs:string"></ModelNumber>
+                        <StyleNumber xsi:type="xs:string"></StyleNumber>
+                    </InvoiceItem>
+                    <Amount xsi:type="cc:BasicAmountType" currencyID="USD">15.00</Amount>
+                </PaymentItem>
+                <Subscription xsi:type="ebl:SubscriptionInfoType" recurring="" reattempt="">
+                    <SubscriptionID></SubscriptionID>
+                    <Username xsi:type="xs:string"></Username>
+                    <Password xsi:type="xs:string"></Password>
+                    <Recurrences xsi:type="xs:string"></Recurrences>
+                </Subscription>
+                <Auction xsi:type="ebl:AuctionInfoType" multiItem="">
+                    <BuyerID xsi:type="xs:string"></BuyerID>
+                </Auction>
+            </PaymentItemInfo>
+            <OfferCouponInfo xsi:type="ebl:OfferCouponInfoType">
+                <Type xsi:type="xs:string"></Type>
+                <ID xsi:type="xs:string"></ID>
+                <Amount xsi:type="xs:string"></Amount>
+                <AmountCurrency xsi:type="xs:string"></AmountCurrency>
+            </OfferCouponInfo>
+            <GiftReceipt xsi:type="xs:string">0</GiftReceipt>
+        </PaymentTransactionDetails>
+    </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

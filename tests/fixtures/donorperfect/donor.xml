@@ -1,0 +1,38 @@
+<result>
+    <record>
+        <field name='donor_id' id='donor_id' value='1981' />
+        <field name='first_name' id='first_name' value='Bob' />
+        <field name='last_name' id='last_name' value='Hopesss' />
+        <field name='middle_name' id='middle_name' value='' />
+        <field name='suffix' id='suffix' value='' />
+        <field name='title' id='title' value='' />
+        <field name='salutation' id='salutation' value='Bob' />
+        <field name='prof_title' id='prof_title' value='' />
+        <field name='opt_line' id='opt_line' value='' />
+        <field name='address' id='address' value='123 Anywhere Str' />
+        <field name='address2' id='address2' value='' />
+        <field name='city' id='city' value='Ottawa' />
+        <field name='state' id='state' value='ON' />
+        <field name='zip' id='zip' value='K2E6T7' />
+        <field name='country' id='country' value='CA' />
+        <field name='address_type' id='address_type' value='' />
+        <field name='home_phone' id='home_phone' value='555-826-5555' />
+        <field name='business_phone' id='business_phone' value='555-826-5555' />
+        <field name='fax_phone' id='fax_phone' value='' />
+        <field name='mobile_phone' id='mobile_phone' value='' />
+        <field name='email' id='email' value='' />
+        <field name='org_rec' id='org_rec' value='N' />
+        <field name='donor_type' id='donor_type' value='IN' />
+        <field name='narrative' id='narrative' value='' />
+        <field name='tag_date' id='tag_date' value='' />
+        <field name='initial_gift_date' id='initial_gift_date' value='11/27/2017' />
+        <field name='last_contrib_date' id='last_contrib_date' value='5/25/2021' />
+        <field name='ytd' id='ytd' value='209.12' />
+        <field name='created_by' id='created_by' value='DonorShops.com' />
+        <field name='created_date' id='created_date' value='11/27/2017' />
+        <field name='modified_by' id='modified_by' value='jbloomfield' />
+        <field name='modified_date' id='modified_date' value='2/19/2021' />
+        <field name='donor_rcpt_type' id='donor_rcpt_type' value='' />
+        <field name='receipt_delivery' id='receipt_delivery' value='L' />
+    </record>
+</result>

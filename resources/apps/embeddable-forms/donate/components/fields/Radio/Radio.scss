@@ -1,0 +1,15 @@
+.root {
+  @apply mt-4 flex items-center;
+
+  .input {
+    @apply h-4 w-4 transition duration-150 ease-in-out;
+  }
+
+  .label {
+    @apply block ml-3 leading-5 font-medium text-gray-200;
+
+    &.light {
+      @apply text-gray-500;
+    }
+  }
+}

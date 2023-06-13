@@ -1,0 +1,28 @@
+{% assign header_title = 'templates.accounts.my_account' | t %}
+{% include 'header-image', header_title: header_title, header_image: settings.login_header_image.full %}
+
+<div class="account-register py-5">
+    <div class="container">
+
+        {%  if request.data.error %}
+            <div class="row">
+                <div class="col-sm-10 offset-sm-1 offset-md-0 col-md-12 col-lg-10 offset-lg-1">
+                    <div class="alert alert-danger" role="alert">{{ request.data.error | escape }}</div>
+                </div>
+            </div>
+        {% endif %}
+
+
+        <div class="row">
+            <div class="col-sm-10 offset-sm-1 offset-md-0 col-md-6 col-lg-5 offset-lg-1">
+                <h3 class="mb-4">{{ 'templates.accounts.register.first_time_here' | t }}</h3>
+                <div class="mb-5 wow fadeInUp">{% include 'account-register' %}</div>
+            </div>
+            <div class="col-sm-10 offset-sm-1 offset-md-0 col-md-6 col-lg-5">
+                <h3 class="mb-4">{{ 'templates.accounts.register.welcome_back' | t }}</h3>
+                <div class="mb-5 wow fadeInUp">{% include 'account-login' %}</div>
+                <div class="mb-5 wow fadeInUp">{% include 'account-reset-password' %}</div>
+            </div>
+        </div>
+    </div>
+</div>

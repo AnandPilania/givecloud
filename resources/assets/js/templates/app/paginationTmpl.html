@@ -1,0 +1,13 @@
+<% if (paginator.parts.length > 0) { %>
+    <ul class="pagination block ml-4 clear-left justify-content-center">
+        <li class="page-item <% if (paginator.previous.is_link == false) { %>disabled<% } %>">
+            <a class="page-link" href="<%= _.escape(paginator.previous.url) %>" tabindex="-1"><%= _.escape(paginator.previous.title) %></a>
+        </li>
+        <% _.forEach(paginator.parts, function(part) { %>
+            <li class="page-item d-none d-md-block <% if (part.is_link == false) { %>disabled<% } %>"><a class="page-link" href="<%= _.escape(part.url) %>"><%= _.escape(part.title) %></a></li>
+        <% }) %>
+        <li class="page-item <% if (paginator.next.is_link == false) { %>disabled<% } %>">
+            <a class="page-link" href="<%= _.escape(paginator.next.url) %>" tabindex="-1"><%= _.escape(paginator.next.title) %></a>
+        </li>
+    </ul>
+<% } %>

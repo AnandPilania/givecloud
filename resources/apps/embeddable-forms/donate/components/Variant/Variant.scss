@@ -1,0 +1,23 @@
+.root {
+  @apply px-3 py-2 font-medium text-sm leading-5 rounded-md mr-4 cursor-pointer;
+
+  &:focus {
+    @apply outline-none;
+  }
+
+  .hiddenInput {
+    @apply hidden;
+  }
+
+  &.light {
+    @apply text-gray-500;
+
+    &:hover {
+      @apply text-gray-800;
+    }
+
+    &.active {
+      @apply text-white;
+    }
+  }
+}

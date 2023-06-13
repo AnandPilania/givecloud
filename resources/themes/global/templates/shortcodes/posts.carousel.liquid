@@ -1,0 +1,27 @@
+<div id="{{ id }}" class="carousel slide py-5" data-ride="carousel" data-interval="false">
+  <ol class="carousel-indicators">
+    {% for post in posts %}
+      <li {% if forloop.first == true %}class="active"{% endif %} data-target="#{{ id }}" data-slide-to="{{ forloop.index0 }}">&nbsp;</li>
+    {% endfor %}
+  </ol>
+  <div class="carousel-inner">
+    {% for post in posts %}
+      <div class="carousel-item text-center text-md-left {% if forloop.first == true %}active{% endif %}">
+        {% if post.feature_image %}
+          <div class="row ">
+            <div class="col-12 col-md-5 col-xl-3">
+              <a class="d-block rounded w-100" href="{{ post.url }}" style="background:url('{{ post.feature_image.thumb }}') no-repeat center center; background-size:cover; min-height:180px;">&nbsp;</a>
+            </div>
+            <div class="col-12 col-md-7 col-xl-9">
+        {% endif %}
+              <h2 class="mb-4 mt-4 mt-md-0 text-md-left">{{ post.title }}</h2>
+              <p class="font-weight-light blogpost-font">{{ post.excerpt }}</p>
+              <a class="btn custom-btn text-uppercase" href="{{ post.url }}">{{ 'general.actions.read_more' | t }}</a>
+        {% if post.feature_image %}
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+</div>

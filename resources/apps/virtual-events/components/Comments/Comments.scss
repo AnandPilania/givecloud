@@ -1,0 +1,12 @@
+.root {
+  @apply relative my-12 rounded-lg overflow-hidden max-w-full;
+
+  padding-bottom: 56.25%;
+  height: 500px;
+
+  iframe,
+  object,
+  embed {
+    @apply absolute w-full h-full top-0 left-0;
+  }
+}

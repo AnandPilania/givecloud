@@ -1,0 +1,7 @@
+<div class="posts-stacked-cards">
+    {% for post in posts %}
+        <div class="py-3">
+            {% include 'post-stacked-item', post: post, match_height: 'posts-stacked' %}
+        </div>
+    {% endfor %}
+</div>

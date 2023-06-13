@@ -1,0 +1,116 @@
+.root {
+  @apply relative;
+  @apply w-full h-11 pl-11;
+  @apply flex flex-row;
+  @apply border border-gray-300 rounded;
+  @apply text-base;
+  @apply transition-colors ease-in-out duration-200;
+  padding-top: 0.6rem;
+
+  .iconContainer {
+    @apply absolute top-0 left-0;
+    @apply flex items-center justify-center;
+    @apply h-11 w-11;
+
+    .icon {
+      @apply text-lg;
+      @apply text-gray-400;
+    }
+  }
+
+  .cardBrandIcon {
+    @apply w-6;
+  }
+
+  .cvvInput,
+  .numberInput,
+  .expiryInput {
+    > div {
+      @apply h-6;
+    }
+    input {
+      @apply w-full h-6 m-0 p-0;
+      @apply border-none appearance-none;
+      @apply placeholder-gray-400;
+    }
+    :global(.StripeElement) {
+      @apply pt-[0.2rem];
+    }
+  }
+
+  .numberInput {
+    @apply grow;
+    width: calc(100% - 5rem - 3rem);
+  }
+
+  .expiryInput {
+    @apply grow-0;
+    width: 5rem;
+  }
+
+  .cvvInput {
+    width: 3rem;
+  }
+
+  &.valid {
+    @apply ring-green-500 border-green-500;
+
+    .iconContainer .icon {
+      @apply text-green-500;
+      @apply opacity-40;
+    }
+  }
+
+  &:global(.has-errors) {
+    @apply text-[#eb1c26];
+    @apply ring-red-500 border-red-500;
+
+    .iconContainer .icon {
+      @apply text-red-500;
+    }
+
+    input {
+      @apply text-red-500 placeholder-red-300;
+
+      &:global(.valid) {
+        @apply text-black;
+      }
+    }
+  }
+
+  @screen 2xl {
+    &.hostedPaymentFields {
+      .numberInput {
+        width: calc(100% - 6rem - 5rem);
+      }
+
+      .expiryInput {
+        width: 5.5rem;
+      }
+
+      .cvvInput {
+        width: 3.25rem;
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+      }
+    }
+
+    & :global(#braintree-hosted-field-number) {
+      width: 85% !important;
+    }
+
+    & :global(#braintree-hosted-field-expirationDate) {
+      width: 90% !important;
+    }
+
+    & :global([id^='braintree-hosted-field-']) {
+      transform: scale(1.15);
+      transform-origin: left;
+    }
+
+    & :global(.StripeElement) {
+      transform: scale(1.1);
+      transform-origin: left;
+    }
+  }
+}

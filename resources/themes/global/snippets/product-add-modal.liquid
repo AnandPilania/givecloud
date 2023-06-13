@@ -1,0 +1,89 @@
+<!-- add product -->
+<div class="modal fade" id="add-product-{{ product.id }}" tabindex="-1" role="dialog" aria-labelledby="add-product-{{ product.id }}-label" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+      <div class="modal-image-preview d-flex align-items-center justify-content-center" style="background-image: linear-gradient( rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6) ), url('{% if product.feature_image %}{{ product.feature_image.thumb }}{% else %}https://placeimg.com/1200/800/nature{% endif %}');">
+        <div class="text-center">
+          <h3 class="modal-title text-white text-center mt-4" id="add-product-{{ product.id }}-label">{{ product.name }}</h3>
+          {% if product.description %}
+            <p class="mx-auto text-white w-75">{{ product.description }}</p>
+          {% endif %}
+        </div>
+      </div>
+
+      {% if product.qty_available %}
+        <form id="add-product-{{ product.id }}-form" class="product-add-to-cart" novalidate>
+          <input type="hidden" name="product_id" value="{{ product.id }}">
+          <input type="hidden" name="recurring_frequency" value="">
+          <input type="hidden" name="recurring_day" value="1">
+
+          <div class="modal-body">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+
+            {% include 'product-option-buttons', product: product %}
+
+            {% if product.enable_tributes %}
+              <div class="mt-4">
+                {% include 'product-tribute-fields', product: product, requires_vue_app: true %}
+              </div>
+            {% endif %}
+
+            {% if product.form_fields.size > 0 %}
+              <div class="mt-4">
+                {% include 'product-form-fields', product: product, show_labels: true %}
+              </div>
+            {% endif %}
+          </div>
+
+          <div class="add-product-btns">
+            <div class="modal-footer d-flex align-items-start w-100">
+              {% unless product.hide_qty %}
+                <div class="form-group labelify d-inline-block mb-0 mr-1" style="width:90px;">
+                  <label for="p{{ product.id }}-variant-id">{{ 'snippets.product_add_modal.qty' | t }}</label>
+                  {% if settings.qty_selection_type == 'text' %}
+                    <input type="text" class="form-control form-control-pill" name="quantity" value="1" required>
+                  {% else %}
+                    <select class="form-control form-control-pill" name="quantity" required>
+                      {% for qty in (1 .. settings.qty_selection_limit) %}
+                        <option value="{{ qty }}">{{ qty }}</option>
+                      {% endfor %}
+                    </select>
+                  {% endif %}
+                </div>
+              {% endunless %}
+              <button type="submit" name="button" value="primary-btn" data-style="slide-up" class="btn btn-lg btn-pill btn-block btn-primary"><span class="ladda-label"><i class="fa fa-plus fa-fw"></i> {% if product.primary_button_label %}{{ product.primary_button_label }}{% else %}{{ 'snippets.product_add_modal.add_to_cart' | t: cart_term: settings.cart_label }}{% endif %}</span></button>
+            </div>
+          </div>
+
+          <div style="display:none;" class="add-product-success modal-body border-top">
+            <div class="d-flex flex-wrap justify-content-between ">
+              <div>
+                <a href="#" class="btn btn-block btn-pill btn-outline-info mb-1" data-dismiss="modal">{{ 'snippets.product_add_modal.keep_browsing' | t }}</a>
+              </div>
+              <div>
+                <a href="/cart" class="btn btn-block btn-pill btn-primary mb-1">{{ 'snippets.product_add_modal.payment' | t }} <i class="fa fa-arrow-right fa-fw"></i></a>
+              </div>
+            </div>
+          </div>
+
+        </form>
+
+      {% else %}
+        <div class="modal-body text-center">
+          <button type="button" class="close" data-dismiss="modal" aria-label="{{ 'general.actions.close' | t }}">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h2 class="text-danger modal-title text-center" id="add-product-{{ product.id }}-label"><i class="fa fa-3x fa-frown-o"></i><br>{{ 'snippets.product_add_modal.cannot_add_to_cart' | t: cart_term: settings.cart_label }}</h2>
+          {% if product.out_of_stock_message %}
+            <p class="text-danger">{{ product.out_of_stock_message }}</p>
+          {% else %}
+            <p class="text-danger">{{ 'snippets.product_add_modal.sold_out' | t }}</p>
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>

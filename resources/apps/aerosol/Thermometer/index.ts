@@ -1,0 +1,1 @@
+export { Thermometer } from './Thermometer'

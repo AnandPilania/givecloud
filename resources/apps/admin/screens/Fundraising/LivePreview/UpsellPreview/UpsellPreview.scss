@@ -1,0 +1,9 @@
+.root {
+  .logo {
+    @apply absolute top-6 w-12 h-auto;
+  }
+
+  .buttonContainer {
+    @apply flex mt-3 w-full;
+  }
+}

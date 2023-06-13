@@ -1,0 +1,28 @@
+.root {
+  @apply relative;
+  @apply w-full mb-2;
+  @apply flex flex-col;
+
+  > * {
+    &:not(:last-child) {
+      @apply mb-2;
+    }
+  }
+
+  .row {
+    @apply flex;
+    @apply space-x-3;
+
+    > * {
+      @apply w-1/2;
+
+      &:only-child {
+        max-width: calc(50% - 0.5rem);
+      }
+    }
+  }
+
+  .input {
+    @apply pl-3;
+  }
+}

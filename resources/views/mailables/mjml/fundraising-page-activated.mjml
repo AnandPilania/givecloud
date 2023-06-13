@@ -1,0 +1,77 @@
+
+{% layout "layouts/app" %}
+
+{% block head %}
+<mj-preview>"{{ $page_name }}" was created by {{ $page_author }}.</mj-preview>
+{% endblock %}
+
+{% block content %}
+<mj-section css-class="box">
+  <mj-column>
+    <mj-headline icon="fa-dark-check">
+      <h1>New Fundraiser</h1>
+    </mj-headline>
+    <mj-text color="#474747" font-size="18px" font-weight="300" padding-top="0">
+      <p><a href="{{ $page_author_url }}">{{ $page_author }}</a> created a new fundraising page:</p>
+    </mj-text>
+
+    <mj-raw>@if($page_author_verified_status === 'Verified')</mj-raw>
+    <mj-text color="#474747" font-size="20px" font-weight="700" padding-top="0">
+      <p>
+        {{ $page_author }} has already been approved to create fundraisers and so this page is live to the public.
+        If you feel that this is an error, please visit the <a href="{{ $page_admin_url }}" target="_blank">{{ $page_name }}</a> page to verify {{ $page_author }}.
+      </p>
+    </mj-text>
+    <mj-raw>
+      @endif
+
+      @if($page_author_verified_status_is_pending)
+    </mj-raw>
+    <mj-text color="#474747" font-size="20px" font-weight="700" padding-top="0">
+      <p>
+        This fundraising page is not public as {{ $page_author }} has not been verified.
+        Please visit the page <a href="{{ $page_admin_url }}" target="_blank">{{ $page_name }}</a> page to verify {{ $page_author }}.
+      </p>
+    </mj-text>
+    <mj-raw>@endif</mj-raw>
+
+    <mj-text color="#474747" font-size="20px" font-weight="700" padding-top="0">
+      <p><a href="{{ $page_url }}" target="_blank">{{ $page_name }}</a></p>
+    </mj-text>
+  </mj-column>
+</mj-section>
+<mj-section css-class="spacer"></mj-section>
+<mj-section css-class="box">
+  <mj-column>
+    <mj-text color="#989898" font-size="18px" font-weight="300" padding-top="0" padding-bottom="0">
+        <p>
+          {{ $page_goal }}<br>
+          <small style="color:#999;">Goal</small>
+        </p>
+    </mj-text>
+  </mj-column>
+  <mj-raw>@if ($page_deadline)</mj-raw>
+    <mj-column>
+      <mj-text color="#989898" font-size="18px" font-weight="300" padding-top="0" padding-bottom="0">
+          <p>
+            {{ toLocalFormat($page_deadline) }}<br>
+            <small style="color:#999;">Deadline</small>
+          </p>
+      </mj-text>
+    </mj-column>
+  <mj-raw>@endif</mj-raw>
+</mj-section>
+<mj-section css-class="spacer"></mj-section>
+<mj-section css-class="box">
+  <mj-column>
+    <mj-button background-color="#82c069" color="white" font-weight="500" font-size="16px" padding="20px" border-radius="30px" href="{{ $page_url }}">
+      View Page
+    </mj-button>
+  </mj-column>
+  <mj-column>
+    <mj-button background-color="#d95263" color="white" font-weight="500" font-size="16px" padding="20px" border-radius="30px" href="{{ $page_suspend_url }}">
+      Suspend Page
+    </mj-button>
+  </mj-column>
+</mj-section>
+{% endblock %}

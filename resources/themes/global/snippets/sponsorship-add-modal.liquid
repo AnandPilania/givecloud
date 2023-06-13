@@ -1,0 +1,119 @@
+<!-- add sponsorship -->
+<div class="modal fade" id="add-sponsorship-{{ child.id }}" tabindex="-1" role="dialog" aria-labelledby="add-sponsorship-{{ child.id }}-label" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+      {% if child.payment_options.recurring or child.payment_options.one_time %}
+        <form id="add-sponsorship-{{ child.id }}-form" class="add-sponsorship-form">
+          <input type="hidden" name="sponsorship_id" value="{{ child.id }}">
+          <div class="modal-body text-center">
+            <button type="button" class="close" data-dismiss="modal" aria-label="{{ 'general.actions.close' | t }}">
+              <span aria-hidden="true">&times;</span>
+            </button>
+
+            <h2 class="modal-title text-center mt-4" id="add-sponsorship-{{ child.id }}-label">Sponsor {{ child.first_name }}</h2>
+
+            {% if settings.sponsorship_show_gender %}
+                <p class="mx-auto w-75">
+                    {% if child.gender == 'F' %}
+                        {{ 'snippets.sponsorships_add_modal.cant_wait_to_tell_child_female' | t: child_name: child.first_name }}
+                    {% elsif child.gender == 'M' %}
+                        {{ 'snippets.sponsorships_add_modal.cant_wait_to_tell_child_male' | t: child_name: child.first_name }}
+                    {% else %}
+                        {{ 'snippets.sponsorships_add_modal.cant_wait_to_tell_child_genderless' | t: child_name: child.first_name }}
+                    {% endif %}
+                </p>
+            {% endif %}
+
+            <div class="add-sponsorship-options" data-toggle="buttons">
+
+              {% assign all_options_ix = 1 %}
+
+              {% if child.payment_options.recurring.size > 0 %}
+                {% if child.payment_options.one_time.size > 0 %}
+                  <div class="mx-auto w-75"><div class="hr-text"><span class="text">{{ 'snippets.sponsorships_add_modal.recurring' | t }}</span></div></div>
+                {% endif %}
+                <div class="btn-group-toggle btn-group-lg btn-group-checked mb-3">
+                  {% for option in child.payment_options.recurring %}
+                    {% if option.is_custom %}
+                      <div class="btn btn-outline-secondary is-custom {% if all_options_ix == 1 %}active{% endif %}"><input type="radio" name="payment_option_id" {% if all_options_ix == 1 %}checked{% endif %} value="{{ option.id }}">
+                        {{ cart.currency.symbol }}<input class="d-inline-block form-control" name="payment_option_amount"><small>/{{ option.recurring_frequency_short }}</small>
+                      </div>
+                    {% else %}
+                      <label class="btn btn-outline-secondary {% if all_options_ix == 1 %}active{% endif %} {% if option.is_custom %}is-custom{% endif %}"><input type="radio" name="payment_option_id" {% if all_options_ix == 1 %}checked{% endif %} value="{{ option.id }}">
+                        {%- if settings.sponsorship_show_rec_desc -%}
+                          {%- if option.recurring_frequency == 'weekly' or option.recurring_frequency == 'biweekly' -%}
+                            {{ 'snippets.sponsorships_add_modal.amount_frequency_on_day_week_html' | t: amount: option.amount, symbol: cart.currency.symbol, frequency: option.recurring_frequency_short, day: option.recurring_day_of_week }}
+                          {%- else -%}
+                            {{ 'snippets.sponsorships_add_modal.amount_frequency_on_day_number_html' | t: amount: option.amount, symbol: cart.currency.symbol, frequency: option.recurring_frequency_short, day: option.recurring_day }}
+                          {%- endif -%}
+                        {% else %}
+                          {{ 'snippets.sponsorships_add_modal.amount_frequency_html' | t: amount: option.amount, symbol: cart.currency.symbol, frequency: option.recurring_frequency_short }}
+                        {%- endif -%}
+                      </label>
+                    {% endif %}
+                    {% assign all_options_ix = all_options_ix | plus: 1 %}
+                  {% endfor %}
+                </div>
+              {% endif %}
+
+              {% if child.payment_options.one_time.size > 0 %}
+                {% if child.payment_options.recurring.size > 0 %}
+                  <div class="mx-auto w-75"><div class="hr-text"><span class="text">{{ 'snippets.sponsorships_add_modal.one_time' | t }}</span></div></div>
+                {% endif %}
+                <div class="btn-group-toggle btn-group-lg btn-group-checked mb-3">
+                  {% for option in child.payment_options.one_time %}
+                    {% if option.is_custom %}
+                      <div class="btn btn-outline-secondary is-custom {% if all_options_ix == 1 %}active{% endif %}"><input type="radio" name="payment_option_id" {% if all_options_ix == 1 %}checked{% endif %} value="{{ option.id }}">
+                        {{ cart.currency.symbol }}<input class="d-inline-block form-control" name="payment_option_amount"><small>{{ 'snippets.sponsorships_add_modal.once' | t }}</small>
+                      </div>
+                    {% else %}
+                      <label class="btn btn-outline-secondary {% if all_options_ix == 1 %}active{% endif %}"><input type="radio" name="payment_option_id" {% if all_options_ix == 1 %}checked{% endif %} value="{{ option.id }}"> {{ 'snippets.sponsorships_add_modal.option_money' | t: symbol: cart.currency.symbol, amount: option.amount }} <small>{{ 'snippets.sponsorships_add_modal.once' | t }}</small></label>
+                    {% endif %}
+                    {% assign all_options_ix = all_options_ix | plus: 1 %}
+                  {% endfor %}
+                </div>
+              {% endif %}
+            </div>
+
+            {% if child.recurring_first_payment == 2 %}
+                <input id="inputInitialCharge" type="hidden" name="initial_charge" value="{{ settings.sponsorship_first_payment_default }}">
+            {% elsif child.recurring_first_payment %}
+              <div class="add-sponsorship-options form-check">
+                <input id="inputInitialCharge" class="form-check-input" type="checkbox" name="initial_charge" value="1" {% if settings.sponsorship_first_payment_default %} checked {% endif %}>
+                <label for="inputInitialCharge" class="form-check-label">
+                  {{ 'snippets.sponsorships_add_modal.make_my_first_payment_today' | t }}
+                </label>
+              </div>
+            {% endif %}
+
+          </div>
+
+          <div class="add-sponsorship-btns modal-footer">
+            <button type="submit" data-style="slide-up" class="btn btn-xl btn-pill btn-block btn-primary"><span class="ladda-label"><i class="fa fa-plus fa-fw"></i> {% if settings.sponsorship_add_to_cart_label %}{{ settings.sponsorship_add_to_cart_label }}{% else %}{{ 'snippets.sponsorships_add_modal.add_to_cart' | t: cart_term: settings.cart_label }}{% endif %}</span></button>
+          </div>
+
+          <div style="display:none;" class="add-sponsorship-success modal-body border-top">
+              <div class="d-flex flex-wrap justify-content-between ">
+                  <div>
+                    <a href="#" class="btn btn-block btn-pill btn-outline-info mb-1" data-dismiss="modal">{{ 'snippets.sponsorships_add_modal.keep_browsing' | t }}</a>
+                  </div>
+                  <div>
+                    <a href="/cart" class="btn btn-block btn-pill btn-primary mb-1">{{ 'snippets.sponsorships_add_modal.payment' | t }} <i class="fa fa-arrow-right fa-fw"></i></a>
+                  </div>
+            </div>
+          </div>
+
+        </form>
+      {% else %}
+        <div class="modal-body text-center">
+          <button type="button" class="close" data-dismiss="modal" aria-label="{{ 'general.actions.close' | t }}">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h2 class="text-danger modal-title text-center" id="add-sponsorship-{{ child.id }}-label"><i class="fa fa-3x fa-exclamation-triangle"></i><br>{{ 'snippets.sponsorships_add_modal.oops_we_made_a_mistake' | t }}</h2>
+          <p>{{ 'snippets.sponsorships_add_modal.not_finished_setting_up_this_record' | t }}<br><small>{{ 'snippets.sponsorships_add_modal.record_missing_a_payment_option' | t }}</small></p>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+.root {
+  &.right {
+    @apply ml-4;
+  }
+
+  &.left {
+    @apply mr-4;
+  }
+
+  &.enabledText {
+    @apply text-black;
+  }
+
+  &.disabledText {
+    @apply text-gray-600;
+  }
+}

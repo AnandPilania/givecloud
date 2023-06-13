@@ -1,0 +1,326 @@
+  <div class="side-bar">
+    <div class="side-bar-body">
+      <div class="side-bar-close pull-right"><i class="fa fa-times"></i></div>
+
+      {% if linklists.mobile-menu %}
+        {% assign menu = linklists.mobile-menu %}
+      {% elsif linklists.main-menu %}
+        {% assign menu = linklists.main-menu %}
+      {% else %}
+        {% assign menu = linklists.hero-menu %}
+      {% endif %}
+
+      <ul class="nav flex-column" data-children=".nav-item" id="side-bar-nav">
+        {% for link in menu.links %}
+          {% if link.links.size %}
+            <li class="nav-item">
+              <a class="nav-link dropdown-toggle collapsed {% if link.child_active %}active{% endif %}" href="#drop{{ forloop.index }}" data-toggle="collapse" aria-haspopup="true" aria-expanded="false">
+                {{ link.title }}
+              </a>
+              {% assign dropdown_id = 'drop' | append: forloop.index %}
+              <div class="collapse" id="{{ dropdown_id }}" data-parent="#side-bar-nav">
+                <ul class="nav flex-column">
+                  {% for sub_link in link.links %}
+                    <li class="nav-item">
+                      {% if sub_link.links %}
+                        <a class="nav-link dropdown-toggle collapsed {% if sub_link.child_active %}active{% endif %}" href="#dropSub{{ forloop.index }}" data-toggle="collapse" aria-haspopup="true" aria-expanded="false">
+                            {{ sub_link.title }}
+                        </a>
+                        <div class="collapse" id="dropSub{{ forloop.index }}" data-parent="#{{ dropdown_id }}">
+                          <ul class="nav flex-column">
+                            {% for subsub_link in sub_link.links %}
+                              <li class="nav-item">
+                                <a class="nav-link" href="{{ subsub_link.url }}" {% if subsub_link.target %}target="{{ subsub_link.target }}"{% endif %}>{{ subsub_link.title }}</a>
+                              </li>
+                            {% endfor %}
+                          </ul>
+                        </div>
+                      {% else %}
+                        <a class="nav-link" href="{{ sub_link.url }}" {% if sub_link.target %}target="{{ sub_link.target }}"{% endif %}>{{ sub_link.title }}</a>
+                      {% endif %}
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </li>
+          {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{{ link.url }}" {% if link.target %}target="{{ link.target }}"{% endif %}>{{ link.title }}</a>
+            </li>
+          {% endif %}
+        {% endfor %}
+
+          {% assign topLeftmenu = linklists.top-left-menu %}
+          {% if topLeftmenu %}
+              <li class="dropdown-divider"></li>
+          {% endif %}
+          {% for link in topLeftmenu.links %}
+              {% if link.links.size %}
+                  <li class="nav-item">
+                      <a class="nav-link dropdown-toggle collapsed {% if link.child_active %}active{% endif %}" href="#drop{{ forloop.index }}" data-toggle="collapse" aria-haspopup="true" aria-expanded="false">
+                          {{ link.title }}
+                      </a>
+                      {% assign dropdown_id = 'drop' | append: forloop.index %}
+                      <div class="collapse" id="{{ dropdown_id }}" data-parent="#side-bar-nav">
+                          <ul class="nav flex-column">
+                              {% for sub_link in link.links %}
+                                  <li class="nav-item">
+                                      {% if sub_link.links %}
+                                          <a class="nav-link dropdown-toggle collapsed {% if sub_link.child_active %}active{% endif %}" href="#dropSub{{ forloop.index }}" data-toggle="collapse" aria-haspopup="true" aria-expanded="false">
+                                              {{ sub_link.title }}
+                                          </a>
+                                          <div class="collapse" id="dropSub{{ forloop.index }}" data-parent="#{{ dropdown_id }}">
+                                              <ul class="nav flex-column">
+                                                  {% for subsub_link in sub_link.links %}
+                                                      <li class="nav-item">
+                                                          <a class="nav-link" href="{{ subsub_link.url }}" {% if subsub_link.target %}target="{{ subsub_link.target }}"{% endif %}>{{ subsub_link.title }}</a>
+                                                      </li>
+                                                  {% endfor %}
+                                              </ul>
+                                          </div>
+                                      {% else %}
+                                          <a class="nav-link" href="{{ sub_link.url }}" {% if sub_link.target %}target="{{ sub_link.target }}"{% endif %}>{{ sub_link.title }}</a>
+                                      {% endif %}
+                                  </li>
+                              {% endfor %}
+                          </ul>
+                      </div>
+                  </li>
+              {% else %}
+                  <li class="nav-item">
+                      <a class="nav-link" href="{{ link.url }}" {% if link.target %}target="{{ link.target }}"{% endif %}>{{ link.title }}</a>
+                  </li>
+              {% endif %}
+          {% endfor %}
+
+          {% assign topRightmenu = linklists.top-right-menu %}
+          {% if topRightmenu %}
+              <li class="dropdown-divider"></li>
+          {% endif %}
+          {% for link in topRightmenu.links %}
+              {% if link.links.size %}
+                  <li class="nav-item">
+                      <a class="nav-link dropdown-toggle collapsed {% if link.child_active %}active{% endif %}" href="#drop{{ forloop.index }}" data-toggle="collapse" aria-haspopup="true" aria-expanded="false">
+                          {{ link.title }}
+                      </a>
+                      {% assign dropdown_id = 'drop' | append: forloop.index %}
+                      <div class="collapse" id="{{ dropdown_id }}" data-parent="#side-bar-nav">
+                          <ul class="nav flex-column">
+                              {% for sub_link in link.links %}
+                                  <li class="nav-item">
+                                      {% if sub_link.links %}
+                                          <a class="nav-link dropdown-toggle collapsed {% if sub_link.child_active %}active{% endif %}" href="#dropSub{{ forloop.index }}" data-toggle="collapse" aria-haspopup="true" aria-expanded="false">
+                                              {{ sub_link.title }}
+                                          </a>
+                                          <div class="collapse" id="dropSub{{ forloop.index }}" data-parent="#{{ dropdown_id }}">
+                                              <ul class="nav flex-column">
+                                                  {% for subsub_link in sub_link.links %}
+                                                      <li class="nav-item">
+                                                          <a class="nav-link" href="{{ subsub_link.url }}" {% if subsub_link.target %}target="{{ subsub_link.target }}"{% endif %}>{{ subsub_link.title }}</a>
+                                                      </li>
+                                                  {% endfor %}
+                                              </ul>
+                                          </div>
+                                      {% else %}
+                                          <a class="nav-link" href="{{ sub_link.url }}" {% if sub_link.target %}target="{{ sub_link.target }}"{% endif %}>{{ sub_link.title }}</a>
+                                      {% endif %}
+                                  </li>
+                              {% endfor %}
+                          </ul>
+                      </div>
+                  </li>
+              {% else %}
+                  <li class="nav-item">
+                      <a class="nav-link" href="{{ link.url }}" {% if link.target %}target="{{ link.target }}"{% endif %}>{{ link.title }}</a>
+                  </li>
+              {% endif %}
+          {% endfor %}
+
+
+        {% if settings.menu_include_search or settings.menu_include_cart %}
+          <li class="dropdown-divider"></li>
+          <li class="nav-item px-2">
+            {% if settings.menu_include_search %}
+              <a class="nav-link d-inline-block px-2 search-toggle" href="#"><i class="fa fa-search"></i></a>
+            {% endif %}
+            {% if settings.menu_include_cart %}
+              <a class="nav-link d-inline-block px-2" href="/cart"><i class="fa fa-shopping-cart"></i> <span class="badge badge-pill badge-light -cart-count">{{ cart.item_count }}</span></a>
+            {% endif %}
+          </li>
+          {% if settings.menu_include_search %}
+            {% include 'header-search' %}
+          {% endif %}
+        {% endif %}
+
+        {% if settings.show_account_links %}
+          <li class="dropdown-divider"></li>
+          {% if account %}
+            <li class="nav-item">
+              <a class="nav-link" href="#drop-profile" data-toggle="collapse" aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa-fw fa-user-circle-o"></i> {{ account.display_name | escape }}
+              </a>
+              <div class="collapse {% if active_profile_menu %}show{% endif %}" id="drop-profile" data-parent="#side-bar-nav">
+                <ul class="nav flex-column">
+                  <li class="nav-item">
+                    <a class="nav-link" href="/account/home">{{ 'snippets.header_sidebar.home' | t }}</a>
+                    {% if site.account_features contains 'view-profile' or site.account_features contains 'view-billing' or site.account_features contains 'view-shipping' %}
+                      <a class="nav-link" href="/account/profile">{{ 'snippets.header_sidebar.profile' | t }}</a>
+                    {% endif %}
+                    {% if site.account_features contains 'view-giving-impact' %}
+                      <a class="nav-link" href="/account/impact">{{ settings.giving_impact_heading_title }}</a>
+                    {% endif %}
+                    {% if site.account_features contains 'view-memberships' %}
+                      <a class="nav-link" href="/account/memberships">{{ 'snippets.header_sidebar.my_memberships' | t: memberships_term: site.synonyms.groups }}</a>
+                    {% endif %}
+                    {% if site.account_features contains 'view-fundraisers' %}
+                      <a class="nav-link" href="/account/fundraisers">{{ 'snippets.header_sidebar.fundraisers' | t }}</a>
+                    {% endif %}
+                    {% if site.account_features contains 'view-purchased-media' %}
+                      <a class="nav-link" href="/account/purchased-media">{{ settings.purchased_media_heading_title }}</a>
+                    {% endif %}
+                    {% if site.account_features contains 'view-orders' %}
+                      <a class="nav-link" href="/account/history">{{ 'snippets.header_sidebar.orders_donations' | t }}</a>
+                    {% endif %}
+                    {% if site.account_features contains 'view-receipts' %}
+                      <a class="nav-link" href="/account/tax-receipts">{{ 'snippets.header_sidebar.tax_receipts' | t }}</a>
+                    {% endif %}
+                    {% if site.account_features contains 'view-sponsorships' %}
+                      <a class="nav-link" href="/account/sponsorships">{{ site.synonyms.sponsorship_children | capitalize }}</a>
+                    {% endif %}
+
+                    {% assign donor_portal_menu = linklists.donor-portal-menu %}
+                    {% if donor_portal_menu %}
+                      {% for link in donor_portal_menu.links %}
+                        <a class="nav-link" href="{{ link.url }}" {% if link.target %}target="{{ link.target }}"{% endif %}>
+                          {{ link.title | escape }}
+                        </a>
+                      {% endfor %}
+                    {% endif %}
+
+                    {% if site.account_features contains 'view-subscriptions' %}
+                      <a class="nav-link" href="/account/subscriptions">{{ 'snippets.header_sidebar.recurring_payments' | t }}</a>
+                    {% endif %}
+                    {% if site.account_features contains 'view-payment-methods' %}
+                      <a class="nav-link" href="/account/payment-methods">{{ 'snippets.header_sidebar.payment_methods' | t }}</a>
+                    {% endif %}
+
+                    <div class="dropdown-divider"></div>
+                    <a class="nav-link" href="/account/logout"><i class="fa fa-power-off"></i> {{ 'general.logout' | t }}</a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+          {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="/account/login">{{ settings.account_link_label }}</a>
+            </li>
+          {% endif %}
+        {% endif %}
+
+        {% if site.currencies.size > 1 %}
+          <li class="dropdown-divider"></li>
+          <li class="nav-item">
+            <select class="form-control my-2" onchange="location.href = this.value">
+              {% for currency in site.currencies %}
+                <option value="/cart/currency/{{ currency.code | downcase }}" {% if currency.code == cart.currency.iso_code %}selected{% endif %}>{{ currency.code }} ({{ currency.symbol }}) - {{ currency.name }}</option>
+              {% endfor %}
+            </select>
+          </li>
+        {% endif %}
+
+
+
+
+        {% assign hasSocialLinks = settings.header_fb_url | default: settings.header_twitter_url | default: settings.header_instagram_url | default: settings.header_pinterest_url | default: settings.header_linkedin_url | default: settings.header_youtube_url | default: settings.header_vimeo_url %}
+        {% assign hasContactLinks = settings.header_phone | default: settings.header_email %}
+
+        {% if hasSocialLinks or hasContactLinks %}
+          <li class="dropdown-divider"></li>
+
+          {% if hasSocialLinks %}
+            <li class="nav-item">
+              <div class="d-flex">
+                <ul class="nav">
+                  {% if settings.header_fb_url %}
+                    <li class="nav-item">
+                      <a class="nav-link px-2" href="{{ settings.header_fb_url }}" target="_blank" rel="noopener">
+                        <i class="fa fa-facebook fa-fw"></i>
+                      </a>
+                    </li>
+                  {% endif %}
+
+                  {% if settings.header_twitter_url %}
+                    <li class="nav-item">
+                      <a class="nav-link px-2" href="{{ settings.header_twitter_url }}" target="_blank" rel="noopener">
+                        <i class="fa fa-twitter"></i>
+                      </a>
+                    </li>
+                  {% endif %}
+
+                  {% if settings.header_instagram_url %}
+                    <li class="nav-item">
+                      <a class="nav-link px-2" href="{{ settings.header_instagram_url }}" target="_blank" rel="noopener">
+                        <i class="fa fa-instagram"></i>
+                      </a>
+                    </li>
+                  {% endif %}
+
+                  {% if settings.header_pinterest_url %}
+                    <li class="nav-item">
+                      <a class="nav-link px-2" href="{{ settings.header_pinterest_url }}" target="_blank" rel="noopener">
+                        <i class="fa fa-pinterest"></i>
+                      </a>
+                    </li>
+                  {% endif %}
+
+                  {% if settings.header_linkedin_url %}
+                    <li class="nav-item">
+                      <a class="nav-link px-2" href="{{ settings.header_linkedin_url }}" target="_blank" rel="noopener">
+                        <i class="fa fa-linkedin"></i>
+                      </a>
+                    </li>
+                  {% endif %}
+
+                  {% if settings.header_youtube_url %}
+                    <li class="nav-item">
+                      <a class="nav-link px-2" href="{{ settings.header_youtube_url }}" target="_blank" rel="noopener">
+                        <i class="fa fa-youtube"></i>
+                      </a>
+                    </li>
+                  {% endif %}
+
+                  {% if settings.header_vimeo_url %}
+                    <li class="nav-item">
+                      <a class="nav-link px-2" href="{{ settings.header_vimeo_url }}" target="_blank" rel="noopener">
+                        <i class="fa fa-vimeo"></i>
+                      </a>
+                    </li>
+                  {% endif %}
+                </ul>
+              </div>
+            </li>
+          {% endif %}
+
+          {% if hasContactLinks %}
+            <li class="nav-item">
+              <ul class="nav px-2 pt-2">
+                {% if settings.header_phone %}
+                  <li class="nav-item">
+                    <span class="nav-link px-2 py-1"><i class="fa fa-phone mr-1"></i> {{ settings.header_phone }}</span>
+                  </li>
+                {% endif %}
+
+                {% if settings.header_email %}
+                  <li class="nav-item">
+                    <a class="nav-link px-2 py-1" href="mailto:{{ settings.header_email }}" target="_blank" rel="noopener">
+                      <i class="fa fa-envelope-o mr-1"></i> {{ settings.header_email }}
+                    </a>
+                  </li>
+                {% endif %}
+              </ul>
+            </li>
+          {% endif %}
+        {% endif %}
+      </ul>
+    </div>
+  </div>

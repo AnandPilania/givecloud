@@ -1,0 +1,25 @@
+
+<div class="modal fade" id="dlg_downloads">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><i class="fa fa-cloud-download"></i> Downloads Library</h4>
+            </div>
+            <div class="modal-body">
+                <div id="filesWrp">
+                    <div style="padding:20px; text-align:center;"><i class="fa fa-spinner fa-spin"></i> Loading...</div>
+                </div>
+            </div>
+            <% if (Givecloud.settings.user_can_add) { %>
+                <form class="modal-footer dropzone">
+                    <div class="dz-message">
+                        <div>Drop files here</div>
+                        <small>or</small>
+                        <div><button type="button">Select Files</button></div>
+                        </div>
+                </form>
+            <% } %>
+        </div>
+    </div>
+</div>

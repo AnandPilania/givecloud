@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<VancoWS>
+    <Auth>
+        <RequestID>0b86d0fa41c64f4c800c41a562c97bd9</RequestID>
+        <RequestTime>2021-06-19 22:07:57</RequestTime>
+        <RequestType>EFTTransactionFundHistory</RequestType>
+        <Signature></Signature>
+        <SessionID>b1d53e482a58fc5403f891eaf76a146a3e3744d1</SessionID>
+        <Version>2.1</Version>
+    </Auth>
+    <Response>
+        <TransactionCount>1</TransactionCount>
+        <Transactions>
+            <Transaction>
+                <ReturnCode></ReturnCode>
+                <DepositDate></DepositDate>
+                <FeeFundID></FeeFundID>
+                <ReturnReason></ReturnReason>
+                <Credit>C</Credit>
+                <CCAuthDesc>Approval</CCAuthDesc>
+                <AccountType>CC</AccountType>
+                <CustomerRef>24967014</CustomerRef>
+                <TransactionRef>200420305</TransactionRef>
+                <Funds>
+                    <Fund>
+                        <FundID>0001</FundID>
+                        <FundAmount>25.00</FundAmount>
+                        <FundName>Where Most Needed</FundName>
+                        <FundTransactionFee>1.14</FundTransactionFee>
+                    </Fund>
+                </Funds>
+                <ReturnDate></ReturnDate>
+                <TransactionFee>1.14</TransactionFee>
+                <CCStatus>P</CCStatus>
+                <Amount>25.00</Amount>
+                <CustomerID>24967014</CustomerID>
+                <TransactionOrigin>Web Services</TransactionOrigin>
+                <ProcessDate>2021-06-19</ProcessDate>
+                <SettlementDate>2021-06-19</SettlementDate>
+                <PaymentMethodRef>39447609</PaymentMethodRef>
+            </Transaction>
+        </Transactions>
+    </Response>
+</VancoWS>

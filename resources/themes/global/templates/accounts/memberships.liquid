@@ -1,0 +1,107 @@
+{% assign active_profile_menu = 'memberships' %}
+
+{% layout 'theme.profile' %}
+
+<h1 class="mt-0">{{ 'templates.accounts.memberships.my_memberships' | t: memberships_term: site.synonyms.groups }}</h1>
+{% assign memberships = account.memberships | where: "show_in_profile", true %}
+{% assign active_memberships = memberships | where: "is_active", true %}
+{% assign inactive_memberships = memberships | where: "is_active", false | where: "is_expired", false %}
+{% assign expired_memberships = memberships | where: "is_expired", true %}
+
+{% if memberships.size == 0 %}
+
+    <div class="text-center">{{ 'templates.accounts.memberships.not_subscribed_to_any' | t: memberships_term: site.synonyms.groups }}</div>
+
+{% else %}
+
+    {% if active_memberships.size %}
+        <h3 class="mb-5">{{ 'templates.accounts.memberships.active_membership' | t: membership_term: site.synonyms.groups }}</h3>
+        <div class="masonry-3">
+            {% for membership in active_memberships %}
+                    <div class="brick-container">
+                        <div class="brick">
+                            <div class="card mb-4 wow fadeInUp">
+                                <div class="card-header bg-light border-light text-center">
+                                    {{ membership.group.name }}
+                                </div>
+                                <div class="card-body py-3 px-2 text-center text-info">
+                                    {% if membership.group.description %}
+                                        <p>{{ membership.group.description }}</p>
+                                    {% endif %}
+                                    {% if membership.end_date %}
+                                        {% if membership.days_left < 10 %}
+                                            <p><span class="badge badge-pill badge-warning">{{ 'templates.accounts.memberships.days_left_count' | t: count: membership.days_left }}</span></p>
+                                        {% else %}
+                                            <p><span class="badge badge-pill badge-light">{{ 'templates.accounts.memberships.expires_on' | t: expiry_date: membership.end_date }}</span></p>
+                                        {% endif %}
+                                    {% else %}
+                                        <p>{{ 'templates.accounts.memberships.this_does_not_expire' | t: membership_term: site.synonyms.group }}</p>
+                                    {% endif %}
+                                    {% if membership.group.default_url %}
+                                        <p><a href="{{ membership.group.default_url }}" class="btn btn-sm btn-pill px-3 btn-outline-primary"><i class="fa fa-external-link mr-1"></i> {{ 'general.actions.view' | t }}</a></p>
+                                    {% endif %}
+                                    {% if membership.group.renewal_url %}
+                                        <p><a href="{{ membership.group.renewal_url }}" class="btn btn-sm btn-pill px-3 btn-outline-primary"><i class="fa fa-refresh mr-1"></i> {{ 'templates.accounts.memberships.renew' | t }}</a></p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% if inactive_memberships.size %}
+        <h3 class="mb-5">{{ 'templates.accounts.memberships.inactive_membership' | t: membership_term: site.synonyms.groups }}</h3>
+        <div class="masonry-3">
+            {% for membership in inactive_memberships %}
+                    <div class="brick-container">
+                        <div class="brick">
+                            <div class="card mb-4 wow fadeInUp">
+                                <div class="card-header bg-light border-light text-center">
+                                    {{ membership.group.name }}
+                                </div>
+                                <div class="card-body py-3 px-2 text-center text-info">
+                                    {% if membership.group.description %}
+                                        <p>{{ membership.group.description }}</p>
+                                    {% endif %}
+                                    <p><span class="badge badge-pill badge-light">{{ 'templates.accounts.memberships.starts_on' | t: start_date: membership.start_date }}</span></p>
+                                    {% if membership.group.renewal_url %}
+                                        <p><a href="{{ membership.group.renewal_url }}" class="btn btn-sm btn-pill px-3 btn-outline-primary"><i class="fa fa-refresh mr-1"></i> {{ 'templates.accounts.memberships.renew' | t }}</a></p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% if expired_memberships.size %}
+        <h3 class="mb-5">{{ 'templates.accounts.memberships.expired_membership' | t: membership_term: site.synonyms.groups }}</h3>
+        <div class="masonry-3">
+            {% for membership in expired_memberships %}
+                    <div class="brick-container">
+                        <div class="brick">
+                            <div class="card mb-4 wow fadeInUp">
+                                <div class="card-header bg-light border-light text-center">
+                                    {{ membership.group.name }}
+                                </div>
+                                <div class="card-body py-3 px-2 text-center text-info">
+                                    {% if membership.group.description %}
+                                        <p>{{ membership.group.description }}</p>
+                                    {% endif %}
+                                    {% if membership.end_date %}
+                                        <p><span class="badge badge-pill badge-danger">{{ 'templates.accounts.memberships.expired_on' | t: expiry_date: membership.end_date }}</span></p>
+                                    {% endif %}
+                                    {% if membership.group.renewal_url %}
+                                        <p><a href="{{ membership.group.renewal_url }}" class="btn btn-sm btn-pill px-3 btn-outline-primary"><i class="fa fa-refresh mr-1"></i> {{ 'templates.accounts.memberships.renew' | t }}</a></p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endif %}

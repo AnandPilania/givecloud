@@ -1,0 +1,7 @@
+.root {
+  @apply font-bold text-center text-base font-sans;
+
+  &.large {
+    @apply text-[22px];
+  }
+}

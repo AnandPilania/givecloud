@@ -1,0 +1,14 @@
+<div class="card">
+  <div class="card-body">
+
+    {% for post in posts %}
+      <article class="bumped clearfix {% unless forloop.last %}border-bottom{% endunless %} hidden-sm">
+        <div class="bumper"><img src="{{ post.feature_image.full }}"></div>
+        <div class="text">
+          <p>{{ post.title|truncate:50 }} <a href="{{ post.url }}">{{ 'templates.accounts.shortcodes.read_more_dots' | t }}</a></p>
+        </div>
+      </article>
+    {% endfor %}
+
+  </div>
+</div>

@@ -1,0 +1,7 @@
+.root {
+  @apply absolute top-1/2 transform translate-x-5 -translate-y-48;
+
+  .closeIcon {
+    @apply absolute top-4 right-4;
+  }
+}

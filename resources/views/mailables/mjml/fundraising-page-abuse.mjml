@@ -1,0 +1,35 @@
+
+{% layout "layouts/app" %}
+
+{% block head %}
+<mj-preview>"{{ $page_name }}" has been reported as "{{ $page_report_reason }}".</mj-preview>
+{% endblock %}
+
+{% block content %}
+<mj-section css-class="box">
+  <mj-column>
+    <mj-headline icon="fa-dark-exclamation-triangle">
+      <h1>Abuse Report</h1>
+    </mj-headline>
+    <mj-text color="#474747" font-size="18px" font-weight="300" padding-top="0">
+      <p>The fundraising page <a href="{{ $page_url }}" target="_blank">{{ $page_name }}</a> has been reported with the following reason:</p>
+    </mj-text>
+    <mj-text color="#474747" font-size="20px" font-weight="700" padding-top="0">
+      <p>{{ $page_report_reason }}</p>
+    </mj-text>
+    <mj-button align="left" background-color="#fc58af" color="white" font-weight="500" font-size="16px" padding="20px" border-radius="30px" href="{{ $page_suspend_url }}">
+      Suspend Page
+    </mj-button>
+  </mj-column>
+</mj-section>
+<mj-raw>@if ($page_report_count > 1)</mj-raw>
+  <mj-section css-class="spacer"></mj-section>
+  <mj-section css-class="box">
+    <mj-column>
+      <mj-text color="#989898" font-size="18px" font-weight="300" padding-top="0" padding-bottom="0">
+          <p>There are a total of <strong>{{ $page_report_count }}</strong> abuse reports for this page.</p>
+      </mj-text>
+    </mj-column>
+  </mj-section>
+<mj-raw>@endif</mj-raw>
+{% endblock %}

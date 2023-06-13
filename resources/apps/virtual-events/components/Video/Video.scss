@@ -1,0 +1,15 @@
+.root {
+  @apply pb-8;
+
+  .iframeContainer {
+    @apply rounded-lg relative overflow-hidden max-w-full h-0;
+
+    padding-bottom: 56.25%;
+
+    iframe,
+    object,
+    embed {
+      @apply absolute w-full h-full top-0 left-0;
+    }
+  }
+}

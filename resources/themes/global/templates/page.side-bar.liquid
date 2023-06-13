@@ -1,0 +1,25 @@
+{% include 'header-image-page', header_image: page.feature_image.full %}
+
+<div class="container gutter-top clearfix my-5">
+
+    <div class="row">
+        <div class="col-12 col-md-3 d-none d-md-inline-block">
+            <div class="filter-list gutter-bottom-lg">
+        {% if page.parent %}<h4>{{ page.parent.title }}</h4>{% endif %}
+
+        {% if page.parent.links | count > 0 %}
+          <ul class="nav flex-column">
+            {% for link in page.parent.links %}
+              <li class="nav-item">
+                <a class="nav-link {% if link.active %}active{% endif %}" href="{{ link.url }}">{{ link.title }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+        </div>
+        <div class="col-12 col-md-9 body-text">
+            {{ page.content }}
+        </div>
+    </div>
+</div>

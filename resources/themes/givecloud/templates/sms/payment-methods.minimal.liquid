@@ -1,0 +1,139 @@
+
+{% layout 'sms' %}
+
+<div id="payment-methods-app" v-cloak>
+    <form @submit.prevent="submitAddPaymentMethodForm" :class="{ 'was-validated': form_validated }" novalidate>
+
+        <div class="card mb-3">
+            <div class="card-header">
+                <h5 class="mb-0">Add a Payment Method</h5>
+                <small class="d-block mt-2" style="line-height:1.4">
+                    Having a payment method linked to your account lets you quickly donate via TEXT or from the website without having to enter your payment information again.
+                </small>
+            </div>
+            <div class="card-body bg-light">
+                <nav class="nav nav nav-pills nav-fill mb-3">
+                    <button v-if="config.gateways.credit_card" type="button" class="btn btn-link btn-sm nav-item nav-link" :class="{active: input.payment_type == 'credit_card'}" @click="input.payment_type = 'credit_card'">
+                        <i class="far fa-credit-card"></i> Credit / Debit
+                    </button>
+                    <button v-if="supportedPaymentType('bank_account')" type="button" class="btn btn-link btn-sm nav-item nav-link" :class="{active: input.payment_type == 'bank_account'}" @click="input.payment_type = 'bank_account'">
+                        <i class="fas fa-university"></i> Bank
+                    </button>
+                    <button v-if="paypal_available" type="button" class="btn btn-link btn-sm nav-item nav-link" :class="{active: input.payment_type == 'paypal'}" @click="input.payment_type = 'paypal'">
+                        <i class="fab fa-paypal"></i> PayPal
+                    </button>
+                </nav>
+                <credit-card v-if="input.payment_type == 'credit_card'">
+                    <div class="mb-3 supported-cardtypes">
+                        <strong>We support:</strong>
+                        <img alt="" v-if="supportedCardType('american-express')" src="https://cdn.givecloud.co/npm/payment-icons@1.1.0/min/flat/amex.svg">
+                        <img alt="" v-if="supportedCardType('diners-club')" src="https://cdn.givecloud.co/npm/payment-icons@1.1.0/min/flat/diners.svg">
+                        <img alt="" v-if="supportedCardType('discover')"    src="https://cdn.givecloud.co/npm/payment-icons@1.1.0/min/flat/discover.svg">
+                        <img alt="" v-if="supportedCardType('jcb')"         src="https://cdn.givecloud.co/npm/payment-icons@1.1.0/min/flat/jcb.svg">
+                        <img alt="" v-if="supportedCardType('maestro')"     src="https://cdn.givecloud.co/npm/payment-icons@1.1.0/min/flat/maestro.svg">
+                        <img alt="" v-if="supportedCardType('master-card')" src="https://cdn.givecloud.co/npm/payment-icons@1.1.0/min/flat/mastercard.svg">
+                        <img alt="" v-if="supportedCardType('unionpay')"    src="https://cdn.givecloud.co/npm/payment-icons@1.1.0/min/flat/unionpay.svg">
+                        <img alt="" v-if="supportedCardType('visa')"        src="https://cdn.givecloud.co/npm/payment-icons@1.1.0/min/flat/visa.svg">
+                    </div>
+                    <div class="form-group labelify payment-number-input" :class="{ 'has-errors': errors.has('pay.number') }">
+                        <label for="inputPaymentNumber">Credit Card Number</label>
+                        <payment-field field="inputPaymentNumber">
+                            <the-mask id="inputPaymentNumber" type="tel" class="form-control monospace" maxlength="19" placeholder="0000 0000 0000 0000" mask="#### #### #### ####" name="number" v-model="payment.number" v-validate.initial="'required|credit_card'" x-autocompletetype="cc-number" autocompletetype="cc-number" autocorrect="off" spellcheck="off" autocapitalize="off"></the-mask>
+                        </payment-field>
+                        <div v-if="payment.number_type" class="payment-number-input__types">
+                            <span>
+                                <img alt="" v-if="payment.number_type == 'american-express'" src="https://cdn.givecloud.co/npm/payment-icons@1.1.0/min/flat/amex.svg">
+                                <img alt="" v-if="payment.number_type == 'diners-club'" src="https://cdn.givecloud.co/npm/payment-icons@1.1.0/min/flat/diners.svg">
+                                <img alt="" v-if="payment.number_type == 'discover'"    src="https://cdn.givecloud.co/npm/payment-icons@1.1.0/min/flat/discover.svg">
+                                <img alt="" v-if="payment.number_type == 'jcb'"         src="https://cdn.givecloud.co/npm/payment-icons@1.1.0/min/flat/jcb.svg">
+                                <img alt="" v-if="payment.number_type == 'maestro'"     src="https://cdn.givecloud.co/npm/payment-icons@1.1.0/min/flat/maestro.svg">
+                                <img alt="" v-if="payment.number_type == 'master-card'" src="https://cdn.givecloud.co/npm/payment-icons@1.1.0/min/flat/mastercard.svg">
+                                <img alt="" v-if="payment.number_type == 'unionpay'"    src="https://cdn.givecloud.co/npm/payment-icons@1.1.0/min/flat/unionpay.svg">
+                                <img alt="" v-if="payment.number_type == 'visa'"        src="https://cdn.givecloud.co/npm/payment-icons@1.1.0/min/flat/visa.svg">
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-6 labelify" :class="{ 'has-errors': errors.has('pay.exp') }">
+                            <label for="inputPaymentExpiry">MM / YY</label>
+                            <payment-field field="inputPaymentExpiry">
+                                <the-mask id="inputPaymentExpiry" type="tel" class="form-control monospace" maxlength="7" placeholder="MM / YY" mask="## / ##" @input.native="paymentExpiry($event)" name="exp" v-model="payment.exp" v-validate.initial="'required|expiration_date'" x-autocompletetype="cc-exp" autocompletetype="cc-exp" autocorrect="off" spellcheck="off" autocapitalize="off"></the-mask>
+                            </payment-field>
+                        </div>
+                        <div class="form-group col-6 labelify" :class="{ 'has-errors': errors.has('pay.cvv') }">
+                            <label for="inputPaymentCVV">CVV</label>
+                            <payment-field field="inputPaymentCVV">
+                                <the-mask id="inputPaymentCVV" type="tel" class="form-control monospace" maxlength="4" placeholder="000" mask="####" name="cvv" v-model="payment.cvv" v-validate.initial="'required|cvv:' + payment.number_type" x-autocompletetype="cc-csc" autocompletetype="cc-csc" autocorrect="off" spellcheck="off" autocapitalize="off"></the-mask>
+                            </payment-field>
+                        </div>
+                    </div>
+                </credit-card>
+                <template v-else-if="input.payment_type == 'bank_account' && gocardless_available">
+                    <div class="text-center text-muted">
+                        <i class="fa fa-bank fa-4x bottom-gutter m-2"></i><br>
+                        {{ 'cart.pay_form.continue_below' | t }}<br>
+                        <i class="fa fa-chevron-down fa-1x"></i>
+                    </div>
+                </template>
+                <template v-else-if="input.payment_type == 'bank_account'">
+                    <div class="form-group labelify labelify-has-value">
+                        <label for="inputCardholderName">Account Holder Name</label>
+                        <input id="inputCardholderName" type="text" class="form-control" maxlength="50" placeholder="John Smith" name="name" v-model="payment.name" autocorrect="off" spellcheck="off" autocapitalize="off">
+                    </div>
+                    <div class="form-group labelify payment-number-input" :class="{ 'has-errors': errors.has('pay.account_holder_type') }">
+                        <label for="inputPaymentAccountHolderType">Account Holder Type</label>
+                        <select id="inputPaymentAccountHolderType" class="form-control" name="account_holder_type" v-model="payment.account_holder_type" v-validate.initial="'required'" autocomplete="off">
+                            <option></option>
+                            <option value="personal">Individual</option>
+                            <option value="business">Company</option>
+                        </select>
+                    </div>
+                    <div class="form-group labelify payment-number-input" :class="{ 'has-errors': errors.has('pay.account_type') }">
+                        <label for="inputPaymentAccountType">Account Type</label>
+                        <select id="inputPaymentAccountType" class="form-control" name="account_type" v-model="payment.account_type" v-validate.initial="'required'" autocomplete="off">
+                            <option></option>
+                            <option value="checking">Checking</option>
+                            <option value="savings">Savings</option>
+                        </select>
+                    </div>
+                    <template v-if="payment.currency == 'CAD'">
+                        <div class="form-row">
+                            <div class="form-group col-6 labelify" :class="{ 'has-errors': errors.has('pay.transit_number') }">
+                                <label for="inputPaymentTransitNumber">Transit #</label>
+                                <the-mask id="inputPaymentTransitNumber" type="tel" class="form-control monospace" maxlength="5" placeholder="00000" mask="#####" name="transit_number" v-model="payment.transit_number" v-validate.initial="'required'" autocorrect="off" spellcheck="off" autocapitalize="off"></the-mask>
+                            </div>
+                            <div class="form-group col-6 labelify" :class="{ 'has-errors': errors.has('pay.institution_number') }">
+                                <label for="inputPaymentInstitutionNumber">Institution #</label>
+                                <the-mask id="inputPaymentInstitutionNumber" type="tel" class="form-control monospace" maxlength="3" placeholder="000" mask="###" name="institution_number" v-model="payment.institution_number" v-validate.initial="'required'" autocorrect="off" spellcheck="off" autocapitalize="off"></the-mask>
+                            </div>
+                        </div>
+                    </template>
+                    <template v-else>
+                        <div class="form-group labelify" :class="{ 'has-errors': errors.has('pay.routing_number') }">
+                            <label for="inputPaymentRoutingNumber">Routing #</label>
+                            <input id="inputPaymentRoutingNumber" type="number" class="form-control monospace" placeholder="0000000" name="routing_number" v-model="payment.routing_number" v-validate.initial="'required'" autocorrect="off" spellcheck="off" autocapitalize="off">
+                        </div>
+                    </template>
+                    <div class="form-group labelify" :class="{ 'has-errors': errors.has('pay.account_number') }">
+                        <label for="inputPaymentAccountNumber">Account #</label>
+                        <input id="inputPaymentAccountNumber" type="number" class="form-control monospace" minlength="4" maxlength="17" placeholder="0000000" name="account_number" v-model="payment.account_number" v-validate.initial="'required'" autocorrect="off" spellcheck="off" autocapitalize="off">
+                    </div>
+                </template>
+                <template v-else-if="input.payment_type == 'paypal'">
+                    <div class="text-center text-muted">
+                        <i class="fab fa-cc-paypal fa-4x bottom-gutter"></i><br>
+                        Continue below<br>
+                        <i class="fas fa-chevron-down fa-1x"></i>
+                    </div>
+                </template>
+            </div>
+        </div>
+
+        <div class="text-center mt-4 mb-3">
+            <button type="submit" ref="submitBtn" class="btn btn-xl btn-pill btn-success mb-3">
+                <i class="fas fa-user"></i> Add payment method
+            </button>
+        </div>
+
+    </form>
+</div>

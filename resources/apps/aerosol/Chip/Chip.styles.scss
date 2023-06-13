@@ -1,0 +1,44 @@
+.root {
+  @apply flex items-center overflow-hidden;
+  @apply px-3 h-8 w-max;
+  @apply rounded-full;
+  @apply text-xs text-white font-bold whitespace-nowrap uppercase leading-none;
+  @apply focus:outline-none focus:ring-4 focus:ring-offset-2 focus:text-white;
+  @apply hover:text-white;
+
+  &.primary {
+    @apply bg-blue-500 hover:bg-blue-500;
+
+    &.inverted {
+      @apply bg-blue-200 hover:bg-blue-200;
+      @apply text-blue-500;
+    }
+  }
+
+  &.warning {
+    @apply bg-yellow-500 hover:bg-yellow-500;
+
+    &.inverted {
+      @apply bg-yellow-200 hover:bg-yellow-200;
+      @apply text-yellow-600;
+    }
+  }
+
+  &.error {
+    @apply bg-red-500 hover:bg-red-500;
+
+    &.inverted {
+      @apply bg-red-200 hover:bg-red-200;
+      @apply text-red-500;
+    }
+  }
+
+  &.info {
+    @apply bg-brand-purple hover:bg-brand-purple;
+
+    &.inverted {
+      @apply bg-opacity-20 hover:bg-opacity-20;
+      @apply text-brand-purple;
+    }
+  }
+}

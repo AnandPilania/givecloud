@@ -1,0 +1,12 @@
+#!/bin/sh
+
+exec 1>&2
+
+DIR="$(git rev-parse --show-toplevel)"
+
+
+set -e
+
+if [ -z "$NO_VERIFY" ]; then
+    $DIR/scripts/php-cs.sh
+fi

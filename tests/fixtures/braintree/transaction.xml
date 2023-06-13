@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<transaction>
+  <id>ccazyhx1</id>
+  <status>submitted_for_settlement</status>
+  <type>sale</type>
+  <currency-iso-code>USD</currency-iso-code>
+  <amount>55.49</amount>
+  <amount-requested>55.49</amount-requested>
+  <merchant-account-id>givecloud</merchant-account-id>
+  <sub-merchant-account-id nil="true"/>
+  <master-merchant-account-id nil="true"/>
+  <order-id nil="true"/>
+  <created-at type="datetime">2022-07-27T06:57:13Z</created-at>
+  <updated-at type="datetime">2022-07-27T06:57:13Z</updated-at>
+  <customer>
+    <id>495241242</id>
+    <first-name>Bob</first-name>
+    <last-name>Hope</last-name>
+    <company nil="true"/>
+    <email>bob@example.com</email>
+    <website nil="true"/>
+    <phone>555-555-5555</phone>
+    <fax nil="true"/>
+    <global-id>Y3VzdG9tZXJfNDk1MjQxMjQy</global-id>
+  </customer>
+  <billing>
+    <id>8d</id>
+    <first-name nil="true"/>
+    <last-name nil="true"/>
+    <company nil="true"/>
+    <street-address>123 Melrose Street</street-address>
+    <extended-address nil="true"/>
+    <locality>Brooklyn</locality>
+    <region>NY</region>
+    <postal-code>11206</postal-code>
+    <country-name>United States of America</country-name>
+    <country-code-alpha2>US</country-code-alpha2>
+    <country-code-alpha3>USA</country-code-alpha3>
+    <country-code-numeric>840</country-code-numeric>
+  </billing>
+  <refund-id nil="true"/>
+  <refund-ids type="array"/>
+  <refunded-transaction-id nil="true"/>
+  <partial-settlement-transaction-ids type="array"/>
+  <authorized-transaction-id nil="true"/>
+  <settlement-batch-id nil="true"/>
+  <shipping>
+    <id nil="true"/>
+    <first-name nil="true"/>
+    <last-name nil="true"/>
+    <company nil="true"/>
+    <street-address nil="true"/>
+    <extended-address nil="true"/>
+    <locality nil="true"/>
+    <region nil="true"/>
+    <postal-code nil="true"/>
+    <country-name nil="true"/>
+    <country-code-alpha2 nil="true"/>
+    <country-code-alpha3 nil="true"/>
+    <country-code-numeric nil="true"/>
+  </shipping>
+  <custom-fields/>
+  <account-funding-transaction type="boolean">false</account-funding-transaction>
+  <avs-error-response-code nil="true"/>
+  <avs-postal-code-response-code>M</avs-postal-code-response-code>
+  <avs-street-address-response-code>M</avs-street-address-response-code>
+  <cvv-response-code>I</cvv-response-code>
+  <gateway-rejection-reason nil="true"/>
+  <processor-authorization-code>ZLGXW1</processor-authorization-code>
+  <processor-response-code>1000</processor-response-code>
+  <processor-response-text>Approved</processor-response-text>
+  <additional-processor-response nil="true"/>
+  <voice-referral-number nil="true"/>
+  <purchase-order-number nil="true"/>
+  <tax-amount nil="true"/>
+  <tax-exempt type="boolean">false</tax-exempt>
+  <sca-exemption-requested nil="true"/>
+  <processed-with-network-token type="boolean">false</processed-with-network-token>
+  <credit-card>
+    <token>f2n7qd2</token>
+    <bin>424242</bin>
+    <last-4>4242</last-4>
+    <card-type>Visa</card-type>
+    <expiration-month>5</expiration-month>
+    <expiration-year>2030</expiration-year>
+    <customer-location>US</customer-location>
+    <cardholder-name>Bob Hope</cardholder-name>
+    <image-url>https://assets.braintreegateway.com/payment_method_logo/visa.png?environment=sandbox</image-url>
+    <prepaid>Unknown</prepaid>
+    <healthcare>Unknown</healthcare>
+    <debit>Unknown</debit>
+    <durbin-regulated>Unknown</durbin-regulated>
+    <commercial>Unknown</commercial>
+    <payroll>Unknown</payroll>
+    <issuing-bank>Unknown</issuing-bank>
+    <country-of-issuance>Unknown</country-of-issuance>
+    <product-id>Unknown</product-id>
+    <global-id>cGF5bWVudG1ldGhvZF9jY19mMm43cWQy</global-id>
+    <account-type>credit</account-type>
+    <unique-number-identifier>0d181d979eaceef52ecae66dcbb23de2</unique-number-identifier>
+    <venmo-sdk type="boolean">false</venmo-sdk>
+    <account-balance nil="true"/>
+  </credit-card>
+  <status-history type="array">
+    <status-event>
+      <timestamp type="datetime">2022-07-27T06:57:13Z</timestamp>
+      <status>authorized</status>
+      <amount>55.49</amount>
+      <user>philippe+us@givecloud.com</user>
+      <transaction-source>api</transaction-source>
+    </status-event>
+    <status-event>
+      <timestamp type="datetime">2022-07-27T06:57:13Z</timestamp>
+      <status>submitted_for_settlement</status>
+      <amount>55.49</amount>
+      <user>philippe+us@givecloud.com</user>
+      <transaction-source>api</transaction-source>
+    </status-event>
+  </status-history>
+  <plan-id nil="true"/>
+  <subscription-id nil="true"/>
+  <subscription>
+    <billing-period-end-date nil="true"/>
+    <billing-period-start-date nil="true"/>
+  </subscription>
+  <add-ons type="array"/>
+  <discounts type="array"/>
+  <descriptor>
+    <name nil="true"/>
+    <phone nil="true"/>
+    <url nil="true"/>
+  </descriptor>
+  <recurring type="boolean">false</recurring>
+  <channel nil="true"/>
+  <service-fee-amount nil="true"/>
+  <escrow-status nil="true"/>
+  <disbursement-details>
+    <disbursement-date nil="true"/>
+    <settlement-amount nil="true"/>
+    <settlement-currency-iso-code nil="true"/>
+    <settlement-currency-exchange-rate nil="true"/>
+    <settlement-base-currency-exchange-rate nil="true"/>
+    <funds-held nil="true"/>
+    <success nil="true"/>
+  </disbursement-details>
+  <disputes type="array"/>
+  <ach-return-responses type="array"/>
+  <authorization-adjustments type="array"/>
+  <payment-instrument-type>credit_card</payment-instrument-type>
+  <processor-settlement-response-code></processor-settlement-response-code>
+  <processor-settlement-response-text></processor-settlement-response-text>
+  <network-response-code>XX</network-response-code>
+  <network-response-text>sample network response text</network-response-text>
+  <three-d-secure-info nil="true"/>
+  <ships-from-postal-code nil="true"/>
+  <shipping-amount nil="true"/>
+  <discount-amount nil="true"/>
+  <network-transaction-id>020220727065713</network-transaction-id>
+  <processor-response-type>approved</processor-response-type>
+  <authorization-expires-at type="datetime">2022-08-03T06:57:13Z</authorization-expires-at>
+  <retry-ids type="array"/>
+  <retried-transaction-id nil="true"/>
+  <refund-global-ids type="array"/>
+  <partial-settlement-transaction-global-ids type="array"/>
+  <refunded-transaction-global-id nil="true"/>
+  <authorized-transaction-global-id nil="true"/>
+  <global-id>dHJhbnNhY3Rpb25fY2NhenloeDE</global-id>
+  <retry-global-ids type="array"/>
+  <retried-transaction-global-id nil="true"/>
+  <retrieval-reference-number>1234567</retrieval-reference-number>
+  <installment-count nil="true"/>
+  <installments type="array"/>
+  <refunded-installments type="array"/>
+  <response-emv-data nil="true"/>
+  <acquirer-reference-number nil="true"/>
+  <merchant-identification-number>123456789012</merchant-identification-number>
+  <terminal-identification-number>00000001</terminal-identification-number>
+  <merchant-name>DESCRIPTORNAME</merchant-name>
+  <merchant-address>
+    <street-address></street-address>
+    <locality>Braintree</locality>
+    <region>MA</region>
+    <postal-code>02184</postal-code>
+    <phone>5555555555</phone>
+  </merchant-address>
+  <pin-verified type="boolean">false</pin-verified>
+  <debit-network nil="true"/>
+  <processing-mode nil="true"/>
+  <payment-receipt>
+    <id>ccazyhx1</id>
+    <global-id>dHJhbnNhY3Rpb25fY2NhenloeDE</global-id>
+    <amount>55.49</amount>
+    <currency-iso-code>USD</currency-iso-code>
+    <processor-response-code>1000</processor-response-code>
+    <processor-response-text>Approved</processor-response-text>
+    <processor-authorization-code>ZLGXW1</processor-authorization-code>
+    <merchant-name>DESCRIPTORNAME</merchant-name>
+    <merchant-address>
+      <street-address></street-address>
+      <locality>Braintree</locality>
+      <region>MA</region>
+      <postal-code>02184</postal-code>
+      <phone>5555555555</phone>
+    </merchant-address>
+    <merchant-identification-number>123456789012</merchant-identification-number>
+    <terminal-identification-number>00000001</terminal-identification-number>
+    <type>sale</type>
+    <pin-verified type="boolean">false</pin-verified>
+    <processing-mode nil="true"/>
+    <network-identification-code nil="true"/>
+    <card-type>Visa</card-type>
+    <card-last-4>1111</card-last-4>
+    <account-balance nil="true"/>
+  </payment-receipt>
+</transaction>

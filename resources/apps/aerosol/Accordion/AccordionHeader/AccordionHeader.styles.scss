@@ -1,0 +1,23 @@
+.button {
+  @apply flex items-center py-4 cursor-pointer;
+
+  .wrapper {
+    @apply bg-gray-200 rounded-full w-9 h-8 relative;
+
+    .icon {
+      @apply absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-all;
+    }
+
+    .open {
+      @apply rotate-90;
+    }
+  }
+
+  .content {
+    @apply w-full;
+
+    &.marginLeft {
+      @apply ml-4;
+    }
+  }
+}

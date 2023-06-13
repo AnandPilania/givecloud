@@ -1,0 +1,15 @@
+.root {
+  @apply relative flex items-start;
+
+  .inputContainer {
+    @apply flex items-center h-5;
+
+    .input {
+      @apply h-4 w-4 transition duration-150 ease-in-out rounded;
+    }
+  }
+
+  .label {
+    @apply ml-3 text-sm leading-5 font-medium;
+  }
+}

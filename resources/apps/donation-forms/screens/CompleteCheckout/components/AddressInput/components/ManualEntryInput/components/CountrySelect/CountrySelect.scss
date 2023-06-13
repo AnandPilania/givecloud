@@ -1,0 +1,46 @@
+.root {
+  @apply relative;
+  @apply flex items-center justify-center;
+
+  .loadingIcon {
+    @apply absolute right-3;
+    @apply text-gray-400;
+  }
+
+  .select {
+    @apply block;
+    @apply border border-gray-300 rounded !important;
+    @apply text-base;
+    @apply w-full h-11;
+    @apply pl-3 pr-10 py-2;
+    @apply placeholder-gray-400;
+    @apply transition-colors ease-in-out duration-200;
+
+    &:focus {
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+      --tw-ring-color: var(--primary-colour-500);
+      border-color: var(--primary-colour-500);
+    }
+
+    &:invalid {
+      @apply text-gray-400;
+    }
+
+    &.valid {
+      @apply ring-green-500 border-green-500 !important;
+    }
+
+    &.invalid {
+      @apply ring-red-500 border-red-500 !important;
+
+      &:invalid {
+        @apply text-red-300;
+      }
+    }
+
+    &.loading {
+      background-image: none;
+    }
+  }
+}

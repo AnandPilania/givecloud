@@ -1,0 +1,8 @@
+.root {
+  @apply flex items-center mb-3 cursor-pointer;
+  @apply text-left block w-full;
+
+  &.disabled {
+    @apply text-gray-500;
+  }
+}

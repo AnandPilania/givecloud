@@ -1,0 +1,98 @@
+{% assign active_profile_menu = 'impact' %}
+
+{% layout 'theme.profile' %}
+
+<h1 class="mt-0">{{ settings.giving_impact_heading_title }}</h1>
+
+<div class="card mb-4 border-secondary wow fadeInUp">
+    <div class="card-header bg-secondary border-secondary text-white text-center">
+        {{ 'templates.accounts.giving_impact.your_lifetime_donations' | t }}
+    </div>
+    <div class="card-body text-center">
+        <p class="h1 font-weight-bold">
+            {{ site.currency_symbol }}<span class="odometer odometer-theme-minimal" data-odometer-update="{{ account.lifetime_donation_amount }}">0</span>
+        </p>
+        <p><a href="/account/history">{{ 'templates.accounts.giving_impact.donations_since_count' | t: count: account.lifetime_donation_count, first_donation_date: account.first_donation_date }}</a> | <a href="/account/subscriptions">{{ 'templates.accounts.giving_impact.active_recurring_donation_count' | t: count: account.active_recurring_donations }}</a></p>
+    </div>
+</div>
+
+{% if site.account_features contains 'view-fundraisers' %}
+    <div class="card mb-4 border-secondary wow fadeInUp">
+        <div class="card-header bg-secondary border-secondary text-white text-center">
+            {{ 'templates.accounts.giving_impact.fundraising_totals' | t }}
+        </div>
+        <div class="card-body text-center">
+            <p class="h1 font-weight-bold">
+                {{ site.currency_symbol }}<span class="odometer odometer-theme-minimal" data-odometer-update="{{ account.lifetime_fundraising_amount }}">0</span>
+            </p>
+            <p><a href="/account/fundraisers">{{ 'templates.accounts.giving_impact.fundraiser_donations_count' | t: count: account.lifetime_fundraising_count }}</a></p>
+        </div>
+    </div>
+{% endif %}
+
+<div class="card mb-4 border-secondary wow fadeInUp" data-wow-delay="0.2s">
+    <div class="card-header bg-secondary border-secondary text-white text-center">
+        {{ 'templates.accounts.giving_impact.your_secondary_impact' | t }} <i class="fa fa-question-circle ml-2" data-toggle="tooltip" data-placement="top" title="{{ 'templates.accounts.giving_impact.your_secondary_impact_description' | t }}"></i>
+    </div>
+    <div class="card-body p-0 text-center">
+        <div class="row no-gutters mx-5">
+            <div class="col-12 py-5 border-bottom">
+                <p class="h1 font-weight-bold">
+                    {{ site.currency_symbol }}<span class="odometer odometer-theme-minimal" data-odometer-update="{{ account.secondary_impact_donations_amount }}">0</span>
+                </p>
+                <p>
+                    {{account.secondary_impact_donation_count }} referred donation(s)
+                </p>
+            </div>
+            <div class="col-12 col-md-6 my-0 my-md-5 py-5 py-md-0 border-right-0 border-md-right border-bottom border-md-bottom-0">
+                <p class="h1 font-weight-bold">
+                    <span class="odometer odometer-theme-minimal" data-odometer-update="{{ account.secondary_impact_site_visit_count }}">0</span>
+                </p>
+                <p>
+                    {{ 'templates.accounts.giving_impact.site_visits' | t }}
+                </p>
+            </div>
+            <div class="col-12 col-md-6 my-5">
+                <p class="h1 font-weight-bold">
+                    <span class="odometer odometer-theme-minimal" data-odometer-update="{{ account.secondary_impact_email_sign_up_count }}">0</span>
+                </p>
+                <p>
+                    {{ 'templates.accounts.giving_impact.email_signups' | t }}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card mb-4 border-secondary wow fadeInUp" data-wow-delay="0.4s">
+    <div class="card-header bg-secondary border-secondary text-white text-center">
+        {{ 'templates.accounts.giving_impact.my_referral_link' | t }}
+    </div>
+    <div class="card-body text-center">
+        <p>{{ settings.giving_impact_referral_link_text }}</p>
+        <div id="referral_link" onClick="copyReferralToClipboard()" class="border-bottom mt-4 mb-1 py-3 h5 bg-light">{{account.referral_link}}</div>
+        <p id="referral_link_status_text" onClick="copyReferralToClipboard()" class="mb-4"><small>{{ 'templates.accounts.giving_impact.click_to_copy' | t }}</small></p>
+        <div class="d-flex flex-column flex-xl-row justify-content-center ">
+            <span class="px-1 py-1"><a href="{{ site.social_urls.facebook }}" target="dp_impact_share" class="btn btn-sm btn-pill px-3 btn-outline-primary"><i class="fa fa-facebook mr-1"></i> {{ 'templates.accounts.giving_impact.share_on_facebook' | t }}</a></span>
+            <span class="px-1 py-1"><a href="{{ site.social_urls.twitter }}" target="dp_impact_share" class="btn btn-sm btn-pill px-3 btn-outline-primary"><i class="fa fa-twitter mr-1"></i> {{ 'templates.accounts.giving_impact.share_on_twitter' | t }}</a></span>
+            <span class="px-1 py-1"><a href="{{ site.social_urls.email }}" class="btn btn-sm btn-pill px-3 btn-outline-primary"><i class="fa fa-envelope mr-1"></i> {{ 'templates.accounts.giving_impact.share_with_email' | t }}</a></span>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function copyReferralToClipboard() {
+        var $temp = $("<input>");
+        $("body").append($temp);
+        $temp.val($('#referral_link').text()).select();
+        document.execCommand("copy");
+        $('#referral_link_status_text').text("{{ 'templates.accounts.giving_impact.copied' | t }}");
+        $temp.remove();
+        setTimeout(resetCopyText, 4000);
+    }
+
+    function resetCopyText () {
+        $('#referral_link_status_text').text("{{ 'templates.accounts.giving_impact.click_to_copy' | t }}");
+    }
+</script>

@@ -1,0 +1,63 @@
+{% include 'headline', align: 'left' %}
+
+<section class="mceNonEditable mceBackground bg-primary text-white py-3">
+    <div class="container">
+        <div class="row">
+            <div class="col mceEditable">
+                <h2 class="text-white">Headline Goes Here<br><small>Lead Out Text Goes Here</small></h2>
+            </div>
+            <div class="col mceEditable">
+                <h2 class="text-white">Headline Goes Here<br><small>Lead Out Text Goes Here</small></h2>
+            </div>
+            <div class="col mceEditable">
+                <h2 class="text-white">Headline Goes Here<br><small>Lead Out Text Goes Here</small></h2>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="mceBackground py-5 mceNonEditable">
+    <div class="container">
+        <div class="mceEditable">
+            <h1>Main Heading Goes Here<br><small>Lead Out Text Goes Here</small></h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque lacinia varius posuere. Aenean et rhoncus turpis, sed porttitor risus. Aliquam blandit dictum leo, vel ultricies purus sodales sed. Nullam feugiat justo congue ultrices accumsan. Aliquam accumsan vehicula enim, eu facilisis felis efficitur vitae. Etiam sed sapien non neque volutpat porta. Sed hendrerit nec ante sed sollicitudin. Morbi eu ipsum vel leo cursus tincidunt. Sed nisl tellus, condimentum sed aliquet commodo, viverra a mauris.</p>
+            <p>Nunc pharetra aliquam felis vel lobortis. Nulla facilisi. Nam euismod leo eros, sed interdum dolor tempor eget. Cras convallis massa tortor, at bibendum lectus sollicitudin a. Nunc vestibulum hendrerit ante, vel euismod arcu malesuada ac. Integer a porta ipsum. Integer mattis elementum mauris. Aenean sed lacus ipsum. Nullam at libero facilisis, mollis mi quis, bibendum metus. Aliquam arcu risus, feugiat pellentesque pretium auctor, tristique ut ex. Vestibulum tempus arcu vulputate dui viverra pulvinar. Vivamus non tincidunt urna, id volutpat nulla. Phasellus turpis tellus, sagittis non tincidunt sit amet, pharetra nec est.</p>
+            <p>Cras ut tellus massa. Pellentesque ac elit ex. Nam id magna elit. Pellentesque arcu eros, luctus sit amet dictum quis, ornare vel dui. Maecenas placerat libero diam, eu venenatis sem ornare sit amet. Nam orci neque, rutrum sed pretium a, feugiat eu mauris. Aliquam sed ultricies felis, eu aliquet felis.</p>
+        </div>
+    </div>
+</section>
+<section class="mceBackground py-5 mceNonEditable" style="background-color:#eeeeee;">
+    <div class="container">
+        <div class="mceEditable">
+            <h1>{{ 'content.signup.main_heading_goes_here' | t }}</h1>
+            <div class="row no-gutters">
+                <div class="col-md-6 offset-md-3">
+                    [signup group="" success_url=""]
+                        <div class="row">
+                            <div class="form-group col-6">
+                                <input class="form-control" name="first_name" required="" type="text" value="" placeholder="{{ 'general.forms.first_name' | t }}" />
+                            </div>
+                            <div class="form-group col-6">
+                                <input class="form-control" name="last_name" required="" type="text" value="" placeholder="{{ 'general.forms.last_name' | t }}" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" name="email" required="" type="email" value="" placeholder="{{ 'general.forms.email' | t }}" />
+                        </div>
+                        <div class="form-group">
+                            <div class="custom-control custom-radio">
+                                <input id="input-email_opt_in-this_only" class="custom-control-input" checked="checked" name="email_opt_in" type="radio" value="0" /> <label class="custom-control-label" for="input-email_opt_in-this_only"> {{ 'content.signup.send_me_emails_about_this_experience_only' | t }}</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input id="input-email_opt_in" class="custom-control-input" name="email_opt_in" type="radio" value="1" /> <label class="custom-control-label" for="input-email_opt_in"> {{ 'content.signup.send_me_emails_about_this_experience_and_add_me_to_the_general_mailing_list' | t }}</label>
+                            </div>
+                        </div>
+                        <div>[recaptcha]</div>
+                        <div class="form-group text-center">
+                            <button class="btn btn-info btn-lg" type="submit">{{ 'content.signup.sign_me_up' | t }}</button>
+                        </div>
+                    [/signup]
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<us-bank-account>
+  <routing-number>011000015</routing-number>
+  <last-4>0000</last-4>
+  <account-type>checking</account-type>
+  <account-holder-name>Bob Hope</account-holder-name>
+  <bank-name>FEDERAL RESERVE BANK</bank-name>
+  <ach-mandate>
+    <accepted-at type="datetime">2022-07-27T15:21:21Z</accepted-at>
+    <text>By clicking ["Checkout"], I authorize Braintree, a service of PayPal, on behalf of ACME (i) to verify my bank account information using bank information and consumer reports and (ii) to debit my bank account.</text>
+  </ach-mandate>
+  <ownership-type>personal</ownership-type>
+  <verified type="boolean">true</verified>
+  <verified-by nil="true"/>
+  <vaulted-in-blue type="boolean">true</vaulted-in-blue>
+  <business-name nil="true"/>
+  <first-name>Bob</first-name>
+  <last-name>Hope</last-name>
+  <default type="boolean">false</default>
+  <token>j36xhhg</token>
+  <customer-id>495241242</customer-id>
+  <customer-global-id>Y3VzdG9tZXJfNDk1MjQxMjQy</customer-global-id>
+  <image-url>https://assets.braintreegateway.com/payment_method_logo/us_bank_account.png?environment=sandbox</image-url>
+  <verifications type="array">
+    <us-bank-account-verification>
+      <status>verified</status>
+      <gateway-rejection-reason nil="true"/>
+      <merchant-account-id>givecloud</merchant-account-id>
+      <processor-response-code>1000</processor-response-code>
+      <processor-response-text>Approved</processor-response-text>
+      <id>8sddahsz</id>
+      <verification-method>network_check</verification-method>
+      <verification-determined-at type="datetime">2022-07-27T15:21:22Z</verification-determined-at>
+      <us-bank-account>
+        <token>j36xhhg</token>
+        <last-4>0000</last-4>
+        <account-type>checking</account-type>
+        <account-holder-name>Bob Hope</account-holder-name>
+        <bank-name>FEDERAL RESERVE BANK</bank-name>
+        <routing-number>011000015</routing-number>
+        <verified type="boolean">true</verified>
+        <ownership-type>personal</ownership-type>
+      </us-bank-account>
+      <created-at type="datetime">2022-07-27T15:21:21Z</created-at>
+      <updated-at type="datetime">2022-07-27T15:21:22Z</updated-at>
+      <global-id>dXNiYW5rYWNjb3VudHZlcmlmaWNhdGlvbl84c2RkYWhzeg</global-id>
+    </us-bank-account-verification>
+  </verifications>
+  <global-id>cGF5bWVudG1ldGhvZF91c2JfajM2eGhoZw</global-id>
+  <created-at type="datetime">2022-07-27T15:21:21Z</created-at>
+  <updated-at type="datetime">2022-07-27T15:21:22Z</updated-at>
+</us-bank-account>

@@ -1,0 +1,57 @@
+
+<div class="row row-padding-sm data-row">
+    <div class="col-sm-6 col-lg-7 edit-variant">
+        <% if (isdefault) { %>
+            <a href="#"><strong><i class="fa fa-check fa-fw"></i> <%= variantname %></strong></a>
+        <% } else { %>
+            <a href="#"><i class="fa fa-fw"></i> <%= variantname %></a>
+        <% } %>
+        <% if (quantityrestock !== null && quantity <= quantityrestock) { %>
+            &nbsp;<span class="label label-danger"><%= quantity %></span>
+        <% } %>
+        <% if (isshippable) { %>
+            &nbsp;<span class="hidden-sm hidden-md label label-default label-outline"><i class="fa fa-truck"></i> <%= weight %>lb<% if (is_shipping_free) { %> (Free)<% } %></span>
+        <% } %>
+        <% if (membership) { %>
+            &nbsp;<span class="hidden-sm hidden-md label label-default label-outline"><i class="fa fa-heart"></i> <%= membership.name %></span>
+        <% } %>
+        <% if (file) { %>
+            &nbsp;<span class="hidden-sm hidden-md label label-default label-outline"><i class="fa fa-download"></i> <%= file.filename %></span>
+        <% } %>
+        <% if (price_presets) { %>
+            &nbsp;<span class="hidden-sm hidden-md label label-default label-outline"><%= php.base_currency_symbol %><%= price_presets %></span>
+        <% } %>
+    </div>
+    <div class="col-sm-6 col-lg-5 text-right">
+        <span class="edit-variant">
+            <% if (is_donation) { %>
+                <span>Donation</span>
+            <% } else if (actual_price == 0) { %>
+                <span>Free</span>
+            <% } else if (linked_variants.length > 0) { %>
+                <span><%= php.base_currency_symbol %><%= total_linked_actual_price.formatMoney() %></span>
+            <% } else if (is_sale) { %>
+                <span class="text-bold text-danger"><%= php.base_currency_symbol %><%= saleprice.formatMoney() %></span>&nbsp;<span class="text-line-thru hidden-sm hidden-md text-muted"><%= php.base_currency_symbol %><%= price.formatMoney() %></span>
+            <% } else { %>
+                <span><%= php.base_currency_symbol %><%= price.formatMoney() %></span>
+            <% } %>
+
+            <% if (billing_period == 'weekly') { %>
+                <small class="text-muted">/week</small>
+            <% } else if (billing_period == 'biweekly') { %>
+                <small class="text-muted">/bi-week</small>
+            <% } else if (billing_period == 'monthly') { %>
+                <small class="text-muted">/mth</small>
+            <% } else if (billing_period == 'quarterly') { %>
+                <small class="text-muted">/qr</small>
+            <% } else if (billing_period == 'annually') { %>
+                <small class="text-muted">/yr</small>
+            <% } %>
+        </span>
+
+        &nbsp;&nbsp;
+        <a href="#" class="btn copy-variant btn-xs btn-info btn-outline"><i class="fa fa-copy fa-fw"></i></a>&nbsp;
+        <a href="#" class="btn trash-variant btn-xs btn-danger"><i class="fa fa-trash fa-fw"></i></a>&nbsp;
+        <a class="sort-variant"><i class="fa fa-bars fa-fw"></i></a>
+    </div>
+</div>

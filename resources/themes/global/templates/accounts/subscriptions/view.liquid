@@ -1,0 +1,178 @@
+{% assign active_profile_menu = 'subscriptions' %}
+{% layout 'theme.profile' %}
+
+<div class="subscription-page">
+
+    <h1 class="mt-0">{{ 'templates.accounts.subscriptions.view.recurring_payment' | t }}</h1>
+
+    {% if subscription.status == 'suspended' %}
+        <div class="w-75 mx-auto mb-5 alert alert-warning text-center">
+            <i class="fa fa-exclamation-circle fa-fw"></i> {{ 'templates.accounts.subscriptions.view.profile_paused_not_being_charged' | t }}
+        </div>
+    {% elsif subscription.status == 'expired' %}
+        <div class="w-75 mx-auto mb-5 alert alert-dark text-center">
+            {{ 'templates.accounts.subscriptions.view.profile_expired' | t }}
+        </div>
+    {% elsif subscription.status == 'cancelled' %}
+        <div class="w-75 mx-auto mb-5 alert alert-dark text-center">
+            {{ 'templates.accounts.subscriptions.view.profile_cancelled' | t }}
+        </div>
+    {% endif %}
+
+    <div class="row mb-5">
+
+    {% unless subscription.locked or subscription.ended %}
+        <div class="col-12 col-sm-6 col-md-5 offset-md-1 col-lg-6 offset-lg-0 col-xl-5 offset-xl-1">
+
+            <div class="card ml-auto">
+                {% if subscription.payment_method %}
+                    {% include 'payment-method-card', method: subscription.payment_method %}
+                {% else %}
+                    <div class="card-body bg-light p-4 {% if card_top %}rounded-top{% else %}rounded{% endif %} text-center">
+                        <div class="text-muted">
+                            <i class="fa fa-exclamation-circle fa-3x"></i>
+                            <div class="my-2">{{ 'templates.accounts.subscriptions.view.missing_payment_method' | t }}</div>
+                        </div>
+                        {% if account.payment_method_count == 0 %}
+                            <a href="/account/payment-methods/add" class="btn btn-outline-primary btn-sm"><i class="fa fa-plus fa-fw"></i> {{ 'templates.accounts.subscriptions.view.add_payment_method' | t }}</a>
+                        {% else %}
+                            <a href="/account/subscriptions/{{ subscription.id }}/edit" class="btn btn-outline-primary btn-sm"><i class="fa fa-edit fa-fw"></i> {{ 'templates.accounts.subscriptions.view.choose_payment_method' | t }}</a>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            </div>
+
+            {% if subscription.payment_method.credit_card.is_expired %}
+                <div class="text-center mt-2 w-75 mx-auto text-sm font-weight-bold text-danger">
+                    {{ 'templates.accounts.subscriptions.view.go_to_payment_methods_html' | t: link: '/account/payment-methods' }}
+                </div>
+            {% endif %}
+
+        </div>
+    {% endunless %}
+
+        <div class="col-12 col-sm-6 pt-3">
+
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="m-0 text-left">{{ subscription.total_amount | money : subscription.currency, 'currency_code' }}<small>{{ subscription.billing_period_abbreviation }}</small></h2>
+                    <div class="text-sm text-muted">{{ 'templates.accounts.subscriptions.view.payment' | t }}</div>
+                    {% if subscription.cover_costs_enabled %}
+                        <div>
+                            <span class="badge badge-subtle">{{ 'templates.accounts.subscriptions.view.includes_cover_costs_amount' | t: cover_costs_amount: subscription.cover_costs_amount, currency: subscription.currency, cover_costs_invoice_label: site.cover_costs_invoice_label }}</span>
+                        </div>
+                    {% endif %}
+                </div>
+
+                {% assign last_payment = subscription.payments | first %}
+                {% if last_payment %}
+                    {% if last_payment.status == 'failed' %}
+                        <div class="col-12 mt-3 text-danger">
+                            <i class="fa fa-exclamation-triangle"></i> {{ 'templates.accounts.subscriptions.view.last_payment_failed_on' | t: date_failed: last_payment.created_at }}.<br>
+                            <small class="monospace">"{{ last_payment.failure_message }}"</small>
+                        </div>
+                    {% else %}
+                        <div class="col-12 mt-3 text-success">
+                            <i class="fa fa-check"></i> {{ 'templates.accounts.subscriptions.view.last_payment_received_on' | t: date_received: last_payment.captured_at }}.<br>
+                        </div>
+                    {% endif %}
+                {% endif %}
+
+                <div class="col-12">
+                    <hr>
+                    {% if subscription.feature_image %}
+                        <img src="{{ subscription.feature_image.thumb }}" height="44" width="44" class="mr-2 pull-left rounded-circle object-fit-cover">
+                    {% endif %}
+                    <div class="font-weight-bold">{{ subscription.description }}</div>
+                    <div class="text-sm text-muted">{{ 'templates.accounts.subscriptions.view.description' | t }}</div>
+                    <hr>
+                </div>
+
+                {% unless subscription.ended %}
+                    <div class="col-6 mb-2">
+                        <div class="">
+                            {% if subscription.billing_period == 'Day' %}
+                                {{ 'templates.accounts.subscriptions.view.billing_period.daily' | t }}
+                            {% elsif subscription.billing_period == 'Week' %}
+                                {{ 'templates.accounts.subscriptions.view.billing_period.weekly' | t: payment_date: subscription.next_payment_date }}
+                            {% elsif subscription.billing_period == 'SemiMonth' %}
+                                {{ 'templates.accounts.subscriptions.view.billing_period.semi_monthly' | t: payment_date: subscription.next_payment_date }}
+                            {% elsif subscription.billing_period == 'Month' %}
+                                {{ 'templates.accounts.subscriptions.view.billing_period.monthly' | t: payment_date: subscription.next_payment_date }}
+                            {% elsif subscription.billing_period == 'Quarter' %}
+                                {{ 'templates.accounts.subscriptions.view.billing_period.quarterly' | t: payment_date: subscription.next_payment_date }}
+                            {% elsif subscription.billing_period == 'Year' %}
+                                {{ 'templates.accounts.subscriptions.view.billing_period.yearly' | t: payment_date: subscription.next_payment_date }}
+                            {% endif %}
+                        </div>
+                        <div class="text-sm text-muted">{{ 'templates.accounts.subscriptions.view.payment_day' | t }}</div>
+                    </div>
+
+                    <div class="col-6 mb-2">
+                        {% if subscription.status == 'suspended' %}
+                            <div class="text-warning"><i class="fa fa-exclamation-circle"></i> {{ 'templates.accounts.subscriptions.view.paused' | t }}</div>
+                        {% else %}
+                            <div class="">{{ subscription.next_payment_date | date: 'short_month_day_year' }}</div>
+                        {% endif %}
+                        <div class="text-sm text-muted">{{ 'templates.accounts.subscriptions.view.next_payment' | t }}</div>
+                    </div>
+                {% endunless %}
+
+                <div class="col-6 mb-2">
+                    <div class="">{{ subscription.amount_collected | money : subscription.currency, 'currency_code' }}{% if subscription.amount_collected > 0 %} <span class="badge badge-primary">{{ 'templates.accounts.subscriptions.view.thank_you' | t }}</span>{% endif %}</div>
+                    <div class="text-sm text-muted">{{ 'templates.accounts.subscriptions.view.received_to_date' | t }}</div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="mb-5 text-center">
+        {% unless subscription.locked or subscription.ended %}
+            <a href="/account/subscriptions/{{ subscription.id }}/edit" class="m-1 px-3 btn btn-primary"><i class="fa fa-pencil"></i> {{ 'templates.accounts.subscriptions.view.make_a_change' | t }}</a>
+            {% if site.account_features contains 'end-subscriptions' %}
+                <a href="/account/subscriptions/{{ subscription.id }}/cancel" class="m-1 px-3 btn btn-outline-primary"><i class="fa fa-trash"></i> {{ 'templates.accounts.subscriptions.view.cancel_payments' | t }}</a>
+            {% endif %}
+        {% endunless %}
+        <a href="/account/subscriptions" class="m-1 px-3 btn btn-outline-dark"><i class="fa fa-arrow-left"></i> {{ 'templates.accounts.subscriptions.view.back' | t }}</a>
+    </div>
+
+    <h2 class="text-left mb-3">{{ 'templates.accounts.subscriptions.view.past_payments' | t }}</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>{{ 'templates.accounts.subscriptions.view.date' | t }}</th>
+                <th>{{ 'templates.accounts.subscriptions.view.reference' | t }}</th>
+                <th class="text-right">{{ 'templates.accounts.subscriptions.view.amount' | t }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if subscription.payments.size > 0 %}
+                {% for payment in subscription.payments %}
+                    <tr class="{% if payment.status == 'failed' %}text-danger{% endif %}">
+                        {% if payment.status == 'failed' %}
+                            <td>{{ payment.created_at | date: 'short_month_day_year' }}</td>
+                            <td>{{ 'templates.accounts.subscriptions.view.failed' | t }}</td>
+                        {% else %}
+                            <td>{{ payment.captured_at | date: 'short_month_day_year' }}</td>
+                            <td>{{ payment.reference_number }}{% if payment.amount_refunded > 0 %} {{ 'templates.accounts.subscriptions.view.refunded' | t }}{% endif %}</td>
+                        {% endif %}
+                        <td class="text-right">
+                        {% assign balance_amt = payment.amount | minus: payment.amount_refunded %}
+                            {% if payment.amount_refunded > 0 %}
+                                <span class="text-danger"><i class='fa fa-reply mr-1'></i><span class="line-thru">{{ payment.amount | money : payment.currency }}</span></span> {{ balance_amt | money : payment.currency, 'currency_code' }}
+                            {% else %}
+                                {{ payment.amount | money : payment.currency, 'currency_code' }}
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="3" class="p-3 text-center text-muted text-lg">{{ 'templates.accounts.subscriptions.view.no_payments_received' | t }}</td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+</div>

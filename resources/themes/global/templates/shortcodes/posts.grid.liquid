@@ -1,0 +1,19 @@
+{% if posts.size == 1 %}
+    {% assign grid_item_wrap_classes = "col-12" %}
+{% elsif posts.size == 2 %}
+    {% assign grid_item_wrap_classes = "col-sm-6 col-12" %}
+{% elsif posts.size == 3 %}
+    {% assign grid_item_wrap_classes = "col-md-4 col-sm-6 col-12" %}
+{% elsif posts.size > 3 %}
+    {% assign grid_item_wrap_classes = "col-lg-3 col-md-4 col-sm-6 col-12" %}
+{% endif%}
+
+{% assign match_height = 'posts-grid' ~ post_type.id %}
+
+<div class="row posts-grid">
+    {% for post in posts %}
+        <div class="{{ grid_item_wrap_classes }}">
+            {% include 'post-grid-item', post: post, match_height: match_height %}
+        </div>
+    {% endfor %}
+</div>

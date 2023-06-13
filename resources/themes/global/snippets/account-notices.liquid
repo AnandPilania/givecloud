@@ -1,0 +1,14 @@
+{% for notice in account.notices %}
+    <div class="bg-danger px-3 py-4">
+        <div class="container d-flex align-items-center justify-content-between">
+            <div class="text-white font-weight-bold">
+                <i class="fa fa-exclamation-triangle"></i> {{ notice.message }}
+            </div>
+            {% if notice.action %}
+                <div class="text-right ml-3">
+                    <a href="{{ notice.action_url }}" class="btn btn-outline-light">{{ notice.action }}</span></a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endfor %}

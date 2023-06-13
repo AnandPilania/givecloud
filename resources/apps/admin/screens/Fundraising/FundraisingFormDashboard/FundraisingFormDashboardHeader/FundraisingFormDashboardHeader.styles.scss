@@ -1,0 +1,11 @@
+.root {
+  @apply justify-between items-end;
+
+  .text {
+    @apply max-w-[220px] sm:max-w-sm text-left;
+  }
+
+  .buttonContainer {
+    @apply flex-row justify-end;
+  }
+}

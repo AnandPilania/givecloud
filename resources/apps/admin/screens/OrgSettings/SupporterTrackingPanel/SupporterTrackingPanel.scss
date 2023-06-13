@@ -1,0 +1,11 @@
+.root {
+  @apply flex flex-col justify-between;
+
+  .buttonContainer {
+    @apply flex justify-end w-full mt-2;
+  }
+
+  .textContainer {
+    @apply flex flex-wrap-reverse;
+  }
+}

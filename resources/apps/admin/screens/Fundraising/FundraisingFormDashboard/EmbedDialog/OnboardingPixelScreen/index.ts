@@ -1,0 +1,1 @@
+export { OnboardingPixelScreen } from './OnboardingPixelScreen'

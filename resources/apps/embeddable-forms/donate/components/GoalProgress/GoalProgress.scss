@@ -1,0 +1,42 @@
+.root {
+  @apply mt-8 mb-8 mr-2;
+
+  .progress {
+    @apply flex;
+    @apply h-6;
+    @apply rounded overflow-hidden;
+    @apply bg-transparent border;
+    @apply text-xs;
+  }
+
+  .progressBar {
+    @apply flex flex-col justify-center;
+    @apply text-center whitespace-nowrap;
+  }
+
+  .content {
+    @apply flex justify-between;
+  }
+
+  .goalAmount,
+  .goalDays,
+  .goalCount {
+    @apply text-sm;
+
+    small {
+      @apply text-xs opacity-60;
+    }
+  }
+
+  .goalAmount {
+    @apply text-left;
+  }
+
+  .goalDays {
+    @apply text-center;
+  }
+
+  .goalCount {
+    @apply text-right;
+  }
+}

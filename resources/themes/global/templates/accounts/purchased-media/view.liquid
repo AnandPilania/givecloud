@@ -1,0 +1,33 @@
+{% assign active_profile_menu = 'purchasedmedia' %}
+
+{% layout 'theme.profile' %}
+
+<div class="row d-flex align-items-center mb-5">
+    <div class="col-12 col-md-2">
+        <a href="/account/purchased-media" class="btn btn-sm btn-pill px-3 btn-outline-primary"><i class="fa fa-arrow-left mr-1"></i> {{ 'templates.accounts.purchased_media.view.back' | t }}</a>
+    </div>
+    <div class="col-12 col-md-8">
+        <h1 class="my-0">{{media.title}}</h1>
+    </div>
+</div>
+
+ <div class="card mb-4 wow fadeInUp">
+    <div class="card-img-top embed-responsive embed-responsive-16by9">
+        {{ media.oembed.html }}
+    </div>
+    <div class="card-body py-3 px-2 text-center text-info">
+        {% if media.description %}
+            <p>{{ media.description }}</p>
+        {% endif %}
+        {% if media.expiration_time %}
+            {% if media.days_left < 10 %}
+                <p><span class="badge badge-pill badge-warning">{{ 'templates.accounts.purchased_media.days_left_count' | t: count: media.days_left }}</span></p>
+            {% else %}
+                <p><span class="badge badge-pill badge-light">{{ 'templates.accounts.purchased_media.expires' | t: expiration_date: media.expiration_time }}</span></p>
+            {% endif %}
+        {% endif %}
+        {% if media.expiration_time and media.days_left < 10 and media.product.url %}
+            <p><a href="{{ media.product.url }}" class="btn btn-sm btn-pill px-3 btn-outline-primary"><i class="fa fa-refresh mr-1"></i> {{ 'templates.accounts.purchased_media.re_purchase' | t }}</a></p>
+        {% endif %}
+    </div>
+</div>

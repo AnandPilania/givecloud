@@ -1,0 +1,21 @@
+.root {
+  @apply flex justify-center items-center bg-zinc-50 rounded-full z-10;
+  @apply px-2 py-1.5 w-32;
+  @apply shadow-lg;
+
+  .initials {
+    @apply flex items-center justify-center bg-slate-500 rounded-full;
+    @apply h-4 w-4 p-4 mr-2;
+    @apply text-white text-sm;
+  }
+
+  .text {
+    @apply font-bold font-sans;
+    font-size: 9px;
+  }
+
+  .overlay {
+    @apply absolute w-56 h-full rounded-md pt-14;
+    @apply bg-blue-300 border-blue-400 opacity-40 hover:cursor-pointer hover:bg-brand-blue hover:border-2 hover:border-blue-400;
+  }
+}

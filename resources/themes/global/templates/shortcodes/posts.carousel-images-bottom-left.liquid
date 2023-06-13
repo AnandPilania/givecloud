@@ -1,0 +1,42 @@
+<div id="{{ id }}" class="carousel slide" data-ride="carousel" data-interval="{{ interval }}">
+
+  <div class="carousel-inner">
+    {% for post in posts %}
+
+      {% assign has_overlay_text = false %}
+      {% if post.title or post.excerpt or post.misc_1 %}
+        {% assign has_overlay_text = true %}
+      {% endif %}
+
+      <div class="carousel-item {% if forloop.first %}active{% endif %}">
+
+        {% if post.url %}
+          <a href="{{ post.url }}"><img class="d-block w-100 {% if has_overlay_text %}darken-25{% endif %}" src="{{ post.feature_image.full }}" alt="{{ post.title }}"></a>
+        {% else %}
+          <img class="d-block w-100" src="{{ post.feature_image.full }}" alt="{{ post.title }}">
+        {% endif %}
+
+        {% if has_overlay_text %}
+          <div class="carousel-caption caption-bottom-left">
+            <div class="carousel-caption-body">
+              {% if post.title %}<h3>{{ post.title }}</h3>{% endif %}
+              {% if post.excerpt %}<p>{{ post.excerpt }}</p>{% endif %}
+              {% if post.misc_1 %}<a href="{{ post.url }}" class="btn btn-lg btn-pill px-4 btn-light">{{ post.misc_1 }}</a>{% endif %}
+            </div>
+          </div>
+        {% endif %}
+
+      </div>
+    {% endfor %}
+  </div>
+
+  <!-- next / previous -->
+  <a class="carousel-control-prev" href="#{{ id }}" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">{{ 'templates.accounts.shortcodes.previous' | t }}</span>
+  </a>
+  <a class="carousel-control-next" href="#{{ id }}" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">{{ 'templates.accounts.shortcodes.next' | t }}</span>
+  </a>
+</div>

@@ -1,0 +1,17 @@
+.root {
+  .createdColumn {
+    @apply flex-row justify-start lg:justify-end;
+  }
+
+  .defaultColumn {
+    @apply flex-row items-center;
+
+    .defaultCheckIcon {
+      @apply text-brand-blue mr-2;
+    }
+  }
+
+  .column {
+    @apply px-0 justify-center md:my-2;
+  }
+}

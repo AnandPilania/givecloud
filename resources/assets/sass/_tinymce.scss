@@ -1,0 +1,154 @@
+
+.givecloudeditor {
+    display: none;
+}
+
+
+$tox-font-family: "Nunito Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+
+.tox-fullscreen {
+    z-index: 100010;
+}
+
+.tox-tinymce,
+.tox-tinymce-aux {
+    font-family: $tox-font-family !important;
+    border: none !important;
+}
+
+.tox {
+    font-family: $tox-font-family !important;
+    .tox-button,
+    .tox-button-link,
+    .tox-dialog__title,
+    .tox-listboxfield .tox-listbox--select,
+    .tox-selectfield select,
+    .tox-textarea,
+    .tox-textfield,
+    .tox-toolbar-textfield {
+        font-family: $tox-font-family !important;
+    }
+    .tox-collection--list {
+        min-width: 160px !important;
+        .tox-collection__item {
+            padding: 2px 8px !important;
+        }
+        .tox-collection__item--active {
+            background: #ececec !important;
+            //color: #aaa !important;
+        }
+        .tox-collection__group {
+            border-color: rgba(0,0,0,0.1) !important;
+        }
+    }
+    .tox-editor-header {
+        border-bottom: 1px solid #ddd;
+    }
+    .tox-split-button {
+        margin: 0 !important;
+    }
+    .tox-toolbar-overlord {
+        padding: 3px;
+        background-color: #f5f5f5 !important;
+    }
+    .tox-toolbar {
+        background: none !important;
+        background-color: #f5f5f5 !important;
+    }
+    .tox-tbtn {
+        width: 27.2px !important;
+        height: 30px !important;
+        margin: 0 !important;
+        border: 1px solid transparent !important;
+        transform: scale(0.8);
+        &:hover,
+        &:focus {
+            background: #ececec !important;
+            border: 1px solid #555d66 !important;
+            color: #23282d !important;
+            box-shadow: inset 0 1px 0 #fff, 0 1px 0 rgba(0, 0, 0, 0.08) !important;
+            outline: none !important;
+        }
+        &.tox-tbtn--disabled {
+            background: #f7f7f7 !important;
+            color: #a0a5aa !important;
+            box-shadow: none !important;
+            cursor: default;
+            opacity: 0.4;
+            &:hover,
+            &:focus {
+                background: none !important;
+                color: #a0a5aa !important;
+                border-color: transparent !important;
+            }
+            &:focus {
+                border-color: #555d66 !important;
+            }
+        }
+        &.tox-tbtn--enabled {
+            background: #ebebeb !important;
+            border: 1px solid #555d66 !important;
+            box-shadow: inset 0 2px 5px -3px rgba(0, 0, 0, 0.3) !important;
+            &:hover,
+            &:focus {
+                border-color: #23282d !important;
+            }
+        }
+        &.tox-tbtn--select {
+            width: auto !important;
+            margin: 0 !important;
+        }
+        &.tox-tbtn--select.tox-tbtn--bespoke {
+            height: 24px !important;
+            margin-right: 6px !important;
+            background: #fff;
+            font-size: 13px !important;
+            border: 1px solid #ddd !important;
+            box-shadow: inset 0 1px 1px -1px rgba(0, 0, 0, .2);
+            transform: none !important;
+            &:hover,
+            &:focus {
+                background: #fff !important;
+                border: 1px solid #b4b9be !important;
+                color: #222f3e !important;
+                box-shadow: inset 0 1px 1px -1px rgba(0, 0, 0, .2);
+            }
+        }
+        &[aria-label="Fullscreen"] {
+            position: absolute;
+            top: 0;
+            right: 0;
+            margin: 2px 2px 0 0 !important;
+        }
+        &[aria-label="Toolbar toggle"] {
+            width: 32px !important;
+            .tox-icon svg {
+                width: 24px;
+                height: 24px;
+            }
+        }
+        svg {
+            fill: #555d66 !important;
+        }
+    }
+    .tox-dialog-wrap__backdrop {
+        background-color: rgba(0, 0, 0, .75) !important;
+    }
+    .tox-dialog__header {
+        background: #eee !important;
+        padding-bottom: 8px !important;
+        border-bottom: 1px solid #ddd !important;
+        .tox-dialog__title {
+            font-weight: bold;
+        }
+    }
+    .tox-dialog__footer {
+        border-color: #ddd !important;
+    }
+    .tox-form__group {
+        margin-bottom: 9px !important;
+        .tox-label {
+            margin-bottom: 1px;
+        }
+    }
+}

@@ -1,0 +1,19 @@
+.root {
+  @apply max-w-5xl w-full mx-auto lg:h-[680px];
+
+  .background {
+    @apply items-center justify-center bg-gray-200 rounded-md mr-4 relative h-full;
+
+    .badge {
+      @apply absolute top-6 left-6;
+    }
+  }
+
+  .header {
+    @apply flex items-center justify-between mb-4;
+  }
+
+  .link {
+    @apply text-brand-blue;
+  }
+}

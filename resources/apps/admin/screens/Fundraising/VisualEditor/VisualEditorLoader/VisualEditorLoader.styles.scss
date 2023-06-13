@@ -1,0 +1,5 @@
+.root {
+  @apply flex items-center justify-center h-full fixed inset-0;
+  @apply bg-gradient-to-b from-brand-blue to-brand-teal transition-opacity;
+  @apply z-50;
+}

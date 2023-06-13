@@ -1,0 +1,35 @@
+@import '../../styles/_variables.scss';
+
+.root {
+  @apply fixed inset-0 overflow-hidden z-20;
+
+  .overlay {
+    @apply absolute inset-0;
+
+    background: $overlay-gradient;
+  }
+
+  .main {
+    @apply fixed inset-y-0;
+
+    .mainContent {
+      @apply h-full;
+    }
+  }
+
+  &.fullScreen {
+    .main {
+      .mainContent {
+        @apply w-screen;
+      }
+    }
+  }
+
+  &.left .main {
+    @apply left-0 right-auto;
+  }
+
+  &.right .main {
+    @apply right-0 left-auto;
+  }
+}

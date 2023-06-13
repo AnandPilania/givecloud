@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit backupGlobals="false"
+         backupStaticAttributes="false"
+         bootstrap="vendor/autoload.php"
+         colors="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         processIsolation="false"
+         stopOnFailure="false">
+    <testsuites>
+        <testsuite name="Browser Test Suite">
+            <directory suffix="Test.php">./tests/Browser</directory>
+        </testsuite>
+        <testsuite name="accounts">
+            <directory suffix="Test.php">./tests/Browser/Accounts</directory>
+        </testsuite>
+        <testsuite name="backend">
+            <directory suffix="Test.php">./tests/Browser/Backend</directory>
+        </testsuite>
+        <testsuite name="themes">
+            <directory suffix="Test.php">./tests/Browser/Themes</directory>
+        </testsuite>
+    </testsuites>
+    <php>
+        <server name="APP_ENV" value="testing"/>
+        <server name="APP_URL" value="https://testing.givecloud.test"/>
+        <server name="HTTP_X_GIVECLOUD_DOMAIN" value="testing"/>
+    </php>
+</phpunit>

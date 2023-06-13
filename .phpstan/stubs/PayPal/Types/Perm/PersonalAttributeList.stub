@@ -1,0 +1,9 @@
+<?php
+
+namespace PayPal\Types\Perm;
+
+class PersonalAttributeList
+{
+    /** @var string[] */
+    public $attribute;
+}

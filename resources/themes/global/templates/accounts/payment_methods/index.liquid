@@ -1,0 +1,97 @@
+{% assign active_profile_menu = 'payment-methods' %}
+{% layout 'theme.profile' %}
+
+<div class="mb-5">
+    <h1 class="mt-0">{{ 'templates.accounts.payment_methods.index.my_payment_methods' | t }}</h1>
+</div>
+
+{% if account.payment_methods.size == 0 %}
+    <p class="my-5 text-lg text-muted text-center">{{ 'templates.accounts.payment_methods.index.add_a_payment_method_for_easier_payments' | t }}</p>
+
+{% else %}
+
+    <div class="row mb-4">
+
+        {% if account.payment_methods.size == 1 %}
+            {% assign col_classes = 'col-md-4 offset-md-4 col-sm-12' %}
+        {% elsif account.payment_methods.size == 2 %}
+            {% assign col_classes = 'col-md-6 col-sm-6' %}
+        {% else %}
+            {% assign col_classes = 'col-md-4 col-sm-6' %}
+        {% endif %}
+
+        {% for method in account.payment_methods %}
+            <div class="{{ col_classes }}">
+                <div class="card mb-4">
+                    {% include 'payment-method-card', method: method, card_top: true, default_method: method.is_default %}
+
+                    {% if method.name %}
+                        <div class="card-body bg-light text-center">
+                            {{ method.name }}
+                        </div>
+                    {% endif %}
+
+                    <div class="card-body text-center p-2">
+                        <div class="card-text text-sm">
+                            <!--<a href="#" class="btn btn-sm btn-info"><i class="fa fa-pencil"></i> Edit</a>-->
+                            {% unless method.is_default %}<button class="btn btn-link btn-sm" data-style="slide-up" data-spinner-color="#333333" onclick="theme.PaymentMethods.setDefault(this,{{ method.id }})"><i class="fa fa-check"></i>&nbsp;{{ 'templates.accounts.payment_methods.index.set_default' | t }}</button>{% endunless %}
+                            <a href="#remove-method-modal-{{ method.id }}" class="btn btn-link btn-sm" data-toggle="modal"><i class="fa fa-trash"></i>&nbsp;{{ 'templates.accounts.payment_methods.index.remove' | t }}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="remove-method-modal-{{ method.id }}" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <form method="post">
+                            <div class="modal-header">
+                                <h5 class="modal-title">
+                                    <div class="d-inline-block mr-2">
+                                        {% if method.account_type == 'Visa' %}
+                                            <img alt="Visa" src="https://cdn.givecloud.co/npm/payment-icons@1.0.1/min/flat/visa.svg" style="width:50px; height:auto;">
+                                        {% elsif method.account_type == 'MasterCard' %}
+                                            <img alt="MasterCard" src="https://cdn.givecloud.co/npm/payment-icons@1.0.1/min/flat/mastercard.svg" style="width:50px; height:auto;">
+                                        {% elsif method.account_type == 'Discover' %}
+                                            <img alt="Discover" src="https://cdn.givecloud.co/npm/payment-icons@1.0.1/min/flat/discover.svg" style="width:50px; height:auto;">
+                                        {% elsif method.account_type == 'American Express' %}
+                                            <img alt="Amex" src="https://cdn.givecloud.co/npm/payment-icons@1.0.1/min/flat/amex.svg" style="width:50px; height:auto;">
+                                        {% else %}
+                                            <i class="fa fa-2x {{ method.fa_icon }}"></i>
+                                        {% endif %}
+                                    </div>
+                                     {{ method.account_number }}
+                                </h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                {{ 'templates.accounts.payment_methods.index.sure_you_want_to_delete_payment_method' | t }}
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-secondary" onclick="theme.PaymentMethods.remove(this,{{ method.id }})"><i class="fa fa-trash"></i> {{ 'templates.accounts.payment_methods.index.permanently_delete' | t }}</button>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> {{ 'templates.accounts.payment_methods.index.cancel' | t }}</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+        <!--
+        <div class="col-xl-3 col-md-4 col-sm-6">
+            <div class="card mb-3">
+                <div class="card-body py-4 text-center">
+                    <i class="fa fa-4x fa-plus"></i><br>
+                    Ending in {{ method.account_last_four }}{% if method.cc_expiry %}<br><small class="text-muted">Exp {{ method.cc_expiry | date: "%m/%y"}}</small>{% endif %}
+                </div>
+            </div>
+        </div>-->
+
+    </div>
+{% endif %}
+
+<div class="text-center">
+    <a href="/account/payment-methods/add" class="btn btn-primary"><i class="fa fa-plus"></i> {{ 'templates.accounts.payment_methods.index.add_payment_method' | t }}</a>
+</div>

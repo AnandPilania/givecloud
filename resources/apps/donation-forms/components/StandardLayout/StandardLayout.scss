@@ -1,0 +1,98 @@
+.root {
+  @apply flex flex-col h-screen w-full bg-transparent;
+  @apply relative;
+
+  .diagonalBackground {
+    @apply bg-white p-14 h-full w-3/4;
+    @apply absolute inset-0;
+    clip-path: polygon(0 0, 100% 0%, 80% 100%, 0% 100%);
+  }
+
+  .header {
+    @apply flex justify-between w-full pt-14 px-14 z-10;
+
+    .logo {
+      @apply items-start h-fit max-w-fit flex-grow-0 z-10;
+    }
+
+    @media (max-height: 768px) {
+      @apply pt-10 px-10;
+    }
+  }
+
+  .main {
+    @apply flex items-center justify-center;
+    @apply h-[95vh] gap-8;
+    @apply absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2;
+    @apply z-10;
+
+    .contentText {
+      @apply max-w-lg xl:max-w-[480px] w-full my-8;
+      @apply flex flex-col justify-center xl:ml-32 shrink-0;
+
+      .thumbnail {
+        @apply w-24 h-24 rounded-full mb-8;
+        @apply object-cover;
+        @apply shrink-0;
+        filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+      }
+
+      .arrowDownIcon {
+        @apply bg-gray-300 rounded-full;
+        @apply w-6 h-6 p-2 mt-4;
+      }
+
+      .heading {
+        @apply -mt-8;
+
+        .headline {
+          @apply text-6xl font-extrabold;
+          @apply flex flex-wrap mt-8;
+          line-height: 1.15;
+
+          @media (max-height: 768px) {
+            @apply text-5xl;
+            line-height: 1.15;
+          }
+        }
+
+        .description {
+          @apply mt-6 mb-20 max-w-screen-xs;
+          @apply text-xl text-gray-600 whitespace-pre-wrap;
+        }
+
+        @media (min-height: 568px) {
+          max-height: calc(636px - 355px);
+        }
+
+        @media (min-height: 768px) {
+          max-height: calc(636px - 236px);
+        }
+      }
+    }
+
+    .contentForm {
+      @apply flex h-full items-center bg-white shrink-0;
+      @apply shadow-2xl overflow-hidden;
+      @apply rounded-2xl;
+
+      @media (min-height: 728px) {
+        max-height: 636px;
+      }
+
+      @screen 2xl {
+        @media (min-height: 828px) {
+          max-height: 736px;
+        }
+      }
+    }
+  }
+
+  .footer {
+    @apply absolute left-14 bottom-14;
+
+    @media (max-height: 768px) {
+      @apply left-10 bottom-10;
+    }
+  }
+}

@@ -1,0 +1,30 @@
+.root {
+  @apply w-full;
+
+  .challenger {
+    @apply flex justify-center items-center my-4;
+    @apply text-xl font-bold;
+
+    &.hide {
+      @apply hidden;
+    }
+  }
+
+  .thumbnail {
+    @apply w-10 h-10 rounded-full mr-4;
+    @apply object-cover;
+    @apply shrink-0;
+  }
+
+  .thermometerContainer {
+    @apply flex gap-2 font-bold;
+
+    .thermometer {
+      @apply w-full;
+    }
+
+    .thermometerLabel {
+      @apply block text-xs text-[#828282];
+    }
+  }
+}

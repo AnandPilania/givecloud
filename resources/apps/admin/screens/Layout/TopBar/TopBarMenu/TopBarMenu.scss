@@ -1,0 +1,11 @@
+.root {
+  @apply flex items-center justify-center;
+
+  .liveChatButton {
+    @apply hidden text-base md:block;
+  }
+
+  .upgradeButtonIcon {
+    @apply w-5 mr-2;
+  }
+}

@@ -1,0 +1,51 @@
+<div class="category-list-{{ category.id }}">
+
+{% include 'header-image', header_title: category.name, header_image: category.feature_image.full %}
+
+<div class="page-content">
+
+{% if category.body %}
+    {{ category.body }}
+{% endif %}
+
+<section class="container py-5">
+
+    <div class="">
+
+        {% if options.columns == 1 %}
+            {% assign grid_item_wrap_classes = "col-12" %}
+        {% elsif options.columns == 2 %}
+            {% assign grid_item_wrap_classes = "col-sm-6 col-12" %}
+        {% elsif options.columns == 3 %}
+            {% assign grid_item_wrap_classes = "col-md-4 col-sm-6 col-12" %}
+        {% else %}
+            {% assign grid_item_wrap_classes = "col-lg-3 col-md-4 col-sm-6 col-12" %}
+        {% endif%}
+
+        <div class="row">
+            {% for product in products %}
+                <div class="{{ grid_item_wrap_classes }} {% if settings.animations %}wow fadeInUp{% endif %}" {% if settings.animations %}data-wow-delay="0.{{ forloop.index }}s"{% endif %}>
+                    {% include 'product-grid-item', show_summary: settings.category_show_product_summaries_on_listings, show_price: true %}
+                </div>
+            {% endfor %}
+        </div>
+
+        <nav class="my-5">
+            <div class="d-flex justify-content-center">
+                {% include 'pagination', paginator: products %}
+            </div>
+        </nav>
+
+        {% if settings.category_allow_add_to_cart %}
+            {% for product in products %}
+                {% include 'product-add-modal', product: product %}
+            {% endfor %}
+        {% endif %}
+
+  </div>
+
+</section>
+
+</div>
+
+</div>

@@ -1,0 +1,43 @@
+{% assign menu = linklists.main-menu %}
+<div class="header-main {% if settings.main_menu_hierarchy == 'multilevel' %}multilevel{% endif %}">
+  <ul class="nav">
+    {% for link in menu.links %}
+      {% if link.links.size %}
+        <li class="nav-item dropdown">
+          <a id="main-menu-item-{{ link.id }}" class="nav-link dropdown-toggle {% if link.child_active %}active{% endif %}" href="{{ link.url }}" {% if link.target %}target="{{ link.target }}"{% endif %} data-toggle="dropdown">
+            {{ link.title }}
+          </a>
+          <div class="dropdown-menu" aria-labelledby="main-menu-item-{{ link.id }}">
+            {% for sub_link in link.links %}
+              <div class="li">
+                {% if sub_link.links %}
+                  {% if settings.main_menu_hierarchy == 'multilevel' %}
+                    <a id="main-menu-item-{{ sub_link.id }}" class="dropdown-item dropdown-toggle" href="#">{{ sub_link.title }}</a>
+                    <ul class="dropdown-menu" aria-labelledby="main-menu-item-{{ sub_link.id }}">
+                      {% for subsub_link in sub_link.links %}
+                        <li><a class="dropdown-item {% if subsub_link.active %}active{% endif %}" href="{{ subsub_link.url }}" {% if subsub_link.target %}target="{{ subsub_link.target }}"{% endif %}>{{ subsub_link.title | escape }}</a></li>
+                      {% endfor %}
+                    </ul>
+                  {% else %}
+                    <h6 class="dropdown-header">{{ sub_link.title }}</h6>
+                    {% for subsub_link in sub_link.links %}
+                      <a class="dropdown-item" href="{{ subsub_link.url }}" {% if subsub_link.target %}target="{{ subsub_link.target }}"{% endif %}>{{ subsub_link.title }}</a>
+                    {% endfor %}
+                  {% endif %}
+                {% else %}
+                  <a class="dropdown-item" href="{{ sub_link.url }}" {% if sub_link.target %}target="{{ sub_link.target }}"{% endif %}>{{ sub_link.title }}</a>
+                {% endif %}
+              </div>
+            {% endfor %}
+          </div>
+        </li>
+      {% else %}
+        <li class="nav-item dropdown">
+          <a class="nav-link {% if link.active %}active{% endif %}" href="{{ link.url }}" {% if link.target %}target="{{ link.target }}"{% endif %}>
+            {{ link.title }}
+          </a>
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+</div>

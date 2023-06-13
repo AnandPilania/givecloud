@@ -1,0 +1,7 @@
+.root {
+  @apply border-b border-t border-gray-300 py-2;
+
+  .column {
+    @apply justify-center;
+  }
+}

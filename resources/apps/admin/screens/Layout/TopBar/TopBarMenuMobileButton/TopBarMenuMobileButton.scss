@@ -1,0 +1,14 @@
+.root {
+  @apply mr-4 my-auto;
+  .menuButton {
+    @apply flex items-center justify-center w-8 h-8 rounded-full text-xl;
+
+    &:hover {
+      @apply bg-gray-200;
+    }
+
+    &:focus {
+      @apply outline-none;
+    }
+  }
+}

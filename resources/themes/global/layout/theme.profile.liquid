@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  {% capture seo_title %}
+    {{ page_title }}
+    {% if settings.default_page_title %}
+      {% unless page_title contains settings.default_page_title %}
+        &ndash; {{ settings.default_page_title }}
+      {% endunless %}
+    {% endif %}
+  {% endcapture %}
+  <title>{{ seo_title }}</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+  <link rel="icon" type="image/png" href="{{ settings.favicon }}">
+
+  <meta name="csrf-token" content="{{ site.csrf_token }}">
+
+  {% include 'og-tags' %}
+
+  {% include 'assets', trim: true %}
+
+  {{ content_for_header }}
+</head>
+<body class="{{ body_classes }} {% if settings.header_style == 'overlay' or settings.header_style == 'overlay-gradient' %}overlayed-header{% endif %} {% if settings.theme_width == 'fixed' %}fixed-width{% endif %}">
+
+{% include 'header' %}
+
+{% if settings.theme_width == 'fixed' %}<div class="container master-container">{% endif %}
+
+<div class="d-none d-lg-block">
+    {% assign header_title = 'layout.theme_profile.my_account' | t %}
+    {% include 'header-image', header_title: header_title, header_image: settings.login_header_image.full %}
+</div>
+
+{% include 'account-notices' %}
+
+<div class="page-content">
+
+<div class="container py-5">
+
+    <div class="row">
+
+        <div class="d-none d-lg-block col-lg-4 col-xl-3 profile-sidebar pr-5">
+
+            {% if account %}
+                <div class="my-4 text-center d-none">
+                    <h3><i class="fa fa-user-circle-o fa-fw fa-4x mb-2"></i><br>{{ account.display_name | escape }}</h3>
+                    {% if account.billing_address.city %}
+                        <p><i class="fa fa-map-marker"></i> {{ account.billing_address.city | escape }}, {{ account.billing_address.province_code | escape }}</p>
+                    {% endif %}
+                </div>
+            {% endif %}
+
+            <div class="list-group mb-3">
+                <a class="list-group-item list-group-item-action {% if active_profile_menu == 'home' %}active{% endif %}" href="/account/home">{{ 'layout.theme_profile.my_home' | t }}</a>
+                {% if site.account_features contains 'view-profile' or site.account_features contains 'view-billing' or site.account_features contains 'view-shipping' %}
+                    <a class="list-group-item list-group-item-action {% if active_profile_menu == 'profile' %}active{% endif %}" href="/account/profile">{{ 'layout.theme_profile.my_profile' | t }}</a>
+                {% endif %}
+                {% if site.account_features contains 'view-giving-impact' %}
+                    <a class="list-group-item list-group-item-action {% if active_profile_menu == 'impact' %}active{% endif %}" href="/account/impact">{{ settings.giving_impact_heading_title }}</a>
+                {% endif %}
+                {% if site.account_features contains 'view-memberships' %}
+                    <a class="list-group-item list-group-item-action {% if active_profile_menu == 'memberships' %}active{% endif %}" href="/account/memberships">{{ 'layout.theme_profile.my_memberships' | t: memberships_term: site.synonyms.groups }}</a>
+                {% endif %}
+                {% if site.account_features contains 'view-fundraisers' %}
+                    <a class="list-group-item list-group-item-action {% if active_profile_menu == 'fundraisers' %}active{% endif %}" href="/account/fundraisers">{{ 'layout.theme_profile.my_fundraisers' | t }}</a>
+                {% endif %}
+                {% if site.account_features contains 'view-purchased-media' %}
+                    <a class="list-group-item list-group-item-action {% if active_profile_menu == 'purchasedmedia' %}active{% endif %}" href="/account/purchased-media">{{ settings.purchased_media_heading_title }}</a>
+                {% endif %}
+                {% if site.account_features contains 'view-orders' %}
+                    <a class="list-group-item list-group-item-action {% if active_profile_menu == 'history' %}active{% endif %}" href="/account/history">{{ 'layout.theme_profile.my_donations_and_orders' | t }}</a>
+                {% endif %}
+                {% if site.account_features contains 'view-receipts' %}
+                    <a class="list-group-item list-group-item-action {% if active_profile_menu == 'tax-receipts' %}active{% endif %}" href="/account/tax-receipts">{{ 'layout.theme_profile.my_tax_receipts' | t }}</a>
+                {% endif %}
+                {% if site.account_features contains 'view-sponsorships' %}
+                    <a class="list-group-item d-flex justify-content-between align-items-center list-group-item-action {% if active_profile_menu == 'sponsorships' %}active{% endif %}" href="/account/sponsorships">
+                        {{ 'layout.theme_profile.my_sponsorships' | t }}
+                    <span class="badge badge-secondary badge-pill">{{ account.sponsorship_count }}</span>
+                    </a>
+                {% endif %}
+            </div>
+
+            {% assign donor_portal_menu = linklists.donor-portal-menu %}
+            {% if donor_portal_menu %}
+                <div class="list-group mb-3">
+                    {% for link in donor_portal_menu.links %}
+                        <a class="list-group-item list-group-item-action {% if link.active %}active{% endif %}" href="{{ link.url }}" {% if link.target %}target="{{ link.target }}"{% endif %}>
+                            {{ link.title | escape }}
+                        </a>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <div class="list-group">
+                {% if site.account_features contains 'view-subscriptions' %}
+                    <a class="list-group-item list-group-item-action {% if active_profile_menu == 'subscriptions' %}active{% endif %}" href="/account/subscriptions">{{ 'layout.theme_profile.my_recurring_payments' | t }}</a>
+                {% endif %}
+                {% if site.account_features contains 'view-payment-methods' %}
+                    <a class="list-group-item list-group-item-action {% if active_profile_menu == 'payment-methods' %}active{% endif %}" href="/account/payment-methods">{{ 'layout.theme_profile.my_payment_methods' | t }}</a>
+                {% endif %}
+            </div>
+
+            <div class="mt-3">
+                <a href="/account/logout"><i class="fa fa-power-off fa-fw"></i> {{ 'general.logout' | t }}</a>
+            </div>
+        </div>
+
+        <div class="col-12 col-lg-8 col-xl-9">
+
+            {{ content_for_layout }}
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+{% include 'footer' %}
+
+{% if settings.theme_width == 'fixed' %}</div>{% endif %}
+
+{% include 'cookie-notice' %}
+
+{% include 'capture-nps' %}
+
+{% include 'localize-general' %}
+
+{{ content_for_footer }}
+
+</body>
+
+</html>

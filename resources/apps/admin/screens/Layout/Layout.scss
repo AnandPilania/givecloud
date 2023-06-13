@@ -1,0 +1,45 @@
+.root {
+  @apply flex;
+  @apply h-screen;
+  @apply overflow-hidden;
+
+  background-color: #f4fbff;
+
+  .contentContainer {
+    .main {
+      :global(#mainContent) {
+        @apply mt-6 lg:px-12;
+      }
+
+      :global(.page-header) {
+        @apply mt-0 text-4xl;
+      }
+
+      :global(.page-header .text-secondary) {
+        @apply text-sm;
+      }
+    }
+  }
+
+  .sidebarContainer {
+    @apply hidden md:flex;
+    @apply relative z-30;
+  }
+
+  .contentContainer {
+    @apply flex flex-col flex-1;
+    @apply overflow-hidden;
+    @apply mr-0;
+
+    .main {
+      @apply flex-1;
+      @apply relative;
+      @apply overflow-y-auto;
+      @apply px-8;
+
+      &:focus {
+        @apply outline-none;
+      }
+    }
+  }
+}

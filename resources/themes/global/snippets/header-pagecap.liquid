@@ -1,0 +1,279 @@
+  <div class="top-bar-alt d-none d-lg-block d-xl-block">
+    <div class="container">
+      <div class="d-flex">
+        <div class="p-1">
+          <ul class="nav">
+            {% if settings.header_fb_url %}
+              <li class="nav-item">
+                <a class="nav-link px-2" href="{{ settings.header_fb_url }}" target="_blank" rel="noopener"><i class="fa fa-facebook fa-fw"></i></a>
+              </li>
+            {% endif %}
+            {% if settings.header_twitter_url %}
+              <li class="nav-item">
+                <a class="nav-link px-2" href="{{ settings.header_twitter_url }}" target="_blank" rel="noopener"><i class="fa fa-twitter"></i></a>
+              </li>
+            {% endif %}
+            {% if settings.header_instagram_url %}
+              <li class="nav-item">
+                <a class="nav-link px-2" href="{{ settings.header_instagram_url }}" target="_blank" rel="noopener"><i class="fa fa-instagram"></i></a>
+              </li>
+            {% endif %}
+            {% if settings.header_pinterest_url %}
+              <li class="nav-item">
+                <a class="nav-link px-2" href="{{ settings.header_pinterest_url }}" target="_blank" rel="noopener"><i class="fa fa-pinterest"></i></a>
+              </li>
+            {% endif %}
+            {% if settings.header_linkedin_url %}
+              <li class="nav-item">
+                <a class="nav-link px-2" href="{{ settings.header_linkedin_url }}" target="_blank" rel="noopener"><i class="fa fa-linkedin"></i></a>
+              </li>
+            {% endif %}
+            {% if settings.header_youtube_url %}
+              <li class="nav-item">
+                <a class="nav-link px-2" href="{{ settings.header_youtube_url }}" target="_blank" rel="noopener"><i class="fa fa-youtube"></i></a>
+              </li>
+            {% endif %}
+            {% if settings.header_vimeo_url %}
+              <li class="nav-item">
+                <a class="nav-link px-2" href="{{ settings.header_vimeo_url }}" target="_blank" rel="noopener"><i class="fa fa-vimeo"></i></a>
+              </li>
+            {% endif %}
+            {% if settings.header_phone %}
+              <li class="nav-item">
+                <span class="nav-link px-2"><i class="fa fa-phone"></i> {{ settings.header_phone }}</span>
+              </li>
+            {% endif %}
+            {% if settings.header_email %}
+              <li class="nav-item">
+                <a class="nav-link px-2" href="mailto:{{ settings.header_email }}" target="_blank" rel="noopener"><i class="fa fa-envelope-o"></i> {{ settings.header_email }}</a>
+              </li>
+            {% endif %}
+
+            {% assign top_left_menu = linklists.top-left-menu %}
+            {% if top_left_menu %}
+              {% for link in top_left_menu.links %}
+                {% if link.links.size %}
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle {% if link.child_active %}active{% endif %}" href="{{ link.url }}" {% if link.target %}target="{{ link.target }}"{% endif %} data-toggle="dropdown">
+                      {{ link.title }}
+                    </a>
+                    <div class="dropdown-menu">
+                    {% for sub_link in link.links %}
+                      {% if sub_link.links %}
+                        <h6 class="dropdown-header">{{ sub_link.title }}</h6>
+                        {% for subsub_link in sub_link.links %}
+                          <a class="dropdown-item {% if subsub_link.active %}active{% endif %}" href="{{ subsub_link.url }}" {% if subsub_link.target %}target="{{ subsub_link.target }}"{% endif %}>{{ subsub_link.title }}</a>
+                        {% endfor %}
+                      {% else %}
+                        <a class="dropdown-item {% if sub_link.active %}active{% endif %}" href="{{ sub_link.url }}" {% if sub_link.target %}target="{{ sub_link.target }}"{% endif %}>{{ sub_link.title }}</a>
+                      {% endif %}
+                    {% endfor %}
+                    </div>
+                  </li>
+                {% else %}
+                  <li class="nav-item">
+                    <a class="nav-link {% if link.active %}active{% endif %}" href="{{ link.url }}" {% if link.target %}target="{{ link.target }}"{% endif %}>
+                      {{ link.title }}
+                    </a>
+                  </li>
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          </ul>
+        </div>
+        <div class="ml-auto p-1">
+          <ul class="nav">
+
+            {% assign top_right_menu = linklists.top-right-menu %}
+            {% if top_right_menu %}
+              <ul class="nav">
+              {% for link in top_right_menu.links %}
+                {% if link.links.size %}
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle {% if link.child_active %}active{% endif %}" href="{{ link.url }}" {% if link.target %}target="{{ link.target }}"{% endif %} data-toggle="dropdown">
+                      {{ link.title | escape }}
+                    </a>
+                    <div class="dropdown-menu">
+                    {% for sub_link in link.links %}
+                      {% if sub_link.links %}
+                        <h6 class="dropdown-header">{{ sub_link.title }}</h6>
+                        {% for subsub_link in sub_link.links %}
+                          <a class="dropdown-item {% if subsub_link.active %}active{% endif %}" href="{{ subsub_link.url }}" {% if subsub_link.target %}target="{{ subsub_link.target }}"{% endif %}>{{ subsub_link.title | escape }}</a>
+                        {% endfor %}
+                      {% else %}
+                        <a class="dropdown-item {% if sub_link.active %}active{% endif %}" href="{{ sub_link.url }}" {% if sub_link.target %}target="{{ sub_link.target }}"{% endif %}>{{ sub_link.title | escape }}</a>
+                      {% endif %}
+                    {% endfor %}
+                    </div>
+                  </li>
+                {% else %}
+                  <li class="nav-item">
+                    <a class="nav-link {% if link.active %}active{% endif %}" href="{{ link.url }}" {% if link.target %}target="{{ link.target }}"{% endif %}>
+                      {{ link.title | escape }}
+                    </a>
+                  </li>
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+
+            {% if settings.show_checkout_link %}
+              <li class="nav-item">
+                <a class="nav-link" href="/cart"><i class="fa {{ settings.fa_cart_icon }} fa-fw"></i>{% if settings.checkout_link_label %}&nbsp;{{ settings.checkout_link_label }}&nbsp;&nbsp;{% endif %}<span class="badge badge-pill badge-dark -cart-count">{{ cart.item_count }}</span></a>
+              </li>
+            {% endif %}
+
+            {% if settings.show_account_links %}
+              {% if account %}
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-fw fa-user-circle-o"></i> <strong>{{ account.display_name | escape }}{% if account.membership_badge %}<span class="text-uppercase badge ml-2 badge-secondary badge-pill">{{ account.membership_badge.group.name }}{% if account.membership_badge.is_active == false %} <span class="text-muted">({{ 'snippets.header_pagecap.expired' | t }})</span>{% endif %}</span>{% endif %}</strong> &nbsp;
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right pl-0" id="">
+                    <div style="width:450px;">
+                      <div class="row no-gutters">
+                        <div class="col-7 text-center pt-5 py-4">
+                          {% if account.avatar %}
+                            <img class="rounded-circle" src="{{ account.avatar }}" width="64" />
+                          {% else %}
+                              <i class="fa fa-user-circle-o fa-4x"></i>
+                          {% endif %}
+                          <div class="mt-2 mb-4 font-weight-bold">
+                            {{ account.display_name | escape }}
+                            {% if account.membership_badge %}
+                              <br />
+                              <span class="badge badge-primary badge-pill membership-badge">
+                                {{ account.membership_badge.group.name }}
+                                {% if account.membership_badge.is_active == false %} - {{ 'snippets.header_pagecap.expired_on' | t: expiry_date: account.membership_badge.end_date }} {% endif %}
+                                <span class="text-muted">
+                                  {% if account.membership_badge.is_active == true %}
+                                    {% if account.membership_badge.days_left < 5 %}
+                                        ({{ 'snippets.header_pagecap.expires_in_count' | t: count: account.membership_badge.days_left }})
+                                    {% else %}
+                                    ({{ 'snippets.header_pagecap.expires_on' | t: expiry_date: account.membership_badge.end_date }})
+                                    {% endif %}
+                                  {% endif %}
+                                </span>
+                              </span>
+                            {% endif %}
+                            {% if account.billing_address.city %}
+                              <br /><small><i class="fa fa-map-marker fa-fw"></i> {{ account.billing_address.city | escape }}, {{ account.billing_address.province_code | escape }}</small>
+                            {% endif %}
+                          </div>
+                          <div class="text-center">
+                            <a href="/account/logout"><i class="fa fa-power-off fa-fw"></i> {{ 'general.logout' | t }}</a>
+                          </div>
+                        </div>
+                        <div class="col-5">
+                          <h6 class="dropdown-header">{{ 'snippets.header_pagecap.my_menu' | t }}</h6>
+                          <a class="dropdown-item" href="/account/home">{{ 'snippets.header_pagecap.home' | t }}</a>
+                          {% if site.account_features contains 'view-profile' or site.account_features contains 'view-billing' or site.account_features contains 'view-shipping' %}
+                            <a class="dropdown-item" href="/account/profile">{{ 'snippets.header_pagecap.profile' | t }}</a>
+                          {% endif %}
+                          {% if site.account_features contains 'view-giving-impact' %}
+                            <a class="dropdown-item" href="/account/impact">{{ settings.giving_impact_heading_title }}</a>
+                          {% endif %}
+                          {% if site.account_features contains 'view-memberships' %}
+                            <a class="dropdown-item" href="/account/memberships">{{ 'snippets.header_pagecap.my_memberships' | t: memberships_term: site.synonyms.groups }}</a>
+                          {% endif %}
+                          {% if site.account_features contains 'view-fundraisers' %}
+                            <a class="dropdown-item" href="/account/fundraisers">{{ 'snippets.header_pagecap.fundraisers' | t }}</a>
+                          {% endif %}
+                          {% if site.account_features contains 'view-purchased-media' %}
+                            <a class="dropdown-item" href="/account/purchased-media">{{ settings.purchased_media_heading_title }}</a>
+                          {% endif %}
+                          {% if site.account_features contains 'view-orders' %}
+                            <a class="dropdown-item" href="/account/history">{{ 'snippets.header_pagecap.orders_donations' | t }}</a>
+                          {% endif %}
+                          {% if site.account_features contains 'view-receipts' %}
+                            <a class="dropdown-item" href="/account/tax-receipts">{{ 'snippets.header_pagecap.tax_receipts' | t }}</a>
+                          {% endif %}
+                          {% if site.account_features contains 'view-sponsorships' %}
+                            <a class="dropdown-item" href="/account/sponsorships">{{ site.synonyms.sponsorship_children | capitalize }}</a>
+                          {% endif %}
+                          {% assign donor_portal_menu = linklists.donor-portal-menu %}
+                          {% if donor_portal_menu %}
+                              {% for link in donor_portal_menu.links %}
+                                <a class="dropdown-item" href="{{ link.url }}" {% if link.target %}target="{{ link.target }}"{% endif %}>
+                                  {{ link.title | escape }}
+                                </a>
+                              {% endfor %}
+                          {% endif %}
+                          {% if site.account_features contains 'view-subscriptions' %}
+                            <a class="dropdown-item" href="/account/subscriptions">{{ 'snippets.header_pagecap.recurring_payments' | t }}</a>
+                          {% endif %}
+                          {% if site.account_features contains 'view-payment-methods' %}
+                            <a class="dropdown-item" href="/account/payment-methods">{{ 'snippets.header_pagecap.payment_methods' | t }}</a>
+                          {% endif %}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              {% else %}
+                <li id="nav-signin" class="nav-item dropdown">
+                  <a class="nav-link" href="/account/login" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ settings.account_link_label }} <i class="fa fa-chevron-down fa-fw"></i></a>
+                  <div class="dropdown-menu dropdown-menu-right p-4">
+                    <div style="width:290px;">
+                      <h3 class="card-title mb-4 text-left">{{ settings.account_link_label }}</h3>
+                       {% include 'social-login' %}
+                      {% form 'customer_login' %}
+                        <div class="form-group labelify">
+                          <label><i class="fa fa-envelope-o"></i> {{ 'general.forms.email' | t }}</label>
+                          <input type="email" name="email" autocomplete="username" class="form-control">
+                        </div>
+                        <div class="form-group labelify">
+                          <label><i class="fa fa-lock"></i> {{ 'general.forms.password' | t }}</label>
+                          <input type="password" name="password" autocomplete="current-password" class="form-control">
+                        </div>
+                        <div class="custom-control custom-checkbox mt-0 mb-3">
+                          <input type="checkbox" class="custom-control-input" id="rememberMeInput" name="remember_me" value="1">
+                          <label class="custom-control-label" for="rememberMeInput">{{ 'snippets.header_pagecap.remember_me' | t }}</label>
+                        </div>
+                        <div class="text-center mb-2">
+                          <button type="submit" class="btn btn-block btn-pill btn-primary"><i class="fa fa-log-in"></i> {{ settings.account_signin_label }}</button>
+                          <div class="text-center mt-2 text-sm">
+                            <a href="/account/reset-password">{{ 'snippets.header_pagecap.i_forgot_my_password' | t }}</a>
+                          </div>
+                        </div>
+                        <hr>
+                        <div class="text-sm text-center">
+                          <a href="/account/register" class="btn btn-block btn-pill btn-secondary"><i class="fa fa-log-in"></i> {{ settings.account_create_account_label }}</a>
+                        </div>
+                      {% endform %}
+                    </div>
+                  </div>
+                </li>
+              {% endif %}
+            {% endif %}
+
+            {% if site.currencies.size > 1 %}
+              <li class="nav-item dropdown currencies-dropdown">
+                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="flag" style="background-image:url(https://cdn.givecloud.co/s/assets/currency_flags/{{ cart.currency.iso_code | downcase }}.png)"></i>
+                  <strong>{% unless cart.currency.symbol == cart.currency.iso_code %}{{ cart.currency.symbol }} {% endunless %}{{ cart.currency.iso_code }}</strong>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" id="">
+                  {% for currency in site.currencies %}
+                    {% if currency.code != cart.currency.iso_code %}
+                      <a class="dropdown-item" href="/cart/currency/{{ currency.code | downcase }}">
+                        <i class="flag" style="background-image:url(https://cdn.givecloud.co/s/assets/currency_flags/{{ currency.code | downcase }}.png)"></i>
+                        <strong>{% unless currency.symbol == currency.code %}{{ currency.symbol }} {% endunless %}{{ currency.code }}</strong>
+                      </a>
+                    {% endif %}
+                  {% endfor %}
+                </div>
+              </li>
+            {% elsif settings.show_currency_in_pagecap %}
+              <li class="nav-item currencies-dropdown">
+                <span class="nav-link">
+                  <i class="flag" style="background-image:url(https://cdn.givecloud.co/s/assets/currency_flags/{{ cart.currency.iso_code | downcase }}.png)"></i>
+                  <strong>{% unless cart.currency.symbol == cart.currency.iso_code %}{{ cart.currency.symbol }} {% endunless %}{{ cart.currency.iso_code }}</strong>
+                </span>
+              </li>
+            {% endif %}
+
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>

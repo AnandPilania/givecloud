@@ -1,0 +1,11 @@
+.root {
+  @apply flex;
+
+  &.margin {
+    @apply mb-6;
+  }
+
+  .input {
+    @apply !border-l-0 !rounded-l-none;
+  }
+}

@@ -1,0 +1,11 @@
+.buttons {
+  @apply justify-end md:flex-row;
+
+  .column {
+    @apply pb-0;
+  }
+}
+
+.content {
+  @apply md:h-80;
+}

@@ -1,0 +1,41 @@
+<div class="page-content">
+
+    {% if category %}
+        {% assign categories = category.sub_categories %}
+    {% else %}
+        {% assign categories = post_type.categories %}
+    {% endif %}
+
+    {% if categories.size > 0 %}
+        <div class="container py-4">
+            <div class="row gutter-sm">
+                {% for category in categories %}
+                    <div class="col-sm {% if post_type.categories.size > 4 %}col-sm-3{% endif %} mb-3">
+                        <a href="/{{ post_type.handle }}/categories/{{ category.handle }}" class="btn btn-lg btn-outline-primary btn-block">{{ category.name }}</a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="container py-5">
+        {% if posts.size > 0 %}
+            <div class="masonry-4">
+              {% for post in posts %}
+                <div class="brick-container">
+                  <div class="brick wow fadeInUp">
+                    {% include 'post-grid-item', post: post %}
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+        {% else %}
+            <p class="text-muted text-lg text-center py-5">{{ 'templates.post_type.no_posts_here' | t }}</p>
+        {% endif %}
+    </div>
+
+    {% if pagination.lastPage > 1 %}
+        {% include 'paging-links' %}
+    {% endif %}
+
+</div>

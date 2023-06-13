@@ -1,0 +1,30 @@
+.root {
+  @apply relative flex items-start;
+
+  .input {
+    @apply flex items-center h-5;
+
+    input[type='checkbox'] {
+      @apply appearance-none p-0 align-middle bg-origin-border select-none flex-shrink-0 w-4 h-4 bg-white border-gray-300 rounded;
+      color: var(--primary-colour-500);
+
+      &:checked {
+        @apply border-transparent;
+        background-color: var(--primary-colour-500);
+      }
+
+      &:focus-visible {
+        @apply ring-2;
+        --tw-ring-color: black;
+      }
+    }
+  }
+
+  &.inverted input[type='checkbox']:checked {
+    @apply bg-white;
+  }
+
+  .label {
+    @apply ml-2 text-sm select-none;
+  }
+}

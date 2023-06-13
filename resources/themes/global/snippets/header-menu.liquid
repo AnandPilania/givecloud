@@ -1,0 +1,84 @@
+{% schema %}
+[
+    {
+        "name": "Customizations",
+        "settings": [
+            {
+                "type": "header",
+                "content": "Header Menu"
+            },
+            {
+                "type": "text",
+                "name": "page_header_menu_heading",
+                "label": "Heading",
+                "size":"sm"
+            },
+            {
+                "type": "text",
+                "name": "page_header_menu_title",
+                "label": "Title",
+                "size":"md"
+            },
+            {
+                "type": "text",
+                "name": "page_header_menu_placeholder",
+                "label": "Dropdown Placeholder Text",
+                "size":"sm"
+            },
+            {
+                "type": "nav_menu",
+                "name": "page_header_menu",
+                "label": "Menu",
+                "size":"sm"
+            }
+        ]
+    }
+]
+{% endschema %}
+
+
+<div class="page-header">
+    {% if feature_image %}
+        <div class="feature-img" style="background-image:url({{ feature_image.full }})"></div>
+    {% endif %}
+
+    <div class="title-nav-block container">
+        <div class="row">
+            <div class="col entry-title-block d-flex align-items-center">
+                <h1>{{ title }}</h1>
+            </div>
+            {% if metadata.page_header_menu %}
+                {% assign page_header_menu = linklists[metadata.page_header_menu] %}
+
+                {% if page_header_menu.links.size %}
+                    <div class="col-4 secondary-nav-block d-flex flex-column justify-content-center">
+                        {% if metadata.page_header_menu_heading %}
+                            <div class="secondary-nav-heading">{{ metadata.page_header_menu_heading }}</div>
+                        {% endif %}
+
+                        {% if metadata.page_header_menu_title %}
+                            <div class="secondary-nav-title">{{ metadata.page_header_menu_title }}</div>
+                        {% endif %}
+
+                        <div class="secondary-page-nav dropdown">
+                            <button type="button" class="btn btn-primary w-100 dropdown-toggle" data-toggle="dropdown">
+                                {% if metadata.page_header_menu_placeholder %}
+                                    {{ metadata.page_header_menu_placeholder }}
+                                {% else %}
+                                    {{ 'snippets.header_menu.select_a_page' | t }}
+                                {% endif %}
+                            </button>
+                            <div class="dropdown-menu">
+                                {% for link in page_header_menu.links %}
+                                    <a class="dropdown-item" href="{{ link.url }}" {% if link.target %}target="{{ link.target }}"{% endif %}>
+                                        {{ link.title | escape }}
+                                    </a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+</div>

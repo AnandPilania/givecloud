@@ -1,0 +1,27 @@
+.root {
+  @apply flex items-center text-blue-500 truncate;
+
+  .backIcon {
+    @apply mr-2 text-base;
+  }
+
+  a {
+    @apply flex items-center font-normal text-base text-blue-500 mr-2;
+
+    &:hover {
+      @apply text-blue-600;
+    }
+  }
+
+  .pageTitle {
+    @apply flex items-center overflow-hidden;
+
+    .pageTitleIcon {
+      @apply mr-2 text-xs;
+    }
+
+    .pageTitleText {
+      @apply block text-blue-500 font-bold truncate;
+    }
+  }
+}

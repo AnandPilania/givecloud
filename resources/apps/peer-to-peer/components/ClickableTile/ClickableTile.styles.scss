@@ -1,0 +1,4 @@
+.root {
+  @apply flex w-full px-3 pt-1 rounded-md md:transition md:duration-500 mb-1 text-inherit hover:shadow-outline-gca;
+  @apply focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-blue transition-none;
+}

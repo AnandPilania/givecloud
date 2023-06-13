@@ -1,0 +1,175 @@
+{% schema %}
+[
+    {
+        "name": "Multi-Item Fields",
+        "config": {
+            "hide_content_editor": true
+        },
+        "settings": [
+            {
+                "type": "header",
+                "content": "Multi-Item Checkout: Branding"
+            },
+            {
+                "type": "text",
+                "name": "event_subtitle",
+                "revisable": true,
+                "label": "Sub Title in Header",
+                "size":"md"
+            },
+            {
+                "type": "on-off",
+                "name": "sharing",
+                "label": "Social Sharing"
+            },
+            {
+                "type": "header",
+                "content": "Multi-Item Checkout: Summary Bar"
+            },
+            {
+                "type": "on-off",
+                "name": "show_details",
+                "label": "Show Summary Bar",
+                "default":true
+            },
+            {
+                "type": "text",
+                "name": "first_panel_heading",
+                "revisable": true,
+                "label": "First Panel Heading",
+                "info": "The heading for the first panel in the summary info",
+                "size":"sm",
+                "default": "Date & Time"
+            },
+            {
+                "type": "select",
+                "name": "first_panel_icon",
+                "label": "First Panel Icon",
+                "options": {
+                    "fa-shopping-bag" : "Bag",
+                    "fa-basket" : "Basket",
+                    "fa-calendar-o" : "Calendar",
+                    "fa-shopping-cart" : "Cart",
+                    "fa-map-marker" : "Location",
+                    "fa-ticket" : "Ticket"
+                },
+                "size":"sm",
+                "default":"fa-calendar-o"
+            },
+            {
+                "type": "text",
+                "name": "first_panel_content",
+                "revisable": true,
+                "label": "First Panel Content",
+                "info": "The content for the first panel.",
+                "size":"sm"
+            },
+            {
+                "type": "text",
+                "name": "second_panel_heading",
+                "revisable": true,
+                "label": "Second Panel Heading",
+                "info": "The heading for the second panel in the summary info",
+                "size":"sm",
+                "default": "Location"
+            },
+            {
+                "type": "select",
+                "name": "second_panel_icon",
+                "label": "Second Panel Icon",
+                "options": {
+                    "fa-shopping-bag" : "Bag",
+                    "fa-basket" : "Basket",
+                    "fa-calendar-o" : "Calendar",
+                    "fa-shopping-cart" : "Cart",
+                    "fa-map-marker" : "Location",
+                    "fa-ticket" : "Ticket"
+                },
+                "size":"sm",
+                "default":"fa-map-marker"
+            },
+            {
+                "type": "text",
+                "name": "second_panel_content",
+                "revisable": true,
+                "label": "Second Panel Content",
+                "info": "The content for the second panel.",
+                "size":"sm"
+            },
+            {
+                "type": "text",
+                "name": "third_panel_heading",
+                "revisable": true,
+                "label": "Third Panel Heading",
+                "info": "The heading for the third panel in the summary info",
+                "size":"sm",
+                "default": "Pricing"
+            },
+            {
+                "type": "select",
+                "name": "third_panel_icon",
+                "label": "Third Panel Icon",
+                "options": {
+                    "fa-shopping-bag" : "Bag",
+                    "fa-basket" : "Basket",
+                    "fa-calendar-o" : "Calendar",
+                    "fa-shopping-cart" : "Cart",
+                    "fa-map-marker" : "Location",
+                    "fa-ticket" : "Ticket"
+                },
+                "size":"sm",
+                "default":"fa-shopping-cart"
+            },
+            {
+                "type": "text",
+                "name": "third_panel_content",
+                "revisable": true,
+                "label": "Third Panel Content",
+                "info": "The content for the third panel.",
+                "size":"sm"
+            }
+        ]
+    },
+    {
+        "include": "multi-item-checkout"
+    }
+]
+{% endschema %}
+
+{% capture page_title %}
+    {{ page.title }}{% if page.metadata.event_subtitle %}<br><small>{{ page.metadata.event_subtitle }}</small>{% endif %}
+{% endcapture %}
+
+{% include 'header-image', header_title: page_title, header_image: page.feature_image.full %}
+
+<div class="page-content">
+    {% if page.metadata.show_details %}
+        <div class="container mt-n5">
+            <div class="card mb-4 {% if settings.animations %}wow fadeIn{% endif %}" {% if settings.animations %}data-wow-delay="1s"{% endif %}>
+                <div class="row no-gutters">
+                    <div class="col-12 col-sm-4 border-right">
+                        <div class="card-body">
+                            <div class="card-title-sm"><i class="fa {{ page.metadata.first_panel_icon }} fa-fw"></i> {{ page.metadata.first_panel_heading }}</div>
+                            <p class="card-text">{{ page.metadata.first_panel_content }}</p>
+                        </div>
+                        <div class="d-block d-sm-none border-bottom"></div>
+                    </div>
+                    <div class="col-6 col-sm-4 border-right">
+                        <div class="card-body">
+                            <div class="card-title-sm"><i class="fa {{ page.metadata.second_panel_icon }} fa-fw"></i> {{ page.metadata.second_panel_heading }}</div>
+                            <p class="card-text">{{ page.metadata.second_panel_content }}</p>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-4">
+                        <div class="card-body">
+                            <div class="card-title-sm"><i class="fa {{ page.metadata.third_panel_icon }} fa-fw"></i> {{ page.metadata.third_panel_heading }}</div>
+                            <p class="card-text">{{ page.metadata.third_panel_content }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    {% include 'multi-item-checkout', id: page.id, metadata: page.metadata %}
+</div>

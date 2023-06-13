@@ -1,0 +1,14 @@
+
+<ul class="pagination justify-content-center">
+    <li class="page-item {% if pagination.currentPage == 1 %}disabled{% endif %}">
+      <a class="page-link" href="{{ pagination.previousPageUrl }}" tabindex="-1"><i class="fa fa-fw fa-chevron-left"></i> {{ 'snippets.paging_links.previous' | t }}</a>
+    </li>
+    {% comment %}
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    {% endcomment %}
+    <li class="page-item {% if pagination.currentPage == pagination.lastPage %}disabled{% endif %}">
+      <a class="page-link" href="{{ pagination.nextPageUrl }}">{{ 'snippets.paging_links.next' | t }} <i class="fa fa-fw fa-chevron-right"></i></a>
+    </li>
+</ul>

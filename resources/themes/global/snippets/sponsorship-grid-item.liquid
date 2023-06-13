@@ -1,0 +1,71 @@
+<div class="card mb-4" {% if match_height %}mh-data="{{ match_height }}"{% endif %}>
+  <div class="card-flags">
+    <!--<div class="flag-secondary">Waiting 1 week</div>-->
+  </div>
+
+    {% if child.thumbnail %}
+        {% if settings.sponsorship_thumb_height != 'full' %}
+            <div class="card-img-top" style="height:{{ settings.sponsorship_thumb_height }}px; background-position:center center; background-size:cover; background-image:url('{{ child.thumbnail }}');"></div>
+        {% else %}
+        <img class="card-img-top" src="{{ child.thumbnail }}" alt="{% include 'sponsorship-name', fname: child.first_name, lname: child.last_name %}">
+        {% endif %}
+  {% else %}
+    <div class="card-img-top text-center d-flex d-inline-block justify-content-center" style="height:{% if settings.sponsorship_thumb_height != 'full' %}{{ settings.sponsorship_thumb_height }}{% else %}250{% endif %}px; background-color:#eee; color:#fff;"><i class="align-self-center fa fa-camera fa-4x"></i></div>
+  {% endif %}
+
+  <div class="card-body text-center">
+    <h4 class="card-title">{% include 'sponsorship-name', fname: child.first_name, lname: child.last_name %}</h4>
+
+    {% if settings.sponsorship_show_age and child.age %}
+      <p class="card-text">
+        {% if settings.sponsorship_show_age and settings.sponsorship_show_gender and child.age and child.gender %}
+          {% if child.gender == 'F' %}
+            {{ 'snippets.sponsorship_grid_item.child_description_female_with_age_html' | t: age: child.age }}
+          {% else %}
+            {{ 'snippets.sponsorship_grid_item.child_description_male_with_age_html' | t: age: child.age }}
+          {% endif %}
+        {% elsif settings.sponsorship_show_age and child.age %}
+          {{ 'snippets.sponsorship_grid_item.child_description_age_html' | t: age: child.age }}
+        {% elsif settings.sponsorship_show_gender and child.gender %}
+          {% if child.gender == 'F' %}
+            {{ 'snippets.sponsorship_grid_item.child_description_female_html' | t }}
+          {% else %}
+            {{ 'snippets.sponsorship_grid_item.child_description_male_html' | t }}
+          {% endif %}
+        {% endif %}
+      </p>
+    {% endif %}
+
+    <div class="text-center">
+      {% assign child_in_cart = sponsorship | in_cart %}
+      {% if child_in_cart %}
+        <a href="#" class="btn btn-outline-primary d-inline-block disabled m-1"><i class="fa fa-check"></i> {{ 'snippets.sponsorship_grid_item.added' | t }}</a>
+      {% elsif sponsorship.sponsored %}
+        <a href="#" class="btn btn-outline-primary d-inline-block disabled m-1"><i class="fa fa-check"></i>
+            {% if settings.sponsorship_sponsored_label %}
+                {{ settings.sponsorship_sponsored_label }}
+            {% else %}
+                {{ 'snippets.sponsorship_grid_item.sponsored' | t }}
+            {% endif %}
+        </a>
+      {% else %}
+        <a href="#add-sponsorship-{{ child.id }}" data-toggle="modal" class="btn btn-primary d-inline-block m-1"><i class="fa fa-plus"></i>
+            {% if settings.sponsorship_sponsor_me_label %}
+                {{ settings.sponsorship_sponsor_me_label }}
+            {% else %}
+                {{ 'snippets.sponsorship_grid_item.sponsor_me' | t }}
+            {% endif %}
+        </a>
+      {% endif %}
+      <a href="/sponsorship/{{ child.id }}" class="btn btn-primary d-inline-block m-1">
+          <i class="fa fa-search"></i>
+          {% if settings.sponsorship_my_profile_label %}
+            {{ settings.sponsorship_my_profile_label }}
+          {% else %}
+            {{ 'snippets.sponsorship_grid_item.my_profile' | t }}
+          {% endif %}
+      </a>
+    </div>
+
+  </div>
+</div>

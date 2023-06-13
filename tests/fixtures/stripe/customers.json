@@ -1,0 +1,73 @@
+{
+  "object": "list",
+  "data": [{
+      "id": "cus_M4G8r8iVCeg3ty",
+      "object": "customer",
+      "address": {
+        "city": "Beverly Hills",
+        "country": "US",
+        "line1": "123 Anywhere St",
+        "line2": "",
+        "postal_code": "CA",
+        "state": "90210"
+      },
+      "balance": 0,
+      "created": 1657964932,
+      "currency": null,
+      "default_currency": null,
+      "default_source": null,
+      "delinquent": false,
+      "description": null,
+      "discount": null,
+      "email": "bob@example.com",
+      "invoice_prefix": "D5EB8A83",
+      "invoice_settings": {
+        "custom_fields": null,
+        "default_payment_method": null,
+        "footer": null,
+        "rendering_options": null
+      },
+      "livemode": false,
+      "metadata": [],
+      "name": "Bob Hope",
+      "next_invoice_sequence": 1,
+      "phone": "555-555-5555",
+      "preferred_locales": [],
+      "shipping": null,
+      "tax_exempt": "none",
+      "test_clock": null
+    },
+    {
+      "id": "cus_Du6h9EnHVIb3MQ",
+      "object": "customer",
+      "address": null,
+      "balance": 0,
+      "created": 1541226010,
+      "currency": "cad",
+      "default_currency": "cad",
+      "default_source": "card_1DSIYaEF6XkQa2YLOpc1lH54",
+      "delinquent": true,
+      "description": null,
+      "discount": null,
+      "email": "bob@example.com",
+      "invoice_prefix": "2EF5D75",
+      "invoice_settings": {
+        "custom_fields": null,
+        "default_payment_method": null,
+        "footer": null,
+        "rendering_options": null
+      },
+      "livemode": false,
+      "metadata": [],
+      "name": null,
+      "next_invoice_sequence": 42,
+      "phone": null,
+      "preferred_locales": [],
+      "shipping": null,
+      "tax_exempt": "none",
+      "test_clock": null
+    }
+  ],
+  "has_more": false,
+  "url": "\/v1\/customers"
+}

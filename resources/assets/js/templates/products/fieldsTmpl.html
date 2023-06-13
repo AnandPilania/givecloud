@@ -1,0 +1,141 @@
+
+<div class="productfields">
+    <input type="hidden" name="productfields[<%= _dom_id %>][id]" value="<%= id %>" />
+    <input type="hidden" name="productfields[<%= _dom_id %>][_isnew]" value="<%= _isnew %>" />
+    <input type="hidden" name="productfields[<%= _dom_id %>][default_value]" value="<%= default_value %>">
+
+    <div id="productfields-table-row-<%= _dom_id %>">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Custom Field
+
+                <div class="pull-right">
+                    <a href="javascript:void(0);" class="-hide-if-single_row btn btn-danger btn-xs" onclick="j.product.fields.remove(<%= _dom_id %>);"><i class="fa fa-times fa-fw"></i> Delete</a>
+                </div>
+            </div>
+            <div class="panel-body">
+
+                <div class="row">
+                    <div class="form-group col-lg-2 col-md-2 col-sm-3 col-xs-6">
+                        <label for="">Sequence</label>
+                        <input type="text" class="form-control -field-sequence" name="productfields[<%= _dom_id %>][sequence]" id="" value="<%= sequence %>" maxlength="3">
+                    </div>
+
+                    <div class="form-group col-lg-7 col-md-7 col-sm-6 col-xs-12">
+                        <label for="">Name:</label>
+                        <input type="text" class="form-control focus-first" name="productfields[<%= _dom_id %>][name]" id="" value="<%= name %>" maxlength="200">
+                    </div>
+
+                    <div class="form-group col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                        <label for="">Type:</label>
+                        <select class="form-control" name="productfields[<%= _dom_id %>][type]" id="productfields_<%= _dom_id %>_type" onchange="j.product.fields.onTypeChange(<%= _dom_id %>);">
+                            <option value="text"    <% if (type == 'text')    { %> selected="selected" <% } %>>Text Field</option>
+                            <option value="lg_text" <% if (type == 'lg_text') { %> selected="selected" <% } %>>Big Text Field</option>
+                            <option value="select"  <% if (type == 'select')  { %> selected="selected" <% } %>>Select Box</option>
+                            <option value="multi-select" <% if (type == 'multi-select') { %> selected="selected" <% } %>>Multi-Select</option>
+                            <option value="check"   <% if (type == 'check')   { %> selected="selected" <% } %>>Check Box</option>
+                            <option value="date"    <% if (type == 'date')    { %> selected="selected" <% } %>>Date</option>
+                            <option value="email"   <% if (type == 'email')   { %> selected="selected" <% } %>>Email</option>
+                            <option value="html"    <% if (type == 'html')    { %> selected="selected" <% } %>>HTML</option>
+                            <option value="hidden"  <% if (type == 'hidden')  { %> selected="selected" <% } %>>Hidden</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row productfields_<%= _dom_id %>_settings_wrap">
+                    <div class="form-group col-sm-3">
+                        <label for="">Is Required</label>
+                        <div class="form-control-static">
+                            <label class="radio-inline">
+                                <input type="radio" name="productfields[<%= _dom_id %>][isrequired]" id="isrequired1" value="1" <% if (isrequired == "1") { %>checked<% } %>> Yes
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="productfields[<%= _dom_id %>][isrequired]" id="isrequired0" value="0" <% if (isrequired == "0") { %>checked<% } %>> No
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group productfields_<%= _dom_id %>_hint_wrap hide col-sm-9">
+                        <label for="">Hint</label>
+                        <input type="text" class="form-control" name="productfields[<%= _dom_id %>][hint]" id="" value="<%= hint %>" maxlength="200">
+                        <small>Optional text that describes the custom field.</small>
+                    </div>
+                </div>
+
+                <div class="row productfields_<%= _dom_id %>_options_wrap productfields_options_wrap hide">
+                    <div class="form-group col-sm-12">
+                        <div class="clearfix">
+                            <label class="pull-left" style="margin-right:14px;">Options</label>
+                            <div class="checkbox" style="margin:0;">
+                                <label><input type="checkbox" name="productfields[<%= _dom_id %>][format]" value="advanced" <% if ((type == 'select' || type == 'multi-select') && format == 'advanced') print('checked') %>>Set both labels and values</label>
+                            </div>
+                        </div>
+                        <div class="simple <% if ((type == 'select' || type == 'multi-select') && format == 'advanced') print('hide') %>">
+                            <textarea class="form-control" style="height:70px;" id="productfields_<%= _dom_id %>_options" name="productfields[<%= _dom_id %>][options]"><%= options %></textarea>
+                            <small>Each select option must be on its own line.</small>
+                            <div class="form-group mt-3">
+                                <label for="productfields_<%= _dom_id %>_options_default">Default Value</label>
+                                <input type="text" class="form-control" id="productfields_<%= _dom_id %>_options_default" placeholder="Enter a default value" value="<%= default_value %>">
+                            </div>
+                        </div>
+                        <div class="choices <% if (!((type == 'select' || type == 'multi-select') && format == 'advanced')) print('hide') %>">
+                            <div class="clone hide">
+                                <div class="form-row choice">
+                                    <div class="col-sm-3"><input type="text" class="form-control" data-index="-1" data-name="productfields[<%= _dom_id %>][choices][_choice_id_][value]" placeholder="Value (ex. PR003)"></div>
+                                    <div class="col-sm-7"><input type="text" class="form-control" data-index="-1" data-name="productfields[<%= _dom_id %>][choices][_choice_id_][label]" placeholder="Label (ex. North-West Pacific Regional Headquarters)"></div>
+                                    <div class="col-sm-2">
+                                        <button type="button" class="btn btn-link choice-up"><i class="fa fa-chevron-up"></i></button>
+                                        <button type="button" class="btn btn-link choice-down"><i class="fa fa-chevron-down"></i></button>
+                                        <button type="button" class="btn btn-link add-choice"><i class="fa fa-plus-circle"></i></button>
+                                        <button type="button" class="btn btn-link remove-choice"><i class="fa fa-minus-circle"></i></button>
+                                        <button type="button" class="btn btn-link default-choice" title="Click to toggle default"><i class="fa fa-check text-gray-400"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <% if ((type == 'select' || type == 'multi-select') && format == 'advanced') { %>
+                                <% _.each(choices, function(choice, index) { %>
+                                    <div class="form-row choice">
+                                        <div class="col-sm-3"><input type="text" class="form-control" data-index="<%= index %>" name="productfields[<%= _dom_id %>][choices][<%= index %>][value]" placeholder="Value (ex. PR003)" value="<%= choice.value %>"></div>
+                                        <div class="col-sm-7"><input type="text" class="form-control" data-index="<%= index %>" name="productfields[<%= _dom_id %>][choices][<%= index %>][label]" placeholder="Label (ex. North-West Pacific Regional Headquarters)" value="<%= choice.label %>"></div>
+                                        <div class="col-sm-2">
+                                            <button type="button" class="btn btn-link choice-up"><i class="fa fa-chevron-up"></i></button>
+                                            <button type="button" class="btn btn-link choice-down"><i class="fa fa-chevron-down"></i></button>
+                                            <button type="button" class="btn btn-link add-choice"><i class="fa fa-plus-circle"></i></button>
+                                            <button type="button" class="btn btn-link remove-choice"><i class="fa fa-minus-circle"></i></button>
+                                            <button type="button" class="btn btn-link default-choice" title="Click to toggle default"><i class="fa fa-check <%= default_value === choice.value ? '' : 'text-gray-400' %>"></i></button>
+                                        </div>
+                                    </div>
+                                <% }); %>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row productfields_<%= _dom_id %>_hidden_wrap productfields_hidden_wrap <% if (type != 'hidden') print('hide') %>">
+                    <div class="form-group col-sm-12">
+                        <label for="productfields_<%= _dom_id %>_hidden_default">Default Value</label>
+                        <input type="text" class="form-control" id="productfields_<%= _dom_id %>_hidden_default" placeholder="Enter a default value" value="<%= default_value %>">
+                    </div>
+                </div>
+
+                <div class="row productfields_<%= _dom_id %>_body_wrap hide">
+                    <div class="form-group col-sm-12">
+                        <textarea class="form-control html" style="height:90px;" id="productfields_<%= _dom_id %>_body" name="productfields[<%= _dom_id %>][body]"><%= body %></textarea>
+                    </div>
+                </div>
+
+                <div class="row productfields_<%= _dom_id %>_settings_wrap">
+                    <div class="form-group col-sm-12 text-info <%= !Givecloud.settings.dpo_is_enabled ? 'hide' : '' %>">
+                        <label for=""><img src="/jpanel/assets/images/dp-blue.png" class="dp-logo inline"> Map to DPO Gift UDF <a href="https://help.givecloud.com/en/articles/4555453-donorperfect-syncing-user-defined-fields-custom-fields" target="_blank" rel="noreferrer"><i class="fa fa-question-circle"></i></a></label>
+                        <select onchange="j.product.fields.onUDFChange(<%= _dom_id %>);" id="map_to_product_meta-<%= _dom_id %>" class="-map_to_product_meta form-control" name="productfields[<%= _dom_id %>][map_to_product_meta]">
+                            <option value="">[ None ]</option>
+                            <%= product_meta_options %>
+                        </select>
+                    </div>
+                </div>
+
+                <div style="float:right; margin-top:-20px; font-size:10px; color:#ccc;">ID: <%= id %></div>
+            </div>
+
+        </div>
+    </div>
+</div>

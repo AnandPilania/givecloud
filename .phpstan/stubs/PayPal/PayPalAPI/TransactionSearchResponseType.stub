@@ -1,0 +1,9 @@
+<?php
+
+namespace PayPal\PayPalAPI;
+
+class TransactionSearchResponseType
+{
+    /** @var \PayPal\EBLBaseComponents\PaymentTransactionSearchResultType[] */
+    public $PaymentTransactions; // @phpstan-ignore-line
+}

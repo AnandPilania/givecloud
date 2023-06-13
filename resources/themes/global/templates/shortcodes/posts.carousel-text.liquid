@@ -1,0 +1,39 @@
+<div id="{{ id }}" class="carousel slide" data-ride="carousel" data-interval="{{ interval }}">
+
+  <div class="carousel-inner">
+    {% for post in posts %}
+      <div class="carousel-item carousel-text {% if forloop.first %}active{% endif %}">
+
+        {% if post.title %}
+          <div class="carousel-caption">
+            <div class="text-lg">{{ post.content }}</div>
+            {% if post.title or post.feature_image.thumb or post.excerpt %}
+              <p>
+                {% if post.feature_image %}
+                  <span class="circle-avatar-bg-sm m-2" style="background-image:url('{{ post.feature_image.thumb }}');"></span><br>
+                {% endif %}
+                {% if post.title %}
+                  <strong>{{ post.title }}</strong>
+                {% endif %}
+                {% if post.excerpt %}
+                  <br><small>{{ post.excerpt }}</small>
+                {% endif %}
+              </p>
+            {% endif %}
+          </div>
+        {% endif %}
+
+      </div>
+    {% endfor %}
+  </div>
+
+  <!-- next / previous -->
+  <a class="carousel-control-prev" href="#{{ id }}" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">{{ 'templates.accounts.shortcodes.previous' | t }}</span>
+  </a>
+  <a class="carousel-control-next" href="#{{ id }}" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">{{ 'templates.accounts.shortcodes.next' | t }}</span>
+  </a>
+</div>

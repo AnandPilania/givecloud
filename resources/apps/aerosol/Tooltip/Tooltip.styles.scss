@@ -1,0 +1,80 @@
+.root {
+  @apply max-w-xs w-full text-white p-4 text-center relative rounded-lg font-normal inline-block z-50;
+
+  &.primary {
+    @apply bg-blue-500;
+  }
+
+  &.info {
+    @apply bg-indigo-600;
+  }
+
+  &.secondary {
+    @apply bg-gray-500;
+  }
+
+  &.error {
+    @apply bg-red-500;
+  }
+
+  &.light {
+    @apply bg-white text-black;
+    @apply shadow-outline-gca;
+
+    .top .arrow {
+      box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.05);
+    }
+
+    .bottom .arrow {
+      box-shadow: -5px -5px 5px 0px rgba(0, 0, 0, 0.05);
+    }
+
+    .left .arrow {
+      box-shadow: 5px -5px 5px 0px rgba(0, 0, 0, 0.05);
+    }
+
+    .right .arrow {
+      box-shadow: -5px 5px 5px 0px rgba(0, 0, 0, 0.05);
+    }
+  }
+}
+
+.tooltip {
+  @apply w-4 h-4 absolute bg-inherit;
+
+  > .arrow {
+    @apply bg-inherit w-4 h-4 rotate-45 absolute;
+  }
+
+  &.top {
+    @apply bottom-0;
+
+    > .arrow {
+      @apply -bottom-2;
+    }
+  }
+
+  &.bottom {
+    @apply top-0;
+
+    > .arrow {
+      @apply -top-2;
+    }
+  }
+
+  &.left {
+    @apply right-0;
+
+    > .arrow {
+      @apply -right-2;
+    }
+  }
+
+  &.right {
+    @apply left-0;
+
+    > .arrow {
+      @apply -left-2;
+    }
+  }
+}

@@ -1,0 +1,57 @@
+
+{% if order %}
+    {{- settings.conversion_scripts -}}
+{% endif %}
+
+{% include 'header-image', header_title: settings.ty_headline, header_image: settings.ty_header_image.full %}
+
+<div class="page-content">
+    <div class="container body-min-height py-3">
+        <h1>
+            <small>{{ settings.ty_leadout }}</small>
+        </h1>
+
+        <div class="row row-eq-height my-5">
+            <div class="col-12 col-md-4 mb-3 {% if settings.ty_box_2_enabled == 0 %}offset-md-4{% elsif settings.ty_box_3_enabled == 0 %}offset-md-2{% endif %}">
+                <div class="card h-100wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="card-body">
+                        {% if order %}
+                            <h3 class="card-title text-left">{{ 'templates.thank_you.view_your_receipt' | t }}</h3>
+                            <p>{{ 'templates.thank_you.your_payment_has_been_processed_successfully' | t }}</p>
+                            <p><a href="/contributions/{{ order.number }}" class="btn btn-sm btn-outline-secondary"><i class="fa fa-search"></i> {{ 'templates.thank_you.invoice_no' | t: number: order.number }}</a></p>
+                        {% elsif pledge %}
+                            <h3 class="card-title text-left">{{ 'templates.thank_you.your_pledge' | t }}</h3>
+                            <p>{{ 'templates.thank_you.your_pledge_has_been_received_successfully' | t : pledge: pledge }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            {% if settings.ty_box_2_enabled %}
+                <div class="col-12 col-md-4 mb-3">
+                    <div class="card h-100wow fadeInUp" data-wow-delay="0.3s">
+                        <div class="card-body">
+                            <h3 class="card-title text-left">{{ settings.ty_box_2_label }}</h3>
+                            {{ settings.ty_box_2_body }}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+            {% if settings.ty_box_3_enabled %}
+                <div class="col-12 col-md-4 mb-3">
+                    <div class="card h-100wow fadeInUp" data-wow-delay="0.5s">
+                        <div class="card-body">
+                            <h3 class="card-title text-left">{{ settings.ty_box_3_label }}</h3>
+                            {{ settings.ty_box_3_body }}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+
+        {% if settings.ty_other_content %}
+            {{ settings.ty_other_content }}
+        {% endif %}
+    </div>
+</div>

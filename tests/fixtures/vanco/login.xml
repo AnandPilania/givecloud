@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<VancoWS>
+    <Auth>
+        <RequestID>7b5286e566b74bcdb61a12a930f3a1d8</RequestID>
+        <RequestTime>2021-06-19 22:06:06</RequestTime>
+        <RequestType>Login</RequestType>
+        <Version>2.1</Version>
+    </Auth>
+    <Response>
+        <SessionID>b1d53e482a58fc5403f891eaf76a146a3e3744d1</SessionID>
+    </Response>
+</VancoWS>

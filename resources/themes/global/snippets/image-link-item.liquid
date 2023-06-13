@@ -1,0 +1,10 @@
+
+<a href="{{ link | default: '#' }}"
+    class="image-link image-link-round {% if size %}image-link-{{ size }}{% endif %} image-link-contrast"
+    {% if image %}style="background-image: url('{{ image }}');"{% endif %}
+>
+    <span class="link-text">{{ text }}</span>
+    {% if caption %}
+        <span class="link-caption">{{ caption }}</span>
+    {% endif %}
+</a>

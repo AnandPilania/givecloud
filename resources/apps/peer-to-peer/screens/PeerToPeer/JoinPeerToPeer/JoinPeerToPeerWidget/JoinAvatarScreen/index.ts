@@ -1,0 +1,1 @@
+export { JoinAvatarScreen } from './JoinAvatarScreen'

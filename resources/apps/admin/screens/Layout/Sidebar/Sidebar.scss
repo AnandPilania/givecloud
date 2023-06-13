@@ -1,0 +1,99 @@
+.root {
+  @apply relative;
+  @apply flex flex-col;
+  @apply h-full;
+  @apply w-72;
+
+  background: linear-gradient(164.27deg, #2f80ed 32.52%, #48b1f0 72.94%);
+
+  &.narrow {
+    @apply w-56;
+  }
+
+  &.fullScreen {
+    @apply w-full;
+  }
+
+  .scrollContent {
+    @apply flex-grow;
+    @apply p-8;
+    @apply overflow-x-hidden overflow-y-auto;
+
+    .header {
+      @apply flex justify-between items-center;
+
+      .gcLogoContainer {
+        @apply bg-white;
+        @apply p-2;
+        @apply rounded-lg;
+        @apply cursor-pointer;
+
+        .gcLogo {
+          @apply w-6 h-6;
+        }
+      }
+
+      .closeButtonContainer {
+        @apply flex items-center justify-center;
+        @apply w-12 h-12;
+        @apply rounded-full;
+        @apply transition duration-300 ease-in-out;
+
+        svg {
+          @apply w-6 h-6;
+        }
+
+        &:active {
+          @apply bg-white bg-opacity-20;
+        }
+      }
+    }
+
+    .firstLevelMenuContainer,
+    .alertsContainer,
+    .pinnedItemsContainer {
+      @apply my-8;
+    }
+
+    .classicMenuButton {
+      @apply inline-flex items-center;
+      @apply text-white text-sm font-medium;
+
+      &:hover {
+        @apply font-semibold;
+      }
+
+      &:focus {
+        @apply outline-none;
+      }
+
+      .icon {
+        @apply mr-1.5;
+      }
+    }
+
+    .classicDaysRemaingText {
+      @apply block;
+      @apply text-yellow-200 font-bold;
+      @apply mt-2;
+    }
+  }
+
+  .footer {
+    @apply flex-shrink-0;
+    @apply p-8;
+
+    a {
+      @apply flex items-center;
+      @apply text-white text-sm font-medium;
+
+      &:hover {
+        @apply font-semibold;
+      }
+
+      .externalLinkIcon {
+        @apply ml-2;
+      }
+    }
+  }
+}

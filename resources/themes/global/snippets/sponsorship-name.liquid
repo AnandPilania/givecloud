@@ -1,0 +1,17 @@
+{%- if settings.sponsorship_name_format == 'first-last' -%}
+{{ fname }} {{ lname }}
+{%- elsif settings.sponsorship_name_format == 'first-l' -%}
+{{ fname }} {{ lname | capitalize | slice : 0, 1 }}.
+{%- elsif settings.sponsorship_name_format == 'f-last' -%}
+{{ fname | capitalize | slice : 0, 1 }}. {{ lname }}
+{%- elsif settings.sponsorship_name_format == 'last-first' -%}
+{{ lname }}, {{ fname }}
+{%- elsif settings.sponsorship_name_format == 'last-f' -%}
+{{ lname }}, {{ fname | capitalize | slice : 0, 1 }}.
+{%- elsif settings.sponsorship_name_format == 'l-first' -%}
+{{ lname | capitalize | slice : 0, 1 }}, {{ fname }}
+{%- elsif settings.sponsorship_name_format == 'first' -%}
+{{ fname }}
+{%- elsif settings.sponsorship_name_format == 'last' -%}
+{{ lname }}
+{%- endif -%}

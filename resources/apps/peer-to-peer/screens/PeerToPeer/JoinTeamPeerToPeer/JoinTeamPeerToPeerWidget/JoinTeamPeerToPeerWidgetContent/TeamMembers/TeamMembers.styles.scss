@@ -1,0 +1,17 @@
+.container {
+  width: 100%;
+  width: -moz-available;
+  width: -webkit-fill-available;
+  width: fill-available;
+
+  .wrapper {
+    @apply h-fit my-2;
+
+    .item {
+      @apply px-2;
+    }
+  }
+  .buttonContainer {
+    @apply w-full flex items-center justify-center py-1;
+  }
+}

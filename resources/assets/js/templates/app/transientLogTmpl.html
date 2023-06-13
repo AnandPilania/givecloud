@@ -1,0 +1,33 @@
+
+<div>
+    <h3>
+        <%= log.message %>
+        <div class="mt-1">
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-gray-100 text-gray-800"><%= log.source.toUpperCase() %></span>
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-<%= colour %>-100 text-<%= colour %>-800"><%= log.level.toUpperCase() %></span>
+            <% if (log.user) { %>
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800"><%= log.user.firstname %> <%= log.user.lastname %></span>
+            <% } %>
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800"><%= log.ip_address %></span>
+        </div>
+    </h3>
+
+    <table class="mt-5 w-full table-fixed">
+        <% _.forEach(log.context, function(value, key) { %>
+            <tr>
+                <% if (!Array.isArray(log.context)) { %>
+                    <td class="pt-3 pr-3" width="120">
+                        <span class="inline-flex items-center px-2.5 py-0.5 text-sm font-medium bg-gray-100 text-gray-800"><%= _.capitalize(key) %></span>
+                    </td>
+                <% } %>
+                <td class="pt-3">
+                    <div class="w-full">
+                        <div class="p-4 font-mono border border-gray-300 bg-gray-100 rounded whitespace-pre overflow-x-auto" style="font-size:11px"><%
+                            if (typeof value === 'string') { %><%= _.escape(value) %><% } else { %><%= _.escape(JSON.stringify(value, null, 4)) %><% }
+                        %></div>
+                    </div>
+                </td>
+            </tr>
+        <% }) %>
+    </table>
+</div>

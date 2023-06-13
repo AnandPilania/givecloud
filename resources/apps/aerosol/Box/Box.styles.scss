@@ -1,0 +1,31 @@
+.root {
+  @apply bg-white overflow-hidden rounded-xl shadow-outline-gca mb-8 relative flex flex-col;
+
+  &.padding {
+    @apply p-6;
+  }
+
+  &.reducedPadding {
+    @apply p-3;
+  }
+
+  &.noPadding {
+    @apply p-0;
+  }
+
+  &.noMargin {
+    @apply mb-0;
+  }
+
+  &.overflowVisible {
+    @apply md:overflow-visible;
+  }
+
+  &.fullscreen {
+    @apply w-full h-screen rounded-none;
+  }
+
+  &.fullHeight {
+    @apply h-full;
+  }
+}

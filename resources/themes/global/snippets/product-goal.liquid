@@ -1,0 +1,20 @@
+<div class="goal" data-goal-currency="{{ product.currency.code }}">
+  <div class="progress {% if goal_size %}progress-{{ goal_size }}{% endif %} {% if goal_style %}progress-{{ goal_style }}{% endif %} {% if goal_style == 'outline' %}border-{{ goal_color }}{% endif %}">
+    <div class="progress-bar bg-{% if goal_color %}{{ goal_color }}{% else %}primary{% endif %}" role="progressbar" style="width: {{ product.goal_progress_percent }}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+  </div>
+  <div class="row no-gutters">
+    {% if goal_size == 'sm' %}
+      {% if settings.goal_progress_primary_indicator == 'days_left' and product.goal_deadline %}
+        <div class="col goal-days text-left"><small>{{ 'snippets.product_goal.days_left' | t }}</small><br>{{ product.goal_days_left }}</div>
+      {% else %}
+        <div class="col goal-amount text-left"><small>{{ 'snippets.product_goal.raised' | t }}</small><br>{{ product.goal_progress | money : product.currency : settings.goal_progress_currency_format }}</div>
+      {% endif %}
+    {% else %}
+      <div class="col goal-amount text-left"><small>{{ 'snippets.product_goal.raised' | t }}</small><br>{{ product.goal_progress | money : product.currency : settings.goal_progress_currency_format }}</div>
+      {% if product.goal_deadline %}
+        <div class="col goal-days text-center"><small>{{ 'snippets.product_goal.days_left' | t }}</small><br>{{ product.goal_days_left }}</div>
+      {% endif %}
+    {% endif %}
+    <div class="col goal-count text-right"><small>{{ 'snippets.product_goal.goal' | t }}</small><br>{{ product.goal_amount | money : product.currency : settings.goal_progress_currency_format }}</div>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+.root {
+  @apply rounded-lg p-4 w-80 bg-theme;
+
+  &.bottom_right {
+    @apply absolute bottom-0 lg:-bottom-9 -right-32;
+  }
+
+  &.bottom_center {
+    @apply absolute bottom-0 lg:-bottom-9 -right-7;
+  }
+
+  &.bottom_left {
+    @apply absolute bottom-0 lg:-bottom-9 -left-32;
+  }
+
+  .header {
+    @apply flex justify-between items-center mb-2;
+  }
+
+  .skeleton {
+    @apply w-28 h-4 bg-gray-100 rounded-md;
+  }
+
+  .icon {
+    @apply text-white;
+  }
+
+  .overlay {
+    @apply bg-blue-300 border-blue-400 opacity-40 hover:cursor-pointer hover:bg-brand-blue hover:border-2 hover:border-blue-400;
+  }
+}

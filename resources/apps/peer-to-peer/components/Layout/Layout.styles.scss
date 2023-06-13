@@ -1,0 +1,49 @@
+.root {
+  @apply relative bg-white h-screen overflow-hidden;
+
+  .container {
+    @apply h-full !p-0 !my-0;
+
+    .wrapper {
+      @apply relative z-10 w-full h-full flex flex-col;
+
+      .svg {
+        @apply h-full w-80 fill-white absolute top-1/2 left-1/2 transform -translate-x-12 -translate-y-1/2;
+      }
+    }
+  }
+
+  .imageContainer {
+    @apply bg-gray-50 absolute inset-y-0 right-0 w-1/2 h-full;
+    @apply scale-125 origin-left blur-lg;
+
+    .image {
+      @apply object-cover aspect-w-[3/4] h-full w-full;
+    }
+  }
+
+  .mobileContent {
+    @apply h-full w-full relative flex justify-center items-center;
+
+    .mobileImage {
+      @apply absolute inset-0 bg-center bg-cover;
+      @apply blur-lg scale-110;
+    }
+  }
+
+  .transition {
+    @apply h-full flex items-center z-30 w-full justify-center;
+  }
+
+  .column {
+    @apply h-full flex justify-center;
+
+    .transition {
+      @apply h-full flex items-center z-30;
+    }
+  }
+
+  .contentContainer {
+    @apply !pr-12;
+  }
+}

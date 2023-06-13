@@ -1,0 +1,7 @@
+.root {
+  @apply absolute inset-0 z-40;
+  @apply flex justify-center;
+  @apply transition-colors ease-in-out duration-300;
+  @apply text-8xl text-center;
+  @apply bg-white;
+}

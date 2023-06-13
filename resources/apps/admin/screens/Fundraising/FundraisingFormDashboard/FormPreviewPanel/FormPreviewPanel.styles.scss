@@ -1,0 +1,11 @@
+.imageContainer {
+  @apply h-full aspect-w-3 aspect-h-[2.5] xl:aspect-h-[2.5] lg:aspect-h-3 overflow-hidden rounded-lg relative bg-slate-100;
+
+  img {
+    @apply object-cover object-top;
+  }
+}
+
+.button {
+  @apply hidden absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2;
+}

@@ -1,0 +1,1 @@
+export { PersonalAvatarScreen } from './PersonalAvatarScreen'

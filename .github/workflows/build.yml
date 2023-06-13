@@ -1,0 +1,68 @@
+
+name: Build
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+
+  build:
+    name: Build
+    runs-on: ubuntu-20.04
+
+    env:
+      FONTAWESOME_NPM_AUTH_TOKEN: ${{ secrets.FONTAWESOME_NPM_AUTH_TOKEN }}
+
+    steps:
+
+    - name: Cleanup previous runs
+      uses: styfle/cancel-workflow-action@0.11.0
+      with:
+        access_token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        ref: ${{ github.head_ref }}
+        token: ${{ secrets.GH_BOT_TOKEN }}
+
+    - uses: actions/setup-node@v2
+      with:
+        node-version: '16.15.0'
+
+    - id: cache_root_node_modules
+      name: Cache node_modules directory for project root
+      uses: actions/cache@v3
+      with:
+        path: node_modules
+        key: ${{ runner.os }}-root-node-modules-${{ hashFiles('**/package-lock.json') }}
+
+    - name: Install deps for project root
+      if: steps.cache_root_node_modules.outputs.cache-hit != 'true'
+      run: npm ci
+
+    - name: Run build for root project
+      run: npm run prod -- --no-color
+
+    - name: Publish to build branch
+      if: success()
+      run: |-
+        git add -fA public/assets && \
+        git add -fA public/jpanel/assets/apps && \
+        git add -fA public/jpanel/assets/dist && \
+        git add -fA public/v1 && \
+        git -c user.name=gcb0t -c user.email=bot@givecloud.com commit -m "Publishing to build branch" --author="gcb0t <bot@givecloud.com>" && \
+        git push --set-upstream origin HEAD:build --atomic --force
+
+    - name: Report status
+      if: always()
+      uses: ravsamhq/notify-slack-action@master
+      with:
+        status: ${{ job.status }}
+        notification_title: '{workflow} {status_message} for givecloud/main repo'
+        message_format: '{emoji} *{workflow}* {status_message} for <{repo_url}|{repo}>'
+        mention_users: 'U0JQ0PPFW'
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_INFRASTRUCTURE_WEBHOOK_URL }}

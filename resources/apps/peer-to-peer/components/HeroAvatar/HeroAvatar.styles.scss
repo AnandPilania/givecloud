@@ -1,0 +1,42 @@
+.root {
+  @apply flex items-center justify-center;
+  @apply rounded-full;
+
+  img {
+    width: -webkit-fill-available;
+  }
+
+  &.custom {
+    @apply bg-theme-light text-theme;
+  }
+
+  &.default {
+    @apply bg-inherit;
+  }
+
+  &.large {
+    @apply w-20 h-20;
+  }
+
+  &.small {
+    @apply w-11 h-11;
+  }
+
+  &.contain {
+    @apply object-contain;
+  }
+
+  &.cover {
+    @apply object-cover;
+  }
+
+  .initials {
+    &.large {
+      @apply font-semibold text-2xl;
+    }
+
+    &.small {
+      @apply font-semibold text-base;
+    }
+  }
+}

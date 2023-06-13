@@ -1,0 +1,49 @@
+
+{% layout "layouts/app" %}
+
+{% block head %}
+<mj-preview>Givecloud successfully processed {{ $transactions_processed }} recurring payments.</mj-preview>
+{% endblock %}
+
+{% block content %}
+<mj-section css-class="box">
+  <mj-column>
+    <mj-headline icon="fa-dark-cog">
+      <h1>Recurring Payment Summary</h1>
+    </mj-headline>
+    <mj-text color="#474747" font-size="18px" font-weight="300" padding-top="0">
+      <p>Givecloud successfully processed {{ $transactions_processed }} recurring payments.</p>
+    </mj-text>
+    <mj-text color="#474747" font-size="18px" font-weight="700" padding-top="0">
+        <p>
+            ({{ $transactions_approved }}) Payments Approved<br>
+            ({{ $transactions_declined }}) Payments Declined
+        </p>
+    </mj-text>
+    <mj-button background-color="#fc58af" color="white" font-weight="500" font-size="16px" padding="20px" border-radius="30px" href="{{ $transactions_url }}">
+      Review Transactions
+    </mj-button>
+    <mj-raw>@if ($is_auto_follow_up)</mj-raw>
+      <mj-text color="#989898" font-size="13px" font-weight="300" padding-top="0" padding-bottom="0">
+        <p>Givecloud has already followed up with those whose payments failed.</p>
+      </mj-text>
+    <mj-raw>@endif</mj-raw>
+  </mj-column>
+</mj-section>
+<mj-raw>@unless ($is_auto_follow_up)</mj-raw>
+  <mj-section css-class="spacer"></mj-section>
+  <mj-section css-class="box">
+    <mj-column>
+      <mj-text padding-bottom="0">
+        <h2>Save Time with Automated Follow-up!</h2>
+      </mj-text>
+      <mj-text color="#989898" font-size="16px" font-weight="300" padding-top="0" padding-bottom="0">
+        <p>
+          Givecloud can automatically notify those whose payments failed. You can set this up under
+          <a href="{{ secure_site_url('/jpanel/settings/email') }}">Settings &amp; Admin &gt; Emails</a>.
+        </p>
+      </mj-text>
+    </mj-column>
+  </mj-section>
+<mj-raw>@endunless</mj-raw>
+{% endblock %}

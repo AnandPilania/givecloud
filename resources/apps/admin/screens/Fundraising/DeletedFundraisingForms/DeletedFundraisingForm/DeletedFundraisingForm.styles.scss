@@ -1,0 +1,11 @@
+.header {
+  @apply lg:max-w-xs capitalize;
+}
+
+.imageContainer {
+  @apply aspect-w-10 aspect-h-7;
+
+  .image {
+    @apply object-center object-cover;
+  }
+}

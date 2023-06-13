@@ -1,0 +1,60 @@
+{% asset '~/scripts/templates/product.js' %}
+
+{% include 'header-image', header_title: '&nbsp;' %}
+
+<div class="page-content">
+
+<section class="mt-4">
+    <div class="container">
+
+        <div class="mb-5 text-center" style="margin-top:-140px;">
+
+            {% if product.feature_image.thumb %}
+            <div class="avatar-xl" style="background-image:url('{{ product.feature_image.thumb }}');"></div>
+            {% else %}
+            <div class="avatar-xl" style="background-color:#eee; color:#fff; text-align:center; padding-top:85px;"><i class="fa fa-camera fa-5x fa-fw"></i></div>
+            {% endif %}
+
+            <h1 class="mt-4">{{ product.name }}</h1>
+
+            <div style="max-width:400px; width:80%;" class="mx-auto">
+                {% if product.goal_amount %}
+                  {% include 'product-goal', product: product, goal_size: 'lg' %}
+                {% endif %}
+            </div>
+        <div>
+
+        <div>
+            <!-- desktop buttons -->
+            <div class="d-none d-md-block mt-5">
+                <button type="button" data-toggle="modal" data-target="#add-product-{{ product.id }}" name="button" value="primary-btn" class="mb-3 btn btn-xl btn-primary btn-pill px-4"><i class="fa fa-plus"></i> {% if product.primary_button_label %}{{ product.primary_button_label }}{% else %}{{ 'templates.product.add_to_cart' | t: cart_term: settings.cart_label }}{% endif %}</button>
+                {% if product.alternate_button_label %}
+                    <button type="button" data-toggle="modal" data-target="#add-product-{{ product.id }}" name="button" value="alternate-btn" class="mb-3 btn btn-xl btn-outline-primary btn-pill px-4">{{ product.alternate_button_label }}</button>
+                {% endif %}
+            </div>
+
+            <!-- mobile buttons (fixed to bottom) -->
+            <div class="mobile-add-product-buttons d-flex d-sm-flex d-md-none shadow-sm fixed-bottom p-3 text-center bg-white align-items-center justify-content-between">
+                <div class="circle-avatar-bg-sm mx-2" style="background-image:url('{{ product.feature_image.thumb }}');"></div>
+
+                <div class="d-flex flex-column">
+                    <button type="button" data-toggle="modal" data-target="#add-product-{{ product.id }}" name="button" value="primary-btn" class="btn btn-primary {% unless product.alternate_button_label %}btn-lg{% endunless %}"><i class="fa fa-plus"></i> {% if product.primary_button_label %}{{ product.primary_button_label }}{% else %}{{ 'templates.product.add_to_cart' | t: cart_term: settings.cart_label }}{% endif %}</button>
+                    {% if product.alternate_button_label %}
+                        <button type="button" data-toggle="modal" data-target="#add-product-{{ product.id }}" name="button" value="alternate-btn" class="btn btn-outline-primary">{{ product.alternate_button_label }}</button>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="">
+
+            {{ product.page_content }}
+
+        </div>
+    </div>
+
+</section>
+
+</div>
+
+{% include 'product-add-modal', product: product %}

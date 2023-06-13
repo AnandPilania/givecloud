@@ -1,0 +1,19 @@
+.svgContainer {
+  @apply max-w-[100px];
+
+  svg {
+    @apply w-full h-full;
+  }
+}
+
+.box {
+  @apply !pb-0;
+}
+
+.content {
+  @apply h-full lg:max-h-112 px-[2px] my-4;
+}
+
+.footer {
+  @apply flex justify-center md:justify-start;
+}

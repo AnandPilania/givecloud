@@ -1,0 +1,67 @@
+.root {
+  @apply relative;
+
+  .box {
+    @apply bg-gray-100 items-start;
+  }
+
+  .heading {
+    @apply w-3/5 text-left mt-3.5;
+  }
+
+  .logoBox {
+    @apply w-full max-h-[4rem] flex justify-center;
+    @apply p-2 mt-5;
+    @apply bg-white rounded-lg;
+
+    .logoWrapper {
+      @apply w-full;
+
+      .logoContainer {
+        @apply aspect-w-12 aspect-h-2;
+
+        .logo {
+          @apply object-center object-contain;
+        }
+      }
+    }
+  }
+
+  .messageBox {
+    @apply w-full h-56;
+    @apply p-4 mt-4;
+    @apply bg-white rounded-lg;
+  }
+
+  .skeleton {
+    @apply h-4;
+    @apply bg-gray-200 rounded-md;
+
+    &.xsmall {
+      @apply w-16;
+    }
+
+    &.small {
+      @apply w-28;
+    }
+
+    &.medium {
+      @apply w-32;
+    }
+
+    &.large {
+      @apply w-40;
+    }
+  }
+
+  .footer {
+    @apply w-full;
+    @apply flex flex-col items-center;
+    @apply mt-6;
+  }
+
+  .overlay {
+    @apply absolute -top-2 -right-5 pt-[6.5rem] pr-56 rounded-md;
+    @apply bg-blue-300 border-blue-400 opacity-40 hover:cursor-pointer hover:bg-brand-blue hover:border-2 hover:border-blue-400;
+  }
+}

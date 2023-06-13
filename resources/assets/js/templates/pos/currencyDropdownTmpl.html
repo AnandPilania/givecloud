@@ -1,0 +1,16 @@
+
+<a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+    <i class="flag" style="background-image:url(https://cdn.givecloud.co/s/assets/currency_flags/<%= currency.code.toLowerCase() %>.png)"></i> <strong><%= currency.symbol %> <%= currency.code %></strong>
+    <span class="caret"></span>
+</a>
+<ul class="dropdown-menu dropdown-menu-right">
+<% _.forEach(currencies, function(c) { %>
+    <% if (c.code != currency.code) { %>
+    <li>
+        <a href="#" onclick="pos.currency.use('<%= c.code %>')">
+            <i class="flag" style="background-image:url(https://cdn.givecloud.co/s/assets/currency_flags/<%= c.code.toLowerCase() %>.png)"></i> <%= c.symbol %> <%= c.code %>
+        </a>
+    </li>
+    <% } %>
+<% }) %>
+</ul>

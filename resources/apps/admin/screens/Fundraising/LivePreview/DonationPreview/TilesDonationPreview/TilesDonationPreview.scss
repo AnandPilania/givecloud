@@ -1,0 +1,16 @@
+.socialProofPill {
+  @apply absolute -top-4 left-16;
+}
+
+.logo {
+  @apply absolute top-6 w-12;
+}
+
+.overlay {
+  @apply absolute -top-1 -right-1.5 pl-56 pb-36 w-full h-full rounded-md;
+  @apply bg-blue-300 border-blue-400 opacity-40 hover:cursor-pointer hover:bg-brand-blue hover:border-2 hover:border-blue-400;
+}
+
+.text {
+  @apply w-3/4 font-bold font-sans text-xs truncate text-center;
+}

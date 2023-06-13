@@ -1,0 +1,8 @@
+.root {
+  @apply flex items-center py-4 px-6;
+  @apply bg-slate-200 rounded-md;
+
+  &.margin {
+    @apply mb-4;
+  }
+}

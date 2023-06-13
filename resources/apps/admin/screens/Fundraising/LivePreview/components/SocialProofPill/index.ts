@@ -1,0 +1,1 @@
+export { SocialProofPill } from './SocialProofPill'

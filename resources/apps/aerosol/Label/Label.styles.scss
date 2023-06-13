@@ -1,0 +1,15 @@
+.root {
+  @apply flex items-center text-sm font-bold text-black font-sans mb-3;
+
+  > .optional {
+    @apply uppercase text-xxs text-gray-600 ml-2;
+  }
+
+  &.disabled {
+    @apply text-gray-500;
+  }
+
+  &.error {
+    @apply text-red-600;
+  }
+}

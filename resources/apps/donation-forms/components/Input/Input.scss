@@ -1,0 +1,74 @@
+.root {
+  @apply relative;
+  @apply w-full;
+
+  .iconContainer {
+    @apply absolute;
+    @apply flex items-center justify-center;
+    @apply h-11 w-11;
+
+    .icon {
+      @apply text-lg;
+      @apply text-gray-400;
+      margin-top: 2px;
+    }
+  }
+
+  .input {
+    @apply w-full h-11;
+    @apply p-3 pt-[0.9rem] pl-3;
+    @apply appearance-none;
+    @apply placeholder-gray-400;
+  }
+
+  &.hasIcon .input {
+    @apply pl-11;
+  }
+
+  .errorMessage {
+    @apply block mt-1 ml-2 text-xs;
+    @apply text-red-500;
+  }
+
+  &.valid {
+    .iconContainer .icon {
+      @apply text-green-500;
+      @apply opacity-40;
+    }
+
+    .input,
+    .input:focus {
+      @apply ring-green-500 border-green-500;
+    }
+  }
+
+  &.invalid {
+    .iconContainer .icon {
+      @apply text-red-500;
+    }
+
+    .input,
+    .input:focus {
+      @apply text-[#eb1c26];
+      @apply ring-red-500 border-red-500;
+      @apply placeholder-red-300;
+    }
+
+    .fauxPlaceholder {
+      @apply text-red-300;
+    }
+  }
+
+  .fauxPlaceholder {
+    @apply absolute top-0 left-0 h-11;
+    @apply border border-transparent leading-6;
+    @apply p-3 pl-3;
+    @apply pointer-events-none;
+    padding-top: 0.65rem;
+    color: #9ca3af;
+  }
+
+  &.hasIcon .fauxPlaceholder {
+    @apply pl-11;
+  }
+}

@@ -1,0 +1,12 @@
+.root {
+  @apply relative flex items-center justify-center;
+
+  .text {
+    @apply max-w-[12rem] font-bold text-5xl font-sans truncate;
+  }
+
+  .overlay {
+    @apply absolute pt-16 px-28 rounded-md;
+    @apply bg-blue-300 border-blue-400 opacity-40 hover:cursor-pointer hover:bg-brand-blue hover:border-2 hover:border-blue-400;
+  }
+}

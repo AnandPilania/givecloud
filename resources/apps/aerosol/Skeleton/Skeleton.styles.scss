@@ -1,0 +1,63 @@
+.root {
+  @apply bg-slate-300 animate-pulse rounded-lg;
+
+  &.margin {
+    @apply mb-4;
+  }
+}
+
+.rounded {
+  @apply rounded-full;
+
+  &.rounded--small {
+    @apply w-8 h-8;
+  }
+
+  &.rounded--medium {
+    @apply w-12 h-12;
+  }
+
+  &.rounded--large {
+    @apply w-16 h-16;
+  }
+}
+
+.width {
+  @apply min-w-fit;
+
+  &.width--small {
+    @apply w-1/4;
+  }
+
+  &.width--medium {
+    @apply w-2/4;
+  }
+
+  &.width--large {
+    @apply w-3/4;
+  }
+
+  &.width--full {
+    @apply w-full;
+  }
+}
+
+.height {
+  @apply min-h-min;
+
+  &.height--small {
+    @apply h-4;
+  }
+
+  &.height--medium {
+    @apply h-8;
+  }
+
+  &.height--large {
+    @apply h-16;
+  }
+
+  &.height--full {
+    @apply h-full;
+  }
+}

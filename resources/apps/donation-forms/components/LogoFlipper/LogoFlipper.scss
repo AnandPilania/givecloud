@@ -1,0 +1,31 @@
+.root {
+  @apply hidden sm-h:block;
+  @apply relative flex items-center justify-center flex-grow;
+  @apply w-auto max-w-[13rem] max-h-full h-full;
+
+  img {
+    @apply w-auto h-auto max-w-full max-h-[3rem] 2xl:max-h-[4rem];
+    @apply m-auto;
+  }
+
+  .frontLogo,
+  .reverseLogo {
+    backface-visibility: hidden;
+    transition: transform 0.8s;
+    transform: perspective(1000px) rotateX(0);
+  }
+
+  .reverseLogo {
+    @apply absolute top-0;
+    transform: perspective(1000px) rotateX(180deg);
+  }
+
+  &.showReverseLogo {
+    .frontLogo {
+      transform: perspective(1000px) rotateX(-179.9deg);
+    }
+    .reverseLogo {
+      transform: perspective(1000px) rotateX(0deg);
+    }
+  }
+}

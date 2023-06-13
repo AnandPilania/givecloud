@@ -1,0 +1,36 @@
+.root {
+  &.standardLayout {
+    @apply pt-8 !important;
+  }
+
+  &.inlineWidget {
+    @apply pt-1 !important;
+  }
+
+  .content {
+    @apply relative;
+    @apply flex flex-col flex-grow items-center;
+    @apply w-full;
+  }
+
+  .components {
+    @apply flex-grow-0;
+    @apply w-full transition-opacity;
+  }
+
+  .transparencyPromiseContainer {
+    @apply my-4;
+  }
+
+  .inputMask {
+    @apply opacity-20 pointer-events-none;
+  }
+
+  .amountSelectorContainer {
+    @apply relative;
+  }
+
+  .donateBtn {
+    @apply font-bold;
+  }
+}

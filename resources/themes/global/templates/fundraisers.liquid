@@ -1,0 +1,105 @@
+{% capture right_side_links %}
+    {% unless account.is_denied %}
+        <a href="/fundraisers/create" class="btn btn-primary btn-pill btn-sm px-4"><i class="fa fa-plus"></i> {{ settings.fundraisers_create_a_page }}</a>
+    {% endunless %}
+{% endcapture %}
+
+{% include 'header-image', header_title: settings.fundraisers_heading, header_image: settings.fundraisers_heading_image, right_side_links: right_side_links %}
+
+<div class="page-content fundraising-pages">
+
+<div class="container">
+    {% if settings.fundraisers_content %}
+        <div class="mt-5 mb-3">
+            {{ settings.fundraisers_content }}
+        </div>
+    {% endif %}
+
+    {% if account %}
+        <div class="mt-5 mb-3">
+            <a href="/account/fundraisers">To view your fundraisers, click here.</a>
+        </div>
+    {% endif %}
+
+    <div class="mt-5 mb-3">
+    <form class="form-secondary" method="get">
+        <div class="row">
+          <div class="col-sm-6 col-lg-9">
+            <div class="form-group labelify d-inline-block">
+                        <label>{{ 'templates.fundraisers.category' | t }}</label>
+                        <select class="form-control" name="category" style="width:180px;">
+                            <option value="">Any</option>
+                            {% for category in site.fundraising_page_categories %}
+                                <option {% if filter.category == category %}selected{% endif %}>{{ category }}</option>
+                            {% endfor %}
+                        </select>
+            </div>
+            <div class="form-group labelify d-none "><!-- d-inline-block-->
+                        <label>{{ 'templates.fundraisers.filter' | t }}</label>
+                        <select class="form-control" name="order_by" style="width:130px;">
+                            <option>{{ 'templates.fundraisers.newest_first' | t }}</option>
+                        </select>
+            </div>
+                    <div class="form-group d-inline-block" style="vertical-align:top;">
+                        <button class="btn-secondary btn btn-lg"><i class="fa fa-chevron-right"></i></button>
+                    </div>
+          </div>
+          <div class="col-sm-6 col-lg-3 text-right">
+            <div class="form-group labelify">
+                <label>{{ 'templates.fundraisers.search' | t }}</label>
+              <div class="input-group">
+                <input type="text" class="form-control" name="keywords" value="{{ filter.keywords | escape }}">
+                <div class="input-group-btn">
+                  <button class="btn btn-secondary btn-lg"><i class="fa fa-search"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+  </div>
+
+    {% if fundraising_pages.size > 0 %}
+        <div class="masonry-3">
+          {% for fundraising_page in fundraising_pages %}
+            <div class="brick-container">
+              <div class="brick">
+                <div class="card mb-4 {% if settings.animations %}wow fadeInUp{% endif %}">
+
+                  {% if fundraising_page.photo %}
+                    <a href="{{ fundraising_page.permalink }}"><img class="card-img-top" src="{{ fundraising_page.photo.thumb }}" alt="{{ fundraising_page.title }}"></a>
+                  {% else %}
+                    <a href="{{ fundraising_page.permalink }}"><div class="card-img-top text-center d-flex d-inline-block justify-content-center" style="height:250px; background-color:#eee; color:#fff;"><i class="align-self-center fa fa-camera fa-4x"></i></div></a>
+                  {% endif %}
+
+                  <div class="card-body">
+
+                    {% if fundraising_page.published_at %}
+                      <div class="text-secondary mb-2 font-weight-bold text-sm">{{ post.published_at | date: "short_month_day_year" }}</div>
+                    {% endif %}
+
+                    <h4 class="card-title"><a href="{{ fundraising_page.permalink }}">{{ fundraising_page.title }}</a></h4>
+
+                    {% include 'goal', goal_currency: fundraising_page.currency, goal_amount: fundraising_page.goal_amount, goal_progress: fundraising_page.amount_raised, goal_percent: fundraising_page.progress_percent %}
+
+                    <hr>
+
+                    <i class="fa fa-user-circle fa-fw"></i> {{ fundraising_page.author.name }}
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+    {% else %}
+        <div class="py-5 text-center">
+            <p class="text-lg text-muted">{{ settings.fundraiser_list_empty_message }}</p>
+            {% unless account.is_denied %}
+                <p><a href="/fundraisers/create" class="btn btn-primary">{{ 'templates.fundraisers.start_my_own_page' | t }}</a></p>
+            {% endunless %}
+        </div>
+    {% endif %}
+</div>
+
+</div>

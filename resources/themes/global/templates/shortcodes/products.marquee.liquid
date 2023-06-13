@@ -1,0 +1,11 @@
+{% asset '~/scripts/templates/product.js' %}
+
+<div class="owl-carousel" data-items="{{ products.size }}">
+    {% for product in products %}
+        {% include 'product-grid-item', product: product, match_height: 'products-marquee-item' %}
+    {% endfor %}
+</div>
+
+{% for product in products %}
+  {% include 'product-add-modal', product: product %}
+{% endfor %}

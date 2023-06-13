@@ -1,0 +1,67 @@
+
+{% if settings.page_heading_bg_effect == 'darken' %}
+  {% assign page_heading_backround_overlay_css = 'linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), ' %}
+{% elsif settings.page_heading_bg_effect == 'darken_more' %}
+  {% assign page_heading_backround_overlay_css = 'linear-gradient( rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75) ), ' %}
+{% elsif settings.page_heading_bg_effect == 'lighten' %}
+  {% assign page_heading_backround_overlay_css = 'linear-gradient( rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5) ), ' %}
+{% elsif settings.page_heading_bg_effect == 'lighten_more' %}
+  {% assign page_heading_backround_overlay_css = 'linear-gradient( rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.75) ), ' %}
+{% endif %}
+
+{% if settings.page_heading_bg == 'image' and header_image == false %}
+  {% assign header_image = 'https://placeimg.com/1200/800/nature' %}
+{% elsif settings.page_heading_bg == 'feature_image' %}
+  {% assign header_image = header_image | default : settings.page_heading_bg_default %}
+{% elsif settings.page_heading_bg == 'color' %}
+  {% assign header_image = '' %}
+{% endif %}
+
+{% if right_side_links %}
+  {% assign page_heading_align = 'left' %}
+{% else %}
+  {% assign page_heading_align = settings.page_heading_align %}
+{% endif %}
+
+<section class="title-bar {% if header_hide_on_mobile %}d-none d-md-block{% endif %}" style="{% if header_image %}background: {{ setting.page_heading_bg_color }} {{ page_heading_backround_overlay_css }} url('{{ header_image }}') no-repeat center center;{% endif %}">
+  <div class="container">
+    <div class="row">
+
+      <div class="col-sm-12 {% if page_heading_align != 'center' %}col-md-6{% endif %}">
+        {% if right_side_links and page_heading_align == 'center' %}
+          <div class="pull-right">{{ right_side_links }}</div>
+        {% endif %}
+
+        <h1 class="text-center {% if page_heading_align != 'center' %}text-md-left{% endif %}">{{ header_title }}</h1>
+      </div>
+
+      {% if right_side_links and page_heading_align != 'center' %}
+        <div class="col-md-6 text-right d-none d-md-block d-lg-block d-xl-block">
+          {{ right_side_links }}
+        </div>
+      {% endif %}
+
+      {% if settings.page_allow_breadcrumb %}
+        <div class="col-md-6 d-none d-md-block d-lg-block d-xl-block">
+          {% if header_crumb_1 %}
+          <nav aria-label="breadcrumb" role="navigation">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="/">Home</a></li>
+              {% if header_crumb_1 %}
+                <li class="breadcrumb-item"><a href="{% if header_crumb_1_url %}{{ header_crumb_1_url }}{% endif %}">{{ header_crumb_1 }}</a></li>
+              {% endif %}
+              {% if header_crumb_2 %}
+                <li class="breadcrumb-item"><a href="{% if header_crumb_2_url %}{{ header_crumb_2_url }}{% endif %}">{{ header_crumb_2 }}</a></li>
+              {% endif %}
+              {% if header_crumb_3 %}
+                <li class="breadcrumb-item"><a href="{% if header_crumb_3_url %}{{ header_crumb_3_url }}{% endif %}">{{ header_crumb_3 }}</a></li>
+              {% endif %}
+            </ol>
+          </nav>
+          {% endif %}
+        </div>
+      {% endif %}
+
+    </div>
+  </div>
+</section>

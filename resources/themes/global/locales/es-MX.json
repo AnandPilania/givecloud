@@ -1,0 +1,1155 @@
+{
+  "content": {
+    "signup": {
+      "main_heading_goes_here_html": "El título va aquí<br><small>El subtítulo va aquí</small>",
+      "send_me_emails_about_this_experience_and_add_me_to_the_general_mailing_list": "Envíeme correos electrónicos sobre esta experiencia y agrégueme a la lista de correo general.",
+      "send_me_emails_about_this_experience_only": "Envíeme correos electrónicos sobre esta experiencia únicamente.",
+      "sign_me_up": "¡Inscríbeme!"
+    }
+  },
+  "general": {
+    "actions": {
+      "continue_below": "Continuar abajo",
+      "close": "Cerca",
+      "read_more": "Leer más",
+      "view": "Ver"
+    },
+    "forms": {
+      "account_holder_name": "nombre del titular de la cuenta",
+      "account_holder_name_placeholder": "John Smith",
+      "account_holder_type": "Tipo de titular de cuenta",
+      "account_holder_types": {
+        "company": "Empresa",
+        "individual": "Individual"
+      },
+      "account_type": "Tipo de cuenta",
+      "account_no": "Cuenta #",
+      "address": "Dirección",
+      "address_placeholder": "Calle y número, apartado de correos, c / o.",
+      "address_2": "Dirección 2",
+      "address_2_placeholder": "apartamento, suite, unidad, edificio, piso, etc.",
+      "bank": "Banco",
+      "billing_address": "Dirección de Envio",
+      "cardholder_name": "Nombre del titular de la tarjeta",
+      "cardholder_name_placeholder": "John Smith",
+      "checking": "Comprobación",
+      "choose_your_impact": "Elija su impacto",
+      "city": "Ciudad",
+      "countries": {
+        "canada": "Canadá",
+        "mexico": "México",
+        "united_states": "Estados Unidos"
+      },
+      "country": "País",
+      "cover_costs": {
+        "most_costs": "{{ amount }} - La mayoría de los costos",
+        "more_costs": "{{ amount }} - Más costos",
+        "minimum_costs": "{{ amount }} - Costos mínimos",
+        "original": "{{ amount }} - Original",
+        "no_thank_you": "no, gracias"
+      },
+      "cover_costs_reverse": {
+        "most_costs": "La mayoría de los costos - {{ amount }}",
+        "more_costs": "Más costos - {{ amount }}",
+        "minimum_costs": "Costos mínimos - {{ amount }}"
+      },
+      "cover_costs_dialog" : {
+        "help_cover_costs_fees": "Ayuda a cubrir costos y tarifas",
+        "one_of_the_most_cost_effective_ways": "Los pagos en línea son una de las formas más rentables para nosotros de recaudar fondos. La automatización elimina el error humano y agiliza nuestras operaciones financieras para que podamos concentrarnos en nuestra misión.",
+        "help_make_the_most_of_your_donation": "Ayude a aprovechar al máximo su donación eliminando los pocos costos restantes en los que incurrimos cuando recaudamos fondos en línea, que incluyen:",
+        "processing_bank_fees": "Comisiones bancarias y de procesamiento",
+        "it_security_costs": "Costos de TI y seguridad",
+        "software_costs": "Costo del software"
+      },
+      "credit_card_number": "Número de tarjeta de crédito",
+      "credit_debit": "Credito debito",
+      "cvv": "CVV",
+      "email": "Email",
+      "expiry": "MM / AA",
+      "expiry_placeholder": "MM / AA",
+      "first_name": "Nombre",
+      "institution_no": "Institución #",
+      "last_name": "Apellido",
+      "organization_name": "Nombre de la empresa",
+      "or": "O",
+      "password": "Contraseña",
+      "paypal": "PayPal",
+      "phone": "Teléfono",
+      "postal": "Código postal",
+      "province": "Provincia",
+      "referral_source": "¿Como has oído de nosotros?",
+      "routing_no": "Enrutamiento #",
+      "savings": "Ahorros",
+      "state": "Estado",
+      "title": "Título",
+      "transit_no": "Tránsito #",
+      "we_support": "Apoyamos:",
+      "zip": "Código postal"
+    },
+    "subdivision_types": {
+      "administration": "Administración",
+      "administrative_region": "Región Administrativa",
+      "administrative_territory": "Territorio Administrativo",
+      "administrative_atoll": "Atolón Administrativo",
+      "administrative_region": "Región Administrativa",
+      "arctic_region": "Región Àrtica",
+      "area": "Zona",
+      "autonomous_city": "Ciudad Autónoma",
+      "autonomous_district": "Distrito Autónomo",
+      "autonomous_province": "Provincia Autónoma",
+      "autonomous_region": "Región Autónoma",
+      "autonomous_city": "Ciudad Autónoma",
+      "autonomous_community": "Comunidad Autónoma",
+      "autonomous_municipality": "Municipio Autónomo",
+      "autonomous_province": "Provincia Autónoma",
+      "autonomous_region": "Región Autónoma",
+      "autonomous_republic": "República Autónoma",
+      "autonomous_sector": "Sector Autónomo",
+      "autonomous_territorial_unit": "Unidad Territorial Autónoma",
+      "borough": "Ciudad",
+      "canton": "Cantón",
+      "capital_district": "Distrito Capital",
+      "capital_metropolitan_city": "Ciudad Capital Metropolitana",
+      "capital_territory": "Territorio Capital",
+      "capital_city": "Ciudad Capital",
+      "capital_district": "Distrito Capital",
+      "capital_territory": "Territorio Capital",
+      "chains_of_islands": "Cadenas (de islas)",
+      "city_corporation": "Corporación de la Ciudad",
+      "city_with_county_rights": "Ciudad con derechos del condado",
+      "city": "Ciudad",
+      "commune": "Comuna",
+      "constitutional_province": "Provincia Constitucional",
+      "council_area": "Área del Consejo",
+      "country": "País",
+      "county": "Condado",
+      "department": "Departamento",
+      "dependency": "Dependencia",
+      "development_region": "Región de Desarrollo",
+      "district": "Distrito",
+      "division": "División",
+      "economic_prefecture": "Prefectura Económica",
+      "economic_region": "Región Económica",
+      "emirate": "Emirato",
+      "entity": "Entidad",
+      "federal_dependency": "Dependencia Federal",
+      "federal_district": "Distrito Federal",
+      "federal_territories": "Territorios Federales",
+      "federal_district": "Distrito Federal",
+      "geographical_entity": "Entidad Geográfica",
+      "geographical_region": "Región Geográfica",
+      "geographical_unit": "Unidad Geográfica",
+      "governorate": "Gobernación",
+      "indigenous_region": "Región Indígena",
+      "island_council": "Cabildo Insular",
+      "island_group": "Grupo de Islas",
+      "island": "Isla",
+      "local_council": "Consejo Local",
+      "london_borough": "Distrito de Londres",
+      "metropolitan_cities": "Ciudades Metropolitanas",
+      "metropolitan_department": "Departamento Metropolitano",
+      "metropolitan_district": "Distrito Metropolitano",
+      "metropolitan_region": "región Metropolitana",
+      "municipalities": "Municipios",
+      "municipality": "Municipio",
+      "nation": "Nación",
+      "oblast": "Oblast",
+      "outlying_area": "Zona Periférica",
+      "overseas_department": "Departamento de Ultramar",
+      "overseas_region": "Región de Ultramar",
+      "overseas_territorial_collectivity": "Colectividad Territorial de Ultramar",
+      "parish": "Parroquia",
+      "popularates": "Población",
+      "prefecture": "Prefectura",
+      "province": "Provincia",
+      "quarter": "Trimestre",
+      "rayon": "Seda Artificial",
+      "region": "Región",
+      "regional_council": "Consejo Regional",
+      "republic": "República",
+      "republican_city": "Ciudad Republicana",
+      "self_governed_part": "Parte Autónoma",
+      "special_district": "Distrito Especial",
+      "special_municipality": "Municipio Especial",
+      "special_region": "Región Especial",
+      "special_administrative_region": "Región Administrativa Especial",
+      "special_city": "Ciudad Especial",
+      "special_island_authority": "Autoridad Insular Especial",
+      "special_municipality": "Municipio Especial",
+      "special_zone": "Zona Especial",
+      "state": "Estado",
+      "territorial_unit": "Unidad Territorial",
+      "territory": "Territorio",
+      "town_council": "Ayuntamiento de la Ciudad",
+      "two_tier_county": "Condado de dos Niveles",
+      "union_territory": "Territorio de la Unión",
+      "unitary_authority": "Autoridad Unitaria",
+      "zone": "Zona"
+    },
+    "give_with_confidence": "Cifrado y seguro. Dar con confianza.",
+    "logout": "Cerrar sesión",
+    "powered_by_givecloud": "Desarrollado por Givecloud."
+  },
+  "layout": {
+    "theme_profile": {
+      "my_account": "Mi cuenta",
+      "my_donations_and_orders": "Mis donaciones y pedidos",
+      "my_fundraisers": "Mis recaudadores de fondos",
+      "my_home": "Mi hogar",
+      "my_memberships": "Mi {{ memberships_term }}",
+      "my_payment_methods": "Mis métodos de pago",
+      "my_profile": "Mi perfil",
+      "my_recurring_payments": "Mis pagos recurrentes",
+      "my_sponsorships": "Mis patrocinios",
+      "my_tax_receipts": "Mis recibos de impuestos"
+    }
+  },
+  "snippets": {
+    "account_register": {
+      "donor_id": "ID del donante",
+      "first": "Nombre",
+      "postal_code_zip": "Código Postal / ZIP"
+    },
+    "capture_nps": {
+      "not_likely": "No es probable",
+      "recommend_us_to_your_friends_and_family": "¿Qué posibilidades hay de que nos recomiende a sus amigos y familiares?",
+      "submit": "Enviar",
+      "very_likely": "Muy probable"
+    },
+    "cart_item": {
+      "recurring_amount_on": "{{ amount | money }}/{{ frequency }} el {{ day | ordinal }}",
+      "remove": "Eliminar"
+    },
+    "cart_list": {
+      "bi_weekly": "quincenal",
+      "day": "día",
+      "item": "Articulo",
+      "qty": "Cantidad",
+      "month": "Lun",
+      "price": "Precio",
+      "quarter": "qr",
+      "shipping": "Envío",
+      "subtotal": "Total parcial",
+      "taxes": "Impuestos",
+      "total": "Total",
+      "total_recurring": "Total recurrente",
+      "total_today": "Total hoy",
+      "week": "semana",
+      "year": "año"
+    },
+    "cookie_notice": {
+      "i_agree": "estoy de acuerdo",
+      "learn_more": "Aprende más"
+    },
+    "goal": {
+      "goal": "META",
+      "raised": "ENTREGADO"
+    },
+    "header_menu": {
+      "select_a_page": "Seleccionar una pagina"
+    },
+    "header_pagecap": {
+      "expired": "CADUCADO",
+      "expires_in_count": {
+        "one": "Vence en 1 día",
+        "other": "Caduca en {{ count}} días",
+        "zero": "Caduca en 0 días"
+      },
+      "expired_on": "Caducado {{ expiry_date | date: 'short_month_day_year' }}",
+      "expires_on": "Caduca el {{ expiry_date | date: 'short_month_day_year' }}",
+      "fundraisers": "Recaudadores de fondos",
+      "home": "Hogar",
+      "i_forgot_my_password": "Olvidé mi contraseña",
+      "my_memberships": "Mi {{ memberships_term }}",
+      "my_menu": "Mi menú",
+      "profile": "Perfil",
+      "orders_donations": "Pedidos / Donaciones",
+      "recurring_payments": "Pagos recurrentes",
+      "payment_methods": "Métodos de pago",
+      "remember_me": "Recuérdame",
+      "tax_receipts": "Recibo de impuestos"
+    },
+    "header_search": {
+      "search_everything": "Buscar...",
+      "search_shop": "Buscar tienda ..."
+    },
+    "header_sidebar": {
+      "fundraisers": "Recaudadores de fondos",
+      "home": "Hogar",
+      "my_memberships": "Mi {{ memberships_term }}",
+      "orders_donations": "Pedidos / Donaciones",
+      "payment_methods": "Métodos de pago",
+      "profile": "Perfil",
+      "recurring_payments": "Pagos recurrentes",
+      "tax_receipts": "Recibo de impuestos"
+    },
+    "paging_links": {
+      "next": "próximo",
+      "previous": "Anterior"
+    },
+    "payment_method_card": {
+      "default": "Defecto"
+    },
+    "post_grid_item": {
+      "play": "Jugar"
+    },
+    "product_add_modal": {
+      "add_to_cart": "Añadir a {{ cart_term }}",
+      "cannot_add_to_cart": "No se puede agregar a {{ cart_term }}.",
+      "keep_browsing": "Sigue navegando",
+      "payment": "Pago",
+      "qty": "Cantidad",
+      "sold_out": "Agotado"
+    },
+    "product_designation_options": {
+      "where_do_you_want_to_have_the_most_impact": "¿Dónde quieres tener el mayor impacto?"
+    },
+    "product_form_fields": {
+      "this_field_is_required": "Este campo es requerido.",
+      "we_need_a_valid_date": "Necesitamos una fecha valida.",
+      "we_need_a_valid_email": "Necesitamos un correo valido.",
+      "we_need_a_valid_phone": "Necesitamos un teléfono valido."
+    },
+    "product_goal": {
+      "days_left": "DÍAS RESTANTES",
+      "raised": "ENTREGADO",
+      "goal": "META"
+    },
+    "product_grid_item": {
+      "clearance": "DESPEJE",
+      "new": "NUEVO",
+      "sale": "REBAJA",
+      "sold_out": "AGOTADO",
+      "view": "Ver más"
+    },
+    "product_options": {
+      "choose_an_option": "Elige una opción",
+      "day_of_month": "{{ day | ordinal }} del mes",
+      "make_my_first_payment_today": "Haga mi primer pago hoy",
+      "payment_day": "Dia de pago:"
+    },
+    "product_social_actions": {
+      "share_this": "Compartir este"
+    },
+    "product_tribute_fields": {
+      "dedication_type": "Tipo de dedicación",
+      "full_name": "Nombre completo",
+      "dedicate_this_donation": "Dedica esta donación",
+      "email_is_missing": "Falta el correo electrónico.",
+      "individual_name": "Nombre del individuo",
+      "name_is_missing": "Falta el nombre.",
+      "no": "No",
+      "none": "Ninguna",
+      "personal_message": "Mensaje personal",
+      "recipient": "Recipiente",
+      "recipient_mailing_address": "Dirección postal del destinatario",
+      "send_an_email": "Enviar un correo electrónico",
+      "send_a_letter": "Enviar una carta",
+      "want_to_send_letter_or_ecard": "¿Quiere que le enviemos una carta o tarjeta electrónica?",
+      "what_is_their_email_address": "¿Cuál es su dirección de correo electrónico?",
+      "which_state": "¿Cual estado?",
+      "who_are_you_dedicating_this_to": "¿A quién le estás dedicando esto?",
+      "who_is_receiving_the_dedication_notice": "¿Quién recibe el aviso de dedicación?",
+      "write_personal_note_to_the_recipient": "Opcional. Escriba una nota personal al destinatario.",
+      "yes": "si"
+    },
+    "social_proofs": {
+      "anonymous": "Anónimo"
+    },
+    "sponsorships_add_modal": {
+      "add_to_cart": "Añadir a {{ cart_term }}",
+      "amount_frequency_html": "{{ symbol }}{{ amount }}<small>/{{ frequency }}</small>",
+      "amount_frequency_on_day_week_html": "{{ symbol }}{{ amount }}<small>/{{ frequency }} el {{ day | date: 'l', 'N' }}</small>",
+      "amount_frequency_on_day_number_html": "{{ symbol }}{{ amount }}<small>/{{ frequency }} el ía {{ day }}</small>",
+      "cant_wait_to_tell_child_female": "¡Estamos ansiosos por decirle a {{ child_name }} que has decidido patrocinarla!",
+      "cant_wait_to_tell_child_male": "¡Estamos ansiosos por decirle a {{ child_name }} que has decidido patrocinarlo!",
+      "cant_wait_to_tell_child_genderless": "¡Estamos ansiosos por decirle a {{child_name}} que ha decidido patrocinarlo!",
+      "keep_browsing": "Sigue navegando",
+      "make_my_first_payment_today": "Haga mi primer pago hoy",
+      "once": "una vez",
+      "one_time": "UNA VEZ",
+      "oops_we_made_a_mistake": "¡Uy! Cometimos un error.",
+      "option_money": "{{ symbol }} {{ amount }}",
+      "not_finished_setting_up_this_record": "Todavía no hemos terminado de configurar este registro.",
+      "payment": "Pago",
+      "record_missing_a_payment_option": "A este registro le falta una opción de pago.",
+      "recurring": "PERIÓDICO"
+    },
+    "sponsorships_filter_side": {
+      "categories": "Categorias",
+      "funding_needed_most_to_least": "Financiamiento necesario: mayor a menor",
+      "goal_highest_to_lowest": "Meta de mayor a menor",
+      "goal_lowest_to_highest": "Meta de menor a mayor",
+      "per_page": "Por página",
+      "search_causes": "Causas de búsqueda ...",
+      "sort_by": "Ordenar por"
+    },
+    "sponsorships_filter_top": {
+      "age": "Años",
+      "birth_month": "Mes de nacimiento",
+      "birth_year": "Año de nacimiento",
+      "boy": "Chico",
+      "gender": "Género",
+      "girl": "Niña",
+      "name": "Nombre",
+      "not_sponsored": "No patrocinado",
+      "reference_no": "Referencia #",
+      "sponsored": "Patrocinado"
+    },
+    "sponsorship_grid_item": {
+      "child_description_age_html": "Soy <strong> {{ age }} años </strong> .",
+      "child_description_female_html": "Soy una <strong> chica </strong> .",
+      "child_description_female_with_age_html": "Soy una <strong> {{ age }} - niña de un año </strong> .",
+      "child_description_male_html": "Soy un <strong> chico </strong> .",
+      "child_description_male_with_age_html": "Soy un <strong> {{ age }} niño de un año </strong> .",
+      "create_a_fundraiser": "Crear un recaudador de fondos",
+      "in_cart": "En el carrito",
+      "my_profile": "Mi perfil",
+      "sponsored": "Patrocinado",
+      "sponsor_me": "Patrociname",
+      "added": "Adicional"
+    }
+  },
+  "templates": {
+    "404": {
+      "404_page_not_found": "404 Pagina no encontrada."
+    },
+    "accounts": {
+      "change_password": {
+        "change_password": "Cambia la contraseña",
+        "confirm_password": "Confirmar contraseña",
+        "new_password": "Nueva contraseña",
+        "password_has_expired": "Su contraseña ha caducado, establezca una contraseña a continuación.",
+        "security_settings": "Configuraciones de seguridad"
+      },
+      "fundraisers": {
+        "edit": {
+          "almost_done": "Casi termino...",
+          "category": "Categoría",
+          "checking_email": "Comprobando dirección de correo electrónico ...",
+          "choose": "Escoger",
+          "choose_your_cause": "Elige tu causa",
+          "create_a_fundraiser": "Crear un recaudador de fondos",
+          "create_page": "Crear página",
+          "currency": "Moneda",
+          "deadline": "Fecha límite",
+          "donor_id": "ID del donante",
+          "design_your_page": "Diseña tu página",
+          "email_already_signed_up": "Parece que ya se ha registrado para una cuenta con esa dirección de correo electrónico. Antes de crear su página, haga clic en el enlace a continuación para iniciar sesión.",
+          "finish": "Terminar",
+          "finish_account_setup_html": "<strong> Finalice la configuración de su cuenta </strong> para que pueda seguir su progreso y cambiar su página.",
+          "goal": "Meta",
+          "login_to_my_account": "Inicia sesión en mi cuenta",
+          "minimum_600x400": "Mínimo 600x400",
+          "no_fundraising_types_setup": "Error. No se han configurado tipos de recaudación de fondos.",
+          "page_name": "Nombre de la página",
+          "postal_code_zip": "Código Postal / ZIP",
+          "select_description": "Elige la descripción de tu página",
+          "title" : "Recaudador de fondos",
+          "title_help" : "Acepta letras, números, puntos, guiones y comillas",
+          "upload_my_own": "Sube mi propio",
+          "update_page": "Actualizar página",
+          "video": "Vídeo",
+          "your_account_already_exists": "Tu cuenta ya existe",
+          "your_details": "Tus detalles"
+        },
+        "index": {
+          "create_new_fundraiser": "Crear un nuevo recaudador de fondos",
+          "my_fundraisers": "Mis recaudadores de fondos",
+          "start_first_fundraiser": "Comience su primer recaudador de fondos hoy!"
+        }
+      },
+      "giving_impact": {
+        "active_recurring_donation_count": {
+          "one": "{{count}} donaciones recurrentes activas",
+          "other": "{{count}} donaciones recurrentes activas",
+          "zero": "no donaciones recurrentes activas"
+        },
+        "click_to_copy": "haga clic para copiar",
+        "copied": "copiado",
+        "donations_since_count": {
+          "one": "1 donación desde {{first_donation_date | date }}",
+          "other": "{{count}} donaciones desde {{account.first_donation_date | date }}",
+          "zero": "no donaciones"
+        },
+        "email_signups": "Registro (s) de correo electrónico",
+        "fundraiser_donations_count": {
+          "one": "1 donación para recaudar fondos",
+          "other": "{{count}} donaciones para recaudar fondos",
+          "zero": "no donaciones para recaudar fondos"
+        },
+        "fundraising_totals": "Totales de recaudación de fondos",
+        "my_referral_link": "Mi enlace de referencia",
+        "share_on_facebook": "Compartir en Facebook",
+        "share_on_twitter": "Compartir en Twitter",
+        "share_with_email": "Compartir con correo electrónico",
+        "site_visits": "Visitas al sitio",
+        "your_lifetime_donations": "Sus donaciones de por vida",
+        "your_secondary_impact": "Tu impacto secundario",
+        "your_secondary_impact_description": "Su impacto secundario se realiza a través de cuántas personas han tenido un impacto debido a usted. Si las personas donan o visitan debido a su enlace de referencia, sus esfuerzos serán parte de su impacto secundario."
+      },
+      "history": {
+        "amount": "Cantidad",
+        "date": "Fecha",
+        "my_donations_and_orders": "Mis donaciones y pedidos",
+        "number": "Número",
+        "external_donations": {
+          "date": "Fecha",
+          "receipt_number": "Número de recibo",
+          "reference": "Referencia",
+          "currency": "Moneda",
+          "amount": "Cantidad",
+          "fair_market_value": "Valor justo de mercado",
+          "net_donation": "Donación neta",
+          "no_records_to_display": "No hay registros para mostrar."
+        }
+      },
+      "home": {
+        "edit": "Editar",
+        "find_sponsorhsips": "Encuentra {{children_term | capitalize | indefinite_article }}",
+        "last_payment": "Ultimo pago",
+        "my_home": "Mi hogar",
+        "my_pledges": "Mis promesas",
+        "not_provided": "No provisto",
+        "no_payments": "Sin pagos",
+        "no_receipts": "Sin recibos",
+        "no_saved_accounts": "No hay cuentas guardadas",
+        "payment_methods": "Métodos de pago",
+        "recurring_payments": "Pagos recurrentes",
+        "shipping_address": "Dirección de Envío",
+        "sponsoring_x_children_html": "Estás patrocinando <strong> <span class=\"badge badge-dark badge-pill\"> {{count}} </span> {{children_term | downcase}} </strong> .",
+        "sponsorships": "Patrocinios",
+        "no_payments_received": "No se recibieron pagos.",
+        "no_pledges": "No hay promesas.",
+        "saved_accounts_count_html": "{{count_badge}} Cuentas guardadas",
+        "subscriptions_count_html": "{{count_badge}} Pagos",
+        "tax_receipt_donations_count_html": "{{count_badge}} donaciones.",
+        "tax_receipts": "Recibo de impuestos",
+        "thank_you_for_last_payment_html": "¡Gracias! Su pago más reciente de <strong> {{ amount | money: currency, 'currency_code' }} </strong> se recibió el <strong> {{ captured_date | date: 'short_month_ordinal_day_year' }} </strong>.",
+        "view_payment_methods": "Ver",
+        "view_sponsorhsip": "Ver",
+        "view_subscriptions": "Ver",
+        "view_tax_receipt": "Ver",
+        "you_have_no_sponsorships": "No tienes patrocinios"
+      },
+      "memberships": {
+        "active_membership": "Activo {{ membership_term }}.",
+        "days_left_count": {
+          "one": "Queda 1 día",
+          "other": "Quedan {{count}} días",
+          "zero": "No quedan días"
+        },
+        "expires_on": "Caduca {{ expiry_date | date : 'short_month_day_year' }}",
+        "expired_membership": "Caducado {{ membership_term }}.",
+        "expired_on": "Caducado {{ expiry_date | date : 'short_month_day_year' }}",
+        "inactive_membership": "Inactivo {{ membership_term }}.",
+        "my_memberships": "Mi {{memberships_term}}",
+        "not_subscribed_to_any": "No está suscrito a ningún {{memberships_term}}.",
+        "renew": "Renovar",
+        "starts_on": "Empieza {{ start_date | date : 'short_month_day_year' }}",
+        "this_does_not_expire": "Este {{membership_term | downcase}} no caduca."
+      },
+      "my_account": "Mi cuenta",
+      "profile": {
+        "cancel": "Cancelar",
+        "change_password": "Cambia la contraseña",
+        "confirm_password": "Confirmar contraseña",
+        "connect" : "Conectar",
+        "connected_accounts" : "Cuentas conectadas",
+        "copy_billing": "Copia de facturación",
+        "create_password" : "Crear contraseña",
+        "login": "Iniciar sesión",
+        "opt_out_reason_other": "Otra razón",
+        "new_password": "Nueva contraseña",
+        "phone": "Teléfono",
+        "profile": "Perfil",
+        "revoke" : "Revocar",
+        "saving": "Ahorro...",
+        "shipping_address": "Dirección de Envío",
+        "update_my_profile": "Actualizar mi perfil"
+      },
+      "register": {
+        "first_time_here": "¿Primera vez aquí?",
+        "welcome_back": "Bienvenido(a)!"
+      },
+      "reset_password": {
+        "create_an_account": "Crea una cuenta",
+        "sign_in": "Registrarse"
+      },
+      "shortcodes": {
+        "next": "próximo",
+        "previous": "Anterior",
+        "read_more_dots": "Lee mas...",
+        "share_with_channel": "Compartir con {{channel_name}}"
+      },
+      "tax_receipts": {
+        "amount": "Cantidad",
+        "date": "Fecha",
+        "my_tax_receipts": "Mis recibos de impuestos",
+        "number": "Número",
+        "no_receipts_available": "No hay recibos disponibles",
+        "sign_in": "Registrarse"
+      },
+      "login": {
+        "first_time_here": "¿Primera vez aquí?",
+        "my_account": "Mi cuenta",
+        "welcome_back": "Bienvenido(a)!"
+      },
+      "payment_methods": {
+        "add": {
+          "bank_account": "Cuenta bancaria",
+          "cancel": "Cancelar",
+          "credit": "Crédito",
+          "change_name_and_address": "Cambiar nombre y dirección",
+          "display_name_optional": "Muestre su Nombre (Opcional)",
+          "my_new_default_payment_method": "Mi nuevo método de pago predeterminado",
+          "new_payment_method": "Nuevo método de pago",
+          "personal_credit_card": "Tarjeta de credito personal",
+          "ach_agree_tos": "Al completar este formulario, nos autoriza a cargar la cuenta arriba por cualquier pago periódico asociado con este método de pago.",
+          "processing": "Procesando...",
+          "save_payment_method": "Guardar método de pago",
+          "subscription_costy_description": "{{amount}} / {{billing_period | downcase}} para {{descripción}}",
+          "use_this_method_for": "Use este método para:"
+        },
+        "index": {
+          "add_payment_method": "Añadir método de pago",
+          "add_a_payment_method_for_easier_payments": "¡Agregue un método de pago para pagos más fáciles!",
+          "cancel": "Cancelar",
+          "my_payment_methods": "Mis métodos de pago",
+          "permanently_delete": "Borrar permanentemente",
+          "remove": "Eliminar",
+          "set_default": "Establecer predeterminado",
+          "sure_you_want_to_delete_payment_method": "¿Estás seguro de que deseas eliminar este método de pago?"
+        }
+      },
+      "purchased-media": {
+        "days_left_count": {
+          "one": "Un día hasta caducado",
+          "other": "{{count}} días hasta caducado",
+          "zero": "Caducado"
+        },
+        "expires": "Caduca {{expiration_date | date }}",
+        "re_purchase": "Readquirir",
+        "index": {
+          "download": "Descargar",
+          "expired": "Caducado el {{expiration_date | date }}",
+          "no_access_to_any_purchased_media": "No tiene acceso a ningún medio comprado.",
+          "open": "Abierto",
+          "purchased_on": "Comprado {{ purchased_date | date }}"
+        },
+        "view": {
+          "back": "Atrás"
+        }
+      },
+      "sponsorships": {
+        "index": {
+          "find_sponsorship": "Encuentra {{ sponsorship_child | capitalize | indefinite_article }}",
+          "my_sponsorships": "Mis patrocinios",
+          "next_charge": "Próximo cargo:",
+          "next_charge_on": "{{ amount | money: currency }} el {{next_payment_date | date: 'date:M jS'}}",
+          "sponsee": {
+            "age_html": "Tengo <strong>{{ age }} años</strong>.",
+            "birth_date_html": "Mi cumpleaños es <strong> {{birth_date | date: 'date: %b % -d,% Y'}} </strong>."
+          },
+          "sponsee_female": {
+            "age_html": "Soy una <strong> {{age}} - niña de un año </strong> .",
+            "gender_html": "Soy una <strong>niña</strong>."
+          },
+          "sponsee_male": {
+            "age_html": "Soy un <strong> {{age}} niño de un año </strong> .",
+            "gender_html": "Soy un <strong>niño</strong>."
+          },
+          "you_have_no_sponsorships": "No tienes patrocinios"
+        },
+        "view": {
+          "about_me": "Sobre mí",
+          "back": "Atrás",
+          "billing": "Información de facturación",
+          "birthday": "Cumpleaños",
+          "end": "Final",
+          "end_sponsorship": "Fin del patrocinio",
+          "more": "Más",
+          "keep_sponsoring": "Sigue patrocinando",
+          "my_birthday_is": "Mi cumpleaños es",
+          "my_name_is_html": "My name is <strong>{% include 'sponsorship-name', fname: first_name, lname: last_name %}</strong>",
+          "my_story": "Mi historia",
+          "no_updates_posted": "No se han publicado actualizaciones.",
+          "profile": "Perfil",
+          "sponsee": {
+            "age_html": "y tengo <strong>{{ age }} años</strong>.",
+            "birth_date_html": "Mi cumpleaños es <strong> {{birth_date | date: 'date: %b % -d,% Y'}} </strong>."
+          },
+          "sponsee_female": {
+            "age_html": "y soy una <strong>{{ age }} - niña de un año</strong>.",
+            "gender_html": "y soy una <strong>niña</strong>."
+          },
+          "sponsee_male": {
+            "age_html": "y soy un <strong>{{ age }} niño de un año</strong>.",
+            "gender_html": "y soy un <strong>niño</strong>."
+          },
+          "sponsee_female_description_html": "Mi nombre es <strong> {{first_name}} </strong> y soy una <strong> {{age}} - niña de un año </strong> .",
+          "sponsee_male_description_html": "Mi nombre es <strong> {{first_name}} </strong> y soy un <strong> {{age}} años de edad </strong> .",
+          "stop_sponsorship": "Parar patrocinio",
+          "updates": "Actualizaciones"
+        }
+      },
+      "subscriptions": {
+        "cancel": {
+          "back": "Atrás",
+          "cancel_my_payment_forever": "Cancelar mi pago para siempre",
+          "cancel_recurring_payment": "Cancelar pago recurrente",
+          "description": "Descripción",
+          "pause_my_payment_for_count": {
+            "one": "Pausar mi pago por 1 mes",
+            "other": "Pausar mi pago por {{count}} meses"
+          },
+          "other": "Otro",
+          "payment": "Pago",
+          "reason_placeholder": "Razón...",
+          "recommend_not_likely": "No es probable",
+          "recommend_us": "¿Qué tan probable es que nos recomiende?",
+          "recommend_very_likely": "Muy probable",
+          "sharing_why": "¿Te importaría compartir por qué has decidido cancelar?",
+          "update_my_payment": "Actualizar mi pago"
+        },
+        "edit": {
+          "add": "Añadir método de pago",
+          "back": "Atrás",
+          "frequency": "Frecuencia",
+          "next_bill_date": "Fecha de la próxima factura",
+          "next_charge_on": "{{ amount }} el {{ next_payment_date }}",
+          "payment_method": "Método de pago",
+          "payment_methods_descriptions": {
+            "bank": "{{bank_name}} cuenta que termina en {{last4}}",
+            "card_html": "{{brand}} que termina en {{last_4}} <small> ({{expiry_month}} / {{expiry_year}}) </small>"
+          },
+          "save_changes": "Guardar cambios",
+          "save_changes_and_reactivate": "Guardar cambios y reactivar"
+        },
+        "index": {
+          "method": "Método",
+          "method_missing": "Desaparecido",
+          "my_recurring_payments": "Mis pagos recurrentes",
+          "next_charge": "Próximo cargo",
+          "no_recurring_payments": "No tiene pagos recurrentes.",
+          "per_month": "/mes",
+          "status_cancelled": "Cancelado",
+          "status_expired": "Caducado",
+          "status_paused": "Pausado"
+        },
+        "view": {
+          "add_payment_method": "Añadir",
+          "amount": "Cantidad",
+          "back": "Atrás",
+          "billing_period": {
+            "daily": "Todos los días",
+            "quarterly": "{{payment_date | date: 'short_day_month'}} del mes cada trimestre",
+            "monthly": "{{payment_date | date: 'short_day_month'}} de cada mes",
+            "semi_monthly": "Cada segundo {{payment_date | date: 'date:l'}}",
+            "weekly": "Cada {{payment_date | date: 'date:l'}}",
+            "yearly": "{{payment_date | date: 'short_day_month'}} del mes apropiado cada año"
+          },
+          "cancel_payments": "Cancelar pagos",
+          "choose_payment_method": "Escoger",
+          "date": "Fecha",
+          "description": "Descripción",
+          "failed": "HA FALLADO",
+          "go_to_payment_methods_html": "Vaya a <a href=\"{{ link }}\"> Métodos de pago </a> y agregue una tarjeta de crédito válida.",
+          "last_payment_failed_on": "El último pago falló el {{date_failed | date: 'M j, Y'}}",
+          "last_payment_received_on": "Último pago recibido el {{date_received | date: 'M j, Y'}}",
+          "includes_cover_costs_amount": "Incluye {{cover_costs_amount | money: currency, 'currency_code'}} para {{cover_costs_invoice_label}}",
+          "make_a_change": "Hacer un cambio",
+          "missing_payment_method": "Falta el método de pago",
+          "next_payment": "Siguiente pago",
+          "no_payments_received": "No se recibieron pagos.",
+          "past_payments": "Pagos pasados",
+          "paused": "Pausado",
+          "payment": "Pago",
+          "payment_day": "Dia de pago",
+          "profile_expired": "Este perfil ha expirado.",
+          "profile_cancelled": "Este perfil ha sido cancelado.",
+          "profile_paused_not_being_charged": "Este perfil está en pausa y no se está cargando.",
+          "received_to_date": "Recibido hasta la fecha",
+          "recurring_payment": "Pago recurrente",
+          "reference": "Referencia",
+          "refunded": "(Reintegrado)",
+          "thank_you": "¡Gracias!"
+        }
+      }
+    },
+    "cart": {
+      "general": {
+        "address_count": {
+          "one": "Dirección",
+          "other": "Direcciones"
+        },
+        "billing": "Información de facturación",
+        "payment": "Pago",
+        "shipping": "Envío",
+        "subtotal": "Total parcial",
+        "taxes": "Impuestos",
+        "total": "Total",
+        "total_recurring": "Total recurrente",
+        "total_today": "Total hoy",
+        "proceed_to_checkout_html": "Pagar <i class=\"fa fa-arrow-right\"> </i>"
+      },
+      "label": {
+        "apply_promo": "Aplicar",
+        "item": "Articulo",
+        "price": "Precio",
+        "quantity": "Cantidad",
+        "remove": "Eliminar",
+        "subtotal": "Total parcial",
+        "total": "Total",
+        "next": "próximo",
+        "other": "Otro"
+      },
+      "login_form": {
+        "login": "Iniciar sesión",
+        "forgot_password": "Olvidé mi contraseña."
+      },
+      "checkout_form": {
+        "address_title": "Dirección",
+        "shipping_title": "Envío"
+      },
+      "address_form": {
+        "phone": "Teléfono",
+        "use_address": "use esta dirección para el envío"
+      },
+      "shipping_form": {
+        "none_available": "No hay métodos de envío disponibles"
+      },
+      "pay_form": {
+        "gocardless": "GoCardless",
+        "payment_methods": "Mis métodos de pago",
+        "save_payment_method": "Guarde esta información de pago de forma segura.",
+        "ach_agree_tos": "Al completar esta compra, nos autoriza a cargar a la cuenta anterior el monto especificado en el campo Total.",
+        "pay_with": "Pagar con:",
+        "payment_method_card": "{{name}} termina en {{last4}}",
+        "payment_method_bank": "{{name}} cuenta que termina en {{last4}}",
+        "no_payment_required": "No se requiere información de pago",
+        "complete_payment": "Donar",
+        "complete_transaction": "Transacción completa",
+        "wont_be_charged": "No se le cobrará."
+      },
+      "step_1": {
+        "recurring_amount_with_date": "{{recurring_amount}} / {{recurring_frequency}} el {{recurring_day}}",
+        "cover_costs_recurring_amount_with_label": "+ {{cover_costs_recurring_amount}} para {{cover_costs_label}}",
+        "tribute_for": "Homenaje a:",
+        "send_letter_to_recipient": "Enviar carta a:",
+        "send_email_to_recipient": "Enviar el email a:",
+        "no_notification": "Sin notificación."
+      }
+    },
+    "collection": {
+      "category": "Categoría",
+      "filter": "Filtrar",
+      "highest_price_first": "El precio más alto primero",
+      "lowest_price_first": "Precio más bajo primero",
+      "name_a_z": "Nombre AZ",
+      "name_z_a": "Nombre ZA",
+      "newest_first": "El más reciente primero",
+      "oldest_first": "Los más viejos primero",
+      "per_page": "Por página",
+      "search": "Buscar...",
+      "sort_by": "Ordenar por"
+    },
+    "fundraiser": {
+      "edit_form": {
+        "cancel": "Cancelar",
+        "cancel_confirmation": "¿Seguro que quieres cancelar tu página de recaudación de fondos?",
+        "edit": "Editar",
+        "page": "Página",
+        "sorry": "Lo siento!"
+      },
+      "closed": "Cerrado",
+      "created_by": "Recaudador de fondos creado por",
+      "days_left_count": {
+        "one": "Queda 1 día",
+        "other": "Quedan {{count}} días",
+        "zero": "No quedan días"
+      },
+      "donate_amount": "Donar {{amount}}",
+      "donors_count": {
+        "zero": "no donantes",
+        "one": "1 donante",
+        "other": "{{ count }} donantes"
+      },
+      "first_to_donate": "¡Sé el primero en donar!",
+      "report": {
+        "inappropriate_content": "¿Contenido inapropiado u ofensivo?",
+        "modal_description": "Gracias por ayudarnos a moderar nuestras páginas de recaudación de fondos. Por favor, identifica el motivo por el que está denunciando esta página:",
+        "report_this_page": "Denunciar esta página",
+        "cancel": "Cancelar"
+      },
+      "pay_form": {
+        "comments": "Comentarios",
+        "donate": "Donar",
+        "keep_me_anonymous": "Mantenme anónimo"
+      },
+      "processing": "Procesando"
+    },
+    "fundraisers": {
+      "category": "Categoría",
+      "filter": "Filtrar",
+      "newest_first": "El más reciente primero",
+      "search": "Buscar...",
+      "start_my_own_page": "Comience mi propia página"
+    },
+    "page_multi_item_checkout": {
+      "add": "Añadir",
+      "apply": "Aplicar",
+      "authorize_us_to_charge_account_above_for_the_amount_specified": "Al completar esta compra, nos autoriza a cargar a la cuenta anterior el monto especificado en el campo Total.",
+      "billing": "Información de facturación",
+      "cancel": "Cancelar",
+      "company": "Empresa",
+      "complete_purchase": "Compra completa",
+      "cover_costs_recurring_amount": "+ cantidad para {{checkout_term}}",
+      "make_a_change": "Hacer un cambio",
+      "method_bank_description": "{{bank}} termina en {{last4}}",
+      "method_card_description_html": "{{brand}} que termina en {{last4}} <small> ({{expiry_month}} / {{expiry_year}}) </small>",
+      "my_methods": "Mis métodos",
+      "phone": "Teléfono",
+      "pay_with": "Pagar con:",
+      "payment": "Pago",
+      "processing": "Procesando",
+      "produce_price_between": "{{price_min | money}} a {{price_max | money}}",
+      "recurring_amount_frequency_on_day_ordinal": "{{amount}} / {{frequency}} en el día",
+      "remove": "Eliminar",
+      "save_this_payment_information_securely": "Guarde esta información de pago de forma segura.",
+      "subtotal": "Total parcial",
+      "taxes": "Impuestos",
+      "today": "Hoy",
+      "total": "Total",
+      "total_recurring": "Total recurrente"
+    },
+    "page_split_fund_donations": {
+      "total_today": "Total hoy",
+      "total": "Total",
+      "there_are_no_funds_setup_for_donation": "No hay fondos configurados para donación",
+      "payment_day": "Dia de pago:",
+      "billing": "Información de facturación",
+      "phone": "Teléfono",
+      "other": "Otro:",
+      "payment": "Pago",
+      "total_recurring": "Total recurrente",
+      "there_is_a_minimum_donation_of": "Hay una donación mínima de {{symbol}} {{min_price}}.",
+      "my_methods": "Mis métodos",
+      "save_this_payment_information_securely": "Guarde esta información de pago de forma segura.",
+      "authorize_us_to_charge_account_above_for_the_amount_specified": "Al completar esta compra, nos autoriza a cargar a la cuenta anterior el monto especificado en el campo Total.",
+      "day_of_month": "{{ day }} del mes",
+      "donate_amount": "Donar {{amount}}",
+      "donate_amount_recurrence_period": "Donar {{amount}} {{period}}",
+      "how_often_would_you_like_to_give": "¿Con qué frecuencia te gustaría dar?",
+      "make_my_first_payment_today": "Haga mi primer pago hoy",
+      "method_bank_description": "{{bank}} termina en {{last4}}",
+      "method_card_description_html": "{{brand}} que termina en {{last4}} <small> ({{expiry_month}} / {{expiry_year}}) </small>",
+      "pay_with": "Pagar con:",
+      "processing": "Procesando",
+      "which_funds_would_you_like_to_give_to": "¿A qué fondos te gustaría dar?"
+    },
+    "post_event": {
+      "all_day_event_dates": "{{ event_start | date: 'month_day' }} al {{  event_end | date: 'month_day_year' }}",
+      "cost": "Costo",
+      "date_and_time": "Fecha y hora",
+      "email": "Email :",
+      "event_date": "{{ event_start | date: 'g:ia' }} a {{  event_end | date: 'g:ia' }} el {{  event_end | date: 'month_day_year' }}",
+      "event_dates": "{{ event_start | date: 'g:ia' }} el {{ event_start | date: 'month_day' }} a {{  event_end | date: 'g:ia' }} el {{  event_end | date: 'short_month_day_year' }}",
+      "location": "Ubicación",
+      "organizer": "Organizador",
+      "phone": "Teléfono :",
+      "website": "Sitio web :"
+    },
+    "post_type": {
+      "all": "Todas",
+      "back_to": "Volver a {{post_term}}",
+      "loading_location": "Cargando ubicación",
+      "no_posts_here": "No hay publicaciones aquí",
+      "nothing_here": "Nada aquí",
+      "play": "Jugar",
+      "up_to_parent_category": "Volver a \"{{ category_name }}\"",
+      "visit_website": "Visita el sitio web"
+    },
+    "product": {
+      "add_to_cart": "Añadir a {{cart_term}}",
+      "continue_to_payment": "Continuar al pago",
+      "date_and_time": "Fecha & Hora",
+      "dedicate": "Dedicar",
+      "details": "Detalles",
+      "description": "Descripción",
+      "comments": "Comentarios",
+      "keep_me_anonymous": "Mantenme anónimo",
+      "location": "Ubicación",
+      "payment": "Pago",
+      "quantity": "Cantidad",
+      "register": "Registrarse",
+      "sold_out": "Agotado",
+      "billing": "Información de facturación",
+      "phone": "Teléfono",
+      "other": "Otro:",
+      "be_the_first_to_donate": "¡Sé el primero en donar!",
+      "pay_with": "Pagar con:",
+      "my_methods": "Mis métodos",
+      "save_this_payment_information_securely": "Guarde esta información de pago de forma segura.",
+      "unsupported_card_type": "Tipo de tarjeta no compatible.",
+      "donate": "Donar {{price}}",
+      "pledge": "Contribuir {{amount}}"
+    },
+    "receipt": {
+      "a_refund_for_this_order_was_issued": "Se emitió un reembolso por esta contribución el {{refund_date | date: 'short_month_ordinal_day_year'}} por {{amount | money: currency}}.",
+      "balance": "Balance",
+      "billing": "Información de facturación",
+      "confirmation": "Confirmación",
+      "cover_costs_recurring_amount_with_label": "+ {{cover_costs_recurring_amount | money: currency, 'currency_code'}} para {{cover_costs_label}}",
+      "quantity": "Cantidad",
+      "notes": "Notas",
+      "not_provided": "No provisto",
+      "price": "Precio",
+      "invoice_no": "Factura # {{number}}",
+      "recurring_amount_on": "{{ amount | money: currency, 'currency_code'}} / {{frequency}} en el {{day}}",
+      "refund_on": "Reembolso el",
+      "shipping": "Envío",
+      "subtotal": "Total parcial",
+      "tax": "Impuesto",
+      "total": "Total"
+    },
+    "search_results": {
+      "no_results_found_for": "No se encontraron resultados para '{{ terms | escape }}'.",
+      "no_results_found_for_with_category": "No se encontraron resultados para '{{ terms | escape }}' en {{ category | escape }}.",
+      "results_for": "Resultados para '{{ terms | escape }}'"
+    },
+    "shortcodes": {
+      "gallery_carousel": {
+        "next": "próximo",
+        "previous": "Anterior"
+      }
+    },
+    "sponsorship": {
+      "about_me": "Sobre mí",
+      "added": "Adicional",
+      "already_sponsored": "Ya patrocinado",
+      "birthday": "Cumpleaños",
+      "child_description_age_html": "Soy <strong> {{age}} años </strong> .",
+      "child_description_female_html": "Soy una <strong> chica </strong> .",
+      "child_description_female_with_age_html": "Soy una <strong> {{ age }} - niña de un año </strong> .",
+      "child_description_male_html": "Soy un <strong> chico </strong> .",
+      "child_description_male_with_age_html": "Soy un <strong> {{ age }} niño de un año </strong> .",
+      "geography": "Geografía",
+      "more": "Más",
+      "my_birthday_is_html": "Mi cumpleaños es <br> <strong> {{ birth_date }} </strong> .",
+      "my_name_is_html": "Mi nombre es <strong> {% include 'sponsorship-name', fname: first_name, lname: last_name%} </strong> .",
+      "my_story": "Mi historia",
+      "sponsor_me": "Patrociname"
+    },
+    "thank_you": {
+      "invoice_no": "Factura # {{number}}",
+      "view_your_receipt": "Ver su recibo",
+      "your_payment_has_been_processed_successfully": "Su pago ha sido procesado con éxito.",
+      "your_pledge": "Tu promesa",
+      "your_pledge_has_been_received_successfully": "Su contribución de {{ pledge.amount | money : pledge.currency }} se ha recibido con éxito."
+    }
+  },
+  "scripts": {
+    "components": {
+      "amount": "Importe",
+      "other": "Otro",
+      "donate_with": "Donar con",
+      "price": "{{ symbol }}{{ price }}",
+      "product_tribute_mail_fields": {
+        "street_address": "Dirección",
+        "what_is_the_zip": "¿Qué es el ZIP?",
+        "which_address_are_we_sending_the_notice_to": "¿A qué dirección enviamos el aviso?",
+        "which_city": "¿Qué ciudad?",
+        "which_country": "¿Cuál país?"
+      }
+    },
+    "templates": {
+      "cart": {
+        "cart_has_already_been_initialized": "El carrito ya se ha inicializado.",
+        "cart_has_not_been_initialized_yet": "El carrito aún no se ha inicializado.",
+        "comments_saved": "Comentarios guardados",
+        "error_removing_item_from_cart": "Error al eliminar el artículo del carrito.",
+        "error_updating_item_quantity_in_cart": "Error al actualizar la cantidad del artículo en el carrito.",
+        "item_quantity_updated": "Cantidad de artículo actualizada.",
+        "item_removed_from_cart": "Artículo retirado del carrito.",
+        "item_removed_from_your_cart": "Artículo eliminado de su carrito.",
+        "only_one_donation": "La cantidad de un artículo de donación no puede ser mayor que uno.",
+        "unable_to_update_cart": "No se pueden actualizar los carritos que no coinciden.",
+        "welcome_back": "Bienvenido(a)!"
+      },
+      "discount_applied": "¡Descuento aplicado!",
+      "multi_item_checkout": {
+        "error_applying_discount": "Error al aplicar el descuento."
+      },
+      "post_type_content": {
+        "filter_by_category": "Filtrar por categoría"
+      },
+      "product": {
+        "added_to_your_cart": "¡Agregado a tu carrito!",
+        "amount": "Cantidad",
+        "choose_an_amount": "Elija una cantidad",
+        "minimum_donation": "Hay una donación mínima de {{currency_price}}"
+      },
+      "split_fund_donations": {
+        "no_donations_yet": "Aún no has agregado ninguna donación.",
+        "no_negative_donation": "No puede donar una cantidad negativa para la donación '{{product}}'.",
+        "not_met_the_minimum_donation_amount": "No ha alcanzado el monto mínimo de donación de {{currency_price}} para la donación '{{product}}'.",
+        "one_time": "Una vez",
+        "per_bi_annually": "/ bianualmente",
+        "per_bi_weekly": "/quincenal",
+        "per_month": "/Lun",
+        "per_quarter": "/ qr",
+        "per_week": "/semana",
+        "per_year": "/ año",
+        "recurring_annually": "Recurrente Anualmente",
+        "recurring_bi_annually": "Recurrente cada dos años",
+        "recurring_bi_weekly": "Recurrente cada dos semanas",
+        "recurring_monthly": "Mensual recurrente",
+        "recurring_quarterly": "Trimestralmente recurrente",
+        "recurring_weekly": "Semanal recurrente"
+      },
+      "subscription_cancel": {
+        "missed_recommend": "¡Uy! Te perdiste: '¿Qué tan probable es que nos recomiende?'",
+        "recurring_payment_cancelled": "¡Pago recurrente cancelado!",
+        "recurring_payment_updated": "Pago recurrente actualizado!"
+      },
+      "subscription_edit": {
+        "daily": "Diario",
+        "monthly": "Mensual",
+        "quarterly": "Trimestral",
+        "recurring_payment_saved": "¡Pago recurrente guardado!",
+        "semi_monthly": "Semi mensual",
+        "semi_yearly": "Semestral",
+        "weekly": "Semanal",
+        "yearly": "Anual"
+      },
+      "unsupport_card_type": "Tipo de tarjeta no compatible. Por favor intente nuevamente con una tarjeta diferente."
+    },
+    "theme": {
+      "alert": "Alerta",
+      "choose_a_number": "¡Elige un número!",
+      "compose_an_epic": "Componer una epopeya ...",
+      "confirm": "Confirmar",
+      "hi_name": "Hola, {{icon}} <strong> {{name}} </strong>",
+      "no": "No",
+      "thank_you_for_the_feedback": "¡Gracias por los comentarios!",
+      "unknown_error_521": "Error desconocido (521)",
+      "yes": "si"
+    }
+  },
+  "money_formats": {
+    "basic": "$ 0,0",
+    "compact": "$ 0,0 [.] A",
+    "currency_code": "$ 0,0.00 [$$$]",
+    "default": "$ 0,0.00"
+  },
+  "date_formats": {
+    "calendar_short_month_day_year": "M d, yyyy",
+    "month_day": "F j",
+    "month_day_year": "F j, Y",
+    "short_day_month": "jS",
+    "short_month_day_year": "M j, Y",
+    "short_month_ordinal_day": "M jS",
+    "short_month_ordinal_day_year": "M jS, Y"
+  }
+}

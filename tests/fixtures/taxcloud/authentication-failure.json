@@ -1,0 +1,7 @@
+{
+  "ResponseType": 0,
+  "Messages": [{
+    "ResponseType": 0,
+    "Message": "Invalid apiLoginID and/or apiKey"
+  }]
+}

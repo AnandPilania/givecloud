@@ -1,0 +1,212 @@
+{% comment %}
+{% if account %}
+    {% assign active_profile_menu = 'history' %}
+    {% layout 'theme.profile' %}
+{% else %}
+    {% include 'header-image', header_title: 'Confirmation' %}
+    <div class="container my-5">
+{% endif %}
+{% endcomment %}
+
+{% assign header_title = 'templates.receipt.confirmation' | t %}
+{% include 'header-image', header_title: header_title %}
+<div class="container my-5">
+
+<div>
+    <div class="pull-right">
+        {{ order.created_at | date : "short_month_ordinal_day_year" }}
+    </div>
+
+    <h4 class="text-left">{{ 'templates.receipt.invoice_no' | t: number: order.number }}</h4>
+
+    <div class="row">
+        <div class="col-12 col-sm-6 my-5">
+            <h5>{{ 'templates.receipt.billing' | t }}</h5>
+            {% if order.billing_address.ispopulated %}
+                {% if order.billing_address.company %}{{ order.billing_address.company | escape }}<br>{% endif %}
+                {{ order.billing_address.name | escape }}<br>
+                {{ order.billing_address.address1 | escape }}<br>
+                {% if order.billing_address.address2 %}{{ order.billing_address.address2 | escape }}<br>{% endif %}
+                {{ order.billing_address.city | escape }}, {{ order.billing_address.province_code | escape }}<br>
+                {{ order.billing_address.zip | escape }} {{ order.billing_address.country_code | escape }}
+            {% else %}
+                {{ 'templates.receipt.not_provided' | t }}
+            {% endif %}
+        </div>
+        {% if order.shippable_item_count %}
+            <div class="col-12 col-sm-6 my-5">
+                <h5>{{ 'templates.receipt.shipping' | t }}</h5>
+                {% if order.shipping_address.ispopulated %}
+                    {% if order.shipping_address.company %}{{ order.shipping_address.company | escape }}<br>{% endif %}
+                    {{ order.shipping_address.name | escape }}<br>
+                    {{ order.shipping_address.address1 | escape }}<br>
+                    {% if order.shipping_address.address2 %}{{ order.shipping_address.address2 | escape }}<br>{% endif %}
+                    {{ order.shipping_address.city | escape }}, {{ order.shipping_address.province_code | escape }}<br>
+                    {{ order.shipping_address.zip | escape }} {{ order.shipping_address.country_code | escape }}
+                {% else %}
+                    {{ 'templates.receipt.not_provided' | t }}
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+
+
+
+    {% if order.is_refunded %}
+        <div class="alert alert-danger" role="alert">
+            {{ 'templates.receipt.a_refund_for_this_order_was_issued' | t: refund_date: order.refunded_at, amount: order.refunded_amt, currency: order.currency }}
+        </div>
+    {% endif %}
+
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th style="width:110px;" class="text-right">{{ 'templates.receipt.price' | t }}</th>
+                    <th style="width:80px;" class="text-center">{{ 'templates.receipt.quantity' | t }}</th>
+                    <th style="width:110px;" class="text-right">{{ 'templates.receipt.total' | t }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in order.line_items %}
+                    <tr>
+                        <td {% if item.is_locked %} class="border-0" colspan="3" {% endif %}">
+                            <div class="cart__line-items--item {% if item.is_locked %}text-sm{% endif %}">
+                                <div class="{% if item.is_locked %}pl-5{% endif %}">
+                                    <div class="media">
+                                        {% if item.thumbnail %}
+                                            <a href="{{ item.url }}" class="d-inline-block mr-3">
+                                                <div class="offset-badges">
+                                                    <img class="rounded {% if item.is_locked %}thumb-sm-square{% else %}thumb-md{% endif %}" src="{{ item.thumbnail }}" alt="{{ item.name | escape }} ({{ item.sku | escape }})">
+                                                    {% if item.is_locked %}
+                                                        <div class="badge badge-primary badge-pill">{{ item.quantity }}</div>
+                                                    {% endif %}
+                                                </div>
+                                            </a>
+                                        {% endif %}
+                                        <div class="media-body">
+                                            <h5 class="my-0 {% if item.is_locked %}text-sm{% endif %}">
+                                                <a href="{{ item.url }}">{{ item.name }}</a> <small class="text-sm text-muted">{{ item.sku }}</small>
+                                            </h5>
+                                            {% if item.shipping_expectation %}
+                                                <div class="mt-2">
+                                                    <small class="text-muted">{{ item.shipping_expectation }}</small>
+                                                </div>
+                                            {% endif %}
+                                            {% if item.recurring_frequency_short %}
+                                                <div class="mt-2">
+                                                    {% if item.recurring_day %}
+                                                        {% assign recurring_day = item.recurring_day | ordinal %}
+                                                    {% else %}
+                                                        {% assign recurring_day = item.recurring_day_of_week | ordinal %}
+                                                    {% endif %}
+                                                    {{ 'templates.receipt.recurring_amount_on' | t : amount: item.recurring_amount, currency: order.currency, frequency: item.recurring_frequency_short, day: recurring_day }}
+                                                </div>
+                                                {% if item.cover_costs_recurring_amount %}
+                                                    <div>
+                                                        <span class="badge badge-subtle">{{ 'templates.receipt.cover_costs_recurring_amount_with_label' | t : cover_costs_recurring_amount: item.cover_costs_recurring_amount, currency: order.currency,  cover_costs_label: site.cover_costs_invoice_label }}</span>
+                                                    </div>
+                                                {% endif %}
+                                            {% endif %}
+                                            {% if item.discounts.size > 0 %}
+                                                <div class="mt-2">
+                                                    <span class="badge badge-danger">{{ item.discounts[0].code }}</span>
+                                                </div>
+                                            {% endif %}
+                                            {% if item.form_fields.size > 0 %}
+                                                <div class="mt-2 form-fields text-sm">
+                                                    {% for form_field in item.form_fields %}
+                                                        <div>
+                                                            <strong>{{ form_field.field.label }}</strong>
+                                                            <span>{{ form_field.value | escape }}</span>
+                                                        </div>
+                                                    {% endfor %}
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+
+                        {% unless item.is_locked %}
+                            <td class="text-right">
+                                {% if item.is_discounted %}
+                                    <span class="font-weight-bold text-danger">{{ item.price | money : order.currency, 'currency_code' }}</span>
+                                    <span class="line-thru text-muted">{{ item.original_price | money : order.currency, 'currency_code' }}</span>
+                                {% else %}
+                                    {{ item.price | money : order.currency, 'currency_code' }}
+                                {% endif %}
+                            </td>
+                            <td class="text-center">
+                                {{ item.quantity }}
+                            </td>
+                            <td class="text-right">
+                                {{ item.line_price | money : order.currency, 'currency_code' }}
+                            </td>
+                        {% endunless %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+
+            <tfoot>
+                {% if order.shipping_price or order.tax_price or order.cover_costs_amount %}
+                    <tr>
+                        <td></td>
+                        <th colspan="2" class="text-right">{{ 'templates.receipt.subtotal' | t }}</th>
+                        <td class="text-right">{{ order.subtotal_price | money : order.currency, 'currency_code' }}</td>
+                    </tr>
+                    {% if order.shipping_price %}
+                        <tr>
+                            <td></td>
+                            <th colspan="2" class="text-right">{{ 'templates.receipt.shipping' | t }} <small class='text-muted'>{{ order.shipping_method }}</small></th>
+                            <td class="text-right">{{ order.shipping_price | money : order.currency, 'currency_code' }}</td>
+                        </tr>
+                    {% endif %}
+                    {% if order.tax_price %}
+                        <tr>
+                            <td></td>
+                            <th colspan="2" class="text-right">{{ 'templates.receipt.tax' | t }}</th>
+                            <td class="text-right">{{ order.tax_price | money : order.currency, 'currency_code' }}</td>
+                        </tr>
+                    {% endif %}
+                    {% if order.cover_costs_amount %}
+                        <tr>
+                            <td></td>
+                            <th colspan="2" class="text-right">{{ site.cover_costs_checkout_label }}</th>
+                            <td class="text-right">{{ order.cover_costs_amount | money : order.currency, 'currency_code' }}</td>
+                        </tr>
+                    {% endif %}
+                {% endif %}
+                <tr>
+                    <td></td>
+                    <th colspan="2" class="text-right">{{ 'templates.receipt.total' | t }}</th>
+                    <td class="text-right">{{ order.total_price | money : order.currency, 'currency_code' }}</td>
+                </tr>
+                {% if order.refunded_at %}
+                    {% for refund in order.successfulRefunds %}
+                        <tr>
+                            <td></td>
+                            <th colspan="2" class="text-right">{{ 'templates.receipt.refund_on' | t }} {{ refund.refunded_at | date : "short_month_ordinal_day_year" }}</th>
+                            <td class="text-right text-danger"> ({{ refund.amount | money : refund.currency, 'currency_code' }})</td>
+                        </tr>
+                    {% endfor %}
+                    <tr>
+                        <td></td>
+                        <th colspan="2" class="text-right">{{ 'templates.receipt.balance' | t }}</th>
+                        <td class="text-right">{{ order.balance_amt | money : order.currency, 'currency_code' }}</td>
+                    </tr>
+                {% endif %}
+
+            </tfoot>
+        </table>
+    </div>
+
+    {% if order.customer_notes %}
+        <h5>{{ 'templates.receipt.notes' | t }}</h5>
+        {{ order.customer_notes }}
+    {% endif %}
+</div>
+
+</div>

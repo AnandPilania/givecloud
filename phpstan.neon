@@ -1,0 +1,62 @@
+includes:
+    - ./vendor/nunomaduro/larastan/extension.neon
+
+parameters:
+    paths:
+        - _
+        - app
+
+    excludePaths:
+        - app/Common/DDTrace/Integrations/LiquidIntegration.php
+
+    level: 5
+
+    phpVersion: 70400
+
+    noModelMake: false
+    noUnnecessaryCollectionCall: false
+
+    stubFiles:
+        - .phpstan/stubs/Ds/Domain/Shared/DateTime.stub
+        - .phpstan/stubs/Google/Cloud/Storage/Connection/Rest.stub
+        - .phpstan/stubs/Google/Cloud/Storage/StorageClient.stub
+        - .phpstan/stubs/Illuminate/Foundation/helpers.stub
+        - .phpstan/stubs/PayPal/EBLBaseComponents/AbstractResponseType.stub
+        - .phpstan/stubs/PayPal/EBLBaseComponents/DoExpressCheckoutPaymentRequestDetailsType.stub
+        - .phpstan/stubs/PayPal/EBLBaseComponents/SetExpressCheckoutRequestDetailsType.stub
+        - .phpstan/stubs/PayPal/PayPalAPI/TransactionSearchResponseType.stub
+        - .phpstan/stubs/PayPal/Service/PermissionsService.stub
+        - .phpstan/stubs/PayPal/Types/Perm/CancelPermissionsRequest.stub
+        - .phpstan/stubs/PayPal/Types/Perm/CancelPermissionsResponse.stub
+        - .phpstan/stubs/PayPal/Types/Perm/GetAccessTokenRequest.stub
+        - .phpstan/stubs/PayPal/Types/Perm/GetAccessTokenResponse.stub
+        - .phpstan/stubs/PayPal/Types/Perm/GetBasicPersonalDataRequest.stub
+        - .phpstan/stubs/PayPal/Types/Perm/GetBasicPersonalDataResponse.stub
+        - .phpstan/stubs/PayPal/Types/Perm/GetPermissionsRequest.stub
+        - .phpstan/stubs/PayPal/Types/Perm/GetPermissionsResponse.stub
+        - .phpstan/stubs/PayPal/Types/Perm/PersonalAttributeList.stub
+        - .phpstan/stubs/PayPal/Types/Perm/RequestPermissionsRequest.stub
+        - .phpstan/stubs/PayPal/Types/Perm/RequestPermissionsResponse.stub
+        - .phpstan/stubs/Rephlux/SpfResolver/SpfResolver.stub
+
+    ignoreErrors:
+        - '#Access to undefined constant static\([a-zA-Z0-9\\_]+\)::(CREATED_BY|UPDATED_BY|DELETED_AT|DELETED_BY)#'
+        - '#Constructor of class [a-zA-Z0-9\\_]+ has an unused parameter#'
+        - '#Result of method [^ ]+ \(void\) is used#'
+        - '#Unsafe usage of new static\(\)#'
+
+    earlyTerminatingMethodCalls:
+        Ds\Domain\Commerce\Gateways\PayPalExpressGateway:
+            - throwGatewayException
+
+    universalObjectCratesClasses:
+        - Braintree\Base
+        - ChargeBee\ChargeBee\Model
+        - Ds\Common\DataAccess
+        - Ds\Http\Resources\CurrencyResource
+        - Illuminate\Database\Eloquent\Model
+        - Liquid\Drop
+        - Paysafe\JSONObject
+        - SocialLinks\Page
+        - SocialLinks\Providers\ProviderInterface
+        - Stripe\StripeObject

@@ -1,0 +1,40 @@
+
+{% unless limit %}
+    {% assign limit = 40 %}
+{% endunless %}
+
+{% unless style %}
+    {% assign style = 'masonry' %}
+{% endunless %}
+
+<div class="{% unless style == 'list' %}masonry-2{% endunless %} w-100">
+    {% for social_proof in social_proofs | limit: limit %}
+
+        <div class="brick-container">
+            <div class="brick">
+                <div class="media m-2">
+                    <span class="pr-3 text-muted" href="#">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-user fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </span>
+                    <div class="media-body text-sm">
+                        {% if social_proof.comment %}
+                            <p class="text-justify mb-1">&ldquo;{{ social_proof.comment }}&rdquo;</p>
+                        {% endif %}
+                        <div>
+                        <div class="pull-right text-right font-weight-bold">{{ social_proof.amount | money : social_proof.currency }}</div>
+                            <p>
+                                <strong>{% if social_proof.name %}{{ social_proof.name }}{% else %}{{ 'snippets.social_proofs.anonymous' | t }}{% endif %}</strong><br>
+                                {{ social_proof.date | date: 'short_month_day_year' }}<br>
+                                <span class="text-muted"><i class="fa fa-map-marker"></i> {{ social_proof.location }}</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    {% endfor %}
+</div>

@@ -1,0 +1,7 @@
+.input {
+  @apply px-2 py-4 block w-full border-2  text-center text-2xl;
+  @apply rounded-lg;
+  @apply uppercase;
+  @apply border-theme bg-theme-light text-theme;
+  @apply focus:border-theme focus:ring-theme focus:ring-2;
+}

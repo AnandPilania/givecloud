@@ -1,0 +1,210 @@
+{% schema %}
+[
+    {
+        "name": "Event Fields",
+        "settings": [
+            {
+                "type": "header",
+                "content": "Time & Location"
+            },
+            {
+                "type": "text",
+                "name": "event_date_time",
+                "label": "Event Dates & Times",
+                "info": "The location of the event",
+                "size":"sm"
+            },
+            {
+                "type": "text",
+                "name": "event_location",
+                "label": "Event Location",
+                "info": "The location of the event",
+                "size":"sm"
+            },
+            {
+                "type": "header",
+                "content": "Branding"
+            },
+            {
+                "type": "image",
+                "name": "event_bg_image",
+                "label": "Background Image",
+                "info": "Background Image",
+                "size":"sm"
+            }
+        ]
+    }
+]
+{% endschema %}
+
+{% asset 'https://cdn.givecloud.co/npm/ekko-lightbox@5.3.0/dist/ekko-lightbox.css' %}
+{% asset 'https://cdn.givecloud.co/npm/ekko-lightbox@5.3.0/dist/ekko-lightbox.min.js' %}
+
+{% include 'header-image-lg', header_title: product.name, header_image: product.metadata.event_bg_image %}
+
+<div class="page-content">
+
+    <div class="container pb-5" style="margin-top:-2.5rem;">
+
+        <div class="card mb-4 {% if settings.animations %}wow fadeInUp{% endif %}" {% if settings.animations %}data-wow-delay="0s"{% endif %}>
+            <div class="row no-gutters">
+                <div class="col-12 col-sm-4 border-right">
+                    <div class="card-body">
+                        <div class="card-title-sm"><i class="fa fa-exclamation-circle fa-fw"></i> {{ 'templates.product.description' | t }}</div>
+                        <p class="card-text">{{ product.description }}</p>
+                    </div>
+                    <div class="d-block d-sm-none border-bottom"></div>
+                </div>
+                <div class="col-6 col-sm-4 border-right">
+                    <div class="card-body">
+                        <div class="card-title-sm"><i class="fa fa-map-marker fa-fw"></i> {{ 'templates.product.location' | t }}</div>
+                        <p class="card-text">{{ product.metadata.event_location }}</p>
+                    </div>
+                </div>
+                <div class="col-6 col-sm-4 ">
+                    <div class="card-body">
+                        <div class="card-title-sm"><i class="fa fa-calendar-o fa-fw"></i> {{ 'templates.product.date_and_time' | t }}</div>
+                        <p class="card-text">{{ product.metadata.event_date_time }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-12 col-sm-8">
+                <div class="card mb-4  {% if settings.animations %}wow fadeInUp{% endif %}" {% if settings.animations %}data-wow-delay="0.3s"{% endif %}>
+                    <img class="card-img-top card-img-top-400" src="{{ product.feature_image.full }}" alt="{{ fundraising_page.title }}">
+                    <div class="card-body">
+                        {{ product.page_content }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-4">
+                <form class="product-add-to-cart" method="post" novalidate>
+                    <div {% if settings.animations %}class="wow fadeInUp" data-wow-delay="1.2s"{% endif %}>
+                        <input type="hidden" name="product_id" value="{{ product.id }}">
+                        <input type="hidden" name="recurring_frequency" value="">
+
+                        <div class="card mb-4">
+                            <div class="card-body border-bottom">
+                                <div class="card-title-sm mb-0"><i class="fa fa-ticket fa-fw"></i> {{ 'templates.product.register' | t }}</div>
+                            </div>
+
+                            {% if product.qty_available %}
+                                {% include 'product-options', product: product, options_style: 'list' %}
+                            {% elsif product.out_of_stock_message %}
+                                <div class="card-body text-danger">{{ product.out_of_stock_message }}</div>
+                            {% else %}
+                                <div class="card-body text-danger">{{ 'templates.product.sold_out' | t }}</div>
+                            {% endif %}
+                        </div>
+
+                        {% if product.enable_tributes %}
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    {% include 'product-tribute-fields', product: product %}
+                                </div>
+                            </div>
+                        {% endif %}
+
+                        {% if product.form_fields.size > 0 %}
+                            <div class="card mb-4 pb-0">
+                                <div class="card-body">
+                                    <div class="card-title-sm mb-4">{{ 'templates.product.details' | t }}</div>
+
+                                    {% include 'product-form-fields', product: product %}
+                                </div>
+                            </div>
+                        {% endif %}
+
+                        <!-- desktop buttons -->
+                        <div class="d-none d-md-block ">
+                            <div class="add-product-btns">
+                                <div class="row gutter-sm">
+
+                                    {% unless product.hide_qty %}
+                                        <div class="col-4">
+                                            <div class="form-group labelify d-inline-block mb-3 mr-1" style="width:90px;">
+                                                <label for="p{{ product.id }}-variant-id">{{ 'templates.product.quantity' | t }}</label>
+                                                {% if settings.qty_selection_type == 'text' %}
+                                                    <input type="text" class="form-control form-control-pill" name="quantity" value="1" required>
+                                                {% else %}
+                                                    <select class="form-control form-control-pill" name="quantity" required>
+                                                        {% for qty in (1 .. settings.qty_selection_limit) %}
+                                                            <option value="{{ qty }}">{{ qty }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    {% endunless %}
+
+                                    <div class="col">
+                                        <button type="submit" name="primary-btn" data-style="slide-up" class="mb-3 mr-1 btn btn-lg btn-primary btn-block px-4" {% unless product.qty_available %}disabled{% endunless %}><i class="fa fa-plus"></i> {% if product.primary_button_label %}{{ product.primary_button_label }}{% else %}{{ 'templates.product.add_to_cart' | t: cart_term: settings.cart_label }}{% endif %}</button>
+                                    </div>
+
+                                    {% if product.alternate_button_label %}
+                                        <div class="col-12">
+                                            <button type="button" name="alternate-btn" value="{{ product.alternate_button_url | escape }}" class="mb-3 btn btn-outline-primary btn-block px-4" data-spinner-color="{{ site.primary_color }}" {% unless product.qty_available %}disabled{% endunless %}>{{ product.alternate_button_label }}</button>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div style="display:none;" class="add-product-success">
+                                <a href="/cart" class="btn btn-lg btn-pill btn-outline-primary mb-1">{{ 'templates.product.continue_to_payment' | t }} <i class="fa fa-arrow-right fa-fw"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- mobile buttons (fixed to bottom) -->
+                    <div class="d-flex d-sm-flex d-md-none shadow-sm fixed-bottom p-3 text-center bg-white align-items-center justify-content-between">
+                        <div class="circle-avatar-bg-sm mx-2" style="background-image:url('{{ product.feature_image.thumb }}');"></div>
+
+                        <div>
+                            <div class="add-product-btns mobile-add-product-buttons">
+                                <div class="d-flex flex-row align-items-center">
+                                    {% unless product.hide_qty %}
+                                        <div class="labelify d-inline-block align-top">
+                                            <label for="p{{ product.id }}-variant-id">{{ 'templates.product.quantity' | t }}</label>
+                                            {% if settings.qty_selection_type == 'text' %}
+                                                <input type="text" class="form-control" name="quantity" value="1" required>
+                                            {% else %}
+                                                <select class="form-control" name="quantity" required>
+                                                    {% for qty in (1 .. settings.qty_selection_limit) %}
+                                                        <option value="{{ qty }}">{{ qty }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            {% endif %}
+                                        </div>
+                                    {% endunless %}
+
+                                    <div class="d-flex flex-column ">
+                                        <button type="submit" name="primary-btn" data-style="slide-up" class="btn btn-primary {% unless product.alternate_button_label %}btn-lg{% endunless %} px" {% unless product.qty_available %}disabled{% endunless %}><i class="fa fa-plus"></i> {% if product.primary_button_label %}{{ product.primary_button_label }}{% else %}{{ 'templates.product.add_to_cart' | t: cart_term: settings.cart_label }}{% endif %}</button>
+                                        {% if product.alternate_button_label %}
+                                            <button type="button" name="alternate-btn" value="{{ product.alternate_button_url | escape }}" class="btn btn-outline-primary px-4" data-spinner-color="{{ site.primary_color }}" {% unless product.qty_available %}disabled{% endunless %}>{{ product.alternate_button_label }}</button>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="display:none;" class="add-product-success">
+                                <a href="/cart" class="btn btn-lg btn-outline-primary mb-1">Payment <i class="fa fa-arrow-right fa-fw"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                {% if product.enable_social_buttons and product.social_urls %}
+                    <div class="mt-4">
+                        {% include 'product-social-actions' %}
+                    </div>
+                {% endif %}
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>

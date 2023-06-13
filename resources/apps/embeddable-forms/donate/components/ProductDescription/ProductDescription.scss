@@ -1,0 +1,11 @@
+.root {
+  @apply mb-6 text-gray-300 text-sm;
+
+  &.light {
+    @apply text-gray-700;
+  }
+
+  .title {
+    @apply text-lg font-bold;
+  }
+}

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns#" lang="{{ site.locale.iso }}">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  {% capture page_title -%}
+    {%- if template.type == 'fundraiser' and fundraising_page.title -%}
+        {{ fundraising_page.title }}
+    {%- elsif template.type == 'page' and page.title -%}
+        {{ page.title }}
+    {%- elsif template.type == 'product' and product.name -%}
+        {{ product.name }}
+    {%- elsif template.type == 'search-results' -%}
+        Results for '{{ terms }}'
+    {%- elsif template.type == 'sponsorship' -%}
+        {% include 'sponsorship-name', fname: sponsorship.first_name, lname: sponsorship.last_name %}
+    {%- else -%}
+        {{ page_title }}
+    {%- endif %}
+  {%- endcapture -%}
+
+  {%- capture seo_title -%}
+    {{ page_title }}
+    {%- if settings.default_page_title -%}
+      {%- unless page_title contains settings.default_page_title %} — {{ settings.default_page_title }}{% endunless -%}
+    {%- endif -%}
+  {%- endcapture -%}
+
+  <title>{{ seo_title | escape }}</title>
+
+  <meta name="description" content="{{ page.page_description | escape }}">
+  <meta name="keywords" content="{{ page.page_keywords | escape }}">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+
+  {% if settings.favicon -%}
+    <link rel="icon" type="image/png" href="{{ settings.favicon }}">
+  {%- endif %}
+
+  <meta name="csrf-token" content="{{ site.csrf_token }}">
+
+  {% include 'og-tags' %}
+
+  {% include 'assets', trim: true %}
+
+  {{ content_for_header }}
+</head>
+<body class="{{ body_classes }} {% if settings.header_style == 'overlay' or settings.header_style == 'overlay-gradient' %}overlayed-header{% endif %} {% if settings.theme_width == 'fixed' %}fixed-width{% endif %}">
+
+{% if settings.header_type == 'full' %}
+  {% include 'header' %}
+{% endif %}
+
+{% if settings.theme_width == 'fixed' %}<div class="container master-container">{% endif %}
+
+{{ content_for_layout }}
+
+{% include 'footer' %}
+
+{% if settings.theme_width == 'fixed' %}</div>{% endif %}
+
+{% include 'pop-up' %}
+
+{% include 'cookie-notice' %}
+
+{% include 'capture-nps' %}
+
+{% include 'localize-general' %}
+
+{{ content_for_footer }}
+
+</body>
+
+</html>

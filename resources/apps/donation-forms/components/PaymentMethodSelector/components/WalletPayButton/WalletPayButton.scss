@@ -1,0 +1,60 @@
+.root {
+  .applePayButton,
+  .googlePayButton {
+    @apply flex items-center justify-center;
+    @apply w-full rounded-md;
+    @apply mt-[8px] px-5 py-2;
+    @apply space-x-2;
+    @apply transition-colors ease-in-out duration-300;
+    @apply bg-black text-lg text-white;
+    height: 46px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
+
+    div {
+      @apply flex items-center justify-center;
+    }
+  }
+
+  .applePayButton.applePayOfficialButton {
+    @apply hidden;
+  }
+
+  .applePayUnofficialButton svg {
+    margin-top: -0.15rem;
+  }
+
+  @supports (-webkit-appearance: -apple-pay-button) {
+    .applePayButton {
+      .applePayUnofficialButton {
+        @apply hidden;
+      }
+
+      .applePayOfficialButton {
+        @apply block w-full h-10;
+        -webkit-appearance: -apple-pay-button;
+        -apple-pay-button-style: black;
+        -apple-pay-button-type: donate;
+      }
+    }
+  }
+
+  .googlePayButton svg {
+    margin-top: 0.25rem;
+    transform: scale(1.1);
+  }
+
+  .googlePayUnofficialButton {
+    @apply p-0;
+
+    &:hover {
+      @apply bg-[#3c4043];
+    }
+
+    > div {
+      @apply w-full;
+      height: 38px;
+    }
+  }
+}

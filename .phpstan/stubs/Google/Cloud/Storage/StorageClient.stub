@@ -1,0 +1,11 @@
+<?php
+
+namespace Google\Cloud\Storage;
+
+use Google\Cloud\Storage\StorageClient as GoogleStorageClient;
+
+class StorageClient
+{
+    /** @var \Google\Cloud\Storage\Connection\Rest */
+    protected $connection;
+}

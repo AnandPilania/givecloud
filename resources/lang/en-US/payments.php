@@ -1,0 +1,98 @@
+<?php
+
+return [
+    'type' => [
+        'Cash' => 'Cash',
+        'Check' => 'Check',
+        'ACH' => 'ACH',
+        'Free' => 'Free',
+        'Other' => 'Other',
+        'Secure Account' => 'Secure Account',
+        'Visa' => 'Visa',
+        'Discover' => 'Discover',
+        'MasterCard' => 'MasterCard',
+        'Amex' => 'Amex',
+        'PayPal' => 'PayPal',
+    ],
+
+    'description' => [
+        'alternate' => 'alternate payment',
+        'authorization' => 'authorization',
+        'ending_in' => 'ending in',
+        'ref' => 'ref',
+        'ach' => [
+            'business' => 'business account',
+            'personal' => 'personal account',
+        ],
+        'check' => [
+            'dated' => 'dated :date',
+            'date' => 'M j, Y',
+        ],
+        'paypal' => 'PayPal account',
+    ],
+
+    'period' => [
+        'one_time' => 'one time',
+        'starting' => 'starting',
+        'weekly' => '/wk',
+        'bi_monthly' => '/bi-',
+        'semi_monthly' => '/2wk',
+        'quarterly' => '/qr',
+        'monthly' => '/mth',
+        'semi_yearly' => '/6mth',
+        'yearly' => '/yr',
+    ],
+
+    'recurring' => [
+        'description' => '{1} You will be charged :description.|[2,*] You will be charged :description and :other.',
+        'weekly' => ':amount/:day',
+        'bi_monthly' => ':amount/bi-:day',
+        'quarterly' => ':amount/qr (:day)',
+        'monthly' => ':amount/mth (:day)',
+        'semi_yearly' => ':amount/6mth (:day)',
+        'yearly' => ':amount/yr (:day)',
+    ],
+
+    'payment_was_not_successful' => 'Payment was not successful or requires further action.',
+    'payment_method_setup_not_successful' => 'Unable to add Payment Method. Setup was not successful or requires further action.',
+
+    'payment_failure_friendly_messages' => [
+        'fallback' => "Your payment couldn't be processed.",
+        'incorrect_number' => 'Looks like the credit card number provided is not valid.',
+        'insufficient_funds' => "It appears there isn't enough available funds to process your payment. You're in good company - it happens often.",
+        'expired_card' => 'Looks like your credit card has expired.',
+        'pickup_card' => 'Your bank reports that this card may have been reported lost or stolen.',
+        'processing_error' => "Lucky you. It appears there's an intermitent problem with the payment network.",
+        'invalid_account' => "Your bank reports that there's a problem with this card or the account it's connected to.",
+        'incorrect_cvc' => 'It appears the security code you provided is incorrect.',
+        'duplicate_transaction' => 'This payment is too identical to a recent payment and was declined to prevent a duplicate transaction.',
+        'invalid_expiry_year' => "The card's expiration year is incorrect.",
+        'call_issuer' => "There's a problem with this card or the account it's connected to.",
+        'incorrect_address' => "The address you provided doesn't match the bank's records.",
+        'do_not_try_again' => "There's a problem with this card or the account it's connected to.",
+        'reenter_transaction' => "Your bank couldn't process this payment.",
+        'account_number_invalid' => 'The bank account you provided is not valid.',
+        'routing_number_invalid' => 'The bank routing number you provided is not valid.',
+        'card_not_supported' => "Your bank doesn't allow your card to make this kind of online payment.",
+    ],
+
+    'payment_failure_corrective_actions' => [
+        'fallback' => 'Double check the information you provided and try again.  You may need to try a different card or device.',
+        'incorrect_number' => 'Double check the card number and try again.',
+        'insufficient_funds' => 'Top-up your card and try again, or try another card.',
+        'expired_card' => 'Check the expiry date you entered or try a different card.',
+        'pickup_card' => 'Try a different card or contact your bank.',
+        'processing_error' => 'Try again in a couple seconds.',
+        'invalid_account' => 'Try a different card or contact your bank.',
+        'incorrect_cvc' => 'Check the 3 or 4 digit security code on the back of your card and try again.',
+        'duplicate_transaction' => 'Try refreshing the page and trying again.',
+        'invalid_expiry_year' => 'Check the expiry date you entered and try again.',
+        'call_issuer' => 'Your bank wants you to contact them, or try another card.',
+        'incorrect_address' => 'Check the address you provided and try again.',
+        'do_not_try_again' => 'Your bank wants you to contact them, or try another card.',
+        'reenter_transaction' => 'Try refreshing the page and trying again, or try a different card.',
+        'account_number_invalid' => 'Check the bank account number and try again.',
+        'routing_number_invalid' => 'Check the bank routing number and try again.',
+        'card_not_supported' => 'Contact your bank or try a different card.',
+    ],
+];

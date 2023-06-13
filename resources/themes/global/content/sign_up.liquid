@@ -1,0 +1,25 @@
+[signup group="" success_url=""]
+    <div class="row">
+        <div class="form-group col-6">
+            <input class="form-control" name="first_name" required="" type="text" value="" placeholder="{{ 'general.forms.first_name' | t }}" />
+        </div>
+        <div class="form-group col-6">
+            <input class="form-control" name="last_name" required="" type="text" value="" placeholder="{{ 'general.forms.last_name' | t }}" />
+        </div>
+    </div>
+    <div class="form-group">
+        <input class="form-control" name="email" required="" type="email" value="" placeholder="{{ 'general.forms.email' | t }}" />
+    </div>
+    <div class="form-group">
+        <div class="custom-control custom-radio">
+            <input id="input-email_opt_in-this_only" class="custom-control-input" checked="checked" name="email_opt_in" type="radio" value="0" /> <label class="custom-control-label" for="input-email_opt_in-this_only"> {{ 'content.signup.send_me_emails_about_this_experience_only' | t }}</label>
+        </div>
+        <div class="custom-control custom-radio">
+            <input id="input-email_opt_in" class="custom-control-input" name="email_opt_in" type="radio" value="1" /> <label class="custom-control-label" for="input-email_opt_in"> {{ 'content.signup.send_me_emails_about_this_experience_and_add_me_to_the_general_mailing_list' | t }}</label>
+        </div>
+    </div>
+    [recaptcha]
+    <div class="form-group text-center">
+        <button class="btn btn-info btn-lg" type="submit">{{ 'content.signup.sign_me_up' | t }}</button>
+    </div>
+[/signup]

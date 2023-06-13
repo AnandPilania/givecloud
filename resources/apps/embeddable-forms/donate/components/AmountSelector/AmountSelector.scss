@@ -1,0 +1,9 @@
+.root {
+  .presetsContainer {
+    @apply mt-4;
+
+    .error {
+      @apply mt-4;
+    }
+  }
+}

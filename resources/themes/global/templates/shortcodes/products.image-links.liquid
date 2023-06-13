@@ -1,0 +1,29 @@
+{% asset '~/scripts/templates/product.js' %}
+
+{% if options.columns == 2 %}
+    {% assign image_link_classes = "col-sm-6 col-12 my-2" %}
+{% elsif options.columns == 4 %}
+    {% assign image_link_classes = "col-md-3 col-sm-6 col-12 my-2" %}
+{% else %}
+    {% assign image_link_classes = "col-md-4 col-sm-6 col-12 my-2" %}
+{% endif%}
+
+<div class="products-image-links">
+  <div class="row">
+    {% for product in products %}
+      <div class="{{ image_link_classes }}">
+
+        {% assign caption = '' %}
+        {% unless product.hide_price or product.is_donation %}
+          {% if product.price_min != product.price_max %}
+            {% capture caption %}{{ product.price_min | money }} - {{ product.price_max | money }}{% endcapture %}
+          {% elsif product.price %}
+            {% assign caption = product.price | money %}
+          {% endif %}
+        {% endunless %}
+
+        {% include 'image-link-item', text: product.name, link: product.url, image: product.feature_image.thumb, caption: caption %}
+      </div>
+    {% endfor %}
+  </div>
+</div>

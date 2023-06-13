@@ -1,0 +1,15 @@
+.logo {
+  @apply absolute top-6 w-12 h-auto;
+}
+
+.headingContainer {
+  @apply w-3/4;
+}
+
+.iconSkeletonContainer {
+  @apply flex justify-center w-full mt-2;
+
+  .iconSkeleton {
+    @apply h-4 w-4 rounded-full p-2 bg-grey-100 mr-2 last:mr-0;
+  }
+}

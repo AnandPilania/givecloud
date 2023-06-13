@@ -1,0 +1,10 @@
+
+<div class="gallery gallery-{{ images.size | at_most: 4 }}">
+    {% for image in images %}
+        <div class="brick">
+            <div class="brick-inr">
+                <a data-fancybox="gallery" href="{{ image | img_url : '1280x960' }}" data-caption="{{ image.caption | escape }}"><img src="{{ image.thumb }}"></a>
+            </div>
+        </div>
+    {% endfor %}
+</div>

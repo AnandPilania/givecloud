@@ -1,0 +1,25 @@
+.root {
+  @apply flex flex-col items-center;
+  @apply border border-[#828282];
+  @apply rounded-lg;
+
+  > * {
+    @apply transform -translate-y-2.5;
+    @apply bg-white;
+    @apply text-xs leading-5 text-[#828282] text-center;
+    @apply px-1;
+
+    strong {
+      @apply font-bold;
+    }
+
+    &:first-child {
+      @apply uppercase;
+      @apply px-3;
+    }
+  }
+
+  .content {
+    @apply p-1 -mb-1.5;
+  }
+}

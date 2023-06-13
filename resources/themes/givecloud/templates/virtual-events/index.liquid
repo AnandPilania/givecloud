@@ -1,0 +1,49 @@
+{% layout 'virtual-events' %}
+
+{% if has_compatible_browser %}
+
+  <div id="app"
+      data-page-title="{{ page_title }}"
+      data-event-code="{{ event_code }}"
+      data-currency="{{ currency | json | escape }}"
+      data-type="{{ type }}"
+      data-logo="{{ logo }}"
+      data-bg-image="{{ bg_image }}"
+      data-theme-style="{{ theme_style }}"
+      data-theme-primary-color="{{ theme_primary_color }}"
+      data-is-chat-enabled="{{ is_chat_enabled }}"
+      data-is-amount-tally-enabled="{{ is_amount_tally_enabled }}"
+      data-is-honor-roll-enabled="{{ is_honor_roll_enabled }}"
+      data-is-emoji-reaction-enabled="{{ is_emoji_reaction_enabled }}"
+      data-is-celebration-enabled="{{ is_celebration_enabled }}"
+      data-celebration-threshold="{{ celebration_threshold }}"
+      data-pusher-config="{{ site.pusher_config | json | escape }}"
+      data-pusher-channel="{{ pusher_channel }}"
+      data-pledge-campaign-id="{{ pledge_campaign_id }}"
+      data-tabs="{{ tabs | json | escape }}"
+      data-video-id="{{ video_id }}"
+      data-chat-id="{{ chat_id }}"
+      data-video-provider="{{ video_provider }}"
+      data-domain="{{ site.host }}"
+      data-is-demo-mode-enabled="{{ is_demo_mode_enabled }}"
+      data-updates-total-text="{{ updates_total_text }}"
+      data-updates-total-text-colour="{{ updates_total_text_colour }}"
+      data-live-stream-status="{{ live_stream_status }}"
+      data-prestream-message-line-one="{{ prestream_message_line_1 }}"
+      data-prestream-message-line-two="{{ prestream_message_line_2 }}"
+  ></div>
+
+{% else %}
+
+   <div class="p-4 rounded-lg bg-gray-900 bg-opacity-90">
+      <div class=" text-2xl mb-2 text-center">Incompatible Browser</div>
+      <div class="">
+          <p class="mb-4 text-center">Sorry, this browser will not work to watch this event here.</p>
+          <p class="mb-4 text-center">
+              Please use a newer browser or update this one.
+          </p>
+          <p>&nbsp;</p>
+      </div>
+  </div>
+
+{% endif %}

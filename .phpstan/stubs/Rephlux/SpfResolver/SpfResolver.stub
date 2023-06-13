@@ -1,0 +1,9 @@
+<?php
+
+namespace Rephlux\SpfResolver;
+
+class SpfResolver
+{
+    /** @var array */
+    protected $spfData; // @phpstan-ignore-line
+}

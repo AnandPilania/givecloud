@@ -1,0 +1,207 @@
+openapi: 3.0.0
+info:
+  title: 'Givecloud API'
+  version: 1.0.0
+paths:
+  /peer-to-peer-campaign:
+    get:
+      tags:
+        - PeerToPeerCampaign
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PeerToPeerCampaignResource'
+
+components:
+  schemas:
+    PeerToPeerCampaignResource:
+      required:
+        - id
+        - fundraiser_type
+        - team_name
+        - team_join_code
+        - team_join_shortlink_url
+        - team_goal_amount
+        - team_currency_code
+        - team_members
+        - goal_amount
+        - currency_code
+        - avatar_name
+        - social_avatar
+        - amount_raised
+        - share_links
+        - supporter
+        - billing_address
+        - shipping_address
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        fundraiser_type:
+          type: string
+        team_name:
+          type: string
+        team_join_code:
+          type: string
+        team_join_shortlink_url:
+          type: string
+        team_goal_amount:
+          type: number
+        team_currency_code:
+          type: string
+        team_members:
+          type: array
+          items:
+            type: object
+        goal_amount:
+          type: number
+        currency_code:
+          type: string
+        avatar_name:
+          type: string
+        social_avatar:
+          type: string
+        amount_raised:
+          nullable: true
+          type: number
+        share_links:
+          required:
+              - facebook
+              - twitter
+              - linkedin
+              - sms
+              - email
+          properties:
+            facebook:
+              type: string
+            twitter:
+              type: string
+            linkedin:
+              type: string
+            sms:
+              type: string
+            email:
+              type: string
+        supporter:
+          properties:
+            id:
+              type: string
+            id_deprecated:
+              type: string
+            active:
+              type: boolean
+            display_name:
+              type: string
+            first_name:
+              type: string
+            last_name:
+              type: string
+            email:
+              type: string
+            type:
+              type: string
+            is_organization:
+              type: boolean
+            email_opt_in:
+              type: boolean
+            vendor_contract_id:
+              type: string
+              nullable: true
+            billing_address:
+              required:
+                - first_name
+                - last_name
+                - company
+                - email
+                - address1
+                - address2
+                - city
+                - state
+                - zip
+                - country
+                - phone
+              properties:
+                first_name:
+                  type: string
+                last_name:
+                  type: string
+                company:
+                  type: string
+                  nullable: true
+                email:
+                  type: string
+                address1:
+                  type: string
+                  nullable: true
+                address2:
+                  type: string
+                  nullable: true
+                city:
+                  type: string
+                  nullable: true
+                state:
+                  type: string
+                  nullable: true
+                zip:
+                  type: string
+                  nullable: true
+                country:
+                  type: string
+                  nullable: true
+                phone:
+                  type: string
+                  nullable: true
+            shipping_address:
+              required:
+                - first_name
+                - last_name
+                - company
+                - email
+                - address1
+                - address2
+                - city
+                - state
+                - zip
+                - country
+                - phone
+              properties:
+                first_name:
+                  type: string
+                last_name:
+                  type: string
+                company:
+                  type: string
+                  nullable: true
+                email:
+                  type: string
+                address1:
+                  type: string
+                  nullable: true
+                address2:
+                  type: string
+                  nullable: true
+                city:
+                  type: string
+                  nullable: true
+                state:
+                  type: string
+                  nullable: true
+                zip:
+                  type: string
+                  nullable: true
+                country:
+                  type: string
+                  nullable: true
+                phone:
+                  type: string
+                  nullable: true
+            created_at:
+              type: string
+            updated_at:
+              type: string
+
+

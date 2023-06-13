@@ -1,0 +1,34 @@
+.root {
+  @apply items-center md-h:justify-center;
+
+  .text {
+    @apply max-w-[14rem] text-center;
+  }
+
+  .thermometerContainer {
+    @apply flex w-full justify-center items-center my-4;
+
+    .thermometer {
+      @apply mx-2 max-w-[14rem];
+    }
+  }
+
+  .overflowContainer {
+    @apply h-80 md-h:h-full overflow-y-auto overflow-x-hidden p-2;
+
+    background: linear-gradient(#ffffff 33%, rgba(255, 255, 255, 0)),
+      linear-gradient(rgba(255, 255, 255, 0), #ffffff 66%) 0 100%,
+      radial-gradient(farthest-side at 50% 0, rgba(212, 212, 216, 0.5), rgba(0, 0, 0, 0)),
+      radial-gradient(farthest-side at 50% 100%, rgba(212, 212, 216, 0.5), rgba(0, 0, 0, 0)) 0 100%;
+    background-color: #ffffff;
+    background-repeat: no-repeat;
+    background-attachment: local, local, scroll, scroll;
+    background-size: 100% 51px, 100% 51px, 100% 17px, 100% 17px;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}

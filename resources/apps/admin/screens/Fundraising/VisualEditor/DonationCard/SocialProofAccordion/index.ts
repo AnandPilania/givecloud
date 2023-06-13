@@ -1,0 +1,1 @@
+export { SocialProofAccordion } from './SocialProofAccordion'

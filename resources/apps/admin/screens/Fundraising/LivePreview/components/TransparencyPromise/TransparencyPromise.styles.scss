@@ -1,0 +1,35 @@
+.root {
+  @apply relative w-full;
+  @apply font-sans;
+
+  .header {
+    @apply absolute -top-1 left-16 uppercase bg-white px-2 font-bold text-grey-200;
+    @apply text-[8px];
+  }
+
+  .content {
+    @apply flex flex-col items-center rounded-lg border border-grey-200 py-2.5;
+
+    .text {
+      @apply flex items-center text-grey-100 font-bold;
+      @apply text-[9px];
+    }
+
+    .skeleton {
+      @apply bg-grey-100 rounded-sm h-3;
+
+      &.short {
+        @apply w-28;
+      }
+
+      &.long {
+        @apply w-36;
+      }
+    }
+  }
+
+  .overlay {
+    @apply absolute -top-4 -left-1 pt-20 pr-56 rounded-md;
+    @apply bg-blue-300 border-blue-400 opacity-40 hover:cursor-pointer hover:bg-brand-blue hover:border-2 hover:border-blue-400;
+  }
+}

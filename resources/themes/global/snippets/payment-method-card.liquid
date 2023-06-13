@@ -1,0 +1,28 @@
+<div class="card-body credit-card-bg {% if card_top %}rounded-top{% else %}rounded{% endif %} text-light text-left">
+
+    {% if default_method %}
+        <div class="card-flags">
+            <div class="flag-primary pr-5"><i class="fa fa-check"></i> {{ 'snippets.payment_method_card.default' | t }}</div>
+        </div>
+    {% endif %}
+
+    <div class="card-flags">
+        {% if method.is_expired %}
+            <div class="flag-badge-danger"><i class="fa fa-exclamation-triangle"></i></div>
+        {% else %}
+            <div class="flag-badge-success"><i class="fa fa-check"></i></div>
+        {% endif %}
+    </div>
+
+    {% include 'payment-method-icon', icon_size:'3x', account_type: method.account_type %}
+    <div class="mb-2 mt-4 pr-2 text-right text-sm monospace">
+        <span>{{ method.account_number }}</span>
+        {% if method.card %}
+            <div class="text-left mt-1">
+                <span class="{% if method.is_expired %}text-light bg-danger font-weight-bold p-1{% endif %}">
+                    {{ method.card.exp_month }}/{{ method.card.exp_year }}
+                </span>
+            </div>
+        {% endif %}
+    </div>
+</div>

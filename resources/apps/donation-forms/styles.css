@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .rings {
+    @apply opacity-0;
+    @apply absolute inset-0 -z-10;
+    @apply h-full w-full rounded-full;
+    content: '';
+    border: 1px solid rgba(var(--primary-colour-500-rgb), 0.25);
+    animation: pulse 3s infinite;
+  }
+}
+
+:root {
+  --app-height: 100%;
+  --theme--colour: #2467CC;
+  --theme--colour-light: rgba(36, 103, 204, 0.15);
+  --theme--colour-dark: #1c51a1;
+  font-size: 14px;
+
+  @media (min-height: 768px) and screen(2xl) {
+    font-size: 16px;
+  }
+}
+
+html,
+body {
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+  height: var(--app-height);
+}
+
+#app-root {
+  height: 100%;
+}
+
+:focus-visible {
+  outline-color: #000;
+}
+
+input {
+  @apply border border-gray-300 rounded;
+  @apply text-base;
+  @apply transition-colors ease-in-out duration-200;
+}
+
+input:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  --tw-ring-color: var(--primary-colour-500);
+  border-color: var(--primary-colour-500);
+}
+

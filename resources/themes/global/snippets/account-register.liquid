@@ -1,0 +1,116 @@
+{% if request.data.success %}
+    <div class="alert alert-success" role="alert">{{ request.data.success | escape }}</div>
+{% endif %}
+{%  if request.data.error %}
+    <div class="alert alert-danger" role="alert">{{ request.data.error | escape }}</div>
+{% endif %}
+
+<div class="card">
+    <div class="card-body">
+
+        <h2 class="card-title text-left mt-1 mb-4">{{ settings.register_heading }}</h2>
+
+        {{ settings.register_subheading }}
+
+        {% include 'social-login' %}
+
+        <form name="registerForm" novalidate>
+            <div class="alert alert-danger" role="alert" style="display:none"></div>
+
+            {% if account_types.size %}
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group labelify">
+                            <label><i class="fa fa-user"></i> Supporter Type</label>
+                            <select class="form-control" name="account_type_id" required>
+                                {% for type in account_types %}
+                                    <option data-organization="{{ type.is_organization }}" value="{{ type.id }}" {% if type.is_default %}selected{% endif %}>{{ type.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+            <div class="form-group labelify" style="display:none">
+                <label>{{ 'general.forms.organization_name' | t }}</label>
+                <input type="text" class="form-control" name="organization_name" x-autocompletetype="organization" autocompletetype="org" autocorrect="off" spellcheck="off" autocapitalize="off">
+            </div>
+
+            {% if settings.allow_register_by_donor_id %}
+                <div class="form-group labelify">
+                    <label><i class="fa fa-envelope-o"></i> {{ 'snippets.account_register.donor_id' | t }}</label>
+                    <input type="tel" class="form-control" name="donor_id" autocomplete="no" required>
+                    {% if settings.register_donor_id_help %}
+                        <small class="form-text text-muted">
+                            {{ settings.register_donor_id_help }}
+                        </small>
+                    {% endif %}
+                </div>
+            {% endif %}
+
+            <div class="row gutter-sm">
+                {% if site.donor_title != 'hidden' %}
+                    <div class="col-3">
+                        <div class="form-group labelify">
+                            <label>{{ 'general.forms.title' | t }}</label>
+                            {% if site.donor_title_options %}
+                                <select class="form-control" name="title" {% if site.donor_title == 'required' %}required{% endif %} x-autocompletetype="honorific-prefix" autocompletetype="honorific-prefix">
+                                    <option value=""></option>
+                                    {% for title in site.donor_title_options %}
+                                        <option value="{{ title | escape }}">{{ title }}</option>
+                                    {% endfor %}
+                                </select>
+                            {% else %}
+                                <input type="text" class="form-control" name="title" {% if site.donor_title == 'required' %}required{% endif %} x-autocompletetype="honorific-prefix" autocompletetype="honorific-prefix" autocorrect="off" spellcheck="off">
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endif %}
+                <div class="col-4">
+                    <div class="form-group labelify">
+                        <label>{{ 'snippets.account_register.first' | t }}</label>
+                        <input type="text" class="form-control" name="first_name" x-autocompletetype="given-name" autocompletetype="given-name" autocorrect="off" spellcheck="off" autocapitalize="off" required>
+                    </div>
+                </div>
+                <div class="col-5">
+                    <div class="form-group labelify">
+                        <label>{{ 'general.forms.last_name' | t }}</label>
+                        <input type="text" class="form-control" name="last_name" x-autocompletetype="surname" autocompletetype="family-name" autocorrect="off" spellcheck="off" autocapitalize="off" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group labelify">
+                <label><i class="fa fa-envelope-o"></i> {{ 'general.forms.email' | t }}</label>
+                <input type="email" class="form-control" name="email" x-autocompletetype="email" autocompletetype="email" autocorrect="off" spellcheck="off" autocapitalize="off" required>
+            </div>
+
+            <div class="form-group labelify">
+                <label><i class="fa fa-map-marker"></i> {{ 'snippets.account_register.postal_code_zip' | t }}</label>
+                <input type="text" class="form-control" name="zip" autocomplete="no" required>
+            </div>
+
+            <div class="form-group labelify">
+                <label><i class="fa fa-lock"></i> {{ 'general.forms.password' | t }}</label>
+                <input type="password" class="form-control" name="password" autocomplete="current-password" required>
+            </div>
+
+            {% if settings.optin_enabled %}
+                <div class="form-group">
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" name="email_opt_in" value="1" id="create-account-opt-in-1">
+                        <label class="custom-control-label" for="create-account-opt-in-1">{{ settings.optin_label }}</label>
+                    </div>
+                </div>
+            {% endif %}
+
+            {{ recaptcha }}
+
+            <div class="text-center mb-2">
+                <button type="submit" class="btn btn-lg btn-block btn-pill btn-primary"><i class="fa fa-log-in"></i> {{ settings.register_button_label }}</button>
+            </div>
+        </form>
+
+    </div>
+</div>

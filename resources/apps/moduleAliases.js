@@ -1,0 +1,16 @@
+module.exports = {
+  '@/root': '',
+  '@/components': 'components',
+  '@/screens': 'screens',
+  '@/fields': 'components/fields',
+  '@/navigation': 'components/navigation',
+  '@/atoms': 'atoms',
+  '@/context': 'context',
+  '@/constants': 'constants',
+  '@/hooks': 'hooks',
+  '@/utilities': 'utilities',
+  '@/mocks': 'mocks',
+  '@/types': 'types',
+  '@/aerosol': '../aerosol',
+  '@/shared': '../shared',
+}

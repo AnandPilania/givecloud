@@ -1,0 +1,15 @@
+# Ignore everything:
+/*
+!/webpack.config.js
+!/webpack.config.base.js
+!/resources/
+
+/resources/*
+!/resources/assets/
+!/resources/apps/
+
+/resources/assets/*
+!/resources/assets/js
+
+/resources/assets/js/*
+!/resources/assets/js/components/

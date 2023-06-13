@@ -1,0 +1,79 @@
+.root {
+  @apply flex w-full rounded-lg h-full;
+
+  &.margin {
+    @apply mb-6;
+  }
+
+  .iconContainer {
+    @apply flex flex-col h-auto;
+
+    &.top {
+      @apply justify-start pl-4 pt-4;
+    }
+
+    &.center {
+      @apply justify-center pl-4;
+    }
+
+    &.bottom {
+      @apply justify-end pl-4 pb-4;
+    }
+  }
+
+  .icon {
+    @apply bg-white rounded-full;
+
+    &.info {
+      @apply text-purple-700 bg-inherit;
+    }
+
+    &.error {
+      @apply text-red-700;
+    }
+
+    &.success {
+      @apply text-green-700;
+    }
+
+    &.warning {
+      @apply text-yellow-700;
+    }
+  }
+
+  .mainContent {
+    @apply w-full h-full p-2;
+  }
+
+  &.info {
+    @apply text-purple-700 bg-gradient-to-tr from-brand-purple/15 to-brand-blue/15;
+
+    &.outlined {
+      @apply bg-none border border-purple-700;
+    }
+  }
+
+  &.error {
+    @apply text-red-700 bg-gradient-to-tr from-brand-red/15 to-brand-pink/15;
+
+    &.outlined {
+      @apply bg-none border border-red-700;
+    }
+  }
+
+  &.success {
+    @apply text-green-700 bg-gradient-to-tr from-brand-green/15 to-brand-teal/15;
+
+    &.outlined {
+      @apply bg-none border border-green-700;
+    }
+  }
+
+  &.warning {
+    @apply text-yellow-700 bg-gradient-to-tr from-brand-yellow/15 to-brand-orange/15;
+
+    &.outlined {
+      @apply bg-none border border-yellow-700;
+    }
+  }
+}

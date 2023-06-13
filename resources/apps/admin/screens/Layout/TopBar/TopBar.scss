@@ -1,0 +1,62 @@
+.root {
+  @apply relative z-20 shrink-0;
+
+  background-color: #f4fbff;
+
+  .mainContent {
+    @apply flex flex-1 justify-between px-5 py-2 font-sans;
+
+    .mainContentLeft {
+      @apply flex items-center flex-col truncate mr-2;
+
+      @apply md:flex-row;
+
+      @apply lg:self-start;
+
+      .mobileMenuButtonContainer {
+        @apply -ml-3 self-start shrink-0;
+
+        @apply md:hidden;
+
+        .givecloudLogo {
+          @apply w-8 h-6;
+        }
+      }
+
+      .breadcrumbContainer {
+        @apply mt-2 hidden overflow-hidden;
+
+        @apply md:flex;
+      }
+    }
+
+    .mainContentRight {
+      @apply flex justify-end mt-2;
+
+      @apply md:items-center;
+
+      @apply lg:mt-0;
+    }
+  }
+
+  .mobileBreadcrumbContainer {
+    @apply mb-3 px-5;
+
+    @apply md:hidden;
+  }
+
+  .gradient {
+    @apply absolute w-full h-8 -bottom-8 pointer-events-none;
+
+    background: linear-gradient(180deg, #f4fbff 0%, rgba(244, 251, 255, 0) 100%);
+    z-index: -1;
+  }
+}
+
+.buttonSkeletonContainer {
+  @apply min-w-full lg:min-w-[40%];
+
+  .buttonSkeleton {
+    @apply pl-28 lg:pl-0;
+  }
+}

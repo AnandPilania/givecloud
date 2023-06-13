@@ -1,0 +1,17 @@
+
+{% layout 'sms' %}
+
+<div id="not-found-app">
+    <div class="card mb-3">
+        <div class="card-header">
+            <h5>{{ 'templates.404.warning' | t }}</h5>
+        </div>
+        <div class="alert alert-info d-flex align-items-center">
+            <i class="fas fa-exclamation-triangle fa-2x mr-3" aria-hidden="true"></i>
+            <span>{{ 'templates.404.link_has_expired' | t }}</span>
+        </div>
+        <div class="card-body">
+            {{ 'templates.404.close_this_window_and_send_text_again' | t }}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,9 @@
+<?php
+
+namespace PayPal\Types\Perm;
+
+class CancelPermissionsRequest
+{
+    /** @var \PayPal\Types\Common\RequestEnvelope */
+    public $requestEnvelope; // @phpstan-ignore-line
+}

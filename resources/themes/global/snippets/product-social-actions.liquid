@@ -1,0 +1,29 @@
+
+{% if product.enable_social_buttons and product.social_urls %}
+
+    <div class="social-actions card mb-4 {% if settings.animations %}wow fadeInUp{% endif %}" {% if settings.animations %}data-wow-delay="0.9s"{% endif %}>
+        <div class="card-body">
+            <div class="card-title-sm mb-4"><i class="fa fa-users"></i> {{ 'snippets.product_social_actions.share_this' | t }}</div>
+
+            <div class="row gutter-sm">
+                <div class="col">
+                    <a href="{{ product.social_urls.facebook }}" class="btn btn-sm btn-pill btn-outline-primary btn-block" target="_blank" rel="noopener"><i class="fa fa-facebook fa-fw"></i></a>
+                </div>
+                <div class="col">
+                    <a href="{{ product.social_urls.twitter }}" class="btn btn-sm btn-pill btn-outline-primary btn-block" target="_blank" rel="noopener"><i class="fa fa-twitter fa-fw"></i></a>
+                </div>
+                <div class="col">
+                    <a href="{{ product.social_urls.email }}" class="btn btn-sm btn-pill btn-outline-primary btn-block"><i class="fa fa-envelope fa-fw"></i></a>
+                </div>
+                <div class="col">
+                    <a href="{{ product.social_urls.linkedin }}" class="btn btn-sm btn-pill btn-outline-primary btn-block" target="_blank" rel="noopener"><i class="fa fa-linkedin fa-fw"></i></a>
+                </div>
+                <div class="col">
+                    <a href="{{ product.social_urls.pinterest }}" class="btn btn-sm btn-pill btn-outline-primary btn-block" target="_blank" rel="noopener"><i class="fa fa-pinterest fa-fw"></i></a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{% endif %}

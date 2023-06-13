@@ -1,0 +1,52 @@
+.root {
+  @apply mx-auto w-full;
+
+  &.container {
+    @apply w-full;
+
+    &.extraSmall {
+      @apply max-w-4xl;
+    }
+
+    &.small {
+      @apply max-w-5xl;
+    }
+
+    &.medium {
+      @apply max-w-6xl;
+    }
+
+    &.large {
+      @apply max-w-7xl;
+    }
+
+    &.full {
+      @apply max-w-full;
+    }
+  }
+
+  &.padding {
+    @apply px-2 md:px-4 pt-2;
+  }
+}
+
+.scrollShadow {
+  background: linear-gradient(#ffffff 33%, rgba(255, 255, 255, 0)),
+    linear-gradient(rgba(255, 255, 255, 0), #ffffff 66%) 0 100%,
+    radial-gradient(farthest-side at 50% 0, rgba(212, 212, 216, 0.5), rgba(0, 0, 0, 0)),
+    radial-gradient(farthest-side at 50% 100%, rgba(212, 212, 216, 0.5), rgba(0, 0, 0, 0)) 0 100%;
+  background-color: #ffffff;
+  background-repeat: no-repeat;
+  background-attachment: local, local, scroll, scroll;
+  background-size: 100% 51px, 100% 51px, 100% 17px, 100% 17px;
+}
+
+.scroll {
+  @apply overflow-y-auto  overflow-x-hidden;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

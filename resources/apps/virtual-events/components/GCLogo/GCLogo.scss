@@ -1,0 +1,4 @@
+.root {
+  @apply pointer-events-none fixed bottom-0 right-0 w-12 h-auto mr-4 mb-4 opacity-25;
+  @apply sm:w-20 sm:mr-8 sm:mb-8;
+}

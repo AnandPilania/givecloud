@@ -1,0 +1,8 @@
+.root {
+  @apply w-full flex items-center justify-center p-2.5 rounded-lg;
+  @apply text-xs font-bold whitespace-nowrap text-white font-sans bg-theme border border-white;
+
+  &.isOutlined {
+    @apply bg-white text-theme border border-theme;
+  }
+}

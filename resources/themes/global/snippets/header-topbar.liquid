@@ -1,0 +1,149 @@
+    <div class="top-bar font-{{ settings.menu_font_size }} {% if settings.menu_font_style == 'sans' %}font-sans{% elsif settings.menu_font_style == 'sans-bold' %}font-sans font-bold{% elsif settings.menu_font_style == 'serif' %}font-serif{% elsif settings.menu_font_style == 'serif-bold' %}font-serif font-bold{% endif %} {% if settings.menu_text_transform == 'upper' %}font-upper{% endif %}">
+    <nav class="container">
+      <div class="d-flex top-bar-min-height">
+
+        <div class="side-bar-open d-lg-none d-xl-none py-2 mr-3 align-self-center"><i class="fa fa-navicon"></i></div>
+
+        <div class="brand p-2 align-self-center">
+          {% if site.logo %}
+            {% if settings.header_logo_url %}<a href="{{ settings.header_logo_url }}" {% if settings.header_logo_target %} target="{{settings.header_logo_target}}"{% endif %}>{% endif %}
+              {% if settings.header_logo_condensed %}
+                <img src="{{ site.logo }}" class="logo-full"><img src="{{ settings.header_logo_condensed }}" class="logo-condensed">
+              {% else %}
+                <img src="{{ site.logo }}">
+              {% endif %}
+            {% if settings.header_logo_url %}</a>{% endif %}
+          {% endif %}
+        </div>
+
+        <div class="mobile-menu ml-auto py-2 align-self-center text-right">
+          <div class="d-none d-sm-inline-block d-md-inline-block">
+            {% if settings.header_fb_url %}
+                <a href="{{ settings.header_fb_url }}" target="_blank" rel="noopener" class="btn px-2 btn-pill btn-outline-secondary"><i class="fa fa-fw fa-facebook"></i></a>
+              {% endif %}
+              {% if settings.header_twitter_url %}
+                <a href="{{ settings.header_twitter_url }}" target="_blank" rel="noopener" class="btn px-2 btn-pill btn-outline-secondary"><i class="fa fa-fw fa-twitter"></i></a>
+              {% endif %}
+              {% if settings.header_instagram_url %}
+                <a href="{{ settings.header_instagram_url }}" target="_blank" rel="noopener" class="btn px-2 btn-pill btn-outline-secondary"><i class="fa fa-fw fa-instagram"></i></a>
+              {% endif %}
+              {% if settings.header_pinterest_url %}
+                <a href="{{ settings.header_pinterest_url }}" target="_blank" rel="noopener" class="btn px-2 btn-pill btn-outline-secondary"><i class="fa fa-fw fa-pinterest"></i></a>
+              {% endif %}
+              {% if settings.header_linkedin_url %}
+                <a href="{{ settings.header_linkedin_url }}" target="_blank" rel="noopener" class="btn px-2 btn-pill btn-outline-secondary"><i class="fa fa-fw fa-linkedin"></i></a>
+              {% endif %}
+              {% if settings.header_youtube_url %}
+                <a href="{{ settings.header_youtube_url }}" target="_blank" rel="noopener" class="btn px-2 btn-pill btn-outline-secondary"><i class="fa fa-fw fa-youtube"></i></a>
+              {% endif %}
+              {% if settings.header_vimeo_url %}
+                <a href="{{ settings.header_vimeo_url }}" target="_blank" rel="noopener" class="btn px-2 btn-pill btn-outline-secondary"><i class="fa fa-fw fa-vimeo"></i></a>
+              {% endif %}
+          </div>
+          {% if settings.menu_big_button_label %}
+            <a href="{{ settings.menu_big_button_url }}" class="btn btn-sm font-weight-normal btn-primary my-1 btn-pill">{{ settings.menu_big_button_label }}</a>
+          {% endif %}
+          {% if settings.menu_alt_big_button_label %}
+            <a href="{{ settings.menu_alt_big_button_url }}" class="btn btn-sm font-weight-normal btn-secondary my-1 ml-1 btn-pill">{{ settings.menu_alt_big_button_label }}</a>
+          {% endif %}
+        </div>
+
+        {% if settings.menu_pages_position == 'right' %}
+          <div class="main-menu ml-auto py-2">
+            {% include 'header-pages-nav' %}
+            {% include 'header-search' %}
+          </div>
+        {% else %}
+          <div class="main-menu mr-auto ml-3 py-2">
+            {% include 'header-pages-nav' %}
+            {% include 'header-search' %}
+          </div>
+        {% endif %}
+
+        <div class="main-menu action-menu py-2">
+          <ul class="nav">
+            {% if settings.menu_include_search %}
+              <li class="nav-item">
+                <a class="nav-link search-toggle" href="#"><i class="fa fa-search"></i></a>
+              </li>
+            {% endif %}
+            {% if settings.menu_include_cart %}
+              <li class="nav-item">
+                <a class="nav-link" href="/cart"><i class="fa {{ settings.fa_cart_icon }}"></i>&nbsp;<span class="badge badge-pill badge-dark -cart-count">{{ cart.item_count }}</span></a>
+              </li>
+            {% endif %}
+            {% if settings.menu_big_button_label %}
+              <li class="nav-item nav-attn-primary">
+                <a class="nav-link" href="{{ settings.menu_big_button_url }}" class="btn">{{ settings.menu_big_button_label }}</a>
+              </li>
+            {% endif %}
+            {% if settings.menu_alt_big_button_label %}
+              <li class="nav-item ml-1 nav-attn-secondary">
+                <a class="nav-link" href="{{ settings.menu_alt_big_button_url }}" class="btn">{{ settings.menu_alt_big_button_label }}</a>
+              </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+
+    {% comment %}
+    <!-- THIS IS AN EXAMPLE OF A MULTI-ROW DROP DOWN -->
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Layouts
+    </a>
+    <div class="dropdown-menu">
+      <div class="row" style="width:600px;">
+        <div class="col-4">
+          <h6 class="dropdown-header">Website &amp; Blog</h6>
+          <a class="dropdown-item" href="/home.html">Home</a>
+          <a class="dropdown-item" href="/content.html">Content</a>
+          <a class="dropdown-item disabled">Form</a>
+          <a class="dropdown-item" href="/blog.html">Feed - News &amp; Blog</a>
+          <a class="dropdown-item" href="/article.html">Feed - Article</a>
+          <a class="dropdown-item disabled">Feed - Events</a>
+          <a class="dropdown-item disabled">Feed - Images / Video</a>
+
+          <h6 class="dropdown-header">Categories &amp; Causes</h6>
+          <a class="dropdown-item" href="/causes-right.html">Causes - Filter Right</a>
+          <a class="dropdown-item" href="/causes-top.html">Causes - Filter Top</a>
+          <a class="dropdown-item" href="/causes-none.html">Causes - Filter None</a>
+          <a class="dropdown-item" href="/categories.html">Categories</a>
+        </div>
+        <div class="col-4">
+          <h6 class="dropdown-header">Product Pages</h6>
+          <a class="dropdown-item disabled">Product</a>
+          <a class="dropdown-item disabled">Product - One Page</a>
+          <a class="dropdown-item disabled">Cause</a>
+          <a class="dropdown-item disabled">Cause - One Page</a>
+          <a class="dropdown-item disabled">Event</a>
+          <a class="dropdown-item disabled">Donation</a>
+          <a class="dropdown-item disabled">One-Page</a>
+          <a class="dropdown-item" href="/one-page-multi-item.html">One-Page Multi-Item</a>
+          <a class="dropdown-item disabled">Peer-to-Peer</a>
+
+          <h6 class="dropdown-header">Sponsorship</h6>
+          <a class="dropdown-item disabled">Sponsorships</a>
+          <a class="dropdown-item disabled">Child</a>
+          <a class="dropdown-item disabled">Checkout</a>
+        </div>
+        <div class="col-4">
+          <h6 class="dropdown-header">Profile</h6>
+          <a class="dropdown-item" href="/login-sign-up.html">Login / Sign-Up</a>
+          <a class="dropdown-item disabled">Reset Password</a>
+          <a class="dropdown-item disabled">My Profile</a>
+
+          <h6 class="dropdown-header">Pop-Ups / Alert-Bar</h6>
+          <a class="dropdown-item" href="/pop-up.html">Pop-Up - Email</a>
+          <a class="dropdown-item" href="/pop-up-donate.html">Pop-Up - Donation</a>
+          <a class="dropdown-item" href="/pop-up-image.html">Pop-Up - Image</a>
+          <a class="dropdown-item" href="/alert-email.html">Alert-Bar - Email</a>
+          <a class="dropdown-item disabled">Alert-Bar - Donation</a>
+        </div>
+      </div>
+    </div>
+  </li>
+  {% endcomment %}

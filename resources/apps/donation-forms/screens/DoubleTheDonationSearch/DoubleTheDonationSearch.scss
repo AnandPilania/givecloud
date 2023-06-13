@@ -1,0 +1,51 @@
+.root {
+  @apply relative;
+  @apply flex flex-col items-center justify-center;
+
+  h3 {
+    @apply text-2xl font-extrabold leading-tight;
+    @apply text-center whitespace-pre-line;
+  }
+
+  p {
+    @apply mt-5 mb-6 mx-8 text-lg leading-snug;
+    @apply text-center whitespace-pre-wrap;
+  }
+
+  .companies {
+    @apply w-full min-h-0 transition-[min-height];
+    &.minHeight {
+      @apply min-h-[14.65rem];
+    }
+  }
+
+  .company {
+    @apply relative w-full mt-2.5 px-6 py-3 text-left;
+    @apply bg-transparent font-bold border-none rounded;
+    background-color: rgba(var(--primary-colour-500-rgb), 0.15);
+    color: var(--primary-text-colour);
+
+    .details {
+      @apply pr-8;
+
+      div,
+      small {
+        @apply whitespace-nowrap text-ellipsis overflow-hidden;
+      }
+    }
+
+    small {
+      @apply block text-sm font-normal;
+    }
+
+    .link {
+      @apply absolute top-0 bottom-0 right-4;
+      @apply flex flex-col justify-center;
+    }
+  }
+
+  .noThanks {
+    @apply mt-8 border-b border-b-gray-400;
+    @apply text-lg leading-[1.2rem] no-underline text-gray-400;
+  }
+}

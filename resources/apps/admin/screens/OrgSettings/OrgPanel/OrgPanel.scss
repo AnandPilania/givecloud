@@ -1,0 +1,15 @@
+.address {
+  @apply whitespace-pre-wrap;
+}
+
+.link {
+  @apply text-sm font-bold;
+}
+
+.text {
+  @apply whitespace-nowrap mr-2;
+}
+
+.badgeContainer {
+  @apply flex w-full flex-wrap-reverse items-baseline;
+}

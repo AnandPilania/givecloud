@@ -1,0 +1,17 @@
+  <div class="footer-credits">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-auto">
+          {{ settings.footer_credits }}
+        </div>
+        <div class="col-auto ml-auto">
+          {% assign footer_menu = linklists.footer-menu %}
+          <ul class="nav">
+            {% for link in footer_menu.links %}
+              <li class="nav-item"><a class="nav-link" href="{{ link.url }}">{{ link.title | escape }}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>

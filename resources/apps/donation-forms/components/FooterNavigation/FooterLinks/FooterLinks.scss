@@ -1,0 +1,27 @@
+.root {
+  @apply flex gap-2;
+
+  &.loose {
+    @apply gap-6;
+
+    .footerLinkButton::after {
+      @apply ml-6;
+    }
+  }
+
+  .footerLinkButton {
+    @apply underline;
+    color: var(--primary-colour-500);
+
+    &::after {
+      @apply inline-block ml-2;
+      content: '|';
+    }
+
+    &:last-child {
+      &::after {
+        @apply hidden;
+      }
+    }
+  }
+}

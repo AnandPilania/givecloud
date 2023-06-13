@@ -1,0 +1,8 @@
+.root {
+  @apply flex flex-col items-center justify-center;
+  @apply mt-3 min-h-[182px] w-full;
+
+  p {
+    @apply mt-4 mb-8 text-xl;
+  }
+}

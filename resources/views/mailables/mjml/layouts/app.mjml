@@ -1,0 +1,177 @@
+
+{% assign includes_wrapper = false %}
+
+<mjml background-color="#EEE">
+  <mj-raw position="file-start">
+<!-- beautify ignore:start -->
+@php
+  if (isset($fromSubscriber) && $fromSubscriber) {
+    $appOrgName = sys_get('clientName');
+    $appOrgLocation = implode(', ', array_filter([site()->client->city, site()->client->province, site()->client->country]));
+    $appLogoUrl = sys_get('default_logo');
+    $marginlessAppLogo = false;
+    $appFacebookUrl = volt_setting('header_fb_url');
+    $appInstagramUrl = volt_setting('header_instagram_url');
+    $appLinkedinUrl = volt_setting('header_linkedin_url');
+    $appTwitterUrl = volt_setting('header_twitter_url');
+  } else {
+    $appOrgName = 'Givecloud';
+    $appOrgLocation = 'Ottawa, Ontario, Canada';
+    $appLogoUrl = 'https://cdn.givecloud.co/static/etc/gc-logo-anim-hd.gif';
+    $marginlessAppLogo = true;
+    $appFacebookUrl = 'https://www.facebook.com/Givecloud';
+    $appInstagramUrl = 'https://www.instagram.com/givecloud/';
+    $appLinkedinUrl = 'https://www.linkedin.com/company/givecloud-com';
+    $appTwitterUrl = 'https://twitter.com/givecloud';
+  }
+@endphp
+<!-- beautify ignore:end -->
+  </mj-raw>
+  <mj-head>
+    <mj-font name="Inter" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;800&display=swap" />
+    {% block head %}{% endblock %}
+    <mj-attributes>
+      <mj-all font-family="Inter, Arial" />
+      <mj-all font-size="14px" />
+      <mj-all line-height="1.4" />
+    </mj-attributes>
+    <mj-style inline="inline">
+      .box {
+        background-color: #FFF;
+        border-radius: 10px;
+        padding: 10px 20px;
+      }
+      .tight-box {
+        background-color: #FFF;
+        border-radius: 10px;
+      }
+      .spacer {
+        padding: 0px;
+        height: 20px;
+      }
+      .logo {
+        margin: auto;
+        max-height: 100%;
+        max-width: 100%;
+      }
+      .social-icons {
+        padding: 10px 0;
+      }
+    </mj-style>
+    <mj-style inline="inline">
+      .block {
+        display: block;
+      }
+      .truncate {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .text-sm {
+        font-size: 11px;
+      }
+      .text-base {
+        font-size: 14px;
+      }
+      .text-black {
+        color: #000000;
+      }
+      .text-blue {
+        color: #1f5ef6;
+      }
+      .text-slate-400 {
+        color: #848484;
+      }
+      .font-bold {
+        font-weight: bold;
+      }
+      .no-underline {
+        text-decoration: none;
+      }
+      .rounded-full {
+        border-radius: 100%;
+      }
+    </mj-style>
+    <mj-style>
+      @media (max-width: 479px) {
+        .hide-on-mobile {
+          display: none;
+        }
+        .collapse-columns-on-mobile > table > tbody > tr > td {
+            display: block !important;
+            width: 100% !important;
+        }
+        .social-icons td {
+          padding: 0 !important;
+        }
+      }
+    </mj-style>
+    {% block style %}{% endblock %}
+  </mj-head>
+  <mj-body background-color="#F4F4F4">
+    <mj-wrapper padding="40px 10px{% if includes_wrapper %} 0{% endif %}">
+      {% block header %}
+        <mj-raw>@if ($marginlessAppLogo)</mj-raw>
+          <mj-section padding="0 10px">
+            <mj-column css-class="tight-box">
+              <mj-image css-class="logo" width="300px" height="110px" padding="0" src="{{ $appLogoUrl }}" alt="{{ $appOrgName }}"></mj-image>
+            </mj-column>
+          </mj-section>
+        <mj-raw>@else</mj-raw>
+          <mj-section padding="0 10px">
+            <mj-column css-class="box">
+              <mj-image css-class="logo" src="{{ $appLogoUrl }}" alt="{{ $appOrgName }}"></mj-image>
+            </mj-column>
+          </mj-section>
+        <mj-raw>@endif</mj-raw>
+        <mj-section css-class="spacer"></mj-section>
+      {% endblock %}
+
+      {% if includes_wrapper %}
+        </mj-wrapper>
+      {% endif %}
+
+      {% block content %}{% endblock %}
+
+      {% if includes_wrapper %}
+        <mj-wrapper padding="0 10px 40px">
+      {% endif %}
+
+      {% block footer %}
+        <mj-section css-class="spacer"></mj-section>
+        <mj-raw>@if ($appFacebookUrl || $appInstagramUrl || $appLinkedinUrl || $appTwitterUrl)</mj-raw>
+          <mj-section padding="0 10px">
+            <mj-group css-class="tight-box social-icons">
+              <mj-column></mj-column>
+              <mj-raw>@if ($appFacebookUrl)</mj-raw>
+                <mj-column>
+                  <mj-image href="{{ $appFacebookUrl }}" title="Check us out on Facebook" width="20px" height="20px" src="https://cdn.givecloud.co/static/notifications/transactional-email/facebook-large-dark.png"></mj-image>
+                </mj-column>
+              <mj-raw>@endif @if ($appInstagramUrl)</mj-raw>
+                <mj-column>
+                  <mj-image href="{{ $appInstagramUrl }}" width="21px" height="20px" src="https://cdn.givecloud.co/static/notifications/transactional-email/instagram-large-dark.png"></mj-image>
+                </mj-column>
+              <mj-raw>@endif @if ($appLinkedinUrl)</mj-raw>
+                <mj-column>
+                  <mj-image href="{{ $appLinkedinUrl }}" width="20px" height="20px" src="https://cdn.givecloud.co/static/notifications/transactional-email/linkedin-large-dark.png"></mj-image>
+                </mj-column>
+              <mj-raw>@endif @if ($appTwitterUrl)</mj-raw>
+                <mj-column>
+                  <mj-image href="{{ $appTwitterUrl }}" width="21px" height="18px" src="https://cdn.givecloud.co/static/notifications/transactional-email/twitter-large-dark.png"></mj-image>
+                </mj-column>
+              <mj-raw>@endif</mj-raw>
+              <mj-column></mj-column>
+            </mj-group>
+          </mj-section>
+        <mj-raw>@endif</mj-raw>
+        <mj-section>
+          <mj-column>
+            <mj-text align="center" color="#979797">
+              <p>{{ $appOrgName }}<br/>{{ $appOrgLocation }}</p>
+            </mj-text>
+          </mj-column>
+        </mj-section>
+      {% endblock %}
+    </mj-wrapper>
+  </mj-body>
+</mjml>

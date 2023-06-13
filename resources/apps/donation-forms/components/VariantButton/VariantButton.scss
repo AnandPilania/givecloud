@@ -1,0 +1,37 @@
+.root {
+  @apply relative;
+  @apply py-1 px-3 mx-1;
+  @apply font-bold text-xs rounded-full;
+  background-color: rgba(var(--primary-colour-500-rgb), 0.3);
+  color: var(--primary-text-colour);
+
+  &.darkPrimaryColour {
+    background-color: rgba(var(--primary-colour-500-rgb), 0.15);
+  }
+
+  &.selected {
+    background-color: var(--primary-colour-500);
+    color: var(--primary-colour-white-or-black);
+  }
+
+  svg {
+    @apply mr-1;
+  }
+
+  &.pulseAnimation:before {
+    @apply rings;
+  }
+
+  &.pulseAnimation:after {
+    @apply rings;
+    animation-delay: 0.5s;
+  }
+}
+
+// prettier-ignore
+@keyframes pulse {
+  0% { opacity: 0; transform: scale(0.85); filter: blur(0); }
+  25% { opacity: 1; }
+  50% { opacity: 0; transform: scale3d(1.25, 1.5, 1); filter: blur(1px); }
+  100% { opacity: 0; }
+}

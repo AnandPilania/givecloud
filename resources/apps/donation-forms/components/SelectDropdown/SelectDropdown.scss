@@ -1,0 +1,45 @@
+.root {
+  @apply relative inline-block rounded-full;
+  @apply bg-no-repeat;
+  @apply font-medium;
+  @apply cursor-pointer;
+  @apply z-10;
+  background-color: rgba(var(--primary-colour-500-rgb), 0.3);
+  background-position: right 0.5rem center;
+  background-size: 1.5em 1.5em;
+  color: var(--primary-text-colour);
+
+  &.darkPrimaryColour {
+    background-color: rgba(var(--primary-colour-500-rgb), 0.15);
+  }
+
+  .select {
+    @apply py-1 pl-2 pr-10;
+    @apply rounded-full;
+  }
+
+  select {
+    @apply absolute top-0 left-0 bottom-0 z-20;
+    @apply w-full opacity-0 text-black;
+  }
+
+  select:focus-visible + .select {
+    @apply ring-2;
+    --tw-ring-color: black;
+  }
+
+  &.clean {
+    @apply bg-transparent;
+    color: var(--primary-colour-500);
+  }
+
+  &.compact {
+    @apply text-sm;
+    line-height: 1rem;
+    background-position: right 1px center;
+
+    .select {
+      padding: 2px 22px 2px 8px;
+    }
+  }
+}

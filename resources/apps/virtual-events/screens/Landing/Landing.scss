@@ -1,0 +1,162 @@
+.root {
+  .background {
+    @apply z-0 fixed inset-0 bg-cover;
+  }
+
+  .overlay {
+    @apply z-0 fixed inset-0 opacity-75;
+
+    &.dark {
+      background-image: radial-gradient(
+        circle 987px at 80% 2%,
+        rgba(0, 0, 0, 0.5) 0%,
+        rgba(0, 0, 0, 0.7) 70%
+      );
+    }
+
+    &.light {
+      background-image: radial-gradient(
+        circle 987px at 80% 2%,
+        rgba(255, 255, 255, 0.5) 0%,
+        rgba(255, 255, 255, 0.7) 70%
+      );
+    }
+  }
+
+  .main {
+    @apply justify-center z-10 relative;
+
+    .content {
+      @apply flex flex-col items-center;
+
+      .logoContainer {
+        @apply w-full h-32 flex items-center justify-center px-6;
+        @apply md:px-12;
+
+        &.full {
+          @apply md:justify-start;
+        }
+      }
+
+      .contentInner {
+        @apply w-full px-6;
+        @apply md:px-12;
+        @apply lg:flex lg:flex-row;
+
+        .columnOne {
+          @apply flex-1;
+          @apply lg:pr-12;
+
+          .sendReactionContainer {
+            @apply block mb-8;
+            @apply lg:hidden;
+          }
+
+          .updatesContainer {
+            @apply hidden;
+            @apply lg:block;
+          }
+        }
+
+        .columnTwo {
+          @apply flex-none;
+
+          .updatesContainer {
+            @apply block;
+            @apply lg:hidden;
+          }
+
+          .sendReactionContainer {
+            @apply hidden mt-12;
+            @apply lg:block;
+          }
+
+          .chatContainer {
+            @apply hidden;
+            @apply md:block;
+          }
+        }
+      }
+    }
+
+    .emojiReactionsContainer {
+      .floatUp1 {
+        @apply opacity-0 top-full ml-0 fixed;
+
+        animation-name: floatUp1;
+        animation-duration: 7s;
+        animation-fill-mode: forwards;
+      }
+
+      .floatUp2 {
+        @apply opacity-0 top-full left-0 fixed;
+
+        animation-name: floatUp2;
+        animation-duration: 5s;
+        animation-fill-mode: forwards;
+      }
+
+      @keyframes floatUp1 {
+        0% {
+          opacity: 0;
+          top: 100%;
+          margin-left: 0;
+        }
+        5% {
+          opacity: 1;
+          top: 95%;
+          margin-left: 30px;
+        }
+
+        50% {
+          opacity: 0.2;
+          top: 50%;
+          margin-left: -30px;
+        }
+
+        95% {
+          opacity: 0;
+          top: 0rem;
+          margin-left: 0px;
+        }
+
+        100% {
+          opacity: 0;
+          top: -4rem;
+          margin-left: 0px;
+        }
+      }
+
+      @keyframes floatUp2 {
+        0% {
+          opacity: 0;
+          top: 100%;
+          margin-left: 0;
+        }
+        5% {
+          opacity: 1;
+          top: 95%;
+          margin-left: -30px;
+        }
+
+        50% {
+          opacity: 0.2;
+          top: 50%;
+          margin-left: 30px;
+        }
+
+        95% {
+          opacity: 0;
+          top: 0rem;
+          margin-left: 0px;
+        }
+
+        100% {
+          opacity: 0;
+          top: -4rem;
+          margin-left: 0px;
+        }
+      }
+    }
+  }
+}

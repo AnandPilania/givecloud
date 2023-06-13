@@ -1,0 +1,30 @@
+.root {
+  @apply flex items-center;
+  @apply mx-auto bg-white rounded-full shadow-xl;
+  --tw-shadow: 0 20px 30px 3px rgba(0, 0, 0, 0.2), 0 8px 12px 3px rgba(0, 0, 0, 0.05);
+  width: 18rem;
+  max-width: 90vw;
+
+  .icon {
+    @apply relative w-12 h-12 m-1;
+
+    img {
+      @apply w-auto h-full max-w-none;
+    }
+
+    .reaction {
+      @apply absolute bottom-0 -right-1;
+      @apply flex items-center justify-center w-6 h-6 text-sm;
+      @apply bg-white rounded-full shadow-lg shadow-gray-800/40;
+    }
+  }
+
+  .text {
+    @apply ml-4 mr-5 pt-1;
+    @apply text-sm leading-4;
+
+    small {
+      @apply text-sm text-gray-500 whitespace-nowrap;
+    }
+  }
+}

@@ -1,0 +1,330 @@
+
+{% layout 'sms' %}
+
+<div id="signup-app" v-cloak>
+    <form v-if="step=='login'" @submit.prevent="submitLoginForm" :class="{ 'was-validated': login_validated }" data-vv-scope="login" novalidate>
+        <input type="hidden" ref="verify_sms" value="{{ verify_sms }}">
+
+        <div class="card mb-3">
+            <div class="card-body alert-warning">
+                <div class="d-flex justify-content-between">
+                    <h5 class="mb-0">{{ 'templates.sms.signup.dont_have_an_account' | t }}</h5>
+                    <button type="button" class="btn btn-sm btn-secondary" @click="step='signup'">{{ 'templates.sms.signup.click_here' | t }}</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-3">
+            <div class="card-header">
+                <h5 class="mb-0">{{ 'templates.sms.signup.login_to_your_account' | t }}</h5>
+            </div>
+            <div v-if="error" ref="error" class="alert alert-danger d-flex align-items-center">
+                <i class="fas fa-exclamation-triangle fa-2x mr-3" aria-hidden="true"></i> <span v-html="error"></span>
+            </div>
+            <div class="card-body bg-light">
+                <div class="form-group labelify" :class="{ 'has-errors': errors.has('login.email') }">
+                    <label for="inputLoginEmail"><i class="far fa-envelope"></i> {{ 'general.forms.email' | t }}</label>
+                    <input id="inputLoginEmail" type="text" class="form-control" name="email" v-model="login.email" v-validate.initial="'required|email'" x-autocompletetype="email" autocompletetype="email" autocorrect="off" spellcheck="off" autocapitalize="off">
+                </div>
+                <div class="form-group labelify" :class="{ 'has-errors': errors.has('login.password') }">
+                    <label for="inputLoginPassword"><i class="fa fa-lock"></i> {{ 'general.forms.password' | t }}</label>
+                    <input id="inputLoginPassword" type="password" class="form-control" name="password" v-model="login.password" v-validate.initial="'required'">
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center my-4">
+            <button ref="loginBtn" type="submit" class="btn btn-xl btn-pill btn-success mb-2" data-style="expand-left">
+                <i class="fas fa-lock mr-1"></i> {{ 'templates.sms.signup.login_to_account' | t }}
+            </button>
+        </div>
+    </form>
+
+    <form v-if="step=='signup'" @submit.prevent="submitSignupForm" :class="{ 'was-validated': signup_validated }" data-vv-scope="signup" novalidate>
+        <input type="hidden" ref="verify_sms" value="{{ verify_sms }}">
+        <input type="hidden" ref="recaptcha_token" value="{{ recaptcha_token }}">
+
+        <div class="card mb-3">
+            <div class="card-body alert-warning">
+                <div class="d-flex justify-content-between">
+                    <h5 class="mb-0">{{ 'templates.sms.signup.already_have_an_account' | t }}</h5>
+                    <button type="button" class="btn btn-sm btn-secondary" @click="step='login'">{{ 'templates.sms.signup.click_here' | t }}</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-3">
+            <div class="card-header">
+                <h5 class="mb-0">My Information</h5>
+            </div>
+            <div v-if="error" ref="error" class="alert alert-danger d-flex align-items-center">
+                <i class="fas fa-exclamation-triangle fa-2x mr-3" aria-hidden="true"></i> <span v-html="error"></span>
+            </div>
+            <div class="card-body bg-light">
+                <template v-if="account_types">
+                    {% if settings.account_type_selector == 'dropdown' %}
+                        <div class="form-group labelify">
+                            <label for="inputSignupAccountType">{{ 'templates.sms.signup.account_type' | t }}</label>
+                            <select id="inputSignupAccountType" class="form-control" name="account_type_id" v-model="signup.account_type_id">
+                                <option v-for="account_type in account_types" :value="account_type.id">${ account_type.name }</option>
+                            </select>
+                        </div>
+                    {% else %}
+                        <div class="form-group">
+                            <div class="btn-group-toggle btn-group-connected mb-3">
+                                <label v-for="account_type in account_types" class="btn btn-outline-dark btn-sm" :class="{ active: signup.account_type_id == account_type.id }" tabindex="0">
+                                    <input type="radio" name="account_type_id" v-model="signup.account_type_id" :value="account_type.id"> ${ account_type.name }
+                                </label>
+                            </div>
+                        </div>
+                    {% endif %}
+                </template>
+                <div class="form-row gutter-sm">
+                    {% if site.donor_title != 'hidden' %}
+                        <div class="col-3">
+                            <div class="form-group labelify">
+                                <label>{{ 'general.forms.title' | t }}</label>
+                                {% if site.donor_title_options %}
+                                    <select id="inputSignupTitle" class="form-control" :class="{ 'has-errors': errors.has('signup.title') }" name="title" v-model="signup.title" {% if site.donor_title == 'required' %}v-validate.initial="'required'"{% endif %} x-autocompletetype="honorific-prefix" autocompletetype="honorific-prefix">
+                                        <option value=""></option>
+                                        <option v-for="title in donor_title_options" :value="title">${ title }</option>
+                                    </select>
+                                {% else %}
+                                    <input type="text" id="inputSignupTitle" class="form-control" :class="{ 'has-errors': errors.has('signup.title') }" name="title" v-model="signup.title" {% if site.donor_title == 'required' %}v-validate.initial="'required'"{% endif %} x-autocompletetype="honorific-prefix" autocompletetype="honorific-prefix" autocorrect="off" spellcheck="off">
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endif %}
+                    <div class="col-4">
+                        <div class="form-group labelify" :class="{ 'has-errors': errors.has('signup.first_name') }">
+                            <label for="inputSignupFirstName">{{ 'general.forms.first_name' | t }}</label>
+                            <input id="inputSignupFirstName" type="text" class="form-control" name="first_name" v-model="signup.first_name" v-validate.initial="'required'" x-autocompletetype="given-name" autocompletetype="given-name" autocorrect="off" spellcheck="off" autocapitalize="off">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group labelify" :class="{ 'has-errors': errors.has('signup.last_name') }">
+                            <label for="inputSignupLastName">{{ 'general.forms.last_name' | t }}</label>
+                            <input id="inputSignupLastName" type="text" class="form-control" name="last_name" v-model="signup.last_name" v-validate.initial="'required'" x-autocompletetype="surname" autocompletetype="family-name" autocorrect="off" spellcheck="off" autocapitalize="off">
+                        </div>
+                    </div>
+                </div>
+                <div v-if="account_type && account_type.is_organization" class="form-group labelify" :class="{ 'has-errors': errors.has('signup.organization_name') }">
+                    <label for="inputSignupOrganizationName">{{ 'general.forms.organization_name' | t }}</label>
+                    <input id="inputSignupOrganizationName" type="text" class="form-control" name="organization_name" v-model="signup.organization_name" v-validate.initial="'required'" x-autocompletetype="org" autocompletetype="organization" autocorrect="off" spellcheck="off" autocapitalize="off">
+                </div>
+                <div class="form-group">
+                    <div class="labelify" :class="{ 'has-errors': errors.has('signup.email') }">
+                        <label for="inputSignupEmail"><i class="far fa-envelope"></i> {{ 'general.forms.email' | t }}</label>
+                        <input id="inputSignupEmail" type="text" class="form-control" name="email" v-model="signup.email" v-validate.initial="'required|email'" x-autocompletetype="email" autocompletetype="email" autocorrect="off" spellcheck="off" autocapitalize="off">
+                    </div>
+                    <div class="custom-control custom-checkbox mt-2">
+                        <input id="inputSignupEmailOptIn" type="checkbox" class="custom-control-input" v-model="signup.email_opt_in">
+                        <label class="custom-control-label" for="inputSignupEmailOptIn">{{ settings.optin_label }}</label>
+                    </div>
+                </div>
+                <div class="form-group labelify" :class="{ 'has-errors': errors.has('signup.country') }">
+                    <label for="inputSignupCountry">{{ 'general.forms.country' | t }}</label>
+                    <select id="inputSignupCountry" class="form-control" name="country" v-model="signup.country">
+                        <option></option>
+                        <option value="CA">{{ 'general.forms.countries.canada' | t }}</option>
+                        <option value="MX">{{ 'general.forms.countries.mexico' | t }}</option>
+                        <option value="US">{{ 'general.forms.countries.united_states' | t }}</option>
+                        <option>--</option>
+                        <option v-for="(name, code) in countries" :value="code">${ name }</option>
+                    </select>
+                </div>
+                <div class="form-group labelify" :class="{ 'has-errors': errors.has('signup.address1') }">
+                    <label for="inputSignupAddress1">{{ 'general.forms.address' | t }}</label>
+                    <input id="inputSignupAddress1" type="text" class="form-control" placeholder="{{ 'general.forms.address_placeholder' | t }}" name="address1" v-model="signup.address1" x-autocompletetype="address-line1" autocompletetype="address-line1" autocorrect="off" spellcheck="off" autocapitalize="off">
+                </div>
+                <div class="form-group labelify">
+                    <label for="inputSignupAddress2">{{ 'general.forms.address_2' | t }}</label>
+                    <input id="inputSignupAddress2" type="text" class="form-control" placeholder="{{ 'general.forms.address_2_placeholder' | t }}" name="address2" v-model="signup.address2" x-autocompletetype="address-line2" autocompletetype="address-line2" autocorrect="off" spellcheck="off" autocapitalize="off">
+                </div>
+                <div class="form-row">
+                    <div class="col-7">
+                        <div class="form-group labelify" :class="{ 'has-errors': errors.has('signup.city') }">
+                            <label for="inputSignupCity">{{ 'general.forms.city' | t }}</label>
+                            <input id="inputSignupCity" type="text" class="form-control" name="city" v-model="signup.city" x-autocompletetype="city" autocompletetype="city" autocorrect="off" spellcheck="off" autocapitalize="off">
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="form-group labelify" :class="{ 'has-errors': errors.has('signup.state') }">
+                            <label for="inputSignupState">
+                                <template v-if="signup.country == 'US'">{{ 'general.forms.state' | t }}</template>
+                                <template v-else>{{ 'general.forms.province' | t }}</template>
+                            </label>
+                            <select v-if="subdivisions" id="inputSignupState" class="form-control" name="state" v-model="signup.state">
+                                <option></option>
+                                <option v-for="(name, code) in subdivisions" :value="code">${ name }</option>
+                            </select>
+                            <input v-else type="text" id="inputSignupState" class="form-control" name="state" v-model="signup.state">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group labelify" :class="{ 'has-errors': errors.has('signup.zip') }">
+                    <label for="inputSignupZip">
+                        <template v-if="signup.country == 'US'">{{ 'general.forms.zip' | t }}</template>
+                        <template v-else>{{ 'general.forms.postal' | t }}</template>
+                    </label>
+                    <input id="inputSignupZip" type="text" class="form-control" name="zip" v-model="signup.zip"  v-validate.initial="'required|min:5'" x-autocompletetype="postal-code" autocompletetype="postal-code" autocorrect="off" spellcheck="off" autocapitalize="off">
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-3">
+            <div class="card-header">
+                <h5 class="mb-0">{{ 'templates.sms.signup.my_payment_method' | t }}</h5>
+            </div>
+            <div class="card-body bg-light">
+                <nav class="nav nav nav-pills nav-fill mb-3">
+                    <button v-if="config.gateways.credit_card" type="button" class="btn btn-link btn-sm nav-item nav-link" :class="{active: signup.payment_type == 'credit_card'}" @click="signup.payment_type = 'credit_card'">
+                        <i class="far fa-credit-card"></i> {{ 'general.forms.credit_debit' | t }}
+                    </button>
+                    <button v-if="supportedPaymentType('bank_account')" type="button" class="btn btn-link btn-sm nav-item nav-link" :class="{active: signup.payment_type == 'bank_account'}" @click="signup.payment_type = 'bank_account'">
+                        <i class="fas fa-university"></i> {{ 'general.forms.bank' | t }}
+                    </button>
+                    <button v-if="paypal_available" type="button" class="btn btn-link btn-sm nav-item nav-link" :class="{active: signup.payment_type == 'paypal'}" @click="signup.payment_type = 'paypal'">
+                        <i class="fab fa-paypal"></i> {{ 'general.forms.paypal' | t }}
+                    </button>
+                </nav>
+                <credit-card v-if="signup.payment_type == 'credit_card'">
+                    <div class="form-group labelify labelify-has-value">
+                        <label for="inputCardholderName">{{ 'general.forms.cardholder_name' | t }}</label>
+                        <input id="inputCardholderName" type="text" class="form-control" maxlength="50" placeholder="{{ 'general.forms.cardholder_name_placeholder' | t }}" name="name" v-model="payment.name" autocorrect="off" spellcheck="off" autocapitalize="off">
+                    </div>
+                    <div class="mb-3 supported-cardtypes">
+                        <strong>{{ 'general.forms.we_support' | t }}</strong>
+                        <img alt="" v-if="supportedCardType('american-express')" src="https://cdn.givecloud.co/npm/payment-icons@1.1.0/min/flat/amex.svg">
+                        <img alt="" v-if="supportedCardType('diners-club')" src="https://cdn.givecloud.co/npm/payment-icons@1.1.0/min/flat/diners.svg">
+                        <img alt="" v-if="supportedCardType('discover')"    src="https://cdn.givecloud.co/npm/payment-icons@1.1.0/min/flat/discover.svg">
+                        <img alt="" v-if="supportedCardType('jcb')"         src="https://cdn.givecloud.co/npm/payment-icons@1.1.0/min/flat/jcb.svg">
+                        <img alt="" v-if="supportedCardType('maestro')"     src="https://cdn.givecloud.co/npm/payment-icons@1.1.0/min/flat/maestro.svg">
+                        <img alt="" v-if="supportedCardType('master-card')" src="https://cdn.givecloud.co/npm/payment-icons@1.1.0/min/flat/mastercard.svg">
+                        <img alt="" v-if="supportedCardType('unionpay')"    src="https://cdn.givecloud.co/npm/payment-icons@1.1.0/min/flat/unionpay.svg">
+                        <img alt="" v-if="supportedCardType('visa')"        src="https://cdn.givecloud.co/npm/payment-icons@1.1.0/min/flat/visa.svg">
+                    </div>
+                    <div class="form-group labelify payment-number-input" :class="{ 'has-errors': errors.has('signup.number') }">
+                        <label for="inputPaymentNumber">{{ 'general.forms.credit_card_number' | t }}</label>
+                        <payment-field field="inputPaymentNumber">
+                            <the-mask id="inputPaymentNumber" type="tel" class="form-control monospace" maxlength="19" placeholder="0000 0000 0000 0000" mask="#### #### #### ####" name="number" v-model="payment.number" v-validate.initial="'required|credit_card'" x-autocompletetype="cc-number" autocompletetype="cc-number" autocorrect="off" spellcheck="off" autocapitalize="off"></the-mask>
+                        </payment-field>
+                        <div v-if="payment.number_type" class="payment-number-input__types">
+                            <span>
+                                <img alt="" v-if="payment.number_type == 'american-express'" src="https://cdn.givecloud.co/npm/payment-icons@1.1.0/min/flat/amex.svg">
+                                <img alt="" v-if="payment.number_type == 'diners-club'" src="https://cdn.givecloud.co/npm/payment-icons@1.1.0/min/flat/diners.svg">
+                                <img alt="" v-if="payment.number_type == 'discover'"    src="https://cdn.givecloud.co/npm/payment-icons@1.1.0/min/flat/discover.svg">
+                                <img alt="" v-if="payment.number_type == 'jcb'"         src="https://cdn.givecloud.co/npm/payment-icons@1.1.0/min/flat/jcb.svg">
+                                <img alt="" v-if="payment.number_type == 'maestro'"     src="https://cdn.givecloud.co/npm/payment-icons@1.1.0/min/flat/maestro.svg">
+                                <img alt="" v-if="payment.number_type == 'master-card'" src="https://cdn.givecloud.co/npm/payment-icons@1.1.0/min/flat/mastercard.svg">
+                                <img alt="" v-if="payment.number_type == 'unionpay'"    src="https://cdn.givecloud.co/npm/payment-icons@1.1.0/min/flat/unionpay.svg">
+                                <img alt="" v-if="payment.number_type == 'visa'"        src="https://cdn.givecloud.co/npm/payment-icons@1.1.0/min/flat/visa.svg">
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-6 labelify" :class="{ 'has-errors': errors.has('pay.exp') }">
+                            <label for="inputPaymentExpiry">{{ 'general.forms.expiry' | t }}</label>
+                            <payment-field field="inputPaymentExpiry">
+                                <the-mask id="inputPaymentExpiry" type="tel" class="form-control monospace" maxlength="7" placeholder="{{ 'general.forms.expiry_placeholder' | t }}" mask="## / ##" @input.native="paymentExpiry($event)" name="exp" v-model="payment.exp" v-validate.initial="'required|expiration_date'" x-autocompletetype="cc-exp" autocompletetype="cc-exp" autocorrect="off" spellcheck="off" autocapitalize="off"></the-mask>
+                            </payment-field>
+                        </div>
+                        <div class="form-group col-6 labelify" :class="{ 'has-errors': errors.has('pay.cvv') }">
+                            <label for="inputPaymentCVV">{{ 'general.forms.cvv' | t }}</label>
+                            <payment-field field="inputPaymentCVV">
+                                <the-mask id="inputPaymentCVV" type="tel" class="form-control monospace" maxlength="4" placeholder="000" mask="####" name="cvv" v-model="payment.cvv" v-validate.initial="'required|cvv:' + payment.number_type" x-autocompletetype="cc-csc" autocompletetype="cc-csc" autocorrect="off" spellcheck="off" autocapitalize="off"></the-mask>
+                            </payment-field>
+                        </div>
+                    </div>
+                </credit-card>
+                <template v-else-if="signup.payment_type == 'bank_account' && gocardless_available">
+                    <div class="text-center text-muted">
+                        <i class="fa fa-bank fa-4x bottom-gutter m-2"></i><br>
+                        {{ 'general.actions.continue_below' | t }}<br>
+                        <i class="fa fa-chevron-down fa-1x"></i>
+                    </div>
+                </template>
+                <template v-else-if="signup.payment_type == 'bank_account'">
+                    <div class="form-group labelify labelify-has-value">
+                        <label for="inputCardholderName">{{ 'general.forms.account_holder_name' | t }}</label>
+                        <input id="inputCardholderName" type="text" class="form-control" maxlength="50" placeholder="{{ 'general.forms.account_holder_name_placeholder' | t }}" name="name" v-model="payment.name" autocorrect="off" spellcheck="off" autocapitalize="off">
+                    </div>
+                    <div class="form-group labelify payment-number-input" :class="{ 'has-errors': errors.has('signup.account_holder_type') }">
+                        <label for="inputPaymentAccountHolderType">{{ 'general.forms.account_holder_type' | t }}</label>
+                        <select id="inputPaymentAccountHolderType" class="form-control" name="account_holder_type" v-model="payment.account_holder_type" v-validate.initial="'required'" autocomplete="off">
+                            <option></option>
+                            <option value="personal">{{ 'general.forms.account_holder_types.individual' | t }}</option>
+                            <option value="business">{{ 'general.forms.account_holder_types.company' | t }}</option>
+                        </select>
+                    </div>
+                    <div class="form-group labelify payment-number-input" :class="{ 'has-errors': errors.has('signup.account_type') }">
+                        <label for="inputPaymentAccountType">{{ 'templates.sms.signup.account_type' | t }}</label>
+                        <select id="inputPaymentAccountType" class="form-control" name="account_type" v-model="payment.account_type" v-validate.initial="'required'" autocomplete="off">
+                            <option></option>
+                            <option value="checking">{{ 'general.forms.checking' | t }}</option>
+                            <option value="savings">{{ 'general.forms.savings' | t }}</option>
+                        </select>
+                    </div>
+                    <template v-if="payment.currency == 'CAD'">
+                        <div class="form-row">
+                            <div class="form-group col-6 labelify" :class="{ 'has-errors': errors.has('signup.transit_number') }">
+                                <label for="inputPaymentTransitNumber">{{ 'general.forms.transit_no' | t }}</label>
+                                <the-mask id="inputPaymentTransitNumber" type="tel" class="form-control monospace" maxlength="5" placeholder="00000" mask="#####" name="transit_number" v-model="payment.transit_number" v-validate.initial="'required'" autocorrect="off" spellcheck="off" autocapitalize="off"></the-mask>
+                            </div>
+                            <div class="form-group col-6 labelify" :class="{ 'has-errors': errors.has('signup.institution_number') }">
+                                <label for="inputPaymentInstitutionNumber">{{ 'general.forms.institution_no' | t }}</label>
+                                <the-mask id="inputPaymentInstitutionNumber" type="tel" class="form-control monospace" maxlength="3" placeholder="000" mask="###" name="institution_number" v-model="payment.institution_number" v-validate.initial="'required'" autocorrect="off" spellcheck="off" autocapitalize="off"></the-mask>
+                            </div>
+                        </div>
+                    </template>
+                    <template v-else>
+                        <div class="form-group labelify" :class="{ 'has-errors': errors.has('signup.routing_number') }">
+                            <label for="inputPaymentRoutingNumber">{{ 'general.forms.routing_no' | t }}</label>
+                            <input id="inputPaymentRoutingNumber" type="number" class="form-control monospace" placeholder="0000000" name="routing_number" v-model="payment.routing_number" v-validate.initial="'required'" autocorrect="off" spellcheck="off" autocapitalize="off">
+                        </div>
+                    </template>
+                    <div class="form-group labelify" :class="{ 'has-errors': errors.has('signup.account_number') }">
+                        <label for="inputPaymentAccountNumber">{{ 'general.forms.account_no' | t }}</label>
+                        <input id="inputPaymentAccountNumber" type="number" class="form-control monospace" minlength="4" maxlength="17" placeholder="0000000" name="account_number" v-model="payment.account_number" v-validate.initial="'required'" autocorrect="off" spellcheck="off" autocapitalize="off">
+                    </div>
+                </template>
+                <template v-else-if="signup.payment_type == 'paypal'">
+                    <div class="text-center text-muted">
+                        <i class="fab fa-cc-paypal fa-4x bottom-gutter"></i><br>
+                        {{ 'general.actions.continue_below' | t }}<br>
+                        <i class="fas fa-chevron-down fa-1x"></i>
+                    </div>
+                </template>
+            </div>
+        </div>
+
+        <div v-if="referral_sources.enabled" class="card mb-3">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    {% if settings.referral_source_label %}{{ settings.referral_source_label }}{% else %}{{ 'general.forms.referral_source' | t }}{% endif %}
+                </h5>
+            </div>
+            <div class="card-body bg-light">
+                <div class="form-group mb-0" :class="{ 'has-errors': errors.has('signup.referral_source') }">
+                    <div class="btn-group-toggle">
+                        <label v-for="source in referral_sources.sources" class="btn btn-outline-dark btn-sm mr-1 mb-1" :class="{ active: referral_source == source }" tabindex="0">
+                            <input type="radio" name="referral_source" v-model="referral_source" :value="source" v-validate.initial="'required'"> ${ source }
+                        </label><label v-if="referral_sources.allow_other" class="btn btn-outline-dark btn-sm mr-1 mb-1" :class="{ active: referral_source == 'other' }" tabindex="0">
+                            <input type="radio" name="referral_source" v-model="referral_source" value="other"> {{ 'templates.sms.signup.referral_source_other' | t }}
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group labelify mb-0" v-if="referral_source == 'other'" :class="{ 'has-errors': errors.has('signup.referral_source_other') }">
+                    <label for="inputSignupReferralSourceOther">{{ 'templates.sms.signup.other' | t }}</label>
+                    <input id="inputSignupReferralSourceOther"  ref="referral_source_other" type="text" class="form-control" name="referral_source_other" v-model="signup.referral_source" v-validate.initial="'required'" style="max-width:200px;" maxlength="45">
+                </div>
+            </div>
+        </div>
+
+        <div class="my-5 text-center">
+            <button ref="submitBtn" type="submit" class="btn btn-xl btn-pill btn-success mb-3" data-style="expand-left">
+                <i class="fas fa-user mr-1"></i> {{ 'templates.sms.signup.save_and_continue' | t }}
+            </button>
+        </div>
+    </form>
+</div>

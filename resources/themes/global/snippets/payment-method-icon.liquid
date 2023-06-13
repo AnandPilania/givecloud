@@ -1,0 +1,13 @@
+{% if account_type == 'Visa' %}
+    <i class="fa fa-{{ icon_size }} fa-cc-visa"></i>
+{% elsif account_type == 'MasterCard' %}
+    <i class="fa fa-{{ icon_size }} fa-cc-mastercard"></i>
+{% elsif account_type == 'Discover' %}
+    <i class="fa fa-{{ icon_size }} fa-cc-discover"></i>
+{% elsif account_type == 'American Express' %}
+    <i class="fa fa-{{ icon_size }} fa-cc-amex"></i>
+{% elsif account_type == 'PayPal' %}
+    <i class="fa fa-{{ icon_size }} fa-paypal"></i>
+{% else %}
+    <i class="fa fa-{{ icon_size }} fa-bank"></i>
+{% endif %}

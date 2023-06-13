@@ -1,0 +1,38 @@
+
+{% layout "layouts/app" %}
+
+{% block head %}
+<mj-preview>Givecloud got an error trying to send data to you through the order_completed webhook.</mj-preview>
+{% endblock %}
+
+{% block content %}
+<mj-section css-class="box">
+  <mj-column>
+    <mj-headline icon="fa-dark-question-circle" padding-bottom="0">
+      <h1>Webhook Failed</h1>
+    </mj-headline>
+    <mj-text color="#474747" font-size="18px" font-weight="300" padding-top="0">
+      <p>Givecloud got an error trying to send data to you through the order_completed webhook. Please forward this message to your developer and review your logs for more detail.</p>
+    </mj-text>
+    <mj-button background-color="#fc58af" color="white" font-weight="500" font-size="16px" padding="20px" border-radius="30px" href="{{ secure_site_url('jpanel/settings/hooks') }}">
+      View Webhook Logs
+    </mj-button>
+  </mj-column>
+</mj-section>
+<mj-section css-class="spacer"></mj-section>
+<mj-section css-class="box">
+  <mj-column>
+    <mj-text padding-bottom="0">
+      <h2>Error Message</h2>
+    </mj-text>
+    <mj-text color="#000000" font-size="16px" font-weight="300" padding-top="0" padding-bottom="0">
+      {{ $error_message }}
+    </mj-text>
+    <mj-raw>@if ($hook_delivery)</mj-raw>
+      <mj-text color="#474747" font-size="14px" font-weight="300" padding-top="0">
+        Delivery {{ $hook_delivery->guid }}
+      </mj-text>
+    <mj-raw>@endif</mj-raw>
+  </mj-column>
+</mj-section>
+{% endblock %}

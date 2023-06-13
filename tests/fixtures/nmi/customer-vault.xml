@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nm_response>
+    <customer_vault>
+        <customer id="145651622">
+            <first_name>Bob</first_name>
+            <last_name>Hope</last_name>
+            <address_1>123 Anywhere St</address_1>
+            <address_2></address_2>
+            <company></company>
+            <city>Beverly Hills</city>
+            <state>CA</state>
+            <postal_code>90210</postal_code>
+            <country>US</country>
+            <email></email>
+            <phone>555-555-5555</phone>
+            <fax></fax>
+            <cell_phone></cell_phone>
+            <customertaxid></customertaxid>
+            <website></website>
+            <shipping_first_name></shipping_first_name>
+            <shipping_last_name></shipping_last_name>
+            <shipping_address_1></shipping_address_1>
+            <shipping_address_2></shipping_address_2>
+            <shipping_company></shipping_company>
+            <shipping_city></shipping_city>
+            <shipping_state></shipping_state>
+            <shipping_postal_code></shipping_postal_code>
+            <shipping_country></shipping_country>
+            <shipping_email></shipping_email>
+            <shipping_carrier></shipping_carrier>
+            <tracking_number></tracking_number>
+            <shipping_date></shipping_date>
+            <shipping></shipping>
+            <cc_number>4xxxxxxxxxxx1111</cc_number>
+            <cc_hash>f6c609e195d9d4c185dcc8ca662f0180</cc_hash>
+            <cc_exp>1221</cc_exp>
+            <cc_start_date></cc_start_date>
+            <cc_issue_number></cc_issue_number>
+            <check_account></check_account>
+            <check_hash></check_hash>
+            <check_aba></check_aba>
+            <check_name></check_name>
+            <account_holder_type></account_holder_type>
+            <account_type></account_type>
+            <sec_code></sec_code>
+            <processor_id></processor_id>
+            <cc_bin>411111</cc_bin>
+            <cc_type>Visa</cc_type>
+            <created>20200417033522</created>
+            <updated>20200417033523</updated>
+            <account_updated></account_updated>
+            <customer_vault_id>145651622</customer_vault_id>
+        </customer>
+    </customer_vault>
+</nm_response>

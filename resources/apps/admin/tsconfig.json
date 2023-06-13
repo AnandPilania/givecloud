@@ -1,0 +1,24 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/root/*": ["/*"],
+      "@/components/*": ["components/*"],
+      "@/screens/*": ["screens/*"],
+      "@/fields/*": ["components/fields/*"],
+      "@/navigation/*": ["navigation/*"],
+      "@/atoms/*": ["atoms/*"],
+      "@/context/*": ["context/*"],
+      "@/constants/*": ["constants/*"],
+      "@/hooks/*": ["hooks/*"],
+      "@/utilities/*": ["utilities/*"],
+      "@/mocks/*": ["mocks/*"],
+      "@/types": ["types.ts"],
+      "@/aerosol": ["../aerosol/index.ts"],
+      "@/aerosol/*": ["../aerosol/*"],
+      "@/shared/*": ["../shared/*"]
+    }
+  },
+  "include": ["../aerosol/**/*", "./**/*", "../shared/**/*"]
+}

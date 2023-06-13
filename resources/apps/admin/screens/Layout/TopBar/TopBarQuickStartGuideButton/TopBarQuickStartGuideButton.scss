@@ -1,0 +1,13 @@
+.root {
+  .desktop {
+    @apply hidden md:flex;
+
+    &.hide {
+      @apply lg:hidden;
+    }
+  }
+
+  .mobile {
+    @apply flex cursor-pointer md:hidden;
+  }
+}

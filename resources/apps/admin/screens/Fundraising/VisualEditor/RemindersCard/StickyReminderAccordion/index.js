@@ -1,0 +1,1 @@
+export { StickyReminderAccordion } from './StickyReminderAccordion'

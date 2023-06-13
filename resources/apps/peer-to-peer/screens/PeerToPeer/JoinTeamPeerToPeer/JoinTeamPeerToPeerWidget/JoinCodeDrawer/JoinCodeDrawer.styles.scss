@@ -1,0 +1,19 @@
+.inputs {
+  @apply mx-auto my-8 max-w-[15rem] w-full;
+}
+
+.container {
+  @apply flex flex-col justify-center !p-[3px];
+
+  .wrapper {
+    @apply w-full flex-auto mt-6 p-1;
+  }
+
+  .cta {
+    @apply flex-shrink-0;
+  }
+}
+
+.padding {
+  @apply !p-[3px];
+}

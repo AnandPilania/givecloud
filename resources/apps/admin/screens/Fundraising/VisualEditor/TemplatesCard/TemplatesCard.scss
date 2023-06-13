@@ -1,0 +1,19 @@
+.root {
+  @apply max-w-5xl w-full mx-auto;
+
+  .column {
+    @apply items-center;
+
+    .image {
+      @apply border border-gray-100 rounded-lg shadow-lg shadow-gray-200 h-auto lg:h-64 text-theme;
+    }
+  }
+}
+
+.static {
+  @apply text-center relative mb-2;
+
+  .button {
+    @apply absolute left-0 top-0;
+  }
+}

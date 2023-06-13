@@ -1,0 +1,49 @@
+
+{% if template.type == 'fundraiser' %}
+    {% assign og_title = fundraising_page.title %}
+    {% assign og_image = fundraising_page.photo %}
+    {% assign og_description = fundraising_page.content %}
+{% elsif template.type == 'page' %}
+    {% assign og_title = page.title %}
+    {% assign og_image = page.feature_image %}
+    {% assign og_description = page.page_description %}
+{% elsif template.type == 'product' %}
+    {% assign og_title = product.name %}
+    {% assign og_image = product.feature_image %}
+    {% assign og_description = product.description %}
+{% elsif template.type == 'post' %}
+    {% assign og_title = post.title %}
+    {% assign og_image = post.feature_image %}
+    {% assign og_description = post.excerpt %}
+{% endif %}
+
+{% unless og_title %}
+    {% assign og_title = seo_title %}
+{% endunless %}
+
+{% unless og_image %}
+    {% assign og_image = site.logo %}
+{% endunless %}
+
+<meta property="og:title" content="{{ og_title | strip_html | strip_newlines | strip | truncatewords: 150 | escape }}">
+<meta property="og:type" content="website">
+<meta property="og:url" content="{{ request.canonical_url | escape }}">
+<meta property="og:image" content="{{ og_image | img_url: '1200x630' }}">
+<meta property="og:description" content="{{ og_description | strip_html | strip_newlines | strip | truncatewords: 300 | escape }}">
+<meta property="og:site_name" content="{{ site.name | strip_html | strip | escape }}">
+
+<meta name="twitter:card" content="{% unless og_image %}summary{% else %}summary_large_image{% endunless %}">
+<meta name="twitter:title" content="{{ og_title | strip_html | strip_newlines | strip | truncatewords: 70 | escape }}">
+<meta name="twitter:image" content="{{ og_image | img_url: '1200x600' }}">
+<meta name="twitter:description" content="{{ og_description | strip_html | strip_newlines | strip | truncatewords: 300 | escape }}">
+
+{% if site.google_property_id %}
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', '{{ site.google_property_id }}', 'auto');
+  ga('send', 'pageview');
+</script>
+{% endif %}

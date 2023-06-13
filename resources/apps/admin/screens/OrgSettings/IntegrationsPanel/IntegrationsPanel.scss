@@ -1,0 +1,19 @@
+.box {
+  @apply flex flex-col justify-between;
+
+  .buttonContainer {
+    @apply flex justify-end w-full mt-2;
+  }
+}
+
+.clickableBox {
+  @apply items-center;
+
+  .textContainer {
+    @apply flex flex-wrap-reverse;
+  }
+
+  .column {
+    @apply h-full justify-center;
+  }
+}

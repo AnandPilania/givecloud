@@ -1,0 +1,11 @@
+.form {
+  @apply w-full h-full flex flex-col;
+}
+
+.buttonContainer {
+  @apply justify-end mt-auto md:mt-4;
+}
+
+.paddingBottomless {
+  @apply pb-0;
+}

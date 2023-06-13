@@ -1,0 +1,9 @@
+<?php
+
+namespace PayPal\EBLBaseComponents;
+
+class AbstractResponseType
+{
+    /** @var \PayPal\EBLBaseComponents\ErrorType[] */
+    public $Errors; // @phpstan-ignore-line
+}

@@ -1,0 +1,119 @@
+{% if settings.page_heading_bg_effect == 'darken' %}
+    {% assign page_heading_backround_overlay_css = 'linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), ' %}
+{% elsif settings.page_heading_bg_effect == 'darken_more' %}
+    {% assign page_heading_backround_overlay_css = 'linear-gradient( rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75) ), ' %}
+{% elsif settings.page_heading_bg_effect == 'lighten' %}
+    {% assign page_heading_backround_overlay_css = 'linear-gradient( rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5) ), ' %}
+{% elsif settings.page_heading_bg_effect == 'lighten_more' %}
+    {% assign page_heading_backround_overlay_css = 'linear-gradient( rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.75) ), ' %}
+{% endif %}
+
+{% if settings.page_heading_bg == 'image' %}
+    {% assign header_image = 'https://placeimg.com/1200/800/nature' %}
+{% elsif settings.page_heading_bg == 'feature_image' %}
+    {% assign header_image = post_type.feature_image.full %}
+{% elsif settings.page_heading_bg == 'color' %}
+    {% assign header_image = '' %}
+{% endif %}
+
+{% if category and category.sub_categories.size > 0 %}
+    {% assign categories = category.sub_categories %}
+{% else %}
+    {% assign categories = post_type.categories %}
+{% endif %}
+
+<section class="title-bar-xl py-5" style="{% if header_image %}background: {{ page_heading_backround_overlay_css }} url('{{ header_image }}') no-repeat center center; background-size:cover;{% endif %}">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 py-5 text-center">
+                <h1 class="text-white my-3">{{ post_type.name }}{% if product.description %}<br><small>{{ product.description }}</small>{% endif %}</h1>
+
+                {% if categories.size > 0 %}
+                    <div class="text-center my-2">
+                        <a href="/{{ post_type.handle }}" class="{% unless category %}active{% endunless %} m-2 btn btn-outline-light">{{ 'templates.post_type.all' | t }}</a>
+                        {% for cat in categories %}
+                            <a href="/{{ post_type.handle }}/categories/{{ cat.handle }}" class="{% if category.id == cat.id %}active{% endif %} m-2 btn btn-outline-light">{{ cat.name }}</a>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="page-content">
+
+    <div class="container py-3">
+        {% if posts.size > 0 %}
+          {% for post in posts %}
+            <div class="mb-4">
+              <div class="card">
+                <div class="row no-gutters">
+                    <a class="col-12 col-md-2 col-xl-3" href="{{ post.url }}" style="background:url('{{ post.feature_image.thumb }}') no-repeat center center; background-size:{% if post_type.metadata.feed_image_display == 'contain' %}contain{% else %}cover{% endif %}; min-height:180px;">&nbsp;</a>
+                    <div class="col-12 col-md-6 col-xl-6">
+                        <div class="card-body">
+                            {% if post.categories.size > 0 %}
+                                <div class="text-secondary mb-2 text-sm">
+                                    {% for cat in post.categories %}
+                                        <span class="mr-3">{{ cat.name }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                            <h2 class="card-title mt-0 mb-2"><a href="{{ post.url }}">{{ post.title }}</a></h2>
+                            <div class="card-text">{{ post.excerpt }}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-12 col-md-4 col-xl-3 d-flex">
+                        <div class="card-body text-muted text-sm">
+                            {% if post.metadata.business_location or post.metadata.business_phone or post.metadata.business_email or post.metadata.business_facebook or post.metadata.business_instagram %}
+                            <ul class="fa-ul mb-3 text-break">
+                                {% if post.metadata.business_location %}<li><i class="fa fa-li fa-map-marker"><!-- --></i> {{ post.metadata.business_location }}</li>{% endif %}
+                                {% if post.metadata.business_phone %}<li><i class="fa fa-li fa-phone"><!-- --></i> {{ post.metadata.business_phone }}</li>{% endif %}
+                                {% if post.metadata.business_email %}<li><i class="fa fa-li fa-envelope-o"><!-- --></i> <a href="mailto:{{ post.metadata.business_email }}">{{ post.metadata.business_email }}</a></li>{% endif %}
+                                {% if post.metadata.business_facebook %}<li><i class="fa fa-li fa-facebook"><!-- --></i> {{ post.metadata.business_facebook }}</li>{% endif %}
+                                {% if post.metadata.business_instagram %}<li><i class="fa fa-li fa-instagram"><!-- --></i> {{ post.metadata.business_instagram }}</li>{% endif %}
+                            </ul>
+                            {% endif %}
+                            <a href="{{ post.url }}" class="btn btn-sm btn-outline-primary">{{ 'general.actions.read_more' | t }}</a>
+                        </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        {% else %}
+            <p class="text-muted text-lg text-center py-5">{{ 'templates.post_type.nothing_here' | t }}</p>
+        {% endif %}
+    </div>
+
+    {% if pagination.lastPage > 1 %}
+        {% include 'paging-links' %}
+    {% endif %}
+
+</div>
+
+{% schema %}
+[
+    {
+        "name": "Images",
+        "settings": [
+            {
+                "type": "header",
+                "content": "Images"
+            },
+            {
+                "type": "select",
+                "label": "Feed Image Display",
+                "name": "feed_image_display",
+                "options": {
+                    "cover" : "Cover (Better for images of people, places)",
+                    "contain" : "Contain (Better for logos or images with white backgrounds)"
+                },
+                "default": "cover"
+            }
+        ]
+    }
+]
+{% endschema %}

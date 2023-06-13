@@ -1,0 +1,19 @@
+.root {
+  @apply relative overflow-visible px-1 xs:p-4;
+  flex: 1 0 100%;
+  width: inherit;
+
+  &.noPadding {
+    @apply p-0;
+  }
+
+  &.isVisible {
+    @apply visible opacity-100;
+    transition: visibility 0s linear 0s, opacity 300ms;
+  }
+
+  &.isHidden {
+    @apply invisible opacity-0;
+    transition: visibility 0s linear 300ms, opacity 300ms;
+  }
+}

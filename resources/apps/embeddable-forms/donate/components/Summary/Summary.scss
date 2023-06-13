@@ -1,0 +1,15 @@
+.root {
+  @apply flex flex-col items-center pb-24;
+
+  .donationAmount {
+    @apply py-4 text-3xl font-medium;
+  }
+
+  .coverTheFeesContainer {
+    @apply mb-4;
+  }
+
+  .error {
+    @apply mt-2 mb-6;
+  }
+}

@@ -1,0 +1,1 @@
+export { PeerToPeerFooter } from './PeerToPeerFooter'

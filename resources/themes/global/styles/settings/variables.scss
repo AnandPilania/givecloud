@@ -1,0 +1,89 @@
+$fa-font-path           : "https://cdn.givecloud.co/npm/font-awesome@4.7.0/fonts";
+
+$font-family-sans-serif : quote(settings('sans_font')), "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-family-serif      : quote(settings('serif_font')), Georgia, serif;
+$font-family-headings   : quote(settings('serif_font')), Georgia, serif;
+$font-weight-headings   : 700;
+
+@if settings('page_headings_font_style') == 'serif_extra_bold' {
+    $font-family-headings: $font-family-serif;
+    $font-weight-headings:900;
+} @else if settings('page_headings_font_style') == 'serif_bold' {
+    $font-family-headings: $font-family-serif;
+    $font-weight-headings:700;
+} @else if settings('page_headings_font_style') == 'serif' {
+    $font-family-headings: $font-family-serif;
+    $font-weight-headings:400;
+} @else if settings('page_headings_font_style') == 'serif_thin' {
+    $font-family-headings: $font-family-serif;
+    $font-weight-headings:300;
+} @else if settings('page_headings_font_style') == 'sans_extra_bold' {
+    $font-family-headings: $font-family-sans-serif !important;
+    $font-weight-headings:900;
+} @else if settings('page_headings_font_style') == 'sans_bold' {
+    $font-family-headings: $font-family-sans-serif !important;
+    $font-weight-headings:700;
+} @else if settings('page_headings_font_style') == 'sans' {
+    $font-family-headings: $font-family-sans-serif !important;
+    $font-weight-headings:400;
+} @else if settings('page_headings_font_style') == 'sans_thin' {
+    $font-family-headings: $font-family-sans-serif !important;
+    $font-weight-headings:300;
+}
+
+$font-size-base         : 1rem;
+$body-bg                : #fff;
+$body-color             : #666;
+
+@if settings('element_roundness') == 'sm' {
+    $border-radius          : 5px;
+    $btn-border-radius      : 2px;
+    $btn-border-radius-lg   : 2px;
+    $btn-border-radius-sm   : 2px;
+    $input-border-radius    : 2px;
+    $input-border-radius-lg : 2px;
+    $input-border-radius-sm : 2px;
+    $card-border-radius     : 5px;
+} @else if settings('element_roundness') == 'md' {
+    $border-radius          : 10px;
+    $btn-border-radius      : 5px;
+    $btn-border-radius-lg   : 5px;
+    $btn-border-radius-sm   : 5px;
+    $input-border-radius    : 5px;
+    $input-border-radius-lg : 5px;
+    $input-border-radius-sm : 5px;
+    $card-border-radius     : 10px;
+} @else if settings('element_roundness') == 'lg' {
+    $border-radius          : 30px;
+    $btn-border-radius      : 30px;
+    $btn-border-radius-lg   : 30px;
+    $btn-border-radius-sm   : 30px;
+    $input-border-radius    : 30px;
+    $input-border-radius-lg : 30px;
+    $input-border-radius-sm : 30px;
+    $card-border-radius     : 30px;
+} @else {
+    $border-radius          : 0px;
+    $btn-border-radius      : 0px;
+    $btn-border-radius-lg   : 0px;
+    $btn-border-radius-sm   : 0px;
+    $input-border-radius    : 0px;
+    $input-border-radius-lg : 0px;
+    $input-border-radius-sm : 0px;
+    $card-border-radius     : 0px;
+}
+
+@if settings('panel_style') == 'none' {
+    $card-border-color: transparent;
+} @else if settings('panel_style') == 'shadow' {
+    $card-border-color: transparent;
+}
+
+$component-active-bg: site('primary_color','#001159');
+/*$component-active-color: color-yiq(site('primary_color','#001159'));*/
+
+$theme-colors: (
+  "primary":   site('primary_color','#001159'),
+  "secondary": site('secondary_color','#555555'),
+  "info":      site('alternate_color','#416387')
+);

@@ -1,0 +1,99 @@
+.root {
+  @apply relative w-full;
+
+  > .inputWrapper {
+    @apply flex w-full;
+
+    .addOn {
+      @apply inline-flex items-center rounded-l-md border border-r-0 border-gray-600 bg-gray-600 px-3 text-white sm:text-sm font-bold font-sans;
+    }
+  }
+
+  > .hidden {
+    @apply sr-only;
+  }
+
+  > .charCount {
+    @apply absolute right-0 font-sans text-sm text-gray-500;
+
+    &.default {
+      @apply top-0;
+    }
+
+    &.noLabel {
+      @apply -top-8;
+    }
+  }
+
+  > .errorMessage {
+    @apply mt-2 text-sm text-red-600 font-bold;
+  }
+
+  > .iconContainer {
+    @apply absolute mr-4 top-4 right-0 flex items-center pointer-events-none;
+
+    > .icon {
+      @apply h-5 w-5 text-gray-400;
+    }
+
+    > .errorIcon {
+      @apply h-5 w-5 text-red-500;
+    }
+  }
+}
+
+.input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+.input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  @apply px-4 py-3 block w-full font-sans bg-transparent border border-gray-400;
+
+  &.defaultBorder {
+    @apply rounded-md;
+  }
+
+  &.addOnBorder {
+    @apply rounded-r-md rounded-l-none border-l-0;
+  }
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    @apply m-0 appearance-none;
+  }
+
+  &.default {
+    @apply focus:border-brand-blue focus:ring-blue-600;
+  }
+
+  &.readonly {
+    @apply cursor-default read-only:border-gray-400 focus:outline-none disabled:border-gray-100;
+  }
+
+  &.disabled {
+    @apply bg-zinc-50 border-gray-100 cursor-not-allowed text-gray-400;
+  }
+
+  &.paddingRight {
+    @apply pr-10;
+  }
+
+  &.error {
+    @apply border-red-600 text-red-700 focus:border-red-600 outline-none;
+  }
+}
+
+.label {
+  @apply flex items-center text-sm font-bold text-black font-sans mb-3;
+
+  > .optional {
+    @apply uppercase text-xxs text-gray-600 ml-2;
+  }
+
+  &.disabled {
+    @apply text-gray-500;
+  }
+}

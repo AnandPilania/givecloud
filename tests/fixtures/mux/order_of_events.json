@@ -1,0 +1,16 @@
+{
+    "events": [
+        "video.live_stream.created",
+        "video.live_stream.connected",
+        "video.asset.created",
+        "video.live_stream.recording",
+        "video.live_stream.active",
+        "video.asset.ready",
+        "video.live_stream.disconnected",
+        "video.live_stream.connected.again",
+        "video.live_stream.recording.again",
+        "video.live_stream.disconnected.again",
+        "video.live_stream.idle",
+        "video.asset.live_stream_completed"
+    ]
+}

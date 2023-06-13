@@ -1,0 +1,27 @@
+.root {
+  @apply items-center justify-center;
+
+  .text {
+    @apply max-w-[14rem] text-center;
+  }
+
+  .thermometerContainer {
+    @apply flex w-full justify-center items-center mt-6;
+
+    .thermometer {
+      @apply mx-2 max-w-[14rem];
+    }
+  }
+}
+
+.column {
+  @apply pb-0 px-0;
+
+  &.left {
+    @apply pl-3;
+  }
+}
+
+.logo {
+  @apply object-cover h-8;
+}

@@ -1,0 +1,104 @@
+{% include 'header-image', header_title: category.name, header_image: category.feature_image.full %}
+
+<div class="page-content">
+
+{% if category.body %}
+    {{ category.body }}
+{% endif %}
+
+<section class="container">
+
+  <div class="py-5">
+    <form class="collection-filters form-secondary" method="get">
+        <div class="row">
+          <div class="col-sm-6 col-lg-9">
+            <div class="form-group labelify d-inline-block">
+                        <label>{{ 'templates.collection.filter' | t }}</label>
+                        <select class="form-control" name="filter" style="width:180px;">
+                            <option></option>
+                            {% for f in filter.filters %}
+                                <option value="{{ f.name }}" {% if f.is_selected %}selected{% endif %}>{{ f.name }}</option>
+                            {% endfor %}
+                        </select>
+            </div>
+            <div class="form-group labelify d-inline-block">
+                        <label>{{ 'templates.collection.sort_by' | t }}</label>
+                        <select class="form-control" name="order_by" style="width:130px;">
+                            <option value="publish_start_date_desc" {% if filter.order_by == 'publish_start_date_desc' %}selected{% endif %}>{{ 'templates.collection.newest_first' | t }}</option>
+                            <option value="publish_start_date" {% if filter.order_by == 'publish_start_date' %}selected{% endif %}>{{ 'templates.collection.oldest_first' | t }}</option>
+                            <option value="name" {% if filter.order_by == 'name' %}selected{% endif %}>{{ 'templates.collection.name_a_z' | t }}</option>
+                            <option value="name_desc" {% if filter.order_by == 'name_desc' %}selected{% endif %}>{{ 'templates.collection.name_z_a' | t }}</option>
+                            <option value="price_desc" {% if filter.order_by == 'price_desc' %}selected{% endif %}>{{ 'templates.collection.highest_price_first' | t }}</option>
+                            <option value="price" {% if filter.order_by == 'price' %}selected{% endif %}>{{ 'templates.collection.lowest_price_first' | t }}</option>
+                            <option value="filter" {% if filter.order_by == 'filter' %}selected{% endif %}>{{ 'templates.collection.filter' | t }}</option>
+                            <option value="category_name" {% if filter.order_by == 'category_name' %}selected{% endif %}>{{ 'templates.collection.category' | t }}</option>
+                        </select>
+            </div>
+            <div class="form-group labelify d-inline-block">
+                        <label>{{ 'templates.collection.per_page' | t }}</label>
+                        <select class="form-control" name="per_page" style="width:80px;">
+                            <option value="6"  {% if filter.per_page == 6 %}selected{% endif %}>6</option>
+                            <option value="36" {% if filter.per_page == 36 %}selected{% endif %}>36</option>
+                            <option value="72" {% if filter.per_page == 72 %}selected{% endif %}>72</option>
+                        </select>
+            </div>
+                    <div class="form-group d-inline-block" style="vertical-align:top;">
+                        <button class="btn-secondary btn btn-lg"><i class="fa fa-chevron-right"></i></button>
+                    </div>
+          </div>
+          <div class="col-sm-6 col-lg-3 text-right">
+            <div class="form-group labelify">
+                <label>{{ 'templates.collection.search' | t }}</label>
+              <div class="input-group">
+                <input type="text" class="form-control" name="keywords" value="{{ filter.keywords | escape }}">
+                <div class="input-group-btn">
+                  <button class="btn btn-secondary btn-lg"><i class="fa fa-search"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+  </div>
+
+    <div class="mb-5">
+        {% if options.columns == 1 %}
+            {% assign grid_item_wrap_classes = "col-12" %}
+        {% elsif options.columns == 2 %}
+            {% assign grid_item_wrap_classes = "col-sm-6 col-12" %}
+        {% elsif options.columns == 3 %}
+            {% assign grid_item_wrap_classes = "col-md-4 col-sm-6 col-12" %}
+        {% else %}
+            {% assign grid_item_wrap_classes = "col-lg-3 col-md-4 col-sm-6 col-12" %}
+        {% endif %}
+
+        <div class="row">
+            {% for cat in category.sub_categories %}
+                <div class="{{ grid_item_wrap_classes }} {% if settings.animations %}wow fadeInUp{% endif %}" {% if settings.animations %}data-wow-delay="0.{{ forloop.index }}s"{% endif %}>
+                    {% include 'collection-grid-item', category: cat %}
+                </div>
+            {% endfor %}
+            {% for product in products %}
+                <div class="{{ grid_item_wrap_classes }} {% if settings.animations %}wow fadeInUp{% endif %}" {% if settings.animations %}data-wow-delay="0.{{ forloop.index }}s"{% endif %}>
+                    {% include 'product-grid-item', show_summary: settings.category_show_product_summaries_on_listings, show_price: true %}
+                </div>
+            {% endfor %}
+        </div>
+
+        <nav class="my-5">
+      <div class="d-flex justify-content-center">
+        {% include 'pagination', paginator: products %}
+      </div>
+    </nav>
+
+    {% if settings.category_allow_add_to_cart %}
+        {% for product in products %}
+          {% include 'product-add-modal', product: product %}
+        {% endfor %}
+    {% endif %}
+
+  </div>
+
+</section>
+
+</div>

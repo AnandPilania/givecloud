@@ -1,0 +1,89 @@
+
+{% capture header_title -%}
+    {{ 'templates.search_results.results_for' | t: terms: terms }}
+{%- endcapture %}
+
+{% include 'header-image', header_title: header_title %}
+
+<div class="page-content">
+
+    <div class="container py-5">
+
+        <div class="text-center my-2">
+            <form role="search" action="/search" method="get">
+                {% if category %}
+                    <input type="hidden" name="category" value="{{ category | escape }}">
+                {% endif %}
+                <div class="form-group">
+                    <div class="input-group">
+                        <input type="text" name="keywords" value="{{ terms | escape }}" class="form-control">
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-secondary">Search</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="text-center my-2">
+            <a href="?" class="{% unless category %}active{% endunless %} m-2 btn btn-outline-primary">All</a>
+
+            {% if resultsHavePages %}
+                <a href="?category=pages" class="{% if category == 'pages' %}active{% endif %} m-2 btn btn-outline-primary">Pages</a>
+            {% endif %}
+
+            {% if resultsHavePosts %}
+                <a href="?category=posts" class="{% if category == 'posts' %}active{% endif %} m-2 btn btn-outline-primary">Posts</a>
+            {% endif %}
+
+            {% if resultsHaveProducts %}
+                <a href="?category=products" class="{% if category == 'products' %}active{% endif %} m-2 btn btn-outline-primary">Products</a>
+            {% endif %}
+
+            {% if resultsHaveFundraisingPages %}
+                <a href="?category=fundraisers" class="{% if category == 'fundraisers' %}active{% endif %} m-2 btn btn-outline-primary">Fundraisers</a>
+            {% endif %}
+
+            {% if resultsHaveSponsees %}
+                <a href="?category=sponsees" class="{% if category == 'sponsees' %}active{% endif %} m-2 btn btn-outline-primary">Sponsees</a>
+            {% endif %}
+
+        </div>
+
+        {% if search_results.size == 0 %}
+
+            <p class="text-lg text-center text-muted">
+                {% if category %}
+                    {{ 'templates.search_results.no_results_found_for_with_category' | t: terms: terms, category: category }}
+                {% else %}
+                    {{ 'templates.search_results.no_results_found_for' | t: terms: terms }}
+                {% endif %}
+            </p>
+
+        {% else %}
+
+            {% for result in search_results %}
+                <div class="row">
+                    <div class="col-12 col-lg-8 offset-lg-2">
+                        <div class="card my-3 {% if settings.animations %}wow fadeInUp{% endif %}">
+                            <div class="row no-gutters">
+                                <div class="col-5 rounded-left bg-img-fill-100"  {% if result.feature_image %}style="background-image:url('{{ result.feature_image }}');"{% endif %}></div>
+                                <div class="col-7">
+                                    <div class="card-body">
+                                        <div><span class="mb-1 badge badge-pill badge-secondary">{{ result.type | capitalize }}</span></div>
+                                        <h4 class="card-title"><a href="{{ result.permalink }}">{{ result.title }}</a></h4>
+                                        <p class="card-text">{{ result.excerpt }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            {% endfor %}
+
+        {% endif %}
+
+    </div>
+
+</div>

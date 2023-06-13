@@ -1,0 +1,7 @@
+.root {
+  @apply flex justify-between items-center p-6;
+
+  .spacingDiv {
+    @apply w-9;
+  }
+}

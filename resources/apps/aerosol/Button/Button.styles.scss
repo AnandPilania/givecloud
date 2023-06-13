@@ -1,0 +1,203 @@
+.root {
+  @apply relative;
+  @apply rounded-lg text-center;
+  @apply text-base whitespace-nowrap font-bold;
+  @apply transition duration-300 ease-in-out;
+  @apply focus:outline-2 focus:outline-offset-2;
+
+  -webkit-appearance: none !important;
+
+  .button {
+    @apply flex items-center justify-center w-full;
+  }
+
+  &.fullWidth {
+    @apply w-full;
+  }
+
+  &.disabled {
+    @apply bg-gray-400 text-white cursor-not-allowed;
+
+    &.clean {
+      @apply bg-transparent text-gray-400;
+    }
+
+    &.outlined {
+      @apply text-gray-400 bg-gray-50;
+      box-shadow: 0 0 0 1px #e4e4e7;
+    }
+  }
+
+  &.custom {
+    @apply text-white bg-theme hover:bg-theme-dark active:bg-theme-dark focus:outline-theme-dark;
+    box-shadow: 0 0 0 1px #ffffff;
+
+    &.clean {
+      @apply bg-transparent text-theme hover:bg-theme hover:text-white;
+      box-shadow: 0 0 0 1px transparent;
+    }
+
+    &.outlined {
+      @apply text-theme bg-theme-light hover:bg-theme-dark hover:text-white shadow-theme;
+    }
+  }
+
+  &.primary {
+    @apply text-white bg-blue-600 hover:bg-blue-700 active:bg-blue-600 focus:outline-blue-600;
+    box-shadow: 0 0 0 1px #ffffff;
+
+    &.clean {
+      @apply bg-transparent text-blue-600;
+      box-shadow: 0 0 0 1px transparent;
+
+      &:hover {
+        box-shadow: 0 0 0 1px #2563eb;
+      }
+    }
+
+    &.outlined {
+      @apply text-blue-600 bg-blue-50 hover:bg-blue-700 hover:text-white;
+      box-shadow: 0 0 0 1px #2563eb;
+    }
+  }
+
+  &.info {
+    @apply bg-indigo-600 text-white hover:bg-indigo-700 active:bg-indigo-600 focus:outline-indigo-600;
+
+    &.clean {
+      @apply bg-transparent text-indigo-600;
+      box-shadow: 0 0 0 1px transparent;
+
+      &:hover {
+        box-shadow: 0 0 0 1px #4f46e5;
+      }
+    }
+
+    &.outlined {
+      @apply text-indigo-600 bg-indigo-50 hover:bg-indigo-600 hover:text-white;
+      box-shadow: 0 0 0 1px #4f46e5;
+    }
+  }
+
+  &.secondary {
+    @apply bg-gray-500 text-white hover:bg-gray-600 active:bg-gray-500 focus:outline-gray-500;
+
+    &.clean {
+      @apply bg-transparent text-gray-500;
+      box-shadow: 0 0 0 1px transparent;
+
+      &:hover {
+        box-shadow: 0 0 0 1px #4b5563;
+      }
+    }
+
+    &.outlined {
+      @apply text-gray-500 bg-gray-50 hover:bg-gray-500 hover:text-white;
+      box-shadow: 0 0 0 1px #4b5563;
+    }
+  }
+
+  &.light {
+    @apply bg-gray-100 text-gray-700 hover:bg-gray-200 active:bg-gray-100 focus:outline-gray-700;
+
+    &.clean {
+      @apply bg-transparent text-gray-700;
+      box-shadow: 0 0 0 1px transparent;
+
+      &:hover {
+        box-shadow: 0 0 0 1px #374151;
+      }
+    }
+
+    &.outlined {
+      @apply text-gray-700 bg-gray-100 hover:bg-gray-700 hover:text-white;
+      box-shadow: 0 0 0 1px #374151;
+    }
+  }
+
+  &.error {
+    @apply bg-red-600 text-white hover:bg-red-700 active:bg-red-500 focus:outline-red-600;
+
+    &.clean {
+      @apply bg-transparent text-red-700 hover:text-white hover:bg-red-600;
+      box-shadow: 0 0 0 1px transparent;
+
+      &:hover {
+        box-shadow: 0 0 0 1px #b91c1c;
+      }
+    }
+
+    &.outlined {
+      @apply text-red-800 bg-red-50 hover:bg-red-600 hover:text-white;
+      box-shadow: 0 0 0 1px #b91c1c;
+    }
+  }
+
+  &.success {
+    @apply bg-green-600 text-white hover:bg-green-700 active:bg-green-500 focus:outline-green-600;
+
+    &.clean {
+      @apply bg-transparent text-green-700;
+      box-shadow: 0 0 0 1px transparent;
+
+      &:hover {
+        box-shadow: 0 0 0 1px #15803d;
+      }
+    }
+
+    &.outlined {
+      @apply text-green-800 bg-green-50 hover:bg-green-600 hover:text-white;
+      box-shadow: 0 0 0 1px #15803d;
+    }
+  }
+
+  &.warning {
+    @apply bg-yellow-700 text-white hover:bg-yellow-700 active:bg-yellow-500 focus:outline-yellow-700;
+
+    &.clean {
+      @apply bg-transparent text-yellow-700;
+      box-shadow: 0 0 0 1px transparent;
+
+      &:hover {
+        box-shadow: 0 0 0 1px #a16207;
+      }
+    }
+
+    &.outlined {
+      @apply text-yellow-800 bg-yellow-50 hover:bg-yellow-600 hover:text-white;
+      box-shadow: 0 0 0 1px #a16207;
+    }
+  }
+
+  &.small {
+    @apply text-sm leading-4;
+    @apply px-4 py-2.5;
+
+    .icon {
+      @apply w-4;
+    }
+  }
+
+  &.medium {
+    @apply text-base;
+    @apply px-4 py-2.5;
+
+    .icon {
+      @apply w-6;
+    }
+  }
+
+  &.hasChildren {
+    .icon {
+      @apply mr-2;
+    }
+  }
+
+  .icon {
+    @apply w-5;
+  }
+
+  .spinner {
+    @apply absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2;
+  }
+}

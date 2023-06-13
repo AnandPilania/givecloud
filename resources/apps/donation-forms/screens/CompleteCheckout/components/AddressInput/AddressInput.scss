@@ -1,0 +1,17 @@
+.root {
+  @apply flex flex-col;
+
+  .input {
+    @apply mb-1;
+  }
+
+  .button {
+    @apply self-end;
+    @apply text-sm;
+    color: var(--primary-text-colour);
+
+    &:hover {
+      color: var(--primary-text-colour);
+    }
+  }
+}

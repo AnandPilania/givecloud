@@ -1,0 +1,21 @@
+.root {
+  @apply flex flex-col flex-grow justify-center;
+  @apply w-full max-w-full;
+
+  .content {
+    @apply relative;
+  }
+
+  .presets {
+    @apply transition-opacity;
+  }
+
+  .variants {
+    @apply flex justify-center;
+    @apply transition-opacity;
+  }
+
+  .inputMask {
+    @apply opacity-0 pointer-events-none;
+  }
+}

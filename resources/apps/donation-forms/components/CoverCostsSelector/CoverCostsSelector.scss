@@ -1,0 +1,34 @@
+.root {
+  @apply flex items-center justify-center text-sm text-center;
+
+  .icon {
+    @apply inline-block ml-2 h-5 align-[-0.4em] rounded-full cursor-pointer;
+    color: var(--primary-colour-700);
+
+    &.darkPrimaryColour {
+      color: var(--primary-colour-500);
+    }
+
+    svg {
+      @apply h-5;
+    }
+  }
+
+  .rateDropdownContainer {
+    @apply relative;
+
+    @media (max-width: 345px) {
+      > span > span {
+        @apply hidden;
+      }
+    }
+
+    .rateDropdown {
+      @apply inline-block;
+    }
+
+    .rateSelectDropdown {
+      @apply static;
+    }
+  }
+}

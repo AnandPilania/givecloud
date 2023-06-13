@@ -1,0 +1,27 @@
+.root {
+  @apply p-0 mx-0 my-2;
+  @apply list-none;
+
+  .menuItem {
+    .link {
+      @apply flex items-center;
+      @apply py-2 px-4;
+      @apply text-gray-800 text-sm;
+      @apply cursor-pointer;
+
+      &:hover {
+        @apply bg-gray-100;
+      }
+
+      .icon {
+        @apply mr-2;
+        @apply text-gray-500;
+      }
+    }
+  }
+
+  .divider {
+    @apply my-2;
+    @apply border-b border-gray-200;
+  }
+}

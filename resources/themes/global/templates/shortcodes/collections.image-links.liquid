@@ -1,0 +1,15 @@
+{% if categories.size == 1 %}
+    {% assign grid_item_wrap_classes = "col-12 my-2" %}
+{% elsif categories.size == 2 %}
+    {% assign grid_item_wrap_classes = "col-sm-6 col-12 my-2" %}
+{% else %}
+    {% assign grid_item_wrap_classes = "col-md-4 col-sm-6 col-12 my-2" %}
+{% endif%}
+
+<div class="row">
+    {% for cat in categories %}
+        <div class="{{ grid_item_wrap_classes }}">
+            {% include 'image-link-item', text: cat.name, link: cat.url, image: cat.feature_image.thumb %}
+        </div>
+    {% endfor %}
+</div>

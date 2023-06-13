@@ -1,0 +1,105 @@
+{% assign active_profile_menu = 'purchasedmedia' %}
+
+{% layout 'theme.profile' %}
+
+<h1 class="mt-0">{{ settings.purchased_media_heading_title }}</h1>
+
+{% assign purchased_media = account.purchased_media %}
+
+{% assign has_active_purchased_media = false %}
+{% assign has_expired_purchased_media = false %}
+{% for purchased_media_instance in purchased_media %}
+    {% if purchased_media_instance.expired %}
+        {% assign has_expired_purchased_media = true %}
+    {% else %}
+        {% assign has_active_purchased_media = true %}
+    {% endif %}
+{% endfor %}
+
+{% if purchased_media.size == 0 %}
+
+    <div class="text-center">{{ 'templates.accounts.purchased_media.index.no_access_to_any_purchased_media' | t }}</div>
+
+{% else %}
+
+    {% if has_active_purchased_media == true %}
+        {% for purchased_media_instance in purchased_media %}
+            {% if purchased_media_instance.expired == false %}
+                <div class="card mb-4 wow fadeInUp" style="overflow:hidden;">
+                    <div class="row no-gutters d-flex align-items-stretch">
+                        <div class="col-12 col-lg-2" style="min-height:125px; background-image:url({% if purchased_media_instance.variant.feature_image %}{{ purchased_media_instance.variant.feature_image.thumb }}{% elsif purchased_media_instance.product.feature_image %}{{ purchased_media_instance.product.feature_image.thumb }}{% endif %}); background-size: cover;">
+                            &nbsp;
+                        </div>
+                        <div class="col-12 col-lg-7">
+                            <div class="py-3 px-4 text-info">
+                                <h3 class="text-left">{{ purchased_media_instance.product.name }}{% if purchased_media_instance.variant.title != 'Default Option' %} - {{ purchased_media_instance.variant.title }}{% endif %}</h3>
+                                {% if purchased_media_instance.description %}
+                                    <p>{{ purchased_media_instance.description }}</p>
+                                {% endif %}
+                                <p>
+                                    <a class="badge badge-pill badge-secondary" href="/contributions/{{ purchased_media_instance.order_number }}">{{ 'templates.accounts.purchased_media.index.purchased_on' | t: granted_date: purchased_media_instance.granted }}</a>
+                                    {% if purchased_media_instance.expiration_time %}
+                                        {% if purchased_media_instance.days_left < 10 %}
+                                            <span class="badge badge-pill badge-warning">{{ 'templates.accounts.purchased_media.days_left_count' | t: count: purchased_media_instance.days_left }}</span>
+                                        {% else %}
+                                            <span class="badge badge-pill badge-light">{{ 'templates.accounts.purchased_media.expires' | t: expiration_date: purchased_media_instance.expiration_time }}</span>
+                                        {% endif %}
+                                    {% endif %}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-3 d-flex align-items-center text-right">
+                            <div class="w-100 pr-4 py-3">
+                                {% if purchased_media_instance.download_url %}
+                                    <div class="py-2"><a href="{{ purchased_media_instance.download_url }}" target="dp_download_{{purchased_media_instance.id}}" class="btn btn-sm btn-pill px-3 btn-outline-primary"><i class="fa fa-download mr-1"></i> {{ 'templates.accounts.purchased_media.index.download' | t }}</a></div>
+                                {% elsif purchased_media_instance.oembed %}
+                                    <div class="py-2"><a href="/account/purchased-media/{{ purchased_media_instance.id }}" class="btn btn-sm btn-pill px-3 btn-outline-primary">{{ 'general.actions.view' | t }}</a></div>
+                                {% else %}
+                                    <div class="py-2"><a href="{{ purchased_media_instance.external_resource_uri }}" target="dp_external_{{purchased_media_instance.id}}" class="btn btn-sm btn-pill px-3 btn-outline-primary"><i class="fa fa-external-link mr-1"></i> {{ 'templates.accounts.purchased_media.index.open' | t }}</a></div>
+                                {% endif %}
+                                {% if purchased_media_instance.expiration_time and purchased_media_instance.days_left < 10 and purchased_media_instance.product.url %}
+                                    <div class="py-2"><a href="{{ purchased_media_instance.product.url }}" class="btn btn-sm btn-pill px-3 btn-outline-primary"><i class="fa fa-refresh mr-1"></i> {{ 'templates.accounts.purchased_media.re_purchase' | t }}</a></div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
+    {% if has_expired_purchased_media == true %}
+        <h3 class="mt-5 mb-3 wow fadeInUp">Expired Media</h3>
+        {% for purchased_media_instance in purchased_media %}
+            {% if purchased_media_instance.expired %}
+                <div class="card mb-4 wow fadeInUp" style="overflow:hidden;">
+                    <div class="row no-gutters d-flex align-items-stretch">
+                        <div class="col-12 col-lg-2" style="min-height:125px; background-image:url({% if purchased_media_instance.variant.feature_image %}{{ purchased_media_instance.variant.feature_image.thumb }}{% elsif purchased_media_instance.product.feature_image %}{{ purchased_media_instance.product.feature_image.thumb }}{% endif %}); background-size: cover;">
+                            &nbsp;
+                        </div>
+                        <div class="col-12 col-lg-7">
+                            <div class="py-3 px-4 text-info">
+                                <h3 class="text-left">{{ purchased_media_instance.product.name }}{% if purchased_media_instance.variant.title != 'Default Option' %} - {{ purchased_media_instance.variant.title }}{% endif %}</h3>
+                                {% if purchased_media_instance.description %}
+                                    <p>{{ purchased_media_instance.description }}</p>
+                                {% endif %}
+                                <p>
+                                    <a class="badge badge-pill badge-secondary" href="/contributions/{{ purchased_media_instance.order_number }}">{{ 'templates.accounts.purchased_media.index.purchased_on' | t: purchased_date: purchased_media_instance.granted }}</a>
+                                    <span class="badge badge-pill badge-danger">{{ 'templates.accounts.purchased_media.index.expired' | t: expiration_date: purchased_media_instance.expiration_time }}</span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-3 d-flex align-items-center text-right">
+                            <div class="w-100 pr-4 py-3">
+                                {% if purchased_media_instance.product.url %}
+                                    <div class="py-2"><a href="{{ purchased_media_instance.product.url }}" class="btn btn-sm btn-pill px-3 btn-outline-primary"><i class="fa fa-refresh mr-1"></i> {{ 'templates.accounts.purchased_media.re_purchase' | t }}</a></div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
+{% endif %}

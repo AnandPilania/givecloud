@@ -1,0 +1,61 @@
+{% if post.alternate_image %}
+    {% assign _header_image = post.alternate_image.full %}
+{% else %}
+    {% assign _header_image = post_type.feature_image.full %}
+{% endif %}
+
+<div class="page-content">
+
+    {% if post.metadata.embed_file %}
+        <div class="container">
+            {% if post.metadata.embed_file.provider_name == "YouTube"  %}
+                <div class="iframe-container">
+                    {{ post.metadata.embed_file.html }}
+                </div>
+            {% else %}
+                {{ post.metadata.embed_file.html }}
+            {% endif %}
+        </div>
+    {% endif %}
+
+    <div class="container py-4">
+        {% if post.categories.size > 0 %}
+            <div class="mb-3 text-sm">
+                {% for cat in post.categories %}
+                    <a href="{{ post.type_handle }}/categories/{{ cat.handle }}" class="mr-3">{{ cat.name }}</a>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <h1 class="mt-0">{{ post.title }}</h1>
+
+        {{ post.content }}
+    </div>
+
+    {% if post.show_sharing_links %}
+        <div class="container pb-4">{% sharing_links title: post.title, channels: settings.post_sharing_links_channels %}</div>
+    {% endif %}
+
+</div>
+
+
+{% schema %}
+[
+    {
+        "name": "Media",
+        "settings": [
+            {
+                "type": "header",
+                "content": "Media"
+            },
+            {
+                "type": "oembed",
+                "name": "embed_file",
+                "label": "Media Link",
+                "info": "Any YouTube, Vimeo, SoundClound, etc URL",
+                "size":"sm"
+            }
+        ]
+    }
+]
+{% endschema %}

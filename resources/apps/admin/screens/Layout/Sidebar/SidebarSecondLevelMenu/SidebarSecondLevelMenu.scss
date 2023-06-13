@@ -1,0 +1,76 @@
+.root {
+  @apply p-8;
+  @apply h-full;
+  @apply overflow-hidden overflow-y-auto;
+
+  .icon {
+    @apply w-8 h-8;
+  }
+
+  h3 {
+    @apply font-bold;
+    @apply my-4;
+
+    .pill {
+      @apply align-middle;
+      @apply rounded;
+      @apply font-extrabold;
+      @apply pt-1 pb-0.5 px-2 mt-2 ml-2;
+      @apply text-black;
+
+      font-size: 0.65rem;
+      background-color: #42cffc;
+
+      &:global(.upgrade) {
+        background: linear-gradient(135deg, #e233ff 0%, #ffcc33 100%);
+        color: #ffffff;
+      }
+    }
+  }
+
+  .newLink {
+    @apply inline-flex items-center;
+    @apply h-auto w-auto;
+    @apply pl-2 pr-3 py-2;
+    @apply bg-green-50;
+    @apply text-sm text-green-600;
+    @apply border border-transparent rounded-3xl;
+    @apply transition duration-300 ease-in-out;
+
+    @apply font-bold !important;
+
+    .newLinkIcon {
+      @apply mr-2;
+      @apply text-lg;
+    }
+
+    &:hover {
+      @apply border-green-300;
+    }
+
+    &:active {
+      @apply border-green-500;
+    }
+
+    .externalLinkIcon {
+      @apply ml-2;
+    }
+  }
+
+  .menu {
+    @apply my-4;
+
+    .section {
+      @apply mt-6;
+
+      .sectionHeader {
+        @apply text-gray-300 uppercase text-xs font-black tracking-tighter;
+      }
+    }
+
+    ul {
+      @apply list-none;
+      @apply m-0 p-0;
+    }
+  }
+}

@@ -1,0 +1,15 @@
+.root {
+  @apply flex flex-col items-center justify-center;
+
+  .confetti {
+    @apply fixed inset-0 pointer-events-none z-20;
+  }
+
+  h3 {
+    @apply mb-4 text-2xl font-bold;
+  }
+
+  p {
+    @apply mx-6 text-base leading-snug;
+  }
+}

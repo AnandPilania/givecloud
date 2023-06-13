@@ -1,0 +1,44 @@
+.root {
+  @apply p-2 pb-10;
+
+  &.darkTheme {
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    textarea:-webkit-autofill,
+    textarea:-webkit-autofill:hover,
+    textarea:-webkit-autofill:focus,
+    select:-webkit-autofill,
+    select:-webkit-autofill:hover,
+    select:-webkit-autofill:focus {
+      border: 1px solid #4b5563;
+      -webkit-text-fill-color: #e5e7eb;
+      -webkit-box-shadow: 0 0 0px 1000px #27303f inset;
+      transition: background-color 5000s ease-in-out 0s;
+    }
+
+    .form {
+      @apply text-white;
+
+      .disclaimerText {
+        @apply text-gray-400;
+      }
+    }
+  }
+
+  .hiddenDonationValue {
+    @apply hidden;
+  }
+
+  .form {
+    @apply max-w-7xl text-gray-800;
+
+    .disclaimerText {
+      @apply pt-6 text-center text-sm text-gray-800;
+    }
+
+    .stepButtonsContainer {
+      @apply mt-6 flex w-full justify-end;
+    }
+  }
+}

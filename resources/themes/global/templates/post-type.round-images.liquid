@@ -1,0 +1,63 @@
+
+{% include 'header-image', header_title: post_type.name, header_image: post_type.feature_image.full %}
+
+{% if category %}
+    {% assign categories = category.sub_categories %}
+{% else %}
+    {% assign categories = post_type.categories %}
+{% endif %}
+
+<div class="page-content">
+
+    {% if categories.size > 0 %}
+        <div class="container py-4">
+            <div class="row gutter-sm">
+                {% for category in categories %}
+                    <div class="{% if post_type.categories.size > 4 %}col-3{% else %}col{% endif %}">
+                        <a href="/{{ post_type.handle }}/categories/{{ category.handle }}" class="btn btn-lg btn-outline-primary btn-block">{{ category.name }}</a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+
+    {% if category %}
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-md-6">
+                    <h2 class="text-center text-md-left mb-2 my-md-4">{{ category.name }}</h2>
+                </div>
+                <div class="col-sm-12 col-md-6 py-md-4 text-center text-md-right">
+                    <a href="/{{ post_type.handle }}">{{ 'templates.post_type.back_to' | t: post_term: post_type.name }}</a>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="container py-5">
+        {% if posts.size > 0 %}
+            <div class="row">
+                {% for post in posts %}
+                    <div class="col-12 col-sm-6 col-md-4 col-xl-3 text-center mb-3">
+                        {% if post.url %}<a href="{{ post.url }}">{% endif %}<span class="circle-avatar-bg-lg mb-2" style="background-image:url('{{ post.feature_image.thumb }}');"></span>{% if post.url %}</a>{% endif %}
+                        {% if post.title or post.excerpt %}
+                            <div>
+                                <p>
+                                    {% if post.title %}<strong>{{ post.title }}</strong>{% endif %}
+                                    {% if post.excerpt %}{% if post.title %}<br>{% endif %}<small>{{ post.excerpt }}</small>{% endif %}
+                                </p>
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="text-muted text-lg text-center py-5">{{ 'templates.post_type.no_posts_here' | t }}</p>
+        {% endif %}
+    </div>
+
+    {% if pagination.lastPage > 1 %}
+        {% include 'paging-links' %}
+    {% endif %}
+
+</div>

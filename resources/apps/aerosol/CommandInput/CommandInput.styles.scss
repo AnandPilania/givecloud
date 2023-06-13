@@ -1,0 +1,69 @@
+.root {
+  @apply relative;
+
+  > .input {
+    @apply w-full border border-gray-400 rounded-md pl-4 pr-14 py-3  text-black focus:ring-1 focus:border-brand-blue relative bg-transparent font-sans;
+  }
+
+  > .button {
+    @apply absolute inset-y-0 right-0 w-full cursor-text;
+  }
+  > .error {
+    @apply border-red-600 text-red-700 focus:ring-1 focus:border-red-600;
+  }
+  > .disabled {
+    @apply bg-zinc-50 border-gray-100 cursor-not-allowed text-gray-400;
+  }
+
+  > .emptyState {
+    @apply relative cursor-default select-none py-2 px-4 text-black mx-2;
+  }
+
+  > .options {
+    @apply absolute max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-md border border-gray-400 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm mt-2 p-0 pt-2 z-40;
+
+    > .option {
+      @apply relative cursor-auto list-none select-none p-2 flex justify-between items-center;
+
+      > .optionLoading {
+        @apply flex justify-center items-center w-full;
+      }
+
+      &.active {
+        @apply bg-blue-600 text-white;
+      }
+    }
+  }
+
+  > .icon {
+    @apply mr-4 text-gray-400 absolute top-4 right-0;
+  }
+
+  > .errorIcon {
+    @apply text-red-500;
+  }
+
+  > .errorMessage {
+    @apply mt-2 text-sm text-red-600;
+  }
+}
+
+.label {
+  @apply flex items-center text-sm font-bold text-black font-sans mb-3;
+
+  > .optional {
+    @apply uppercase text-xxs text-gray-600 ml-2;
+  }
+
+  &.disabled {
+    @apply text-gray-500;
+  }
+
+  &.error {
+    @apply text-red-600;
+  }
+}
+
+.deleteButton {
+  @apply absolute top-2 right-4;
+}

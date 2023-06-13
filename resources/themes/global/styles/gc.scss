@@ -1,0 +1,52 @@
+.gc-lock {
+    font-size:11px;
+    width:auto;
+    display:inline-block;
+    margin:0px auto;
+    padding-left:40px;
+    background:transparent url('https://cdn.givecloud.co/static/etc/gc-lock-dark.png') no-repeat left center;
+    background-size:30px 30px;
+    text-align:left;
+    vertical-align: middle;
+}
+
+.gc-lock-dark {
+    font-size:11px;
+    width:auto;
+    display:inline-block;
+    margin:0px auto;
+    padding-left:40px;
+    background:transparent url('https://cdn.givecloud.co/static/etc/gc-lock-light.png') no-repeat left center;
+    background-size:30px 30px;
+    text-align:left;
+    color:#fff;
+    vertical-align: middle;
+
+    .text-muted {
+        color:#ccc;
+    }
+    a, a:active, a:hover, a:visited {
+        color:#ccc;
+    }
+}
+
+.gc-partner-brand-img {
+    max-height:30px;
+    width:auto;
+    margin:2px 7px;
+    vertical-align:middle;
+}
+
+.gc-caption {
+    max-width: 100%;
+    img {
+        margin-bottom: 0;
+    }
+}
+
+.gc-caption-text {
+    margin-bottom: 0;
+    padding: 10px 14px;
+    background: #ddd;
+    font-size: 0.71111em;
+}

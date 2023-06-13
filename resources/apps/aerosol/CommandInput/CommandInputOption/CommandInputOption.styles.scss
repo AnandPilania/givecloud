@@ -1,0 +1,7 @@
+.root {
+  @apply relative cursor-pointer list-none select-none p-2 flex justify-between items-center;
+
+  &.active {
+    @apply bg-blue-600 text-white;
+  }
+}

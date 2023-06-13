@@ -1,0 +1,61 @@
+@keyframes sheen {
+  to {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(2);
+  }
+}
+
+.root {
+  @apply mt-3;
+
+  .altPaymentMethods {
+    @apply flex justify-between space-x-[8px];
+    @apply mt-[8px];
+
+    .altPaymentMethodButton {
+      @apply grow mt-0 px-3;
+      height: 46px;
+
+      span {
+        @apply flex items-center justify-center space-x-2 whitespace-nowrap;
+
+        svg:last-of-type {
+          @apply mr-2;
+        }
+      }
+
+      &.bankAccountBtn {
+        @apply w-auto grow-0 px-8;
+      }
+    }
+  }
+
+  .summary {
+    @apply relative mt-4 mb-8 py-4 overflow-hidden;
+    @apply text-xl text-center;
+
+    .summaryContent {
+      @apply relative z-10;
+      transform: translateZ(10px); // we love you safari
+
+      strong {
+        @apply block text-2xl;
+      }
+    }
+  }
+
+  .coverCostsContainer {
+    @apply mt-1;
+  }
+
+  .sheen {
+    @apply absolute top-0 left-0 w-full h-full;
+
+    div {
+      @apply absolute top-0 left-0 w-full h-full;
+      @apply bg-gradient-to-r from-white to-[var(--primary-colour-100)];
+      clip-path: polygon(0 0, 100% 0, 75% 100%, 0% 100%);
+      transform: translateX(-100%);
+    }
+  }
+}

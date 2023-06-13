@@ -1,0 +1,14 @@
+
+{% if paginator.parts.size > 0 %}
+    <ul class="pagination justify-content-center">
+        <li class="page-item {% if paginator.previous.is_link == false %} disabled {% endif %}">
+            <a class="page-link" href="{{ paginator.previous.url }}" tabindex="-1">{{ paginator.previous.title }}</a>
+        </li>
+        {% for page in paginator.parts %}
+            <li class="page-item d-none d-md-block {% if page.is_link == false %}disabled{% endif %}"><a class="page-link" href="{{ page.url }}">{{ page.title }}</a></li>
+        {% endfor %}
+        <li class="page-item {% if paginator.next.is_link == false %} disabled {% endif %}">
+            <a class="page-link" href="{{ paginator.next.url }}" tabindex="-1">{{ paginator.next.title }}</a>
+        </li>
+    </ul>
+{% endif %}

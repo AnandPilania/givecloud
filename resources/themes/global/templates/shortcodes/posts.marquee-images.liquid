@@ -1,0 +1,19 @@
+<div id="{{ id }}" class="owl-carousel">
+
+  {% for post in posts %}
+    <div class="text-center">
+
+      {% if post.url %}
+        <a href="{{ post.url }}"><img class="d-block w-100 hover-full-color" src="{{ post.feature_image.thumb }}" alt="{{ post.title }}"></a>
+      {% else %}
+        <img class="d-block w-100" class="hover-full-color" src="{{ post.feature_image.thumb }}" alt="{{ post.title }}">
+      {% endif %}
+
+      {% if post.title %}
+        <div><small>{{ post.title }}</small></div>
+      {% endif %}
+
+    </div>
+  {% endfor %}
+
+</div>

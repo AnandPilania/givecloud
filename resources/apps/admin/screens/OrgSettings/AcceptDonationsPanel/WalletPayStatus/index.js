@@ -1,0 +1,1 @@
+export { WalletPayStatus } from './WalletPayStatus'

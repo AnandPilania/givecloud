@@ -1,0 +1,15 @@
+.root {
+  @apply flex items-center justify-center;
+  @apply text-white;
+  @apply rounded-full;
+  @apply cursor-pointer;
+  @apply h-12 w-12 lg:h-8 lg:w-8;
+
+  &.checked {
+    @apply ring-2 ring-offset-2;
+  }
+
+  &.margin {
+    @apply mb-7;
+  }
+}

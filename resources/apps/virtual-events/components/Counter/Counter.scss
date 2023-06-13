@@ -1,0 +1,24 @@
+.root {
+  @apply flex items-center justify-center font-bold scale-75 text-6xl;
+  @apply md:scale-100;
+
+  &.dark {
+    @apply text-white;
+  }
+
+  &.light {
+    @apply text-black;
+  }
+
+  &.uninitalized {
+    @apply opacity-25;
+  }
+
+  &.dashboardType {
+    font-size: 5rem;
+  }
+
+  .dollarSign {
+    @apply font-medium opacity-75;
+  }
+}

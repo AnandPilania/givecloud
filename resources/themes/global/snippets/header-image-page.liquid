@@ -1,0 +1,50 @@
+{% if settings.page_heading_bg_effect == 'darken' %}
+  {% assign page_heading_backround_overlay_css = 'linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), ' %}
+{% elsif settings.page_heading_bg_effect == 'darken_more' %}
+  {% assign page_heading_backround_overlay_css = 'linear-gradient( rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75) ), ' %}
+{% elsif settings.page_heading_bg_effect == 'lighten' %}
+  {% assign page_heading_backround_overlay_css = 'linear-gradient( rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5) ), ' %}
+{% elsif settings.page_heading_bg_effect == 'lighten_more' %}
+  {% assign page_heading_backround_overlay_css = 'linear-gradient( rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.75) ), ' %}
+{% endif %}
+
+{% if settings.page_heading_bg == 'image' %}
+  {% assign header_image = 'https://placeimg.com/1200/800/nature' %}
+{% elsif settings.page_heading_bg == 'feature_image' %}
+  {% assign header_image = header_image | default : settings.page_heading_bg_default %}
+{% elsif settings.page_heading_bg == 'color' %}
+  {% assign header_image = '' %}
+{% endif %}
+
+<section class="title-bar" style="{% if header_image %}background: {{ setting.page_heading_bg_color }} {{ page_heading_backround_overlay_css }} url('{{ header_image }}') no-repeat center center;{% endif %}">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 {% if settings.page_heading_align != 'center' %}col-md-6{% endif %}">
+        <h1 class="{% if settings.page_heading_align == 'center' %}text-center{% endif %}">{% if setting.page_heading == 'parent' %}{{ page.parent.title }}{% else %}{{ page.title }}{% endif %}</h1>
+      </div>
+
+      <!-- breadcrumb -->
+      {% if settings.page_allow_breadcrumb %}
+        <div class="col-md-6 d-none d-md-block d-lg-block d-xl-block">
+          {% comment %}
+          <nav aria-label="breadcrumb" role="navigation">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="/">Home</a></li>
+              {% if page.parent %}
+                {% if page.parent.parent %}
+                  {% if page.parent.parent.parent %}
+                    <li class="breadcrumb-item"><a href="{{ page.parent.parent.parent.url }}">{{ page.parent.parent.parent.title }}</a></li>
+                  {% endif %}
+                  <li class="breadcrumb-item"><a href="{{ page.parent.parent.url }}">{{ page.parent.parent.title }}</a></li>
+                {% endif %}
+                <li class="breadcrumb-item"><a href="{{ page.parent.url }}">{{ page.parent.title }}</a></li>
+              {% endif %}
+              <li class="breadcrumb-item active" aria-current="page">{{ page.title }}</li>
+            </ol>
+          </nav>
+          {% endcomment %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,25 @@
+.root {
+  @apply flex justify-center lg:justify-between w-full items-center mb-6;
+}
+.button {
+  @apply block h-11 mr-4;
+}
+
+.nextButton {
+  @apply absolute top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 right-0;
+}
+.previousButton {
+  @apply absolute top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 left-8;
+}
+
+.carouselContainer {
+  @apply w-full mt-2 flex justify-center;
+}
+
+.buttonContainer {
+  @apply flex justify-end mb-4 lg:mb-0;
+}
+
+.errorIcon {
+  @apply absolute -top-2 right-0 text-white bg-red-600 rounded-full inline-flex items-center justify-center;
+}

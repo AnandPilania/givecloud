@@ -1,0 +1,10 @@
+.root {
+  @apply w-full;
+  @apply p-3;
+  @apply rounded-md;
+  @apply border-2 border-theme;
+
+  &.margin {
+    @apply mb-4;
+  }
+}

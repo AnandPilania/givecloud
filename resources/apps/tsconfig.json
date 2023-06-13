@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "outDir": "../../../public/jpanel/assets/apps/admin",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "resolveJsonModule": true,
+    "sourceMap": true,
+    "noImplicitAny": false,
+    "module": "es6",
+    "target": "es5",
+    "jsx": "react-jsx",
+    "skipLibCheck": true,
+    "allowJs": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "noEmit": false,
+    "strict": true
+  },
+  "exclude": ["./core", "./donation-forms", "./embedabble-forms", "./virtual-events", "./widgets"]
+}

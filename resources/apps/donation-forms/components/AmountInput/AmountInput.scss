@@ -1,0 +1,60 @@
+.root {
+  @apply absolute inset-0;
+  @apply flex flex-col justify-center items-center;
+  @apply w-full bg-white;
+
+  .currencySymbol {
+    @apply absolute top-0 bottom-0 left-0;
+    @apply flex justify-end items-center;
+    @apply mx-2;
+    @apply text-2xl font-medium;
+    width: 20px;
+  }
+
+  .inputWrap {
+    @apply relative flex justify-center items-center;
+
+    input {
+      @apply w-56 p-3 pt-3 pb-2;
+      @apply text-2xl font-semibold border-gray-500;
+      text-align: end;
+    }
+
+    &.rightHandSide {
+      @apply flex-row-reverse;
+
+      .currencySymbol {
+        @apply left-auto right-0;
+      }
+
+      input {
+        @apply pr-8;
+      }
+    }
+  }
+
+  .currencySelector {
+    @apply absolute top-3 -right-[5.4rem];
+
+    > div > div {
+      @apply underline underline-offset-[3px];
+    }
+  }
+
+  .doneButton {
+    @apply flex items-center justify-center;
+    @apply w-56 mt-3 mx-auto px-5 pt-4 pb-3;
+    @apply space-x-2;
+    @apply text-lg rounded-md;
+    background-color: var(--primary-colour-500);
+    color: var(--primary-colour-white-or-black);
+
+    .icon {
+      @apply mr-2;
+    }
+
+    &[disabled] {
+      @apply opacity-40 cursor-not-allowed;
+    }
+  }
+}

@@ -1,0 +1,23 @@
+.root {
+  @apply max-w-[21rem];
+
+  .radioGroup {
+    @apply text-left h-full;
+  }
+
+  .padding {
+    @apply pr-0 !pb-0;
+  }
+
+  .columns {
+    @apply -ml-3;
+  }
+
+  .radioButtonColumn {
+    @apply pt-0 pl-0;
+  }
+
+  .inputColumn {
+    @apply pt-0 pr-0;
+  }
+}

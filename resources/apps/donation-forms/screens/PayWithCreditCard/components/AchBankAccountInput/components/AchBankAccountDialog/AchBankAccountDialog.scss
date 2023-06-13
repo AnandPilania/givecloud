@@ -1,0 +1,52 @@
+.root {
+  @apply fixed inset-0 z-20 bg-[rgba(0,0,0,0.65)] hidden;
+  will-change: transform; /* fix for header background opacity stacking issue */
+
+  .dialog {
+    @apply absolute inset-12;
+    @apply flex flex-col p-6;
+    @apply bg-white rounded-2xl;
+  }
+
+  .content {
+    @apply grow;
+
+    h1 {
+      @apply mt-5 mb-6 text-3xl font-bold text-center;
+    }
+  }
+
+  .errorMessage {
+    @apply block mt-1 ml-2 text-xs;
+    @apply text-red-500;
+  }
+
+  .accountType {
+    @apply flex flex-row space-x-8 justify-center mb-6;
+  }
+
+  .routingNumberCAD {
+    @apply flex space-x-4;
+
+    .transitNumber {
+      @apply grow;
+    }
+
+    .institutionNumber {
+      @apply w-36 min-w-[100px];
+    }
+  }
+
+  .accountNumber {
+    @apply mt-3;
+  }
+
+  .businessAccount {
+    @apply my-6;
+  }
+
+  .controls {
+    @apply grow-0;
+    @apply flex flex-row space-x-2;
+  }
+}

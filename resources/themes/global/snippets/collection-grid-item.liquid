@@ -1,0 +1,16 @@
+<div class="card mb-4" {% if match_height %}mh-data="{{ match_height }}"{% endif %}>
+    {% if category.feature_image.thumb %}
+    <a href="{{ category.url }}">
+      <img class="card-img-top" src="{{ category.feature_image.thumb }}" alt="{{ category.name | escape }}">
+    </a>
+  {% else %}
+    <a href="{{ category.url }}"><div class="card-img-top text-center d-flex d-inline-block justify-content-center" style="height:250px; background-color:#eee; color:#fff;"><i class="align-self-center fa fa-camera fa-4x"></i></div></a>
+  {% endif %}
+
+  <div class="card-body">
+    <h4 class="card-title"><a href="{{ category.url }}">{{ category.name }}</a></h4>
+    <div class="text-center mt-3">
+      <a href="{{ category.url }}" class="btn btn-sm btn-outline-primary d-inline-block m-1"><i class="fa fa-search"></i> {{ 'general.actions.view' | t }}</a>
+    </div>
+  </div>
+</div>

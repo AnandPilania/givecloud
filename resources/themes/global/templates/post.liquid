@@ -1,0 +1,32 @@
+{% if post.alternate_image %}
+    {% assign _header_image = post.alternate_image.full %}
+{% else %}
+    {% assign _header_image = post_type.feature_image.full %}
+{% endif %}
+
+{% assign share_body = post.excerpt | default: post.content %}
+
+{% include 'header-image', header_title: post.type_name, header_image: _header_image %}
+
+<div class="page-content post-content">
+
+    <div class="container pb-5 mt-n4">
+        <img src="{{ post.feature_image.full }}" class="w-100 theme-shadow rounded wow fadeIn">
+
+        <div class="wow fadeIn">
+            <p class="mt-5 text-center text-sm text-secondary font-weight-bold">{{ post.published_at | date: "short_month_day_year" }}</p>
+            <h1 class="mt-2 mb-0">{{ post.title }}</h1>
+
+            {% if post.show_sharing_links %}
+                <div class="mt-3">{% sharing_links title: post.title, description: share_body, channels: settings.post_sharing_links_channels, hidetext: true %}</div>
+            {% endif %}
+
+            <div class="mt-5">{{ post.content }}</div>
+        </div>
+    </div>
+
+    {% if post.show_sharing_links %}
+        <div class="container pb-4">{% sharing_links title: post.title, description: share_body, channels: settings.post_sharing_links_channels %}</div>
+    {% endif %}
+
+</div>

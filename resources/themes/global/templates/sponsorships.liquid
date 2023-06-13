@@ -1,0 +1,71 @@
+{% assign page_title = settings.sponsorship_list_title %}
+
+{% layout 'theme' %}
+
+{% include 'header-image', header_title: settings.sponsorship_list_title, header_image: settings.sponsorship_header_bg_image %}
+
+{% if settings.sponsorship_list_preface %}
+  <div class="container my-4">
+    {{ settings.sponsorship_list_preface }}
+  </div>
+{% endif %}
+
+<section class="mt-4">
+  <div class="container body-min-height">
+
+    {% if settings.sponsorship_filter_position == 'top' %}
+      {% include 'sponsorship-filter-top' %}
+    {% endif %}
+
+    {% if settings.sponsorship_filter_position == 'right' %}
+      <div class="row">
+        <div class="col-9">
+    {% endif %}
+
+    {% if sponsorships %}
+      {% if settings.sponsorship_list_style == 'masonry' %}
+        <div class="masonry-3 w-100">
+          {% for sponsorship in sponsorships %}
+            <div class="brick-container">
+              <div class="brick">
+                {% include 'sponsorship-grid-item', child: sponsorship %}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="row">
+          {% for sponsorship in sponsorships %}
+            <div class="col-lg-4 col-sm-6">
+              {% include 'sponsorship-grid-item', child: sponsorship %}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      {% if pagination.lastPage > 1 %}
+        <nav class="my-5">
+          <div class="d-flex justify-content-center">
+            {% include 'paging-links' %}
+          </div>
+        </nav>
+      {% endif %}
+    {% else %}
+      <p class="text-lg text-muted m-5 text-center">{{ settings.sponsorship_list_empty_message }}</p>
+    {% endif %}
+
+    {% if settings.sponsorship_filter_position == 'right' %}
+        </div>
+        <div class="sponsorship-filter-side col-3">
+          {% include 'sponsorship-filter-side' %}
+        </div>
+      </div>
+    {% endif %}
+
+  </div>
+
+</section>
+
+{% for sponsorship in sponsorships %}
+  {% include 'sponsorship-add-modal', child: sponsorship %}
+{% endfor %}

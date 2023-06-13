@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns#">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="icon" type="image/png" href="{{ settings.favicon }}">
+  <title>{{ page_title }}</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap">
+  <link rel="stylesheet" href="https://cdn.plyr.io/3.6.4/plyr.css" />
+  {% for css_file in css_files %}
+    <link rel="stylesheet" href="{{ css_file }}">
+  {% endfor %}
+</head>
+<body class="bg-gray-100 text-white h-screen" style="background-image:url({{ bg_image }})">
+
+  {{ content_for_layout }}
+
+
+  {% for script_file in script_files %}
+    <script charset="utf-8" src="{{ script_file }}"></script>
+  {% endfor %}
+</body>
+</html>

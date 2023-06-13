@@ -1,0 +1,1 @@
+export { TransparencyStatementAccordion } from './TransparencyStatementAccordion'

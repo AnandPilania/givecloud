@@ -1,0 +1,25 @@
+@keyframes sheen {
+  to {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(2);
+  }
+}
+
+.root {
+  @apply absolute inset-0 flex items-center justify-center p-3 overflow-hidden mx-auto;
+  @apply bg-[#ffca6b] rounded-full text-black text-sm;
+  width: max-content;
+  will-change: transform; /* fix for safari border-radius issues */
+  backface-visibility: hidden;
+
+  svg {
+    @apply w-4 h-4 mr-1;
+  }
+
+  .sheen {
+    @apply absolute top-[50%] left-7 w-[600px] h-[600px] bg-[#ffd487] rounded-full;
+    animation: sheen 1s linear;
+    animation-delay: 0.3s;
+    transform: translate(-50%, -50%) scale(0);
+  }
+}

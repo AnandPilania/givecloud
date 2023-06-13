@@ -1,0 +1,11 @@
+.columns {
+  @apply w-full;
+
+  .column {
+    @apply justify-center;
+
+    .icon {
+      @apply ml-2;
+    }
+  }
+}

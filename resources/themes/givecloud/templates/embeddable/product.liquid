@@ -1,0 +1,28 @@
+{% layout 'embeddable' %}
+
+{% if has_donation_variants %}
+    <div id="app"
+        data-product="{{ product | json | escape }}"
+        data-variant-unit-amounts="{{ variantUnitAmounts | json | escape }}"
+        data-goal-currency-format="{{ settings.goal_progress_currency_format | escape }}"
+        data-disclaimer-text="{{ disclaimertext | escape }}"
+        data-account-types="{{ account_types | json | escape }}"
+        data-email-optin-label="{{ settings.optin_label | json | escape }}"
+        data-can-create-account="{{ settings.cart_create_account | json | escape }}"
+        data-create-account-label="{{ settings.cart_create_account_label | json | escape }}"
+        data-create-account-description="{{ settings.cart_create_account_description | json | escape }}"
+        data-donor-title="{{ site.donor_title | json | escape }}"
+        data-donor-title-options="{{ site.donor_title_options | json | escape }}"
+        data-cover-costs-checkout-description="{{ site.cover_costs_checkout_description_with_amount | json | escape }}"
+        data-currencies="{{ site.currencies | json | escape }}"
+        data-recurring-first-payment-default="{{ settings.product_recurring_first_payment_default | json | escape }}"
+        data-product-preset-other-label="{{ settings.product_preset_other_label | json | escape }}"
+        data-payment-day-options="{{ site.payment_day_options | json | escape }}"
+        data-payment-weekday-options="{{ site.payment_weekday_options | json | escape }}"
+        data-recaptcha-site-key="{{ site.recaptcha_site_key | json | escape }}"
+        data-return-state="{% if request.input.state == 'thankyou' or request.input.state == 'error' %}{{ request.input.state | escape }}{% endif %}"
+        data-return-error="{% if request.input.state == 'error' and error %}{{ error | escape }}{% endif %}"
+    ></div>
+{% else %}
+    <p style="color:#a0aec0;">Embeddable payments can only be done with donations.</p>
+{% endif %}

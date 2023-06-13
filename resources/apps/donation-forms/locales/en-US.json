@@ -1,0 +1,220 @@
+{
+  "components": {
+    "app": {
+      "social_proof_notifications": {
+        "someone": "Someone",
+        "from": "from",
+        "recent_html": "<strong>{{ who }}</strong> gave <strong>{{ amount }}</strong> <small>{{ when }}</small>",
+        "largest_amount_html": "<strong>{{ who }}</strong> gave the most, <strong>{{ amount }}</strong> <small>{{ when }}</small>"
+      }
+    },
+    "amount_selector": {
+      "done_button": "Done",
+      "variant_button": {
+        "monthly": "Monthly",
+        "today_only": "Today Only"
+      }
+    },
+    "badge_preview": {
+      "top_x_of_donors_html": "<strong>TOP {{ percentage }}%</strong> of Donors"
+    },
+    "cover_costs_selector": {
+      "information": {
+        "help_cover_costs_fees": "Help Cover\nCosts & Fees",
+        "one_of_the_most_cost_effective_ways": "Online payments are one of the most cost effective ways for us to fundraise. Automation eliminates human error and streamlines our financial operations so we can focus on our mission.",
+        "help_make_the_most_of_your_donation": "Help make the most of your donation by eliminating the very few remaining costs we incur when fundraising online, including:",
+        "processing_bank_fees": "Processing & Bank Fees",
+        "it_security_costs": "IT & Security Costs",
+        "software_costs": "Software Costs"
+      },
+      "description_html": "Add {{ amount }} to help cover costs <span>& fees</span>",
+      "most_costs": "{{ amount }} - Most Costs",
+      "more_costs": "{{ amount }} - More Costs",
+      "minimum_costs": "{{ amount }} - Minimum Costs",
+      "no_thank_you": "No Thank You"
+    },
+    "footer_navigation": {
+      "faq": "FAQ",
+      "privacy_and_legal": "Privacy & Legal"
+    },
+    "screen": {
+      "exit_confirm_modal": {
+        "message": "Your impact has not been processed yet. If you exit now you will lose your progress.",
+        "are_you_sure": "Are you sure you want to leave without making a difference?",
+        "cancel": "Finish My Donation",
+        "close": "Close",
+        "exit": "Leave This Page"
+      },
+      "test_mode_warning": "Donation Form in Test Mode"
+    },
+    "next_button": {
+      "label": "Next"
+    }
+  },
+  "screens": {
+    "choose_payment_method": {
+      "amount_stepper": {
+        "tap_to_change": "Tap To Change"
+      },
+      "payment_method_selector": {
+        "amount": "{{ amount }}",
+        "monthly_amount": "{{ amount }}/mth",
+        "donate": "Donate",
+        "donate_with": "Donate with",
+        "pay_with": "Pay with",
+        "credit": "Credit Card",
+        "bank": "Bank",
+        "paypal_unknown_error": "There was a problem using PayPal. Make sure your pop-ups aren't being blocked. Or, try a different way of donating."
+      },
+      "transparency_promise": {
+        "title": "Impact Promise"
+      }
+    },
+    "pay_with_credit_card": {
+      "heading": "Secure Payment",
+      "description": "You can rest assured that your information is always protected by our bank level encryption.",
+      "credit_card": "Credit Card",
+      "donate": "Donate",
+      "amount": "{{ amount }}",
+      "monthly_amount": "{{ amount }}/mth",
+      "bank_ach": "Bank / ACH",
+      "credit": "Credit",
+      "ach": "ACH",
+      "cardholder_name": "Cardholder Name",
+      "cardholder_name_required": "A name is required.",
+      "cardholder_last_name_required": "A last name is required.",
+      "name_on_account": "Name on Account",
+      "card_number": "Card Number",
+      "card_number_invalid": "Your card number is incomplete.",
+      "card_number_required": "A card number is required.",
+      "card_exp": "MM / YY",
+      "card_exp_invalid": "Your card's expiration date is incorrect.",
+      "card_exp_required": "A card expiration date is required.",
+      "card_cvv": "CVC",
+      "card_cvv_invalid": "Your card's security code is incomplete.",
+      "card_cvv_required": "A card security code is required.",
+      "bank_transfer": "Bank Transfer",
+      "account_type": "Account Type",
+      "checking": "Checking",
+      "savings": "Savings",
+      "routing_number": "Routing Number",
+      "transit_number": "Transit Number",
+      "institution_number": "Institution #",
+      "routing_number_required": "A routing number is required.",
+      "routing_number_cad_required": "A transit/institution number is required.",
+      "account_number": "Account Number",
+      "account_number_required": "An account number is required.",
+      "is_a_business_account_html": "This is a <strong>business account</strong>.",
+      "ach_placeholder_usd": "Routing / Account",
+      "ach_placeholder_cad": "Transit / Institution / Account",
+      "continue": "Continue",
+      "email_address": "Email Address",
+      "email_address_invalid": "The email address you entered is invalid.",
+      "email_address_required": "An email address is required.",
+      "billing_address_placeholder": "Billing Address",
+      "billing_address_required": "A billing address is required.",
+      "edit_manually": "Edit Manually",
+      "search_for_address": "Search for Address",
+      "placeholder_address": "123 Example Street",
+      "placeholder_city": "City",
+      "placeholder_state": "State/Province",
+      "placeholder_zip": "Zip/Postal Code",
+      "placeholder_country": "Country",
+      "ach_mandate_html": "By clicking [\"Continue\"], I authorize <strong>{{ gateway }}</strong> on behalf of <strong>{{ organization }}</strong> (i) to verify my bank account information using bank information and consumer reports and (ii) to debit my bank account.",
+      "must_accept_mandate": "You must accept the mandate terms.",
+      "donate_button": "Give Now"
+    },
+    "complete_checkout": {
+      "heading": "Last Step",
+      "description": "Giving us your contact info allows\nus to send you your donation confirmation and receipt.",
+      "contact_info": "Contact Info",
+      "first_and_last_name": "First & Last Name",
+      "give": "Give",
+      "amount": "{{ amount }}",
+      "monthly_amount": "{{ amount }}/mth"
+    },
+    "are_you_a_robot": {
+      "heading": "Are you a robot?",
+      "description": "This step helps us prevent fraud\nand protects us from costly fees\nand chargebacks."
+    },
+    "payment_approved": {
+      "heading": "Approved",
+      "description": "A confirmation email has been sent to {{ email }}."
+    },
+    "payment_declined": {
+      "heading": "That Didn't Work",
+      "try_again": "Try Again",
+      "error_from_bank": "Error From Bank: {{ error }}"
+    },
+    "processing_payment": {
+      "description": "Processing Payment",
+      "messages": {
+        "contacting_bank": "Contacting Bank",
+        "authorizing_payment": "Authorizing Payment",
+        "waiting_on_bank": "Waiting on Bank",
+        "processing": "Processing"
+      }
+    },
+    "monthly_upsell": {
+      "heading": "Upgrade Your\nImpact",
+      "description_html": "12x your impact (or more) by giving monthly.",
+      "starts_on": "Starts {{ date }}.",
+      "make_per_month_html": "Make It <strong>{{ amount }}/mth</strong>",
+      "per_month_html": "{{ amount }}/mth",
+      "every_little_bit": "♥️ Every little bit counts!",
+      "no_thanks": "No Thanks"
+    },
+    "double_the_donation_search": {
+      "heading": "Double My Impact",
+      "description": "See if your employer will match\nyour donation.",
+      "new_employer": "New Employer",
+      "no_thanks": "No Thanks"
+    },
+    "double_the_donation_match": {
+      "heading": "We'll Double Your\nDonation",
+      "description": "Check your email for your next\nstep to submit your matching gift\nrequest to:"
+    },
+    "email_opt_in": {
+      "heading": "Can We Send You\nUpdates?",
+      "description_html": "Can we send you updates on the impact YOUR donation is having?",
+      "keep_me_up_to_date": "Keep Me Up-To-Date",
+      "no_thanks": "No Thanks"
+    },
+    "thank_you": {
+      "heading": "Thank you, {{ name }}!",
+      "description_html": "Your generosity is making an impact.",
+      "spread_the_word": "Spread The Word"
+    },
+    "frequently_asked_questions": {
+      "heading": "FAQ",
+      "bank_level_security_html": "<strong>Bank-Level Security</strong> keeps your payment safe and secure.",
+      "tax_deductible_html": "<strong>100% Tax Deductible</strong> in {{ country }} through our <span class='whitespace-nowrap'>{{ type }}</span> charity number {{ number }}.",
+      "instant_tax_receipt_html": "<strong>Instant Tax Receipt</strong> emailed to you right after you donate.",
+      "transparency_promise_html": "<strong>Impact Promise</strong> ensures 100% of your donation is used as promised.",
+      "give_by_check_html": "<strong>Can I give by check?</strong><br />Using the online form allows us to streamline our financial operations so we can focus all our resources on our mission. If check is the best, please make it out to:",
+      "other_ways_to_donate": "Are there other ways I can donate?",
+      "contact_us_html": "<strong>Who can I contact about my donation?</strong><br />You can reach our team at:",
+      "close": "Close"
+    },
+    "privacy_and_legal": {
+      "heading": "Privacy & Legal",
+      "your_personal_information": "Your personal information and payment data are safe and secure.",
+      "we_are": "We are:",
+      "charity_number": "Charity #{{ number }}",
+      "bank_level_encryption_html": "We use <strong>bank level encryption</strong> to process your payment.",
+      "information_security_standards_html": "Our vendors adhere to the high information security standards of <strong>SOC & PCI compliance</strong>.",
+      "never_share_your_information_html": "We <strong>never share your information</strong> with <strong>any</strong> third-parties.",
+      "we_are_gdpr_compliant_html": "We are <strong>GDPR compliant</strong>. Manage your data by {{ logging_in }} or by contacting our privacy officer at",
+      "logging_in": "Logging In",
+      "access_privacy_policy": "Our full privacy policy can be accessed at:",
+      "reach_privacy_officer": "Our privacy officer can be reached at:",
+      "powered_and_secured_by": "This form is powered and secured by:",
+      "payment_safely_processed_by": "Your payment is safely processed by:",
+      "close": "Close"
+    },
+    "landing": {
+      "donate": "Donate"
+    }
+  },
+  "unknown_error_521": "Unknown error (521)"
+}

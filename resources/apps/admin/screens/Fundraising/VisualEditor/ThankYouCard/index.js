@@ -1,0 +1,1 @@
+export { ThankYouCard } from './ThankYouCard'

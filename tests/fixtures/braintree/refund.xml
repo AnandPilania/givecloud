@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<transaction>
+  <id>dx8cnw2x</id>
+  <status>submitted_for_settlement</status>
+  <type>credit</type>
+  <currency-iso-code>USD</currency-iso-code>
+  <amount>27.99</amount>
+  <amount-requested nil="true"/>
+  <merchant-account-id>givecloud</merchant-account-id>
+  <sub-merchant-account-id nil="true"/>
+  <master-merchant-account-id nil="true"/>
+  <order-id nil="true"/>
+  <created-at type="datetime">2022-07-27T13:49:26Z</created-at>
+  <updated-at type="datetime">2022-07-27T13:49:26Z</updated-at>
+  <customer>
+    <id>194819840</id>
+    <first-name>Tim</first-name>
+    <last-name>Robertson</last-name>
+    <company nil="true"/>
+    <email>apple-pay@givecloud.com</email>
+    <website nil="true"/>
+    <phone>4089741010</phone>
+    <fax nil="true"/>
+    <global-id>Y3VzdG9tZXJfMTk0ODE5ODQw</global-id>
+  </customer>
+  <billing>
+    <id nil="true"/>
+    <first-name nil="true"/>
+    <last-name nil="true"/>
+    <company nil="true"/>
+    <street-address nil="true"/>
+    <extended-address nil="true"/>
+    <locality nil="true"/>
+    <region nil="true"/>
+    <postal-code nil="true"/>
+    <country-name nil="true"/>
+    <country-code-alpha2 nil="true"/>
+    <country-code-alpha3 nil="true"/>
+    <country-code-numeric nil="true"/>
+  </billing>
+  <refund-id nil="true"/>
+  <refund-ids type="array"/>
+  <refunded-transaction-id>r6bsfnwc</refunded-transaction-id>
+  <partial-settlement-transaction-ids type="array"/>
+  <authorized-transaction-id nil="true"/>
+  <settlement-batch-id nil="true"/>
+  <shipping>
+    <id nil="true"/>
+    <first-name nil="true"/>
+    <last-name nil="true"/>
+    <company nil="true"/>
+    <street-address nil="true"/>
+    <extended-address nil="true"/>
+    <locality nil="true"/>
+    <region nil="true"/>
+    <postal-code nil="true"/>
+    <country-name nil="true"/>
+    <country-code-alpha2 nil="true"/>
+    <country-code-alpha3 nil="true"/>
+    <country-code-numeric nil="true"/>
+  </shipping>
+  <custom-fields/>
+  <account-funding-transaction type="boolean">false</account-funding-transaction>
+  <avs-error-response-code nil="true"/>
+  <avs-postal-code-response-code>A</avs-postal-code-response-code>
+  <avs-street-address-response-code>A</avs-street-address-response-code>
+  <cvv-response-code>A</cvv-response-code>
+  <gateway-rejection-reason nil="true"/>
+  <processor-authorization-code nil="true"/>
+  <processor-response-code>1002</processor-response-code>
+  <processor-response-text>Processed</processor-response-text>
+  <additional-processor-response nil="true"/>
+  <voice-referral-number nil="true"/>
+  <purchase-order-number nil="true"/>
+  <tax-amount nil="true"/>
+  <tax-exempt type="boolean">false</tax-exempt>
+  <sca-exemption-requested nil="true"/>
+  <processed-with-network-token type="boolean">false</processed-with-network-token>
+  <credit-card>
+    <token>9j7c7bw</token>
+    <bin nil="true"/>
+    <last-4 nil="true"/>
+    <card-type nil="true"/>
+    <expiration-month></expiration-month>
+    <expiration-year></expiration-year>
+    <customer-location nil="true"/>
+    <cardholder-name nil="true"/>
+    <image-url>https://assets.braintreegateway.com/payment_method_logo/unknown.png?environment=sandbox</image-url>
+    <prepaid>Unknown</prepaid>
+    <healthcare>Unknown</healthcare>
+    <debit>Unknown</debit>
+    <durbin-regulated>Unknown</durbin-regulated>
+    <commercial>Unknown</commercial>
+    <payroll>Unknown</payroll>
+    <issuing-bank>Unknown</issuing-bank>
+    <country-of-issuance>Unknown</country-of-issuance>
+    <product-id>Unknown</product-id>
+    <global-id>cGF5bWVudG1ldGhvZF9jY185ajdjN2J3</global-id>
+    <account-type nil="true"/>
+    <unique-number-identifier nil="true"/>
+    <venmo-sdk type="boolean">false</venmo-sdk>
+    <account-balance nil="true"/>
+  </credit-card>
+  <apple-pay>
+    <prepaid>Unknown</prepaid>
+    <healthcare>Unknown</healthcare>
+    <debit>Unknown</debit>
+    <durbin-regulated>Unknown</durbin-regulated>
+    <commercial>Unknown</commercial>
+    <payroll>Unknown</payroll>
+    <issuing-bank>Unknown</issuing-bank>
+    <country-of-issuance>Unknown</country-of-issuance>
+    <product-id>Unknown</product-id>
+    <bin>520424</bin>
+    <token>9j7c7bw</token>
+    <card-type>Apple Pay - MasterCard</card-type>
+    <last-4>1471</last-4>
+    <expiration-month>09</expiration-month>
+    <expiration-year>2022</expiration-year>
+    <cardholder-name>MasterCard Apple Pay Cardholder</cardholder-name>
+    <image-url>https://assets.braintreegateway.com/payment_method_logo/apple_pay.png?environment=sandbox</image-url>
+    <payment-instrument-name>MasterCard 1471</payment-instrument-name>
+    <source-description>MasterCard 1471</source-description>
+    <global-id>cGF5bWVudG1ldGhvZF9hcHBsZV85ajdjN2J3</global-id>
+  </apple-pay>
+  <status-history type="array">
+    <status-event>
+      <timestamp type="datetime">2022-07-27T13:49:26Z</timestamp>
+      <status>submitted_for_settlement</status>
+      <amount>27.99</amount>
+      <user>philippe+us@givecloud.com</user>
+      <transaction-source>api</transaction-source>
+    </status-event>
+  </status-history>
+  <plan-id nil="true"/>
+  <subscription-id nil="true"/>
+  <subscription>
+    <billing-period-end-date nil="true"/>
+    <billing-period-start-date nil="true"/>
+  </subscription>
+  <add-ons type="array"/>
+  <discounts type="array"/>
+  <descriptor>
+    <name nil="true"/>
+    <phone nil="true"/>
+    <url nil="true"/>
+  </descriptor>
+  <recurring nil="true"/>
+  <channel nil="true"/>
+  <service-fee-amount nil="true"/>
+  <escrow-status nil="true"/>
+  <disbursement-details>
+    <disbursement-date nil="true"/>
+    <settlement-amount nil="true"/>
+    <settlement-currency-iso-code nil="true"/>
+    <settlement-currency-exchange-rate nil="true"/>
+    <settlement-base-currency-exchange-rate nil="true"/>
+    <funds-held nil="true"/>
+    <success nil="true"/>
+  </disbursement-details>
+  <disputes type="array"/>
+  <ach-return-responses type="array"/>
+  <authorization-adjustments type="array"/>
+  <payment-instrument-type>apple_pay_card</payment-instrument-type>
+  <processor-settlement-response-code></processor-settlement-response-code>
+  <processor-settlement-response-text></processor-settlement-response-text>
+  <network-response-code nil="true"/>
+  <network-response-text nil="true"/>
+  <three-d-secure-info nil="true"/>
+  <ships-from-postal-code nil="true"/>
+  <shipping-amount nil="true"/>
+  <discount-amount nil="true"/>
+  <network-transaction-id nil="true"/>
+  <processor-response-type>approved</processor-response-type>
+  <authorization-expires-at nil="true"/>
+  <retry-ids type="array"/>
+  <retried-transaction-id nil="true"/>
+  <refund-global-ids type="array"/>
+  <partial-settlement-transaction-global-ids type="array"/>
+  <refunded-transaction-global-id>dHJhbnNhY3Rpb25fcjZic2Zud2M</refunded-transaction-global-id>
+  <authorized-transaction-global-id nil="true"/>
+  <global-id>cmVmdW5kX2R4OGNudzJ4</global-id>
+  <retry-global-ids type="array"/>
+  <retried-transaction-global-id nil="true"/>
+  <retrieval-reference-number nil="true"/>
+  <installment-count nil="true"/>
+  <installments type="array"/>
+  <refunded-installments nil="true"/>
+  <response-emv-data nil="true"/>
+  <acquirer-reference-number nil="true"/>
+  <merchant-identification-number>123456789012</merchant-identification-number>
+  <terminal-identification-number>00000001</terminal-identification-number>
+  <merchant-name>DESCRIPTORNAME</merchant-name>
+  <merchant-address>
+    <street-address></street-address>
+    <locality>Braintree</locality>
+    <region>MA</region>
+    <postal-code>02184</postal-code>
+    <phone>5555555555</phone>
+  </merchant-address>
+  <pin-verified type="boolean">false</pin-verified>
+  <debit-network nil="true"/>
+  <processing-mode nil="true"/>
+  <payment-receipt>
+    <id>dx8cnw2x</id>
+    <global-id>cmVmdW5kX2R4OGNudzJ4</global-id>
+    <amount>27.99</amount>
+    <currency-iso-code>USD</currency-iso-code>
+    <processor-response-code>1002</processor-response-code>
+    <processor-response-text>Processed</processor-response-text>
+    <processor-authorization-code nil="true"/>
+    <merchant-name>DESCRIPTORNAME</merchant-name>
+    <merchant-address>
+      <street-address></street-address>
+      <locality>Braintree</locality>
+      <region>MA</region>
+      <postal-code>02184</postal-code>
+      <phone>5555555555</phone>
+    </merchant-address>
+    <merchant-identification-number>123456789012</merchant-identification-number>
+    <terminal-identification-number>00000001</terminal-identification-number>
+    <type>credit</type>
+    <pin-verified type="boolean">false</pin-verified>
+    <processing-mode nil="true"/>
+    <network-identification-code nil="true"/>
+  </payment-receipt>
+</transaction>

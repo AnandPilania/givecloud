@@ -1,0 +1,423 @@
+{% capture right_side_links %}
+    <a href="/fundraisers" class="btn btn-outline-light btn-pill btn-sm px-4"><i class="fa fa-arrow-left"></i> Back</a>
+{% endcapture %}
+
+{% assign header_title = 'templates.accounts.fundraisers.edit.create_a_fundraiser' | t %}
+{% include 'header-image', header_title: header_title, header_image: settings.fundraisers_heading_image, right_side_links: right_side_links %}
+
+<div class="fundraising-page-edit">
+    <div class="container my-5">
+        <div class="row">
+
+            <div class="col-12 col-lg-8 order-2 order-lg-1">
+
+                {% if fundraise_message %}
+                    <div class="mb-5 alert alert-danger"><i class="fa fa-frown-o"></i> {{ 'templates.fundraiser.edit_form.sorry' | t }} {{ fundraise_message }}</div>
+                {% endif %}
+
+                {% if errors.size %}
+                    <div class="mb-5 alert alert-danger">
+                        <strong><i class="fa fa-frown-o"></i> {{ 'templates.fundraiser.edit_form.sorry' | t }}</strong>
+                        <ul class="mt-2 mb-0 pl-4">
+                            {% for error in errors %}
+                                <li>{{ error[1] | first }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+
+
+                {% form 'edit_fundraiser', fundraising_page, data-toggle: "validator", data-html: true, id: "form-fundraising_page" %}
+                    {% if fundraising_page_types.size == 1 or filter.type %}
+
+                        <input type="hidden" name="page_type_id" value="{% if filter.type %}{{ filter.type }}{% else %}{{ fundraising_page_types[0].id }}{% endif %}">
+
+                    {% elsif fundraising_page_types.size == 0 %}
+
+                        <div class="alert alert-danger mb-5">{{ 'templates.accounts.fundraisers.edit.no_fundraising_types_setup' | t }}</div>
+
+                    {% else %}
+
+                        <div class="mb-5">
+                            <h3 class="text-left mb-3">{{ 'templates.accounts.fundraisers.edit.choose_your_cause' | t }}</h3>
+
+                            {% assign fundraising_page_type_decks = fundraising_page_types | chunk: 3 %}
+                            {% assign default_fundraising_page_type_id = request.old.page_type_id | default : fundraising_page.page_type_id | default: fundraising_page_types.0.id %}
+
+                            {% for fundraising_page_type_deck in fundraising_page_type_decks %}
+
+                                <div class="card-deck">
+                                    {% for fundraising_page_type in fundraising_page_type_deck %}
+                                        <div class="card mb-3">
+                                            {% if fundraising_page_type.photo %}
+                                                <img class="card-img-top card-img-top-fixed-sm" src="{{ fundraising_page_type.photo.thumb }}">
+                                            {% endif %}
+                                            <div class="card-body">
+                                                <div class="font-weight-bold mb-2">{{ fundraising_page_type.title }}</div>
+                                                <p class="text-sm">{{ fundraising_page_type.summary }}</p>
+                                            </div>
+                                            <div class="card-footer">
+                                                <div class="custom-control custom-radio {% if errors.page_type_id %}has-errors{% endif %}">
+                                                    <input type="radio" id="inputPageTypeId-{{ fundraising_page_type.id }}" name="page_type_id" class="custom-control-input" value="{{ fundraising_page_type.id }}" {% if fundraising_page_type.id == default_fundraising_page_type_id %}checked{% endif %}>
+                                                    <label class="custom-control-label" for="inputPageTypeId-{{ fundraising_page_type.id }}">{{ 'templates.accounts.fundraisers.edit.choose' | t }}</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                    {% unless account %}
+                        <div class="mb-5">
+                            <h3 class="text-left mb-3">{{ 'templates.accounts.fundraisers.edit.your_details' | t }}</h3>
+                            <div class="form-group labelify {% if errors.email %}has-errors{% endif %}">
+                                <label for="inputEmail"><i class="fa fa-envelope-o"></i> {{ 'general.forms.email' | t }}</label>
+                                <input id="inputEmail" type="text" value="{{ request.old.email }}" class="form-control required-before-modal" name="email" x-autocompletetype="email" autocompletetype="email" autocorrect="off" spellcheck="off" autocapitalize="off" required>
+                                <div id="emailCheckingAddress" class="hide help-block with-errors mt-3">
+                                    <img style="width:1rem;height:1rem;" class="spinner spinner-spin" src="{{ 'spinner.gif' | asset_url }}" alt=""> <small>{{ 'templates.accounts.fundraisers.edit.checking_email' | t }}</small>
+                                </div>
+                                <div id="emailErrorMessage" class="hide alert alert-danger mt-3" role="alert"></div>
+                                <div id="emailAlreadyInUse" class="hide alert alert-warning mt-3 p-4" role="alert">
+                                    <h4 class="alert-heading">{{ 'templates.accounts.fundraisers.edit.your_account_already_exists' | t }}</h4>
+                                    <p>{{ 'templates.accounts.fundraisers.edit.email_already_signed_up' | t }}</p>
+                                    <div><a href="/account/login?back={{ request.path | url_encode }}"><button type="button" class="btn btn-warning">{{ 'templates.accounts.fundraisers.edit.login_to_my_account' | t }}</button></a></div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endunless %}
+
+                    <h3 class="text-left mb-3">{{ 'templates.accounts.fundraisers.edit.design_your_page' | t }}</h3>
+
+                    <div class="form-row">
+                        {% assign old_page_name = '' %}
+                        {% assign fundraiser_edit_title =  'templates.accounts.fundraisers.edit.title' | t %}
+                        {% if fundraising_page %}
+                            {% assign old_page_name = fundraising_page.title %}
+                        {% elsif account %}
+                            {% assign old_page_name =  account.display_name | possesses | append: ' ' | append: fundraiser_edit_title %}
+                        {% endif %}
+                        <div class="form-group col-6 labelify {% if errors.page_name %}has-errors{% endif %}">
+                            <label for="inputTitle">{{ 'templates.accounts.fundraisers.edit.page_name' | t }}</label>
+                            <input id="inputTitle"
+                                   type="text"
+                                   class="form-control required-before-modal"
+                                   name="page_name"
+                                   pattern="[\w\d\s.\-_\x22\x27]+"
+                                   value="{{ request.old.page_name | default : old_page_name }}"
+                                   autocorrect="off"
+                                   spellcheck="off"
+                                   autocapitalize="off"
+                            >
+                            <div class="ml-2 text-muted"><small>{{ 'templates.accounts.fundraisers.edit.title_help' | t }}</small></div>
+                        </div>
+
+                        {% assign old_category = request.old.category | default:fundraising_page.category %}
+                        <div class="form-group col-6 labelify {% if errors.category %}has-errors{% endif %}">
+                            <label for="inputCategory">{{ 'templates.accounts.fundraisers.edit.category' | t }}</label>
+                            <select id="inputCategory" type="text" class="form-control" name="category" autocorrect="off" spellcheck="off" autocapitalize="off">
+                                {% for category in site.fundraising_page_categories %}
+                                    <option value="{{ category | escape }}" {% if category == old_category %}selected{% endif %}>{{ category }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <div>
+                        {% assign p2p_page_images = settings.p2p_page_image_1:p2p_page_image_2:p2p_page_image_3:p2p_page_image_4:p2p_page_image_5:p2p_page_image_6:p2p_page_image_7:p2p_page_image_8:p2p_page_image_9 %}
+                        {% assign p2p_preset_image = p2p_page_images | where : 'id', fundraising_page.photo.id %}
+                        {% assign p2p_description_templates = settings.p2p_description_template_1:p2p_description_template_2:p2p_description_template_3 %}
+
+                        <div class="row gutter-sm image-options mb-3">
+                            {% for p2p_page_image in p2p_page_images %}
+                                {% if p2p_page_image %}
+                                    <div class="col-md-4 col-6">
+                                        <div class="image-option {% if errors.page_photo %}has-errors{% endif %}" style="background-image:url('{{ p2p_page_image.thumb }}');">
+                                            <input type="radio" name="page_photo" value="{{ p2p_page_image.id }}" {% if fundraising_page.photo.id == p2p_page_image.id %}checked{% endif %}>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+
+                            {% if settings.p2p_page_allow_image_upload  %}
+                                <div class="col-md-4 col-6">
+                                    <div class="image-option image-option-custom {% if errors.page_photo_custom %}has-errors{% endif %}">
+                                        <label for="input-photo_custom"><i class="fa fa-camera"></i> {{ 'templates.accounts.fundraisers.edit.upload_my_own' | t }}</label>
+                                        <input type="file" class="form-control hide image-option-input" id="input-photo_custom" accept=".jpg,.jpeg,.gif,.png" name="page_photo_custom" autocomplete="off" {% if fundraising_page.photo and p2p_preset_image.size == 0 %}data-selected-image="{{ fundraising_page.photo.thumb }}"{% endif %}>
+                                        {% if fundraising_page.photo and p2p_preset_image.size == 0 %}
+                                            <input type="hidden" name="custom_image_path" value="{{ fundraising_page.photo.thumb }}" />
+                                        {% endif %}
+                                        <input type="radio" name="page_photo" value="custom" {% if fundraising_page.photo and p2p_preset_image.size == 0 %}checked{% endif %}>
+                                    </div>
+                                    <div style="margin-top:-10px;" class="text-center text-muted"><small>{{ 'templates.accounts.fundraisers.edit.minimum_600x400' | t }}</small></div>
+                                </div>
+                            {% elsif fundraising_page.photo and p2p_preset_image.size == 0 %}
+                                <div class="col-md-4 col-6">
+                                    <div class="image-option {% if errors.page_photo %}has-errors{% endif %}" style="background-image:url('{{ fundraising_page.photo.thumb }}');">
+                                        <input type="radio" name="page_photo" value="custom" {% if fundraising_page.photo and p2p_preset_image.size == 0 %}checked{% endif %}>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </div>
+
+                    </div>
+
+                    {% if settings.p2p_page_allow_video_link or fundraising_page.video_url %}
+                        {% assign old_video_url = request.old.video_url | default: fundraising_page.video_url %}
+                    <div class="form-group labelify {% if errors.video %}has-errors{% endif %}">
+                        <label for="inputVideo"><i class="fa fa-video"></i> {{ 'templates.accounts.fundraisers.edit.video' | t }}</label>
+                        <input id="inputVideo" {% if settings.p2p_page_allow_video_link != '1' %}readonly{% endif %} type="text" placeholder="YouTube or Vimeo Link" class="form-control" name="video" value="{{ old_video_url | escape }}" autocorrect="off" spellcheck="off" autocapitalize="off">
+                        {% if settings.p2p_page_allow_video_link != '1' %}
+                            <div class="d-flex flex-row-reverse">
+                                <button type="button" class="btn btn-link font-weight-light" onclick="document.getElementById('inputVideo').value = ''; $(this).addClass('hide')">Clear</button>
+                            </div>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+
+                    <div class="form-row">
+                        {% assign old_goal_deadline = fundraising_page.goal_deadline | date: 'short_month_day_year' %}
+                        {% assign old_goal_deadline = request.old.goal_deadline | default : old_goal_deadline %}
+                        {% assign old_goal_amount = request.old.goal_amount | default : fundraising_page.goal_amount %}
+                        <div class="form-group col-6 labelify {% if errors.goal_deadline %}has-errors{% endif %}">
+                            <label for="inputGoalDeadline">{{ 'templates.accounts.fundraisers.edit.deadline' | t }}</label>
+                            <input id="inputGoalDeadline" type="text" class="form-control date-picker" name="goal_deadline" value="{{ old_goal_deadline  }}" autocorrect="off" spellcheck="off" autocapitalize="off">
+                        </div>
+
+                        <div class="form-group col-{% if site.currencies.size > 1 %}4{% else %}6{% endif %} labelify {% if errors.goal_amount %}has-errors{% endif %}">
+                            <label for="inputGoalAmount">{{ 'templates.accounts.fundraisers.edit.goal' | t }}</label>
+                            <input id="inputGoalAmount" type="tel" class="form-control" name="goal_amount" value="{{ old_goal_amount }}" autocorrect="off" spellcheck="off" autocapitalize="off">
+                        </div>
+
+                        {% if site.currencies.size > 1 %}
+                            {% assign currency_code = fundraising_page.currency.code | default : site.currency %}
+                            {% assign old_currency_code = request.old.currency.code | default : currency_code %}
+                            <div class="form-group col-2 labelify {% if errors.currency_code %}has-errors{% endif %}">
+                                <label for="inputCurrencyCode">{{ 'templates.accounts.fundraisers.edit.currency' | t }}</label>
+                                <select name="currency_code" class="form-control">
+                                    {% for currency in site.currencies %}
+                                        <option {% if currency.code == old_currency_code %}selected{% endif %} value="{{ currency.code }}">{{ currency.code }} ({{ currency.symbol }})</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        {% endif %}
+
+                    </div>
+
+                    {% if settings.p2p_allow_custom_description == '1' %}
+                        {% assign page_content = fundraising_page.content | escape %}
+                        {% assign old_page_content = request.old.content | default : page_content %}
+                        <div class="form-group {% if errors.content %}has-errors{% endif %}">
+                            <div class="quill-editor form-control" data-input="inputContent"></div>
+                            <input type="hidden" id="inputContent" name="content" value="{{ old_page_content }}">
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    {% else %}
+                        {% assign hasTemplate = false %}
+                        {% for template in p2p_description_templates %}
+                            {% if template == '' %}
+                                {% continue %}
+                            {% endif %}
+                            {% assign hasTemplate = true %}
+                        {% endfor %}
+                        {% if hasTemplate %}
+                        <h6 class="text-left mb-3">{{ 'templates.accounts.fundraisers.edit.select_description' | t }}</h6>
+                        <div class="mb-5 card-radio-input">
+                            {% assign old_description_template = request.old.description_template | default : fundraising_page.description_template %}
+                            {% for template in p2p_description_templates %}
+                                {% if template == '' %}
+                                    {% continue %}
+                                {% endif %}
+                                <label for="inputDescriptionTemplate-{{ forloop.index }}">
+                                    <input type="radio"
+                                           id="inputDescriptionTemplate-{{ forloop.index }}"
+                                           name="description_template"
+                                           class="d-none"
+                                           value="{{ forloop.index }}"
+                                           {% if old_description_template == forloop.index %}checked{% endif %}>
+                                    <div class="card bg-light">
+                                        <div class="card-body">
+                                            {{ template }}
+                                        </div>
+                                    </div>
+                                </label>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    {% endif %}
+
+                    {% if site.fundraising_pages_require_guideline_acceptance == '1' %}
+                        <div class="form-group pt-3 pb-3">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" id="inputGuidelinesAgreement" class="custom-control-input required-before-modal" name="guidelines-agreements" required>
+                                <label class="custom-control-label" for="inputGuidelinesAgreement">
+                                    <small class="text-muted">{{ site.fundraising_pages_guidelines }}</small>
+                                </label>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    {% if account %}
+                        <div class="mt-4 text-center">
+                            <button type="submit" class="btn btn-success btn-lg btn-pill px-5"><i class="fa fa-check fa-fw"></i> {% if fundraising_page %}{{ 'templates.accounts.fundraisers.edit.update_page' | t }}{% else %}{{ 'templates.accounts.fundraisers.edit.create_page' | t }}{% endif %}</button>
+                        </div>
+                    {% else %}
+                        <div class="modal fade" id="modal-create-account" tabindex="-1" role="dialog" aria-labelledby="modal-create-account-label" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="modal-create-account-label">{{ 'templates.accounts.fundraisers.edit.almost_done' | t }}</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>{{ 'templates.accounts.fundraisers.edit.finish_account_setup_html' | t }}</p>
+
+                                        {% if account_types.size %}
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="form-group labelify">
+                                                        <label><i class="fa fa-user"></i> {{ 'general.forms.account_type' | t }}</label>
+                                                        <select class="form-control" name="account_type_id" required onchange="theme.fundraiserOnAccountTypeChange(this)">
+                                                            {% for type in account_types %}
+                                                                <option data-organization="{{ type.is_organization }}" value="{{ type.id }}" {% if type.is_default %}selected{% endif %}>{{ type.name }}</option>
+                                                            {% endfor %}
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+
+                                        <div class="form-group labelify" style="display:none">
+                                            <label>{{ 'general.forms.organization_name' | t }}</label>
+                                            <input type="text" class="form-control" name="organization_name" x-autocompletetype="organization" autocompletetype="org" autocorrect="off" spellcheck="off" autocapitalize="off">
+                                        </div>
+
+                                        {% if settings.allow_register_by_donor_id %}
+                                            <div class="form-group labelify">
+                                                <label><i class="fa fa-envelope-o"></i> {{ 'templates.accounts.fundraisers.edit.donor_id' | t }}</label>
+                                                <input type="tel" class="form-control" name="donor_id" autocomplete="no" required>
+                                                {% if settings.register_donor_id_help %}
+                                                    <small class="form-text text-muted">
+                                                        {{ settings.register_donor_id_help }}
+                                                    </small>
+                                                {% endif %}
+                                            </div>
+                                        {% endif %}
+
+                                        <div class="row gutter-sm">
+                                            {% if site.donor_title != 'hidden' %}
+                                                <div class="form-group col-2 labelify">
+                                                    <label for="inputBillingTitle">{{ 'general.forms.title' | t }}</label>
+                                                    {% if site.donor_title_options %}
+                                                        <select id="inputBillingTitle" class="form-control" name="billing_title" {% if site.donor_title == 'required' %}required{% endif %} x-autocompletetype="honorific-prefix" autocompletetype="honorific-prefix">
+                                                            <option value=""></option>
+                                                            {% for donor_title in site.donor_title_options %}
+                                                                <option>{{ donor_title | escape }}</option>
+                                                            {% endfor %}
+                                                        </select>
+                                                    {% else %}
+                                                        <input type="text" id="inputBillingTitle" class="form-control" name="billing_title" {% if site.donor_title == 'required' %}required{% endif %} x-autocompletetype="honorific-prefix" autocompletetype="honorific-prefix" autocorrect="off" spellcheck="off">
+                                                    {% endif %}
+                                                </div>
+                                            {% endif %}
+                                            <div class="col">
+                                                <div class="form-group labelify">
+                                                    <label>{{ 'general.forms.first_name' | t }}</label>
+                                                    <input type="text" class="form-control" name="first_name" x-autocompletetype="given-name" autocompletetype="given-name" autocorrect="off" spellcheck="off" autocapitalize="off" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-5">
+                                                <div class="form-group labelify">
+                                                    <label>{{ 'general.forms.last_name' | t }}</label>
+                                                    <input type="text" class="form-control" name="last_name" x-autocompletetype="surname" autocompletetype="family-name" autocorrect="off" spellcheck="off" autocapitalize="off" required>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group labelify">
+                                            <label><i class="fa fa-map-marker"></i> {{ 'templates.accounts.fundraisers.edit.postal_code_zip' | t }}</label>
+                                            <input type="text" class="form-control" name="postal_code" autocomplete="no" required>
+                                        </div>
+
+                                        <div class="form-group labelify">
+                                            <label><i class="fa fa-lock"></i> {{ 'general.forms.password' | t }}</label>
+                                            <input type="password" class="form-control" name="password" required>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" name="email_opt_in" value="1" id="create-account-opt-in-1">
+                                                <label class="custom-control-label" for="create-account-opt-in-1">{{ settings.optin_label }}</label>
+                                            </div>
+                                        </div>
+
+                                        {{ recaptcha }}
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> {{ 'templates.accounts.fundraisers.edit.finish' | t }}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-4 text-center">
+                            <a href="#" onclick="openModal()" class="btn btn-success btn-lg btn-pill px-5"><i class="fa fa-check fa-fw"></i> {{ 'templates.accounts.fundraisers.edit.create_page' | t }}</a>
+                        </div>
+                    {% endif %}
+                {% endform %}
+
+            </div>
+
+            <div class="col-12 col-lg-4 order-1 order-lg-2">
+                <div class="pl-md-5 ml-md-3 mb-5">
+                    {{ settings.p2p_page_create_instructions }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        var $form = $('#form-fundraising_page');
+        var $emailField = $form.find('#inputEmail');
+        var checkEmail = function () {
+            var email = $emailField.val();
+            $('#emailCheckingAddress, #emailAlreadyInUse, #emailErrorMessage').slideUp();
+            if (email === '') {
+                return;
+            }
+            $('#emailCheckingAddress').slideDown();
+            Givecloud.Account.checkEmail(email).then(function(data) {
+                if (data.exists) {
+                    $('#emailAlreadyInUse').slideDown();
+                }
+            }).catch(function (data) {
+                $('#emailErrorMessage').slideDown().html(data.message);
+            }).finally(function () {
+                $('#emailCheckingAddress').slideUp();
+            });
+        }
+        $emailField.on('blur', checkEmail);
+        // run checkEmail in case the email field is pre-populated from an auto-fill
+        checkEmail();
+    })
+
+    function openModal () {
+        var fields = $('.required-before-modal');
+
+        for (var i = 0; i < fields.length; i++) {
+            if (!fields[i].checkValidity()) {
+                fields[i].reportValidity();
+                return;
+            }
+        }
+
+        $('#modal-create-account').modal('show');
+    }
+</script>

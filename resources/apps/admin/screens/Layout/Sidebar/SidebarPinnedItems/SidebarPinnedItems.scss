@@ -1,0 +1,73 @@
+.root {
+  .heading {
+    @apply text-white uppercase text-xs font-black tracking-tighter;
+    @apply opacity-50;
+    @apply mb-2;
+  }
+
+  ul {
+    @apply list-none;
+    @apply m-0 p-0;
+    @apply max-h-80 overflow-hidden overflow-y-auto;
+
+    li {
+      a {
+        @apply flex items-center;
+        @apply text-white text-sm;
+        @apply py-1.5;
+        @apply cursor-pointer;
+
+        @apply md:py-1;
+
+        &:hover {
+          @apply font-semibold;
+        }
+
+        .iconContainer {
+          @apply flex items-center justify-center;
+          @apply bg-white bg-opacity-20;
+          @apply w-6 h-6 mr-2;
+          @apply rounded-md;
+
+          .icon {
+            font-size: 0.65rem;
+          }
+        }
+
+        .externalLinkIcon {
+          @apply ml-2;
+        }
+      }
+    }
+  }
+
+  &:not(.empty) {
+    &:hover .editLink {
+      @apply opacity-100;
+    }
+
+    .editLink {
+      @apply opacity-0;
+    }
+  }
+
+  .editLink {
+    @apply flex items-center;
+    @apply w-max;
+    @apply px-3 py-1.5 mt-3;
+    @apply bg-white bg-opacity-20;
+    @apply text-xs text-white font-semibold;
+    @apply rounded-md;
+    @apply transition-opacity ease-in-out duration-300;
+
+    &:focus {
+      @apply bg-opacity-30;
+    }
+
+    .editIcon {
+      @apply mr-2;
+
+      font-size: 0.65rem;
+    }
+  }
+}

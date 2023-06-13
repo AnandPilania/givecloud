@@ -1,0 +1,15 @@
+.tileColumns {
+  @apply items-center w-full;
+}
+
+.tileContent {
+  @apply pl-1;
+
+  .tileHeading {
+    @apply text-left mb-1;
+  }
+
+  .tileThermometer {
+    @apply flex items-center;
+  }
+}

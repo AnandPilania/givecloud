@@ -1,0 +1,2454 @@
+[
+  {
+    "name": "global",
+    "theme_name": "Global",
+    "theme_description": "Global Impact Theme",
+    "theme_version": "0.1.0",
+    "theme_author": "Givecloud",
+    "theme_homepage": "https://theme-global.givecloud.co"
+  },
+  {
+    "name": "Basics",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Browser"
+      },
+      {
+        "type": "image",
+        "name": "favicon",
+        "label": "Favicon",
+        "info": "The small icon in the browser the represents your site."
+      },
+      {
+        "type": "text",
+        "name": "default_page_title",
+        "label": "Default Page Title",
+        "info": "Each individual page's title will be prepended to this title. Example: 'About Us - Default Page Title'"
+      },
+
+      {
+        "type": "header",
+        "content": "Fixed Width Options"
+      },
+      {
+        "type": "select",
+        "name": "theme_width",
+        "label": "Page Width",
+        "info": "",
+        "options": {
+          "full":"Full Width (No Margins)",
+          "fixed":"Fixed Width - Centered"
+        },
+        "default":"full",
+        "size":"sm"
+      },
+      {
+        "type": "color",
+        "name": "theme_width_margin_color",
+        "label": "Page Margin Color",
+        "info": "The color of the margins on the left/right side of the screen.",
+        "default":"#eee"
+      },
+      {
+        "type": "header",
+        "content": "Element Styles"
+      },
+      {
+        "type": "select",
+        "name": "element_roundness",
+        "label": "Element Roundness",
+        "info": "",
+        "options": {
+          "none":"None (Square Edges)",
+          "sm":"Slightly Round",
+          "md":"Round",
+          "lg":"Very Round"
+        },
+        "default":"none",
+        "size":"sm"
+      },
+      {
+        "type": "select",
+        "name": "panel_style",
+        "label": "Panel Styles",
+        "info": "",
+        "options": {
+          "none":"None",
+          "border":"Border",
+          "shadow":"Shadow"
+        },
+        "default":"border",
+        "size":"sm"
+      },
+      {
+        "type": "on-off",
+        "name": "animations",
+        "label": "Panel Animations",
+        "info": "",
+        "default":0
+      },
+      {
+        "type": "header",
+        "content": "Text Styles"
+      },
+      {
+        "type": "font",
+        "name": "serif_font",
+        "label": "Paragraph Serif Font",
+        "size":"sm",
+        "default":"Roboto Slab",
+        "allow_blank":false,
+        "allow_other":true
+      },
+      {
+        "type": "font",
+        "name": "sans_font",
+        "label": "Paragraph Sans-Serif Font",
+        "size":"sm",
+        "default":"Open Sans",
+        "allow_blank":false,
+        "allow_other":true
+      },
+      {
+        "type": "select",
+        "name": "page_headings_font_style",
+        "label": "Headings Font Style",
+        "options":{
+          "serif_extra_bold":"Serif Extra Bold",
+          "serif_bold":"Serif Bold",
+          "serif":"Serif",
+          "serif_thin":"Serif Thin",
+          "sans_extra_bold":"Sans Serif Extra Bold",
+          "sans_bold":"Sans Serif Bold",
+          "sans":"Sans Serif",
+          "sans_thin":"Sans Serif Thin"
+        },
+        "size":"sm",
+        "default":"serif_bold",
+        "allow_blank":false
+      },
+      {
+        "type": "select",
+        "name": "page_headings_decoration",
+        "label": "Headings Decoration",
+        "options":{
+          "none":"None",
+          "bar_below":"Bar Below"
+        },
+        "size":"sm",
+        "default":"bar_below",
+        "allow_blank":false
+      },
+      {
+        "type": "select",
+        "name": "page_headings_case",
+        "label": "Headings Case",
+        "options":{
+          "none":"Normal",
+          "uppercase":"All-Caps",
+          "lowercase":"All-Lower"
+        },
+        "size":"sm",
+        "default":"upper",
+        "allow_blank":false
+      },
+      {
+        "type": "header",
+        "content": "Buttons"
+      },
+      {
+        "type": "font",
+        "name": "btn_font",
+        "label": "Font",
+        "size":"sm",
+        "default":"Open Sans",
+        "allow_blank":false,
+        "allow_other":true
+      },
+      {
+        "type": "select",
+        "name": "btn_font_weight",
+        "label": "Boldness",
+        "options":{
+          "bolder":"Extra Bold",
+          "bold":"Bold",
+          "normal":"Normal",
+          "thin":"Thin"
+        },
+        "size":"sm",
+        "default":"serif_bold",
+        "allow_blank":false
+      },
+      {
+        "type": "select",
+        "name": "btn_case",
+        "label": "Case",
+        "options":{
+          "none":"Normal",
+          "uppercase":"All-Caps",
+          "lowercase":"All-Lower"
+        },
+        "size":"sm",
+        "default":"none",
+        "allow_blank":false
+      },
+      {
+        "type": "select",
+        "name": "btn_letter_spacing",
+        "label": "Letter Spacing",
+        "options":{
+          "0px":"Normal",
+          "1px":"1px",
+          "2px":"2px",
+          "3px":"3px",
+          "4px":"4px",
+          "5px":"5px",
+          "6px":"6px",
+          "7px":"7px",
+          "8px":"8px",
+          "9px":"9px",
+          "10px":"10px",
+          "11px":"11px",
+          "12px":"12px"
+        },
+        "size":"sm",
+        "default":"none",
+        "allow_blank":false
+      },
+      {
+        "type": "header",
+        "content": "Social Links"
+      },
+      {
+        "type": "multi",
+        "name": "post_sharing_links_channels",
+        "label": "Channels",
+        "options":{
+          "facebook": "Facebook",
+          "twitter": "Twitter",
+          "linkedin": "LinkedIn",
+          "pinterest": "Pinterest",
+          "reddit": "Reddit",
+          "tumblr": "Tumblr",
+          "evernote": "Evernote",
+          "whatsapp": "WhatsApp",
+          "sms": "SMS",
+          "email": "Email",
+          "print": "Print"
+        },
+        "default": null,
+        "allow_blank": true,
+        "info": "Which social media platform supporters will be able to share content to."
+      }
+    ]
+  },
+  {
+    "name": "Header & Sidebar",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Format"
+      },
+      {
+        "type": "select",
+        "name": "header_type",
+        "label": "Header Type",
+        "info": "",
+        "options": {
+          "full":"Full Header",
+          "none":"No Header"
+        },
+        "default":"full",
+        "size":"sm"
+      },
+      {
+        "type": "select",
+        "name": "header_width",
+        "label": "Header Width",
+        "info": "",
+        "options": {
+          "fixed":"Fixed Width",
+          "full":"Full Width"
+        },
+        "default":"fixed",
+        "size":"sm"
+      },
+      {
+        "type": "select",
+        "name": "header_style",
+        "label": "Header Style",
+        "info": "",
+        "options": {
+          "normal":"Normal",
+          "overlay":"Overlay Content",
+          "overlay-gradient":"Overlay Content (w/ Gradient)"
+        },
+        "default":"normal",
+        "size":"sm"
+      },
+      {
+        "type": "header",
+        "content": "Top Bar"
+      },
+      {
+        "type": "on-off",
+        "name": "show_page_cap",
+        "label": "Enable",
+        "info": "Show a small nav bar on the very top of the site.",
+        "default" : true
+      },
+      {
+        "type": "color",
+        "name": "page_cap_color",
+        "label": "Bar Color",
+        "info": "The color of the nav bar at the very top of the site.",
+        "default" : "#222222"
+      },
+      {
+        "type": "color",
+        "name": "page_cap_text_color",
+        "label": "Text Color",
+        "info": "The color of the text in the nav bar at the very top of the site.",
+        "default" : "#ffffff"
+      },
+      {
+        "type": "on-off",
+        "name": "show_checkout_link",
+        "label": "Show Checkout Link",
+        "info": "Show checkout link and total.",
+        "default": false
+      },
+      {
+        "type": "text",
+        "name": "checkout_link_label",
+        "label": "Checkout Link Label",
+        "info": "The label for the checkout link. Example: 'Checkout' or 'Basket' or 'My Payment'",
+        "default" : "",
+        "size": "sm"
+      },
+      {
+        "type": "on-off",
+        "name": "show_account_links",
+        "label": "Show Account Links",
+        "info": "Show account related links in the top right corner.",
+        "default" : true
+      },
+      {
+        "type": "on-off",
+        "name": "show_currency_in_pagecap",
+        "label": "Show Currency",
+        "info": "Show currency details.",
+        "default": false
+      },
+      {
+        "type": "text",
+        "name": "account_create_account_label",
+        "label": "'Create an Account' Label",
+        "size":"sm",
+        "placeholder":"Create an Account",
+        "default":"Create an Account"
+      },
+      {
+        "type": "text",
+        "name": "account_link_label",
+        "label": "'My Account' Label",
+        "size":"sm",
+        "placeholder":"My Account",
+        "default":"My Account"
+      },
+      {
+        "type": "text",
+        "name": "account_signin_label",
+        "label": "'Sign-In' Label",
+        "size":"sm",
+        "placeholder":"Sign-In",
+        "default":"Sign-In"
+      },
+      {
+        "type": "header",
+        "content": "Branding"
+      },
+      {
+        "type": "link",
+        "name": "header_logo_url",
+        "label": "Logo URL"
+      },
+      {
+        "type": "select",
+        "name": "header_logo_target",
+        "label": "Logo Target",
+        "options":{
+          "":"Same Tab",
+          "_blank":"New Tab"
+        }
+      },
+      {
+        "type": "image",
+        "name": "header_logo_condensed",
+        "label": "Logo for Condensed Header",
+        "info": "A version of your logo that will work when your header is condensed."
+      },
+      {
+        "type": "header",
+        "content": "Sidebar (Mobile)"
+      },
+      {
+        "type": "color",
+        "name": "sidebar_bg_color",
+        "label": "Background Color",
+        "default": "#222222"
+      },
+      {
+        "type": "header",
+        "content": "Social Icons"
+      },
+      {
+        "type": "text",
+        "name": "header_fb_url",
+        "label": "Facebook Icon URL",
+        "info": "Leave this blank to hide the Facebook icon.",
+        "placeholder" : "https://facebook.com/my-organization"
+      },
+      {
+        "type": "text",
+        "name": "header_twitter_url",
+        "label": "Twitter Icon URL",
+        "info": "Leave this blank to hide the Twitter icon.",
+        "placeholder" : "https://twitter.com/my-organization"
+      },
+      {
+        "type": "text",
+        "name": "header_instagram_url",
+        "label": "Instagram Icon URL",
+        "info": "Leave this blank to hide the Instagram icon.",
+        "placeholder" : "https://instagram.com/my-organization"
+      },
+      {
+        "type": "text",
+        "name": "header_pinterest_url",
+        "label": "Pinterest Icon URL",
+        "info": "Leave this blank to hide the Pinterest icon.",
+        "placeholder" : "https://pinterest.com/my-organization"
+      },
+      {
+        "type": "text",
+        "name": "header_linkedin_url",
+        "label": "LinkedIn Icon URL",
+        "info": "Leave this blank to hide the LinkedIn icon.",
+        "placeholder" : "https://linkedin.com/my-organization"
+      },
+      {
+        "type": "text",
+        "name": "header_youtube_url",
+        "label": "YouTube Icon URL",
+        "info": "Leave this blank to hide the YouTube icon.",
+        "placeholder" : "https://youtube.com/"
+      },
+      {
+        "type": "text",
+        "name": "header_vimeo_url",
+        "label": "Vimeo Icon URL",
+        "info": "Leave this blank to hide the Vimeo icon.",
+        "placeholder" : "https://vimeo.com/"
+      },
+      {
+        "type": "text",
+        "name": "header_phone",
+        "label": "Phone",
+        "info": "Leave this blank to hide the phone icon.",
+        "placeholder" : "555-555-5555 (Mon-Fri: 9a-5p)"
+      },
+      {
+        "type": "text",
+        "name": "header_email",
+        "label": "Email",
+        "info": "Leave this blank to hide the email icon.",
+        "placeholder" : "info@mycause.org"
+      },
+      {
+        "type": "header",
+        "content": "Main Menu"
+      },
+      {
+        "type": "select",
+        "name": "menu_pages_position",
+        "label": "Position",
+        "options":{
+          "left":"Left (Beside Brand/Logo)",
+          "right":"Right"
+        },
+        "default":"right",
+        "size":"sm"
+      },
+      {
+        "type": "select",
+        "name": "main_menu_hierarchy",
+        "label": "Menu Hierarchy",
+        "options":{
+          "flat": "Flat",
+          "multilevel": "Multilevel"
+        },
+        "size": "sm",
+        "default": "flat",
+        "allow_blank": false
+      },
+      {
+        "type": "select",
+        "name": "menu_font_size",
+        "label": "Font Size",
+        "options":{
+          "sm":"Small",
+          "md":"Normal",
+          "lg":"Large",
+          "xl":"X-Large"
+        },
+        "default":"sm",
+        "size":"sm"
+      },
+      {
+        "type": "select",
+        "name": "menu_font_style",
+        "label": "Font Style",
+        "options":{
+          "sans":"Sans Serif Light",
+          "sans-bold":"Sans Serif Bold"
+        },
+        "default":"sans-bold",
+        "size":"sm"
+      },
+      {
+        "type": "color",
+        "name": "menu_text_color",
+        "label": "Text Color",
+        "default":"#000000"
+      },
+      {
+        "type": "color",
+        "name": "menu_hover_color",
+        "label": "Hover Color",
+        "default":"#000000"
+      },
+      {
+        "type": "select",
+        "name": "menu_text_transform",
+        "label": "Text Format",
+        "options":{
+          "normal":"Normal",
+          "upper":"Uppercase"
+        },
+        "default":"upper",
+        "size":"sm"
+      },
+      {
+        "type": "on-off",
+        "name": "menu_separator",
+        "label": "Show Separator Bars",
+        "default": true,
+        "size": "sm"
+      },
+      {
+        "type": "on-off",
+        "name": "menu_include_cart",
+        "label": "Show Cart & Count",
+        "default": true,
+        "size": "sm"
+      },
+      {
+        "type": "on-off",
+        "name": "menu_include_search",
+        "label": "Show Search",
+        "default": true,
+        "size": "sm"
+      },
+      {
+        "type": "select",
+        "name": "menu_search_scope",
+        "label": "Search Scope",
+        "options": {
+          "products": "Products",
+          "everything": "Everything (Pages, Products, Posts etc)"
+        },
+        "default": "products",
+        "size": "sm",
+        "info": "If you are showing search, what should be searched?"
+      },
+      {
+        "type": "text",
+        "name": "menu_big_button_label",
+        "label": "Primary Button Label",
+        "info": "",
+        "size": "sm"
+      },
+      {
+        "type": "link",
+        "name": "menu_big_button_url",
+        "label": "Primary Button Url",
+        "info": ""
+      },
+      {
+        "type": "text",
+        "name": "menu_alt_big_button_label",
+        "label": "Secondary Big Button Label",
+        "info": "",
+        "size": "sm"
+      },
+      {
+        "type": "link",
+        "name": "menu_alt_big_button_url",
+        "label": "Secondary Big Button Url",
+        "info": ""
+      },
+      {
+        "type": "header",
+        "content": "Hero Menu"
+      },
+      {
+        "type": "info",
+        "content": "<i class='fa fa-fw fa-exclamation-circle'></i> Create a menu called 'Hero Menu'."
+      },
+      {
+        "type": "select",
+        "name": "hero_menu_hierarchy",
+        "label": "Menu Hierarchy",
+        "options":{
+          "flat": "Flat",
+          "multilevel": "Multilevel"
+        },
+        "size": "sm",
+        "default": "flat",
+        "allow_blank": false
+      },
+      {
+        "type": "color",
+        "name": "hero_menu_color",
+        "label": "Color",
+        "default":"#444444"
+      },
+      {
+        "type": "color",
+        "name": "hero_menu_text_color",
+        "label": "Text Color",
+        "default":"#ffffff"
+      },
+      {
+        "type": "select",
+        "name": "hero_menu_text_case",
+        "label": "Text Case",
+        "options":{
+          "none":"Normal",
+          "uppercase":"All-Caps",
+          "lowercase":"All-Lower"
+        },
+        "size":"sm",
+        "default":"uppercase",
+        "allow_blank":false
+      },
+      {
+        "type": "on-off",
+        "name": "hero_menu_hide_on_mobile",
+        "label": "Hide on Mobile",
+        "default": false
+      }
+    ]
+  },
+  {
+    "name": "Alerts & Pop-Ups",
+    "settings": [
+      {
+        "type": "header",
+        "content": "'We Use Cookies' Alert"
+      },
+      {
+        "type": "on-off",
+        "name": "cookie_alert",
+        "label": "Enable",
+        "info": "Show a bar along the bottom of your site with an alert about your use of cookies.",
+        "default" : false
+      },
+      {
+        "type": "text",
+        "name": "cookie_message",
+        "label": "Message",
+        "default": "We use cookies to ensure you get the best experience on our website.",
+        "info": "Recommended: 'We use cookies to ensure you get the best experience on our website.'"
+      },
+      {
+        "type": "text",
+        "name": "cookie_learn_more_url",
+        "label": "'Learn More' Link",
+        "info": "Where do you want to send people if they want to learn more about cookies or your use of cookies?",
+        "default": "http://cookiesandyou.com/"
+      },
+      {
+        "type": "header",
+        "content": "Pop-Up"
+      },
+      {
+        "type": "info",
+        "content": "This pop-up will display ONCE for every user that visits your site. However, if you change the Headline or Body in any way, every user will see this pop-up again."
+      },
+      {
+        "type": "select",
+        "name": "pop_up_option",
+        "label": "Pop-Up",
+        "options":{
+          "no":"None",
+          "message":"Message"
+        },
+        "size":"sm",
+        "info": "Show a pop-up when a visitor lands on your site.",
+        "default" : "no",
+        "allow_blank":false
+      },
+      {
+        "type": "text",
+        "name": "pop_up_headline",
+        "label": "Headline",
+        "default": "Attention",
+        "size":"sm"
+      },
+      {
+        "type": "text",
+        "name": "pop_up_body",
+        "label": "Body",
+        "default": "Our offices will be closed on Monday, January 12th for maintenance."
+      },
+      {
+        "type": "text",
+        "name": "pop_up_label",
+        "label": "Button Label",
+        "default": "I Understand",
+        "size":"sm"
+      },
+      {
+        "type": "link",
+        "name": "pop_up_url",
+        "label": "Button Action"
+      },
+      {
+        "type": "number",
+        "name": "pop_up_delay",
+        "label": "Delay (Seconds)",
+        "info": "How many seconds before the popup displays? (Default: 0)",
+        "default":0,
+        "size":"sm"
+     }
+    ]
+  },
+  {
+    "name": "Page Template",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Header"
+      },
+      {
+        "type": "select",
+        "name": "page_heading",
+        "label": "Heading",
+        "options":{
+          "page":"Page Title",
+          "parent":"Parent Page/Menu Title"
+        },
+        "size":"sm",
+        "default":"parent",
+        "allow_blank":false
+      },
+      {
+        "type": "select",
+        "name": "page_heading_align",
+        "label": "Heading Alignment",
+        "options":{
+          "left":"Left",
+          "center":"Center"
+        },
+        "size":"sm",
+        "default":"left",
+        "allow_blank":false
+      },
+      {
+        "type": "on-off",
+        "name": "page_allow_breadcrumb",
+        "label": "Show Breadcrumb",
+        "default": false
+      },
+      {
+        "type": "color",
+        "name": "page_heading_font_color",
+        "label": "Font Color",
+        "default":"#ffffff"
+      },
+      {
+        "type": "select",
+        "name": "page_heading_bg",
+        "label": "Background",
+        "options":{
+          "color":"Solid Color",
+          "image":"Random Image",
+          "feature_image":"Page/Post Feature Image"
+        },
+        "size":"sm",
+        "default":"image",
+        "allow_blank":false
+      },
+      {
+        "type": "color",
+        "name": "page_heading_bg_color",
+        "label": "Background Color",
+        "default":"#dddddd"
+      },
+      {
+        "type": "media",
+        "name": "page_heading_bg_default",
+        "label": "Background Default Image"
+      },
+      {
+        "type": "select",
+        "name": "page_heading_bg_effect",
+        "label": "Background Image Effect",
+        "options":{
+          "none":"None",
+          "darken":"Darken",
+          "darken_more":"Darken More",
+          "lighten":"Lighten",
+          "lighten_more":"Lighten More"
+        },
+        "size":"sm",
+        "default":"darken_more",
+        "allow_blank":false
+      },
+      {
+        "type": "header",
+        "content": "Page Content"
+      },
+      {
+        "type": "color",
+        "name": "page_content_bg_color",
+        "label": "Background Color",
+        "default":"#ffffff"
+      },
+      {
+        "type": "select",
+        "name": "page_content_bg_effect",
+        "label": "Background Effect",
+        "options":{
+          "none":"None",
+          "gradient":"Subtle Fade"
+        },
+        "default": "none",
+        "size": "sm"
+      }
+    ]
+  },
+  {
+    "name": "Category Template",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Options"
+      },
+      {
+        "type": "on-off",
+        "name": "category_allow_add_to_cart",
+        "label": "Allow Add-to-Cart",
+        "default": true
+      },
+      {
+        "type": "on-off",
+        "name": "category_show_product_summaries_on_listings",
+        "label": "Show product summaries on product listings",
+        "default": false
+      },
+      {
+        "type": "text",
+        "name": "category_empty_message",
+        "label": "Empty Category Message",
+        "default": "There are no items here."
+      }
+    ]
+  },
+  {
+    "name": "Product Template",
+    "settings": [
+      {
+        "type": "header",
+        "content": "General"
+      },
+      {
+        "type": "category",
+        "name": "product_featured_category",
+        "label": "Featured Category"
+      },
+      {
+        "type": "text",
+        "name": "product_preset_other_label",
+        "label": "Price Preset 'Other' Label",
+        "size":"sm",
+        "placeholder":"Other",
+        "default":"Other"
+      }
+    ]
+  },
+  {
+    "name": "Goal Progress",
+    "settings": [
+      {
+        "type": "header",
+        "content": "General"
+      },
+      {
+        "type": "select",
+        "name": "goal_progress_currency_format",
+        "label": "Currency Format",
+        "info": "How goal progress and amount should be displayed",
+        "options": {
+          "default":"Default (ex. $1,000.00)",
+          "basic":"Basic (ex. $1,000)",
+          "compact":"Compact (ex. $1k)"
+        },
+        "default":"default",
+        "size":"sm"
+      },
+      {
+        "type": "select",
+        "name": "goal_progress_primary_indicator",
+        "label": "Primary Goal Indicator",
+        "info": "Used to prioritize what is displayed when limited space is available",
+        "options": {
+          "amount_raised":"Amount Raised",
+          "days_left":"Days Left"
+        },
+        "default":"amount_raised",
+        "size":"sm"
+      }
+    ]
+  },
+  {
+    "name": "Login / Registration / Opt-Ins",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Styling"
+      },
+      {
+        "type": "media",
+        "name": "login_header_image",
+        "label": "Header Image"
+      },
+      {
+        "type": "color",
+        "name": "login_bg_color",
+        "label": "Background Color",
+        "default": "#efefef"
+      },
+      {
+        "type": "header",
+        "content": "Options"
+      },
+      {
+        "type": "text",
+        "name": "register_heading",
+        "label": "Heading",
+        "default": "Create an Account",
+        "info": "The heading that displays above the 'register' section."
+      },
+      {
+        "type": "text",
+        "name": "register_subheading",
+        "label": "Subheading",
+        "default": "",
+        "info": "The heading that displays above the 'register' section."
+      },
+      {
+        "type": "text",
+        "name": "register_button_label",
+        "label": "'Register' Button Label",
+        "default": "Create account"
+      },
+      {
+        "type": "on-off",
+        "name": "optin_enabled",
+        "label": "Enable Email Opt-in",
+        "default": true,
+        "info": "Enable/Disable the Email Opt-in Field at checkout."
+      },
+      {
+        "type": "text",
+        "name": "optin_label",
+        "label": "Email Opt-In Label",
+        "default": "Send me emails and updates."
+      },
+      {
+        "type": "text",
+        "name": "optout_reason_label",
+        "label": "Email Opt-Out Reason Label",
+        "default": "Why are you opting out?"
+      },
+      {
+        "type": "header",
+        "content": "Registration by Donor ID"
+      },
+      {
+        "type": "info",
+        "content": "<strong><i class='fa fa-fw fa-exclamation-circle'></i> About Register with Donor ID</strong><br>Register with Donor ID allows your users to register for an account on your website using a donor id you provide them (plus their postal code for security purposes). By allowing your donors to register using a Donor ID you provide, you ensure your donors identity, ensure they are linked to the correct records and reduce the chance duplicate records will be created."
+      },
+      {
+        "type": "on-off",
+        "name": "allow_register_by_donor_id",
+        "label": "Allow Registration by Donor ID",
+        "default": false
+      },
+      {
+        "type": "text",
+        "name": "register_donor_id_help",
+        "label": "Help Text",
+        "default": "Use the Donor ID that was provided to you as well as your ZIP code on file to register.",
+        "info": "Help text that displays above the Donor ID field to help remind your donors where they can find their Donor ID. (OPTIONAL)"
+      },
+      {
+        "type": "header",
+        "content": "Login"
+      },
+      {
+        "type": "text",
+        "name": "login_heading",
+        "label": "Heading",
+        "default": "Login",
+        "info": "The large heading that displays above the login section."
+      },
+      {
+          "type": "text",
+          "name": "login_subheading",
+          "label": "Subheading",
+          "default": "",
+          "info": "The smaller heading that displays above the login section."
+      },
+      {
+          "type": "text",
+          "name": "login_button_label",
+          "label": "Button Label",
+          "default": "Sign-In",
+          "info": "The label on the login button."
+      },
+      {
+          "type": "header",
+          "content": "Forgot Password"
+      },
+      {
+          "type": "text",
+          "name": "forgot_page_title",
+          "label": "Page Title",
+          "default": "Forgot Your Password?",
+          "info": "The page title for the password reset page."
+      },
+      {
+          "type": "text",
+          "name": "forgot_password_heading",
+          "label": "Heading",
+          "default": "Reset Password",
+          "info": "The large heading that displays above the 'forgot your password' section."
+      },
+      {
+          "type": "text",
+          "name": "forgot_password_subheading",
+          "label": "Subheading",
+          "default": "",
+          "info": "The smaller heading that displays above the 'forgot your password' section."
+      },
+      {
+          "type": "text",
+          "name": "forgot_password_help",
+          "label": "Help Text",
+          "default": "",
+          "info": "Help text that will display beneath the email field."
+      },
+      {
+          "type": "text",
+          "name": "reset_password_button_label",
+          "label": "Button Label",
+          "default": "Reset Password",
+          "info": "The label on the 'Reset my Password' button."
+      }
+    ]
+  },
+  {
+    "name": "Donor Portal",
+    "settings": [
+      {
+          "type": "header",
+          "content": "Recurring Payments"
+      },
+      {
+          "type": "text",
+          "name": "cancel_subscription_message",
+          "label": "Cancel Confirmation Message",
+          "default": "Are you sure you want to cancel your recurring donation?",
+          "info": "The message that is displayed to the donor before they cancel a recurring payment."
+      },
+      {
+          "type": "text",
+          "name": "cancel_subscription_feedback_message",
+          "label": "Cancel Feedback Message",
+          "default": "Help us improve! Why are you adjusting your payment?",
+          "info": "The message that is displayed to the donor when they are asked to give feedback for cancelling."
+      },
+      {
+        "type": "header",
+        "content": "Purchased Media"
+      },
+      {
+        "type": "text",
+        "name": "purchased_media_heading_title",
+        "label": "Purchased Media Heading",
+        "default": "My Purchased Media",
+        "info": "When donors purchase downloads or access to streaming video there is a section in the Donor Portal called 'My Purchased Media', this setting allows you to override the name of that section to better suit your organization. For instance, you could rename this to be 'My Courses' if you offer e-training."
+      },
+      {
+        "type": "header",
+        "content": "Direct & Secondary Impact"
+      },
+      {
+        "type": "text",
+        "name": "giving_impact_heading_title",
+        "label": "Page Heading & Link Text",
+        "default": "My Impact",
+        "info": "The heading and link title for this feature"
+      },
+      {
+        "type": "text",
+        "name": "giving_impact_referral_link_text",
+        "label": "Referral Link Description",
+        "default": "This is your referral link. Share this link on social media, through email or sms. When you refer people with this link, their visits, donations and mailing list sign ups will be attributed to you! Thanks for helping spread the word.",
+        "info": "The text that will describe the purpose of the referral link."
+      },
+      {
+        "type": "header",
+        "content": "External Donations Display"
+      },
+      {
+        "type": "info",
+        "content": "<strong><i class='fa fa-fw fa-exclamation-circle'><\/i> About External Donations Display<\/strong><br>If you use an external donation\/CRM tracker, we can show all donations made through that platform on the logged in member's Orders\/Donations page in addition to Givecloud donations. In order to use this feature, the \"View Past Donations\/Orders\" feature must be enabled in the \"Donor Portal Features\" section of <a href='\/jpanel\/settings\/accounts'>Account Settings<\/a>. Please note that this feature is only currently set up for DonorPerfect integrations."
+      },
+      {
+        "type": "on-off",
+        "name": "external_donations_on_member_profile_show",
+        "label": "Show External Donations on Profile",
+        "default": false
+      },
+      {
+        "type": "text",
+        "name": "external_donations_on_member_profile_header",
+        "label": "Header",
+        "default": "All Order History",
+        "info": "The heading that is shown above all external donations on the profile page."
+      },
+      {
+        "type": "multi-custom",
+        "name": "external_donations_on_member_profile_columns",
+        "label": "Columns to Show",
+        "info": "Which columns do you want to show in the gifts table.",
+        "options": [
+          "Date",
+          "Receipt Number",
+          "Reference",
+          "Currency",
+          "Amount",
+          "Fair Market Value",
+          "Net Donation"
+        ],
+        "default": [
+          "Date",
+          "Reference",
+          "Amount"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Sponsorship",
+    "settings": [
+      {
+        "type": "header",
+        "content": "General"
+      },
+      {
+        "type": "on-off",
+        "name": "sponsorship_show_ref",
+        "label": "Show Reference Numbers",
+        "default": true,
+        "size": "sm"
+      },
+      {
+        "type": "text",
+        "name": "sponsorship_ref_prefix",
+        "label": "Reference Prefix",
+        "size": "sm",
+        "default": "Ref#"
+      },
+      {
+        "type": "select",
+        "name": "sponsorship_name_format",
+        "label": "Name Format",
+        "options": {
+          "first-last":"First Last",
+          "first-l":"First L.",
+          "f-last":"F. Last",
+          "last-first":"Last, First",
+          "last-f":"Last, F.",
+          "l-first":"L, First",
+          "first":"First",
+          "last":"Last"
+        },
+        "default": "first-last",
+        "size": "sm"
+      },
+      {
+        "type": "on-off",
+        "name": "sponsorship_show_age",
+        "label": "Show Age",
+        "default": true,
+        "size": "sm"
+      },
+      {
+        "type": "on-off",
+        "name": "sponsorship_show_birthday",
+        "label": "Show Birthday",
+        "default": true,
+        "size": "sm"
+      },
+      {
+        "type": "on-off",
+        "name": "sponsorship_show_gender",
+        "label": "Show Gender",
+        "default": true,
+        "size": "sm"
+      },
+      {
+        "type": "header",
+        "content": "Sponsorship List"
+      },
+      {
+        "type": "text",
+        "name": "sponsorship_list_title",
+        "label": "Page Heading",
+        "size": "md",
+        "default": "Sponsor a Beneficiary"
+      },
+      {
+        "type": "image",
+        "name": "sponsorship_header_bg_image",
+        "label": "Heading Background Image",
+        "info": "Heading Background Image",
+        "size":"sm"
+      },
+      {
+        "type": "select",
+        "name": "sponsorship_list_style",
+        "label": "List Style",
+        "info": "When using Masonry, set Phone Heights to 'Keep Original Image Heights' for best effect.",
+        "options": {
+          "grid":"Grid",
+          "masonry":"Masonry (Pinterest)"
+        },
+        "default":"masonry",
+        "size":"sm"
+      },
+      {
+        "type": "select",
+        "name": "sponsorship_thumb_height",
+        "label": "Photo Heights",
+        "info": "The width of the image depends on the device being used. (Example: Phone vs Tablet vs Laptop)",
+        "options": {
+          "full":"Keep Original Image Heights",
+          "450":"Fix all to 450px high",
+          "400":"Fix all to 400px high",
+          "350":"Fix all to 350px high",
+          "300":"Fix all to 300px high",
+          "250":"Fix all to 250px high",
+          "200":"Fix all to 200px high"
+        },
+        "default":"full",
+        "size":"md"
+      },
+      {
+        "type": "text",
+        "name": "sponsorship_list_empty_message",
+        "label": "'No-Results' Message",
+        "info": "The message that displays where there are no filter results.",
+        "size": "lg",
+        "default": "No records match your filter options."
+      },
+      {
+        "type": "text",
+        "name": "sponsorship_my_profile_label",
+        "label": "Custom 'My Profile' Label",
+        "info": "Leave this blank to display the default label.",
+        "size": "sm",
+        "default": ""
+      },
+      {
+        "type": "text",
+        "name": "sponsorship_sponsor_me_label",
+        "label": "Custom 'Sponsor Me' Label",
+        "info": "Leave this blank to display the default button label.",
+        "size": "sm",
+        "default": ""
+      },
+      {
+        "type": "text",
+        "name": "sponsorship_sponsored_label",
+        "label": "Custom 'Sponsored' Label",
+        "info": "Leave this blank to display the default button label.",
+        "size": "sm",
+        "default": ""
+      },
+      {
+        "type": "header",
+        "content": "Filters"
+      },
+      {
+        "type": "html",
+        "name": "sponsorship_list_preface",
+        "label": "Preface Content",
+        "info": "Optional formatted text that will display before the filter.",
+        "default": ""
+      },
+      {
+        "type": "select",
+        "name": "sponsorship_filter_position",
+        "label": "Position",
+        "info": "Where do you want the filters to display?",
+        "options": {
+          "top":"Top of Page",
+          "right":"Right Sidebar"
+        },
+        "default":"top",
+        "size":"sm"
+      },
+      {
+        "type": "multi-custom",
+        "name": "sponsorship_filter_options",
+        "label": "Filter Options",
+        "info": "Which filters do you want.",
+        "options": [
+          "Name",
+          "Reference Number",
+          "Gender",
+          "Age",
+          "Birth Month",
+          "Birth Year",
+          "Sponsored"
+        ],
+        "default":["Age","Birth Month","Birth Year"]
+      },
+      {
+        "type": "text",
+        "name": "sponsorship_filter_search_label",
+        "label": "Search Label",
+        "info": "",
+        "size": "sm",
+        "default": "Search"
+      },
+      {
+        "type": "header",
+        "content": "Profile"
+      },
+      {
+        "type": "on-off",
+        "name": "sponsorship_show_map",
+        "label": "Show Google Map",
+        "default": true,
+        "size": "sm"
+      },
+      {
+          "type": "text",
+          "name": "google_maps_api_key",
+          "label": "Google Maps API Key",
+          "default": "",
+          "info": "If you do not have one, you can get an <a href=\"https://developers.google.com/maps/documentation/javascript/get-api-key\" rel=\"noopener noreferrer\" target=\"_blank\">API key here</a>."
+      },
+      {
+        "type": "select",
+        "name": "sponsorship_map_type",
+        "label": "Map Type",
+        "default":"static",
+        "options": {
+          "static":"Static Image",
+          "iframe":"Interactive (iFrame)"
+        },
+        "size":"sm"
+      },
+      {
+          "type": "on-off",
+          "name": "sponsorship_show_rec_desc",
+          "label": "Show Recurring Payment Description",
+          "default": false,
+          "info": "Show the payment description for each recurring payment option. Eg $50.00/Month on the 1st"
+      },
+      {
+        "type": "text",
+        "name": "sponsorship_my_story_label",
+        "label": "Custom 'My Story' Label",
+        "info": "Leave this blank to display the default button label.",
+        "size": "sm",
+        "default": ""
+      },
+      {
+        "type": "header",
+        "content": "Sponsoring"
+      },
+      {
+        "type": "text",
+        "name": "sponsorship_add_to_cart_label",
+        "label": "Custom 'Add to Cart' Label",
+        "info": "Leave this blank to display the default button label.",
+        "size": "sm",
+        "default": ""
+      },
+      {
+        "type": "select",
+        "name": "sponsorship_first_payment",
+        "label": "Make First Payment Today",
+        "options": {
+          "1": "Show",
+          "2": "Hidden (Use Default)",
+          "0": "Disabled"
+        },
+        "default": "1",
+        "allow_blank": false,
+        "info": "Enable 'Make first payment today' option on the sponsorship detail page."
+      },
+      {
+        "type": "on-off",
+        "name": "sponsorship_first_payment_default",
+        "label": "Make First Payment Today Default",
+        "default": false,
+        "info": "Set 'Make first payment today' option to be automatically checked."
+      },
+      {
+        "type": "text",
+        "name": "sponsorship_ending_confirmation_message",
+        "label": "Sponsorship Ending Message",
+        "info": "This message will show in a text bubble when a supporter attempts to end their sponsorship",
+        "default": "Are you sure you want to end my sponsorship?"
+      }
+    ]
+  },
+  {
+    "name": "Fundraisers (P2P)",
+    "settings": [
+      {
+        "type": "header",
+        "content": "General"
+      },
+      {
+        "type": "text",
+        "name": "fundraisers_heading",
+        "label": "Title",
+        "size": "sm",
+        "default": "Fundraisers"
+      },
+      {
+        "type": "image",
+        "name": "fundraisers_heading_image",
+        "label": "Background"
+      },
+      {
+        "type": "html",
+        "name": "fundraisers_content",
+        "label": "Content"
+      },
+      {
+        "type": "header",
+        "content": "List of Pages"
+      },
+      {
+        "type": "color",
+        "name": "fundraiser_list_background_color",
+        "label": "Background Color",
+        "size": "sm",
+        "default": "#efefef"
+      },
+      {
+        "type": "text",
+        "name": "fundraiser_list_empty_message",
+        "label": "Empty Message",
+        "size": "sm",
+        "info": "The message that displays where there are no fundraising pages to display.",
+        "default": "No fundraisers here."
+      },
+      {
+        "type": "header",
+        "content": "Creating a Page"
+      },
+      {
+          "type": "media",
+          "name": "p2p_page_image_1",
+          "label": "Default Images",
+          "default": ""
+      },
+      {
+          "type": "media",
+          "name": "p2p_page_image_2",
+          "label": "",
+          "default": ""
+      },
+      {
+          "type": "media",
+          "name": "p2p_page_image_3",
+          "label": "",
+          "default": ""
+      },
+      {
+          "type": "media",
+          "name": "p2p_page_image_4",
+          "label": "",
+          "default": ""
+      },
+      {
+          "type": "media",
+          "name": "p2p_page_image_5",
+          "label": "",
+          "default": ""
+      },
+      {
+          "type": "media",
+          "name": "p2p_page_image_6",
+          "label": "",
+          "default": ""
+      },
+      {
+          "type": "media",
+          "name": "p2p_page_image_7",
+          "label": "",
+          "default": ""
+      },
+      {
+          "type": "media",
+          "name": "p2p_page_image_8",
+          "label": "",
+          "default": ""
+      },
+      {
+          "type": "media",
+          "name": "p2p_page_image_9",
+          "label": "",
+          "default": ""
+      },
+      {
+        "type": "on-off",
+        "name": "p2p_page_allow_image_upload",
+        "label": "Allow Image Upload",
+        "default": false,
+        "info": "When enabled, fundraisers can upload a custom image for their page."
+      },
+      {
+        "type": "on-off",
+        "name": "p2p_page_allow_video_link",
+        "label": "Allow Video link",
+        "default": false,
+        "info": "When enabled, fundraisers can add a video link to their page."
+      },
+      {
+        "type": "on-off",
+        "name": "p2p_allow_custom_description",
+        "label": "Allow custom descriptions",
+        "default": false,
+        "info": "When enabled, fundraisers can write their own description. Otherwise, they'll be able to choose from provided templates."
+      },
+      {
+        "type": "bigText",
+        "name": "p2p_description_template_1",
+        "label": "Description template",
+        "info": "Users will be able to choose from these provided template if custom descriptions are disallowed.",
+        "default": ""
+      },
+      {
+        "type": "bigText",
+        "name": "p2p_description_template_2",
+        "label": "",
+        "info": "",
+        "default": ""
+      },
+      {
+        "type": "bigText",
+        "name": "p2p_description_template_3",
+        "label": "",
+        "info": "",
+        "default": ""
+      },
+      {
+          "type": "html",
+          "name": "p2p_page_create_instructions",
+          "label": "Instructions",
+          "default": "<p class='text-lg'>We're so happy you've chosen to create a fundraising page!</p><p>Here's a couple pointers to be sure you make the most of your page:<ul><li>Use a compelling, good quality image</li><li>If you have a video, include it</li><li>Share it with as many people as you can</li></ul></p>"
+      },
+      {
+        "type": "header",
+        "content": "Page"
+      },
+      {
+        "type": "color",
+        "name": "fundraisers_background_color",
+        "label": "Background Color",
+        "size": "sm",
+        "default": "#efefef"
+      },
+      {
+        "type": "media",
+        "name": "fundraisers_background_image",
+        "label": "Background Image",
+        "default": ""
+      },
+      {
+        "type": "select",
+        "name": "fundraisers_background_style",
+        "label": "Background Style",
+        "options": {
+          "tiled": "Tiled",
+          "centered": "Centered",
+          "full-screen": "Full-Screen"
+        },
+        "default": "full-screen",
+        "size":"sm"
+      },
+      {
+        "type": "text",
+        "name": "fundraisers_create_a_page",
+        "label": "Create a Page",
+        "size": "sm",
+        "default": "Page Maker"
+      },
+      {
+        "type": "header",
+        "content": "Honour Roll"
+      },
+      {
+        "type": "text",
+        "name": "fundraisers_honour_roll_heading",
+        "label": "Honour Roll Title",
+        "size": "sm",
+        "default": "Honour Roll"
+      },
+      {
+        "type": "select",
+        "name": "fundraisers_honour_roll_limit",
+        "label": "Honour Roll Limit",
+        "options": {
+          "10": "10",
+          "20": "20",
+          "40": "40",
+          "80": "80"
+        },
+        "default": "80",
+        "size":"sm"
+      },
+      {
+        "type": "select",
+        "name": "fundraisers_honour_roll_style",
+        "label": "Honour Roll Style",
+        "options": {
+          "list": "List",
+          "masonry": "Masonry"
+        },
+        "default": "masonry",
+        "size":"sm"
+      }
+    ]
+  },
+  {
+    "name": "Cart & Checkout",
+    "settings": [
+      {
+        "type": "header",
+        "content": "General"
+      },
+      {
+        "type": "select",
+        "name": "fa_cart_icon",
+        "label": "Icon",
+        "info": "",
+        "options": {
+          "fa-shopping-bag": "Bag",
+          "fa-shopping-basket": "Basket",
+          "fa-shopping-cart": "Cart",
+          "fa-child": "Child",
+          "fa-paw": "Paw"
+        },
+        "default":"fa-shopping-basket",
+        "size":"sm"
+      },
+      {
+        "type": "media",
+        "name": "cart_header_image",
+        "label": "Header Image"
+      },
+      {
+        "type": "text",
+        "name": "cart_label",
+        "label": "Label",
+        "default":"Basket",
+        "size":"sm"
+      },
+      {
+        "type": "text",
+        "name": "cart_title",
+        "label": "Checkout Title",
+        "default": "Your Payment",
+        "size":"sm"
+      },
+      {
+        "type": "text",
+        "name": "cart_post_checkout_redirect_url",
+        "label": "Post-Checkout Redirect URL",
+        "info": "Override the page that the user is redirected to after checkout."
+      },
+      {
+        "type": "header",
+        "content": "'Continue Shopping' Button"
+      },
+      {
+        "type": "on-off",
+        "name": "cart_continue_shopping_enabled",
+        "label": "Enabled",
+        "default": true
+      },
+      {
+        "type": "text",
+        "name": "cart_continue_shopping_label",
+        "label": "Label",
+        "default":"Continue Shopping",
+        "size":"md"
+      },
+      {
+        "type": "link",
+        "name": "cart_continue_shopping_url",
+        "label": "Page / Link",
+        "default": "/",
+        "info": "Where you want the donor to go when they click this button."
+      },
+      {
+        "type": "header",
+        "content": "Special Notes"
+      },
+      {
+        "type": "on-off",
+        "name": "cart_comments_enabled",
+        "label": "Enabled",
+        "default": true
+      },
+      {
+        "type": "text",
+        "name": "cart_comments_label",
+        "label": "Label",
+        "default":"Special Notes",
+        "size":"md"
+      },
+      {
+        "type": "text",
+        "name": "cart_comments_hint",
+        "label": "Help Text",
+        "default":"Leave a note or special instructions."
+      },
+      {
+        "type": "header",
+        "content": "Promo Codes"
+      },
+      {
+        "type": "on-off",
+        "name": "cart_promos_enabled",
+        "label": "Enabled",
+        "default": true
+      },
+      {
+        "type": "text",
+        "name": "cart_promos_label",
+        "label": "Label",
+        "default":"Promotion Codes",
+        "size":"md"
+      },
+      {
+        "type": "text",
+        "name": "cart_promos_hint",
+        "label": "Help Text",
+        "default":"Enter a discount code below, then click apply."
+      },
+      {
+        "type": "header",
+        "content": "Account Login"
+      },
+      {
+        "type": "on-off",
+        "name": "cart_login_enabled",
+        "label": "Enabled",
+        "default": true
+      },
+      {
+        "type": "text",
+        "name": "cart_login_label",
+        "label": "Label",
+        "default":"Already Have an Account?",
+        "size":"md"
+      },
+      {
+        "type": "text",
+        "name": "cart_login_hint",
+        "label": "Help Text",
+        "default":"Login with your email and password for quicker checkout."
+      },
+      {
+        "type": "header",
+        "content": "Billing Phone"
+      },
+      {
+          "type": "on-off",
+          "name": "billing_phone_required",
+          "label": "Require Billing Phone",
+          "default": false,
+          "info": "Require the Billing Phone Field."
+      },
+      {
+        "type": "header",
+        "content": "Create Account"
+      },
+      {
+        "type": "on-off",
+        "name": "cart_create_account",
+        "label": "Enabled",
+        "info": "Show 'Create Account' at checkout.",
+        "default" : true
+      },
+      {
+        "type": "text",
+        "name": "cart_create_account_label",
+        "label": "Label",
+        "default":"Create Account",
+        "size":"sm"
+      },
+      {
+        "type": "text",
+        "name": "cart_create_account_description",
+        "label": "Help Text",
+        "default":"Enter a password and we'll save your info for next time."
+      },
+      {
+          "type": "header",
+          "content": "Quantity Selection"
+      },
+      {
+          "type": "select",
+          "name": "qty_selection_type",
+          "label": "Quantity Selection Type",
+          "options": {
+              "text": "Text Field",
+              "dropdown": "Dropdown"
+          },
+          "default": "dropdown",
+          "allow_blank": false
+      },
+      {
+          "type": "number",
+          "name": "qty_selection_limit",
+          "label": "Quantity Selection Limit",
+          "default": "25",
+          "size": "sm"
+      },
+      {
+        "type": "header",
+        "content": "Payment"
+      },
+      {
+        "type": "select",
+        "name": "product_recurring_first_payment",
+        "label": "Make First Payment Today",
+        "options": {
+          "1": "Show",
+          "2": "Hidden (Use Default)",
+          "0": "Disabled"
+        },
+        "default": "1",
+        "allow_blank": false,
+        "info": "Enable 'Make first payment today' option on the product detail page (recurring payments).",
+        "size":"sm"
+      },
+      {
+        "type": "on-off",
+        "name": "product_recurring_first_payment_default",
+        "label": "Make First Payment Today Default",
+        "default": true,
+        "info": "Set 'Make first payment today' option to be checked by default."
+      },
+      {
+        "type": "select",
+        "name": "account_type_selector",
+        "label": "Account Type Selection",
+        "info": "",
+        "options": {
+          "dropdown":"Drop Down",
+          "buttons":"Buttons"
+        },
+        "default":"buttons",
+        "size":"sm"
+      },
+      {
+        "type": "on-off",
+        "name": "show_payment_ssl_security",
+        "label": "Show GC Trust Logo",
+        "default": true,
+        "size":"sm"
+      },
+      {
+        "type": "header",
+        "content": "Tribute"
+      },
+      {
+        "type": "text",
+        "name": "tribute_question",
+        "label": "Tribute Question",
+        "default": "Do you want to dedicate this donation or donate as a gift to someone?",
+        "info": "This is the question we ask the donor to determine if they want this dedicate their gift.",
+        "size": "md"
+      },
+      {
+        "type": "text",
+        "name": "tribute_type_label",
+        "label": "Tribute Type Label",
+        "default": "Dedication Type",
+        "info": "The label that shows above the field for the type of dedication this is.",
+        "size": "md"
+      },
+      {
+        "type": "text",
+        "name": "tribute_recipient_label",
+        "label": "Tribute Recipient Label",
+        "default": "",
+        "placeholder": "Eg, Recipient",
+        "info": "The label that shows above the person's information fields. If you leave this blank, it will be the default value \"Recipient\"",
+        "size": "md"
+      },
+      {
+        "type": "text",
+        "name": "tribute_name_label",
+        "label": "Tribute Name Label",
+        "default": "Individual's Name",
+        "info": "The label that shows above the field for the person's name for the dedication.",
+        "size": "md"
+      },
+      {
+        "type": "text",
+        "name": "tribute_notification_send_email_label",
+        "label": "Tribute \"Send Email\" Button Label",
+        "default": "",
+        "placeholder":"Eg, Send Email",
+        "info": "The text that will show on the \"Send Email\" button when choosing how to send the tribute. If you leave this blank, it will be the default value \"Send Email\".",
+        "size": "md"
+      },
+      {
+        "type": "text",
+        "name": "tribute_notification_send_a_letter_label",
+        "label": "Tribute \"Send a Letter\" Button Label",
+        "default": "",
+        "placeholder":"Eg, Send a Letter",
+        "info": "The text that will show on the \"Send a Letter\" button when choosing how to send the tribute. If you leave this blank, it will be the default value \"Send a Letter\".",
+        "size": "md"
+      },
+      {
+        "type": "text",
+        "name": "tribute_notification_none_label",
+        "label": "Tribute \"None\" Button Label",
+        "default": "",
+        "placeholder":"Eg, None",
+        "info": "The text that will show on the \"None\" button when choosing how to send the tribute. If you leave this blank, it will be the default value \"None\".",
+        "size": "md"
+      },
+      {
+        "type": "header",
+        "content": "Referral Source"
+      },
+      {
+        "type": "text",
+        "name": "referral_source_label",
+        "label": "Customize Label",
+        "info": "Customize the Referral Source question label. For example: 'How'd you hear about us?' or 'Which location are you giving from?' or 'What is your church campus?'",
+        "default":"How'd you hear about us?",
+        "size":"md"
+      },
+      {
+        "type": "on-off",
+        "name": "cart_referral_source_required",
+        "label": "Cart requires a referral source",
+        "info": "Should the referral source be required at checkout.",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Page with Payment"
+      },
+      {
+        "type": "color",
+        "name": "pg_with_pay_bg_color",
+        "label": "Background Color",
+        "default":"#ffffff"
+      },
+      {
+        "type": "text",
+        "name": "pg_with_pay_panel_heading",
+        "label": "Alternate Panel Heading",
+        "info": "An optional panel to use for things like Frequently Asked Questions, Terms & Conditions, etc.",
+        "default":"",
+        "size":"sm"
+      },
+      {
+        "type": "html",
+        "name": "pg_with_pay_panel_content",
+        "label": "Alternate Panel Content",
+        "default":""
+      },
+      {
+        "type": "on-off",
+        "name": "pg_with_pay_floating_donate_button",
+        "label": "Show Floating Donate Button on Mobile",
+        "info": "Turn this on if you would like the donate button to 'float' at the footer of the screen after scrolling past the billing section when checking out.",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Special Notes"
+      },
+      {
+        "type": "on-off",
+        "name": "pg_comments_enabled",
+        "label": "Enabled",
+        "default": true
+      },
+      {
+        "type": "text",
+        "name": "pg_comments_label",
+        "label": "Label",
+        "default":"Special Notes",
+        "size":"md"
+      },
+      {
+        "type": "text",
+        "name": "pg_comments_hint",
+        "label": "Help Text",
+        "default":"Leave a note or special instructions."
+      },
+      {
+        "type": "header",
+        "content": "Gift Aid (UK)"
+      },
+      {
+        "type": "text",
+        "name": "gift_aid_heading",
+        "label": "Heading",
+        "default": "Gift Aid (UK Only)"
+      },
+      {
+        "type": "text",
+        "name": "gift_aid_description",
+        "label": "Description",
+        "default": "Gift Aid is a tax incentive available to UK Tax Payers."
+      },
+      {
+        "type": "text",
+        "name": "gift_aid_checkbox_label",
+        "label": "Checkbox Label",
+        "default": "This donation is Gift Aid eligible."
+      },
+      {
+        "type": "header",
+        "content": "Special Content"
+      },
+      {
+        "type": "html",
+        "name": "special_content_guest",
+        "label": "Special Content: Guest"
+      },
+      {
+        "type": "html",
+        "name": "special_content_logged_in_non_member",
+        "label": "Special Content: Logged-In Non-Member"
+      },
+      {
+        "type": "html",
+        "name": "special_content_logged_in_member",
+        "label": "Special Content: Logged-In Member"
+      },
+      {
+          "type": "header",
+          "content": "Up-Sell Content"
+      },
+      {
+          "type": "info",
+          "content":"Choose a product that you want to be sure everyone has the chance to add to their cart. If it's not in their cart, the checkout screen will display a panel asking them if they want to add it. This is great for encouraging general or campaign donations along side other sales or fundraising!"
+      },
+      {
+          "type": "on-off",
+          "name": "enable_upsell",
+          "label": "Enable Up-Sell Content",
+          "default": "0"
+      },
+      {
+          "type": "product",
+          "name": "upsell_product",
+          "label": "Up-Sell Product",
+          "default": "",
+          "info": "This is the product that a donor will be taken to from the checkout page."
+      },
+      {
+          "type": "text",
+          "name": "upsell_headline",
+          "label": "Headline",
+          "default": "",
+          "info": "An attention-grabbing headline."
+      },
+      {
+          "type": "text",
+          "name": "upsell_description",
+          "label": "Description",
+          "default": "",
+          "info": "Add some helpful hint-text to the call to action."
+      },
+      {
+          "type": "text",
+          "name": "upsell_button_label",
+          "label": "Button Label",
+          "default": "",
+          "info": "A big, clear call to action. Try: 'Add a One-Time Donation'."
+      },
+      {
+          "type": "color",
+          "name": "upsell_bg_color",
+          "label": "Up-Sell BG Color",
+          "default": "#f7f7f7"
+      },
+      {
+          "type": "color",
+          "name": "upsell_headline_color",
+          "label": "Up-Sell Headline Text Color",
+          "default": "#000000"
+      },
+      {
+          "type": "color",
+          "name": "upsell_description_color",
+          "label": "Up-Sell Description Text Color",
+          "default": "#000000"
+      },
+      {
+          "type": "on-off",
+          "name": "use_custom_upsell",
+          "label": "Use Custom Up-Sell Content",
+          "default": "0",
+          "info": "Want to build your own up-sell section? Enabled custom content and use the setting below to customize exactly what the user sees."
+      },
+      {
+          "type": "html",
+          "name": "custom_upsell",
+          "label": "Custom Up-Sell Content",
+          "info": "Place your custom upsell code here."
+      }
+    ]
+  },
+  {
+    "name": "Thank You",
+    "settings": [
+      {
+        "type": "header",
+        "content": "General"
+      },
+      {
+        "type": "media",
+        "name": "ty_header_image",
+        "label": "Header Image"
+      },
+      {
+        "type": "text",
+        "name": "ty_headline",
+        "label": "Headline",
+        "default":"Thank You!",
+        "size":"sm"
+      },
+      {
+        "type": "text",
+        "name": "ty_leadout",
+        "label": "Headline",
+        "default":"Your generosity is making a difference!",
+        "size":"md"
+      },
+      {
+        "type": "header",
+        "content": "Alternate Box 2"
+      },
+      {
+        "type": "on-off",
+        "name": "ty_box_2_enabled",
+        "label": "Enabled",
+        "default": true
+      },
+      {
+        "type": "text",
+        "name": "ty_box_2_label",
+        "label": "Label",
+        "default":"Give Again"
+      },
+      {
+        "type": "html",
+        "name": "ty_box_2_body",
+        "label": "Content",
+        "default":"<p>Find more ways you can make a difference!</p><p><a href='/' class='btn btn-sm btn-primary'><i class='fa fa-arrow-right'></i> Find More Items</a></p>"
+      },
+      {
+        "type": "header",
+        "content": "Alternate Box 3"
+      },
+      {
+        "type": "on-off",
+        "name": "ty_box_3_enabled",
+        "label": "Enabled",
+        "default": true
+      },
+      {
+        "type": "text",
+        "name": "ty_box_3_label",
+        "label": "Label",
+        "default":"Share on Social Media"
+      },
+      {
+        "type": "html",
+        "name": "ty_box_3_body",
+        "label": "Content",
+        "default":"<p>Tell your friends about how they can help make a difference!</p>"
+      }
+    ]
+  },
+  {
+    "name": "Footer",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Design"
+      },
+      {
+        "type": "select",
+        "name": "footer_scheme",
+        "label": "Color Scheme",
+        "info": "",
+        "options": {
+          "dark":"Dark",
+          "light":"Light"
+        },
+        "default":"dark",
+        "size":"sm"
+      },
+      {
+        "type": "select",
+        "name": "footer_columns",
+        "label": "Number of Columns",
+        "info": "",
+        "options": {
+          "0":"0",
+          "1":"1",
+          "2":"2",
+          "3":"3",
+          "4":"4"
+        },
+        "default":"4",
+        "size" : "sm"
+      },
+      {
+        "type": "on-off",
+        "name": "show_ssl_security",
+        "label": "SSL Secure Badge"
+      },
+      {
+        "type": "header",
+        "content": "Columns"
+      },
+      {
+        "type": "text",
+        "name": "footer_col_1_label",
+        "label": "Column 1"
+      },
+      {
+        "type": "html",
+        "name": "footer_col_1_content",
+        "label": ""
+      },
+      {
+        "type": "text",
+        "name": "footer_col_2_label",
+        "label": "Column 2"
+      },
+      {
+        "type": "html",
+        "name": "footer_col_2_content",
+        "label": ""
+      },
+      {
+        "type": "text",
+        "name": "footer_col_3_label",
+        "label": "Column 3"
+      },
+      {
+        "type": "html",
+        "name": "footer_col_3_content",
+        "label": ""
+      },
+      {
+        "type": "text",
+        "name": "footer_col_4_label",
+        "label": "Column 4"
+      },
+      {
+        "type": "html",
+        "name": "footer_col_4_content",
+        "label": ""
+      },
+      {
+        "type": "header",
+        "content": "Credits"
+      },
+      {
+        "type": "html",
+        "name": "footer_credits",
+        "label": "Credits"
+      },
+      {
+        "type": "header",
+        "content": "Bottom-Right Links"
+      },
+      {
+        "type": "info",
+        "content": "Add links to the bottom right by creating a menu called 'Footer Menu' and adding links/pages to it."
+      }
+    ]
+  },
+  {
+    "name": "Error Page",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Error Page"
+      },
+      {
+        "type": "media",
+        "name": "error_header_image",
+        "label": "Error Header Image"
+      },
+      {
+        "type": "text",
+        "name": "error_heading",
+        "label": "Error Heading",
+        "default": "Oh No!",
+        "size": "sm"
+      },
+      {
+        "type": "text",
+        "name": "error_description",
+        "label": "Error Summary",
+        "default": "There's a problem with this link."
+      },
+      {
+        "type": "header",
+        "content": "Feature Box 1"
+      },
+      {
+        "type": "on-off",
+        "name": "error_box_1_enabled",
+        "label": "Enabled",
+        "default": false
+      },
+      {
+        "type": "text",
+        "name": "error_box_1_label",
+        "label": "Label",
+        "default":"Give Again"
+      },
+      {
+        "type": "html",
+        "name": "error_box_1_body",
+        "label": "Content",
+        "default":"<p>Find more ways you can make a difference!</p><p><a href='/' class='btn btn-sm btn-primary'><i class='fa fa-arrow-right'></i> Find More Items</a></p>"
+      },
+      {
+        "type": "header",
+        "content": "Feature Box 2"
+      },
+      {
+        "type": "on-off",
+        "name": "error_box_2_enabled",
+        "label": "Enabled",
+        "default": false
+      },
+      {
+        "type": "text",
+        "name": "error_box_2_label",
+        "label": "Label",
+        "default":"Give Again"
+      },
+      {
+        "type": "html",
+        "name": "error_box_2_body",
+        "label": "Content",
+        "default":"<p>Find more ways you can make a difference!</p><p><a href='/' class='btn btn-sm btn-primary'><i class='fa fa-arrow-right'></i> Find More Items</a></p>"
+      },
+      {
+        "type": "header",
+        "content": "Feature Box 3"
+      },
+      {
+        "type": "on-off",
+        "name": "error_box_3_enabled",
+        "label": "Enabled",
+        "default": false
+      },
+      {
+        "type": "text",
+        "name": "error_box_3_label",
+        "label": "Label",
+        "default":"Share on Social Media"
+      },
+      {
+        "type": "html",
+        "name": "error_box_3_body",
+        "label": "Content",
+        "default":"<p>Tell your friends about how they can help make a difference!</p>"
+      }
+    ]
+  },
+  {
+    "name": "Advanced",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Advanced"
+      },
+      {
+        "type": "css",
+        "name": "css_overrides",
+        "label": "CSS Overrides",
+        "info": "Override any of your theme's CSS."
+      },
+      {
+        "type": "raw-html",
+        "name": "custom_head_tags",
+        "label": "Custom HEAD Tags",
+        "info": "Referenced in the HEAD of all templates."
+      },
+      {
+        "type": "raw-html",
+        "name": "custom_scripts",
+        "label": "Custom Scripts",
+        "info": "Add custom <scripts> without unlocking your theme. Make sure to include your javascript in &lt;script&gt;…&lt;/script&gt; or &lt;script src=\"…\"&gt;&lt;/script&gt;. This will be output at the very bottom of your site below all other script inclusions."
+      },
+      {
+        "type": "raw-html",
+        "name": "conversion_scripts",
+        "label": "Conversion Scripts",
+        "info": "Provide front-end scripts you want to run after a purchase or donation completes successfully. The following placeholders are available for use: [order_id] and [order_amount]."
+      }
+    ]
+  }
+]

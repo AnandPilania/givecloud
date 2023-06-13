@@ -1,0 +1,17 @@
+.root {
+  .otherAmount {
+    @apply relative;
+
+    .dollarSign {
+      @apply absolute top-3 left-3 z-10 text-gray-400;
+
+      &.light {
+        @apply text-gray-800;
+      }
+    }
+
+    .input {
+      @apply pl-8;
+    }
+  }
+}

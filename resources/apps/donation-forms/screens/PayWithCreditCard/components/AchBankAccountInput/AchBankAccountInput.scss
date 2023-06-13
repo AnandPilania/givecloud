@@ -1,0 +1,90 @@
+.root {
+  @apply relative;
+  @apply w-full;
+
+  .input {
+    @apply relative;
+    @apply w-full h-11 pl-11;
+    @apply flex flex-row;
+    @apply border border-gray-300 rounded;
+    @apply text-base;
+    @apply transition-colors ease-in-out duration-200;
+    padding-top: 0.6rem;
+
+    &.valid {
+      @apply ring-green-500 border-green-500;
+
+      .iconContainer .icon {
+        @apply text-green-500;
+        @apply opacity-40;
+      }
+    }
+
+    &.invalid {
+      @apply ring-red-500 border-red-500;
+
+      .iconContainer .icon {
+        @apply text-red-500;
+      }
+    }
+  }
+
+  .iconContainer {
+    @apply absolute top-0 left-0;
+    @apply flex items-center justify-center;
+    @apply w-11;
+    height: calc(2.75rem - 2px);
+
+    .icon {
+      @apply text-lg;
+      @apply text-gray-400;
+    }
+  }
+
+  .labelText {
+    @apply text-gray-400;
+  }
+
+  .flagIcon {
+    @apply absolute right-3;
+    @apply w-8 h-6;
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+    &.grayscale {
+      &.american svg {
+        rect[fill],
+        g path {
+          @apply fill-gray-400;
+        }
+      }
+      &.canadian svg {
+        [fill='red'] {
+          @apply fill-gray-400;
+        }
+        [fill='white'] {
+          @apply fill-transparent;
+        }
+      }
+    }
+  }
+
+  .errorMessage {
+    @apply block mt-1 ml-2 text-xs;
+    @apply text-red-500;
+  }
+
+  &:global(.has-errors) {
+    @apply text-[#eb1c26];
+    @apply ring-red-500 border-red-500;
+
+    .iconContainer .icon {
+      @apply text-red-500;
+    }
+
+    input {
+      @apply text-red-500 placeholder-red-300;
+    }
+  }
+}

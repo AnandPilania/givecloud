@@ -1,0 +1,105 @@
+<form method="get" class="sponsorship-filter-top form-inline form-secondary text-center d-flex justify-content-center align-items-center my-5">
+
+  {% for field_name in settings.sponsorship_filter_options %}
+
+    {% if field_name == 'Name' %}
+
+      <div class="mb-2 labelify labelify-sm d-inline-block mx-1">
+        <label><i class="fa fa-fw fa-user"></i> {{ 'snippets.sponsorships_filter_top.name' | t }}</label>
+        <input class="form-control" name="name" style="width:125px;" value="{{ filter.name | escape }}">
+      </div>
+
+    {% elsif field_name == 'Reference Number' %}
+
+      <div class="mb-2 labelify labelify-sm d-inline-block mx-1">
+        <label><i class="fa fa-fw fa-hashtag"></i> {{ 'snippets.sponsorships_filter_top.reference_no' | t }}</label>
+        <input class="form-control" name="ref" style="width:125px;" value="{{ filter.ref | escape }}">
+      </div>
+
+    {% elsif field_name == 'Age' %}
+
+      <div class="mb-2 labelify labelify-sm d-inline-block mx-1">
+        <label><i class="fa fa-fw fa-gift"></i> {{ 'snippets.sponsorships_filter_top.age' | t }}</label>
+        <select class="form-control" name="age" style="min-width:90px;">
+          <option></option>
+          {% for age in (1 .. site.sponsorship_maturity_age) %}
+            <option value="{{ age }}" {% if filter.age == age %}selected{% endif %}>{{ age }}yr{{ if age > 1 }}s{{ endif }} old</option>
+          {% endfor %}
+        </select>
+      </div>
+
+    {% elsif field_name == 'Birth Month' %}
+
+      <div class="mb-2 labelify labelify-sm d-inline-block mx-1">
+        <label><i class="fa fa-fw fa-calendar-o"></i> {{ 'snippets.sponsorships_filter_top.birth_month' | t }}</label>
+        <select class="form-control" name="birth_month" style="min-width:125px;">
+          <option></option>
+          {% for month_number in (1 .. 12) %}
+            <option value="{{ month_number }}" {% if filter.birth_month == month_number %}selected{% endif %}>{{ "2020-" | append: month_number | append: "-01" | date: "date:M" }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+    {% elsif field_name == 'Birth Year' %}
+
+      <div class="mb-2 labelify labelify-sm d-inline-block mx-1">
+        <label><i class="fa fa-fw fa-calendar-o"></i> {{ 'snippets.sponsorships_filter_top.birth_year' | t }}</label>
+        <select class="form-control" name="birth_year" style="min-width:115px;">
+          <option selected></option>
+          {% assign current_year = 'now' | date: '%Y' %}
+
+          {% for i in (1999 .. current_year) %}
+            <option value="{{ i }}" {% if i == filter.birth_year %}selected{% endif %}>{{ i }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+    {% elsif field_name == 'Gender' %}
+
+      <div class="mb-2 labelify labelify-sm d-inline-block mx-1">
+        <label><i class="fa fa-fw fa-child"></i> {{ 'snippets.sponsorships_filter_top.gender' | t }}</label>
+        <select class="form-control" name="gender" style="min-width:90px;">
+          <option selected></option>
+          <option value="m" {% if filter.gender == 'm' %}selected{% endif %}>{{ 'snippets.sponsorships_filter_top.boy' | t }}</option>
+          <option value="f" {% if filter.gender == 'f' %}selected{% endif %}>{{ 'snippets.sponsorships_filter_top.girl' | t }}</option>
+        </select>
+      </div>
+
+    {% elsif field_name == 'Sponsored' %}
+
+      <div class="mb-2 labelify labelify-sm d-inline-block mx-1">
+        <label><i class="fa fa-fw fa-check-square-o"></i> {{ 'snippets.sponsorships_filter_top.sponsored' | t }}</label>
+        <select class="form-control" name="sponsored" style="min-width:90px;">
+          <option selected></option>
+          <option value="0" {% if filter.sponsored == 0 %}selected{% endif %}>{{ 'snippets.sponsorships_filter_top.not_sponsored' | t }}</option>
+          <option value="1" {% if filter.sponsored == 1 %}selected{% endif %}>{{ 'snippets.sponsorships_filter_top.sponsored' | t }}</option>
+        </select>
+      </div>
+
+    <!-- need to find the appropriately named segment -->
+    {% else %}
+
+      {% for field in custom_fields %}
+        {% if field.name == field_name %}
+
+          <div class="mb-2 hide labelify labelify-sm d-inline-block mx-1">
+            <label>{{ field.name }}</label>
+            <select class="form-control" name="fields[{{ field.id }}]" style="min-width:115px;">
+              <option selected></option>
+              {% for option in field.options %}
+                <option value="{{ option.id }}" {% if filter.fields[field.id] contains option.id %}selected{% endif %}>{{ option.name }}</option>
+              {% endfor %}
+            </select>
+          </div>
+
+          {% break %}
+
+        {% endif %}
+      {% endfor %}
+
+    {% endif %}
+  {% endfor %}
+
+  <button type="submit" class="mb-2 btn btn-lg mx-1 btn-secondary">{{ settings.sponsorship_filter_search_label }} <i class="fa fa-chevron-right"></i></button>
+
+</form>

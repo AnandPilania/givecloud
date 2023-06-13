@@ -1,0 +1,669 @@
+{% capture right_side_links %}
+    <a href="/fundraisers" class="btn btn-outline-light btn-pill btn-sm px-4"><i class="fa fa-arrow-left"></i> Back</a>
+    {% unless account.is_denied %}
+        <a href="/fundraisers/create" class="btn btn-primary btn-pill btn-sm px-4"><i class="fa fa-plus"></i> {{ settings.fundraisers_create_a_page }}</a>
+    {% endunless %}
+{% endcapture %}
+
+{% capture cancel_confirmation_message %}
+    {{ 'templates.fundraiser.edit_form.cancel_confirmation' | t }}
+{% endcapture %}
+
+{% asset async: true, ext: js, defer: true, 'https://maps.googleapis.com/maps/api/js?key={google_maps_api_key}&libraries=places&callback=loadLookup' %}
+
+{% include 'header-image', header_title: fundraising_page.title, header_image: fundraising_page.product.feature_image.full, right_side_links: right_side_links %}
+
+<div class="fundraising-page pb-5">
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-12 col-md-7 col-lg-8">
+                {% if fundraiser_report_message %}
+                    <div class="mb-4 alert alert-success"><i class="fa fa-check fa-fw"></i> {{ fundraiser_report_message }}</div>
+                {% endif %}
+                <div class="card mb-4 {% if settings.animations %}wow fadeInUp{% endif %}">
+                    {% if fundraising_page.video %}
+                        <div class="card-img-top {% unless fundraising_page.video.provider_name == 'Facebook' %}embed-responsive embed-responsive-16by9{% endunless %}">
+                            {{ fundraising_page.video.html }}
+                        </div>
+                    {% else %}
+                        <img class="card-img-top card-img-top-600" src="{{ fundraising_page.photo | img_url: '708x' }}" alt="{{ fundraising_page.title }}">
+                    {% endif %}
+                    {% if fundraising_page.content %}
+                        <div class="card-body">
+                            {% assign content_size = fundraising_page.content | size %}
+                            {% if content_size > 780 %}
+                                <div id="about-fundraiser" class="read-more-content">
+                                    {{ fundraising_page.content }}
+                                </div>
+                                <div><a href="#about-fundraiser" class="read-more">{{ 'general.actions.read_more' | t }}</a></div>
+                            {% else %}
+                                {{ fundraising_page.content }}
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="row fundraisers-honour-roll">
+                    <div class="col-12">
+
+                        <div class="card d-none d-md-block mb-4 {% if settings.animations %}wow fadeInUp{% endif %}" {% if settings.animations %}data-wow-delay="0.3s"{% endif %}>
+                            <div class="card-body">
+                                <h4 class="card-title">{{ settings.fundraisers_honour_roll_heading }}</h4>
+
+
+                                {% if fundraising_page.social_proof.size > 0 %}
+                                    <div class="">
+
+                                        {% include 'social-proofs', social_proofs: fundraising_page.social_proof, style: settings.fundraisers_honour_roll_style, limit: settings.fundraisers_honour_roll_limit %}
+
+                                        <!--<div class="text-center">
+                                            <a href="#"><i class="fa fa-refresh"></i> Load More</a>
+                                        </div>-->
+
+                                    </div>
+                                {% else %}
+
+                                    <p class="text-muted text-center text-lg">{{ 'templates.fundraiser.first_to_donate' | t }}</p>
+
+                                {% endif %}
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="text-center">
+	                <div>____</div>
+	                <small>{{ 'templates.fundraiser.report.inappropriate_content' | t }}<br><a href="#report-page-modal" data-toggle="modal">{{ 'templates.fundraiser.report.report_this_page' | t }}</a></small>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-5 col-lg-4">
+                {% unless fundraising_page.organizer.is_verified  %}
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="row gutter-sm">
+                            <div class="col-12">
+                                {% if fundraising_page.organizer.is_pending or fundraising_page.organizer.is_unverified %}
+                                    <div class="alert alert-warning mb-0" role="alert">
+                                        {{ fundraising_page.pending_message }}
+                                    </div>
+                                {% endif %}
+                                {% if fundraising_page.organizer.is_denied %}
+                                    <div class="alert alert-danger mb-0" role="alert">
+                                        {{ fundraising_page.denied_message }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endunless %}
+
+                {% if fundraising_page.can_edit %}
+                    <div class="card mb-4 {% if settings.animations %}wow fadeInUp{% endif %}" {% if settings.animations %}data-wow-delay="0.3s"{% endif %}>
+                        <div class="card-body">
+                            <div class="row gutter-sm">
+                                <div class="col-6">
+                                    {% form 'cancel_fundraiser', fundraising_page, data-confirm: cancel_confirmation_message %}
+                                        <button type="submit" class="btn btn-block btn-sm btn-outline-danger"><i class="fa fa-trash fa-fw"></i> {{ 'templates.fundraiser.edit_form.cancel' | t }}</button>
+                                    {% endform %}
+                                </div>
+                                {% if site.account_features contains 'edit-fundraisers' %}
+                                    <div class="col-6">
+                                        <a href="{{ fundraising_page.permalink }}/edit" class="btn btn-block btn-sm btn-primary"><i class="fa fa-pencil fa-fw"></i> {{ 'templates.fundraiser.edit_form.edit' | t }}<span class="d-none d-lg-inline"> {{ 'templates.fundraiser.edit_form.page' | t }}</span></a>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+
+                <div class="card mb-4 {% if settings.animations %}wow fadeInUp{% endif %}" data-wow-delay="0.6s">
+                    {% if fundraising_page.video and fundraising_page.photo %}
+                        <img class="card-img-top card-img-top-sm" src="{{ fundraising_page.photo.full }}" alt="{{ fundraising_page.title }}">
+                    {% endif %}
+
+                    <div class="card-body">
+
+                        {% include 'goal', goal_currency: fundraising_page.currency, goal_progress: fundraising_page.amount_raised, goal_amount: fundraising_page.goal_amount, goal_percent: fundraising_page.progress_percent, goal_size:'lg', goal_color: 'secondary' %}
+
+                        <hr>
+
+                        <div class="row gutter-sm text-sm">
+                            <div class="col-6">
+                                <i class="fa fa-user fa-fw"></i> {{ 'templates.fundraiser.donors_count' | t: count: fundraising_page.donation_count }}
+                            </div>
+                            {% if fundraising_page.goal_deadline %}
+                            <div class="col-6 font-weight-bold text-right">
+                                    {% if fundraising_page.has_ended %}
+                                        <i class="fa fa-calendar-o fa-fw"></i> {{ 'templates.fundraiser.closed' | t }}
+                                    {% else %}
+                                    <i class="fa fa-calendar-o fa-fw"></i> {{ 'templates.fundraiser.days_left_count' | t: count: fundraising_page.days_left }}
+                                {% endif %}
+                            </div>
+                            {% endif %}
+                        </div>
+
+                        <hr>
+
+                        {% if fundraising_page.social_urls %}
+                            <div class="social-actions row gutter-sm">
+
+                                <div class="col">
+                                    <a href="{{ fundraising_page.social_urls.facebook }}" class="btn btn-sm btn-pill btn-outline-primary btn-block" target="_blank" rel="noopener"><i class="fa fa-facebook fa-fw"></i></a>
+                                </div>
+                                <div class="col">
+                                    <a href="{{ fundraising_page.social_urls.twitter }}" class="btn btn-sm btn-pill btn-outline-primary btn-block" target="_blank" rel="noopener"><i class="fa fa-twitter fa-fw"></i></a>
+                                </div>
+                                <div class="col">
+                                    <a href="{{ fundraising_page.social_urls.email }}" class="btn btn-sm btn-pill btn-outline-primary btn-block"><i class="fa fa-envelope fa-fw"></i></a>
+                                </div>
+                                <div class="col">
+                                    <a href="{{ fundraising_page.social_urls.linkedin }}" class="btn btn-sm btn-pill btn-outline-primary btn-block" target="_blank" rel="noopener"><i class="fa fa-linkedin fa-fw"></i></a>
+                                </div>
+                                <div class="col">
+                                    <a href="{{ fundraising_page.social_urls.pinterest }}" class="btn btn-sm btn-pill btn-outline-primary btn-block" target="_blank" rel="noopener"><i class="fa fa-pinterest fa-fw"></i></a>
+                                </div>
+                            </div>
+                        {% endif %}
+
+                        <hr>
+
+                        <div>
+                            <div class="created-by">{{ 'templates.fundraiser.created_by' | t }}</div>
+                            <strong>{{ fundraising_page.author.name }}</strong>
+                            {% if fundraising_page.author.location %}
+                                <br><small><i class="fa fa-map-marker"></i> {{ fundraising_page.author.location }}</small>
+                            {% endif %}
+                        </div>
+
+                    </div>
+                </div>
+
+                <form id="product-payment-app" ref="form" @submit.prevent="submitPayForm" :class="{ 'was-validated': payValidated }" data-vv-scope="pay" class="{% if settings.animations %}wow fadeInUp{% endif %}" {% if settings.animations %}data-wow-delay="0.9s"{% endif %} method="post" novalidate>
+                    {% if fundraising_page.product.metadata.pay_page_post_purchase_redirect_url %}
+                        <input type="hidden" ref="redirect_url" value="{{ fundraising_page.product.metadata.pay_page_post_purchase_redirect_url | escape }}">
+                    {% endif %}
+
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h4 class="card-title">{{ 'templates.fundraiser.pay_form.donate' | t }}</h4>
+                            <div ref="productOptionForm" class="mb-4">
+                                <input type="hidden" name="fundraising_page_id" value="{{ fundraising_page.id }}">
+                                <input type="hidden" name="fundraising_member_id" value="{{ fundraising_page.organizer.id }}">
+                                {% include 'product-option-buttons', product:fundraising_page.product %}
+                            </div>
+
+                            <div class="form-group labelify">
+                                <label for="inputComments">{{ 'templates.fundraiser.pay_form.comments' | t }}</label>
+                                <textarea id="inputComments" type="text" class="form-control" name="comments" v-model="input.comments" autocorrect="off" spellcheck="off" autocapitalize="off"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="inputIsAnonymous" v-model="input.is_anonymous">
+                                    <label class="custom-control-label" for="inputIsAnonymous">{{ 'templates.fundraiser.pay_form.keep_me_anonymous' | t }}</label>
+                                </div>
+                            </div>
+
+                            <div ref="productForm">
+                                <input type="hidden" name="product_id" value="{{ fundraising_page.product.id }}">
+                                <input type="hidden" name="recurring_frequency" value="">
+
+                                {% if fundraising_page.product.enable_tributes %}
+                                    {% include 'product-tribute-fields', product: fundraising_page.product %}
+                                {% endif %}
+
+                                {% if fundraising_page.product.form_fields.size > 0 %}
+                                    {% include 'product-form-fields', product: fundraising_page.product %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <nav class="nav nav nav-pills nav-fill mb-3">
+                                <template v-if="config.gateways.credit_card">
+                                    <button v-if="paysafe_checkout_available" type="button" class="btn btn-link nav-item nav-link" :class="{active: input.payment_type == 'credit_card'}" @click="input.payment_type = 'credit_card'">
+                                        <i class="fa fa-credit-card"></i> {{ 'general.forms.credit_debit' | t }}
+                                    </button>
+                                    <button v-else type="button" class="btn btn-link nav-item nav-link" :class="{active: input.payment_type == 'credit_card'}" @click="input.payment_type = 'credit_card'">
+                                        <i class="fa fa-credit-card"></i> {{ 'general.forms.credit_debit' | t }}
+                                    </button>
+                                </template>
+                                <button v-if="supportedPaymentType('bank_account')" type="button" class="btn btn-link nav-item nav-link" :class="{active: input.payment_type == 'bank_account'}" @click="input.payment_type = 'bank_account'">
+                                    <i class="fa fa-bank"></i> {{ 'general.forms.bank' | t }}
+                                </button>
+                                <button v-if="paypal_available" type="button" class="btn btn-link nav-item nav-link" :class="{active: input.payment_type == 'paypal'}" @click="input.payment_type = 'paypal'">
+                                    <i class="fa fa-paypal"></i> {{ 'general.forms.paypal' | t }}
+                                </button>
+                                <button v-if="account && account.payment_methods.length" type="button"  class="btn btn-link nav-item nav-link" :class="{active: input.payment_type == 'payment_method'}" @click="input.payment_type = 'payment_method'">
+                                    <i class="fa fa-user"></i> {{ 'templates.cart.pay_form.payment_methods' | t }}
+                                </button>
+                            </nav>
+                            <template v-if="input.payment_type == 'credit_card'">
+                                <template v-if="paysafe_checkout_available">
+                                    <div v-if="is_onetime" class="form-group mt-2 text-center">
+                                        <div class="custom-control custom-checkbox d-inline-block">
+                                            <input type="checkbox" id="inputSavePaymentMethod" class="custom-control-input" name="save_payment_method" v-model="payment.save_payment_method">
+                                            <label class="custom-control-label" for="inputSavePaymentMethod">
+                                                <i class="fa fa-lock"></i> {{ 'templates.cart.pay_form.save_payment_method' | t }}
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="text-center text-muted">
+                                        {{ 'general.actions.continue_below' | t }}<br>
+                                        <i class="fa fa-chevron-down fa-1x"></i>
+                                    </div>
+                                </template>
+                                <credit-card v-else>
+                                    <div class="form-group labelify payment-number-input" :class="{ 'has-errors': errors.has('pay.number') }">
+                                        <label for="inputPaymentNumber">{{ 'general.forms.credit_card_number' | t }}</label>
+                                        <payment-field field="inputPaymentNumber">
+                                            <the-mask id="inputPaymentNumber" type="tel" class="form-control monospace" maxlength="19" placeholder="0000 0000 0000 0000" mask="#### #### #### ####" name="number" v-model="payment.number" v-validate.initial="'required|credit_card'" x-autocompletetype="cc-number" autocompletetype="cc-number" autocorrect="off" spellcheck="off" autocapitalize="off"></the-mask>
+                                        </payment-field>
+                                        <div v-if="payment.number_type" class="payment-number-input__types">
+                                            <span>
+                                                <img alt="" v-if="payment.number_type == 'american-express'" src="https://cdn.givecloud.co/npm/payment-icons@1.1.0/min/flat/amex.svg">
+                                                <img alt="" v-if="payment.number_type == 'diners-club'" src="https://cdn.givecloud.co/npm/payment-icons@1.1.0/min/flat/diners.svg">
+                                                <img alt="" v-if="payment.number_type == 'discover'"    src="https://cdn.givecloud.co/npm/payment-icons@1.1.0/min/flat/discover.svg">
+                                                <img alt="" v-if="payment.number_type == 'jcb'"         src="https://cdn.givecloud.co/npm/payment-icons@1.1.0/min/flat/jcb.svg">
+                                                <img alt="" v-if="payment.number_type == 'maestro'"     src="https://cdn.givecloud.co/npm/payment-icons@1.1.0/min/flat/maestro.svg">
+                                                <img alt="" v-if="payment.number_type == 'master-card'" src="https://cdn.givecloud.co/npm/payment-icons@1.1.0/min/flat/mastercard.svg">
+                                                <img alt="" v-if="payment.number_type == 'unionpay'"    src="https://cdn.givecloud.co/npm/payment-icons@1.1.0/min/flat/unionpay.svg">
+                                                <img alt="" v-if="payment.number_type == 'visa'"        src="https://cdn.givecloud.co/npm/payment-icons@1.1.0/min/flat/visa.svg">
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-6 labelify" :class="{ 'has-errors': errors.has('pay.exp') }">
+                                            <label for="inputPaymentExpiry">{{ 'general.forms.expiry' | t }}</label>
+                                            <payment-field field="inputPaymentExpiry">
+                                                <the-mask id="inputPaymentExpiry" type="tel" class="form-control monospace" maxlength="7" placeholder="{{ 'general.forms.expiry_placeholder' | t }}" mask="## / ##" @input.native="paymentExpiry($event)" name="exp" v-model="payment.exp" v-validate.initial="'required|expiration_date'" x-autocompletetype="cc-exp" autocompletetype="cc-exp" autocorrect="off" spellcheck="off" autocapitalize="off"></the-mask>
+                                            </payment-field>
+                                        </div>
+                                        <div class="form-group col-6 labelify" :class="{ 'has-errors': errors.has('pay.cvv') }">
+                                            <label for="inputPaymentCVV">{{ 'general.forms.cvv' | t }}</label>
+                                            <payment-field field="inputPaymentCVV">
+                                                <the-mask id="inputPaymentCVV" type="tel" class="form-control monospace" maxlength="4" placeholder="000" mask="####" name="cvv" v-model="payment.cvv" v-validate.initial="'required|cvv:' + payment.number_type" x-autocompletetype="cc-csc" autocompletetype="cc-csc" autocorrect="off" spellcheck="off" autocapitalize="off"></the-mask>
+                                            </payment-field>
+                                        </div>
+                                    </div>
+                                    <div v-if="is_onetime" class="form-group">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" id="inputSavePaymentMethod" class="custom-control-input" name="save_payment_method" v-model="payment.save_payment_method">
+                                            <label class="custom-control-label" for="inputSavePaymentMethod">
+                                                <i class="fa fa-lock"></i> {{ 'templates.cart.pay_form.save_payment_method' | t }}
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="supported-cardtypes mt-1 text-center">
+                                        <strong>{{ 'general.forms.we_support' | t }}</strong>
+                                        <img alt="" v-if="supportedCardType('american-express')" src="https://cdn.givecloud.co/npm/payment-icons@1.1.0/min/flat/amex.svg">
+                                        <img alt="" v-if="supportedCardType('diners-club')" src="https://cdn.givecloud.co/npm/payment-icons@1.1.0/min/flat/diners.svg">
+                                        <img alt="" v-if="supportedCardType('discover')"    src="https://cdn.givecloud.co/npm/payment-icons@1.1.0/min/flat/discover.svg">
+                                        <img alt="" v-if="supportedCardType('jcb')"         src="https://cdn.givecloud.co/npm/payment-icons@1.1.0/min/flat/jcb.svg">
+                                        <img alt="" v-if="supportedCardType('maestro')"     src="https://cdn.givecloud.co/npm/payment-icons@1.1.0/min/flat/maestro.svg">
+                                        <img alt="" v-if="supportedCardType('master-card')" src="https://cdn.givecloud.co/npm/payment-icons@1.1.0/min/flat/mastercard.svg">
+                                        <img alt="" v-if="supportedCardType('unionpay')"    src="https://cdn.givecloud.co/npm/payment-icons@1.1.0/min/flat/unionpay.svg">
+                                        <img alt="" v-if="supportedCardType('visa')"        src="https://cdn.givecloud.co/npm/payment-icons@1.1.0/min/flat/visa.svg">
+                                    </div>
+                                </credit-card>
+                            </template>
+                            <template v-else-if="input.payment_type == 'bank_account' && gocardless_available">
+                                <div class="text-center text-muted">
+                                    <i class="fa fa-bank fa-4x bottom-gutter m-2"></i><br>
+                                    {{ 'general.actions.continue_below' | t }}<br>
+                                    <i class="fa fa-chevron-down fa-1x"></i>
+                                </div>
+                            </template>
+                            <template v-else-if="input.payment_type == 'bank_account'">
+                                <div class="form-group labelify payment-number-input" :class="{ 'has-errors': errors.has('pay.account_holder_type') }">
+                                    <label for="inputPaymentAccountHolderType">{{ 'general.forms.account_holder_type' | t }}</label>
+                                    <select id="inputPaymentAccountHolderType" class="form-control" name="account_holder_type" v-model="payment.account_holder_type" v-validate.initial="'required'" autocomplete="off">
+                                        <option></option>
+                                        <option value="personal">{{ 'general.forms.account_holder_types.individual' | t }}</option>
+                                        <option value="business">{{ 'general.forms.account_holder_types.company' | t }}</option>
+                                    </select>
+                                </div>
+                                <div class="form-group labelify payment-number-input" :class="{ 'has-errors': errors.has('pay.account_type') }">
+                                    <label for="inputPaymentAccountType">{{ 'general.forms.account_type' | t }}</label>
+                                    <select id="inputPaymentAccountType" class="form-control" name="account_type" v-model="payment.account_type" v-validate.initial="'required'" autocomplete="off">
+                                        <option></option>
+                                        <option value="checking">{{ 'general.forms.checking' | t }}</option>
+                                        <option value="savings">{{ 'general.forms.savings' | t }}</option>
+                                    </select>
+                                </div>
+                                <template v-if="input.currency_code == 'CAD'">
+                                    <div class="form-row">
+                                        <div class="form-group col-6 labelify" :class="{ 'has-errors': errors.has('pay.transit_number') }">
+                                            <label for="inputPaymentTransitNumber">{{ 'templates.cart.pay_form.transit' | t }}</label>
+                                            <the-mask id="inputPaymentTransitNumber" type="tel" class="form-control monospace" maxlength="5" placeholder="00000" mask="#####" name="transit_number" v-model="payment.transit_number" v-validate.initial="'required'" autocorrect="off" spellcheck="off" autocapitalize="off"></the-mask>
+                                        </div>
+                                        <div class="form-group col-6 labelify" :class="{ 'has-errors': errors.has('pay.institution_number') }">
+                                            <label for="inputPaymentInstitutionNumber">{{ 'templates.cart.pay_form.institution' | t }}</label>
+                                            <the-mask id="inputPaymentInstitutionNumber" type="tel" class="form-control monospace" maxlength="3" placeholder="000" mask="###" name="institution_number" v-model="payment.institution_number" v-validate.initial="'required'" autocorrect="off" spellcheck="off" autocapitalize="off"></the-mask>
+                                        </div>
+                                    </div>
+                                </template>
+                                <template v-else>
+                                    <div class="form-group labelify" :class="{ 'has-errors': errors.has('pay.routing_number') }">
+                                        <label for="inputPaymentRoutingNumber">{{ 'templates.cart.pay_form.routing' | t }}</label>
+                                        <input id="inputPaymentRoutingNumber" type="tel" class="form-control monospace" placeholder="0000000" name="routing_number" v-model="payment.routing_number" v-validate.initial="'required'" autocorrect="off" spellcheck="off" autocapitalize="off">
+                                    </div>
+                                </template>
+                                <div class="form-group labelify" :class="{ 'has-errors': errors.has('pay.account_number') }">
+                                    <label for="inputPaymentAccountNumber">{{ 'templates.cart.pay_form.account' | t }}</label>
+                                    <input id="inputPaymentAccountNumber" type="tel" class="form-control monospace" minlength="4" maxlength="17" placeholder="0000000" name="account_number" v-model="payment.account_number" v-validate.initial="'required'" autocorrect="off" spellcheck="off" autocapitalize="off">
+                                </div>
+                                <div class="form-group">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" id="inputPaymentAchAgreeTos" class="custom-control-input" name="ach_agree_tos" v-model="payment.ach_agree_tos" v-validate.initial="'required'">
+                                        <label class="custom-control-label" for="inputPaymentAchAgreeTos">
+                                            <small class="text-muted">{{ 'templates.cart.pay_form.ach_agree_tos' | t }}</small>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div v-if="is_onetime" class="form-group">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" id="inputSavePaymentMethod" class="custom-control-input" name="save_payment_method" v-model="payment.save_payment_method">
+                                        <label class="custom-control-label" for="inputSavePaymentMethod">
+                                            <i class="fa fa-lock"></i> {{ 'templates.cart.pay_form.save_payment_method' | t }}
+                                        </label>
+                                    </div>
+                                </div>
+                            </template>
+                            <template v-else-if="input.payment_type == 'paypal'">
+                                <div v-if="is_onetime" class="form-group mt-2 text-center">
+                                    <div class="custom-control custom-checkbox d-inline-block">
+                                        <input type="checkbox" id="inputSavePaymentMethod" class="custom-control-input" name="save_payment_method" v-model="payment.save_payment_method">
+                                        <label class="custom-control-label" for="inputSavePaymentMethod">
+                                            <i class="fa fa-lock"></i> {{ 'templates.cart.pay_form.save_payment_method' | t }}
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="text-center text-muted">
+                                    <i class="fa fa-cc-paypal fa-4x bottom-gutter"></i><br>
+                                    {{ 'general.actions.continue_below' | t }}<br>
+                                    <i class="fa fa-chevron-down fa-1x"></i>
+                                </div>
+                            </template>
+                            <template v-else-if="input.payment_type == 'payment_method'">
+                                <p><strong>{{ 'templates.cart.pay_form.pay_with' | t }}</strong></p>
+                                <div v-for="method in account.payment_methods" class="custom-control custom-checkbox d-inline-block">
+                                    <input type="radio" :id="'inputSavePaymentMethod' + method.id" class="custom-control-input" name="payment_method" v-model="payment.payment_method" :value="method.id">
+                                    <label class="custom-control-label" :for="'inputSavePaymentMethod' + method.id">
+                                        <template v-if="method.card">
+                                            {{ 'templates.cart.pay_form.payment_method_card' | t: name: '${ method.card.brand }', last4: '${ method.card.last4 }' }}
+                                            <small>(${ method.card.exp_month }/${ method.card.exp_year })</small>
+                                        </template>
+                                        <template v-else-if="method.bank">
+                                            {{ 'templates.cart.pay_form.payment_method_bank' | t: name: '${ method.bank.name }', last4: '${ method.bank.last4 }' }}
+                                        </template>
+                                        <template v-else>
+                                            ${ method.name } - ${ method.account_number }
+                                        </template>
+                                    </label>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+
+                    <div class="card mb-4">
+                        <div class="card-body">
+
+                            <div class="form-group labelify" :class="{ 'has-errors': errors.has('pay.billing_email') }">
+                                <label for="inputBillingEmail"><i class="fa fa-envelope-o"></i> {{ 'general.forms.email' | t }}</label>
+                                <input id="inputBillingEmail" type="text" class="form-control" name="billing_email" v-model="input.billing_email" v-validate.initial="'required|email'" x-autocompletetype="email" autocompletetype="email" autocorrect="off" spellcheck="off" autocapitalize="off">
+                            </div>
+                            {% if settings.optin_enabled %}
+                                <div class="form-group">
+                                    <div class="custom-control custom-checkbox">
+                                        <input id="inputEmailOptIn" type="checkbox" class="custom-control-input" v-model="input.email_opt_in">
+                                        <label class="custom-control-label" for="inputEmailOptIn">{{ settings.optin_label }}</label>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            <div class="form-group labelify" :class="{ 'has-errors': errors.has('pay.billing_phone') }">
+                                <label for="inputBillingPhone"><i class="fa fa-phone"></i> {{ 'templates.cart.address_form.phone' | t }}</label>
+                                <input
+                                    id="inputBillingPhone"
+                                    type="text"
+                                    class="form-control"
+                                    name="billing_phone"
+                                    v-model="input.billing_phone"
+                                    {% if product.metadata.billing_phone_required %}v-validate.initial="'required'"{% endif %}
+                                    x-autocompletetype="phone-full"
+                                    autocompletetype="tel"
+                                    autocorrect="off"
+                                    spellcheck="off"
+                                    autocapitalize="off">
+                            </div>
+
+                            <hr>
+
+                            <template v-if="account_types">
+                                {% if settings.account_type_selector == 'dropdown' %}
+                                    <div class="form-group labelify">
+                                        <label for="inputAccountType">Supporter Type</label>
+                                        <select id="inputAccountType" class="form-control" name="account_type_id" v-model="input.account_type_id">
+                                            <option v-for="account_type in account_types" :value="account_type.id">${ account_type.name }</option>
+                                        </select>
+                                    </div>
+                                {% else %}
+                                    <div class="form-group">
+                                        <div class="btn-group-toggle mb-3">
+                                            <label v-for="account_type in account_types" class="btn btn-outline-dark" :class="{ active: input.account_type_id == account_type.id }">
+                                                <input type="radio" name="account_type_id" v-model="input.account_type_id" :value="account_type.id"> ${ account_type.name }
+                                            </label>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            </template>
+
+                            <div class="row gutter-sm">
+                                {% if site.donor_title != 'hidden' %}
+                                    <div class="form-group col-2 labelify">
+                                        <label for="inputBillingTitle">{{ 'general.forms.title' | t }}</label>
+                                        {% if site.donor_title_options %}
+                                            <select id="inputBillingTitle" class="form-control" :class="{ 'has-errors': errors.has('pay.billing_title') }" name="billing_title" v-model="input.billing_title" {% if site.donor_title == 'required' %}v-validate.initial="'required'"{% endif %} x-autocompletetype="honorific-prefix" autocompletetype="honorific-prefix">
+                                                <option value=""></option>
+                                                <option v-for="title in donor_title_options" :value="title">${ title }</option>
+                                            </select>
+                                        {% else %}
+                                            <input type="text" id="inputBillingTitle" class="form-control" :class="{ 'has-errors': errors.has('pay.billing_title') }" name="billing_title" v-model="input.billing_title" {% if site.donor_title == 'required' %}v-validate.initial="'required'"{% endif %} x-autocompletetype="honorific-prefix" autocompletetype="honorific-prefix" autocorrect="off" spellcheck="off">
+                                        {% endif %}
+                                    </div>
+                                {% endif %}
+                                <div class="col">
+                                    <div class="form-group labelify">
+                                        <label for="inputBillingFirstName">{{ 'general.forms.first_name' | t }}</label>
+                                        <input type="text" v-model="input.billing_first_name" id="inputBillingFirstName" class="form-control" name="billing_first_name">
+                                    </div>
+                                </div>
+                                <div class="col-5">
+                                    <div class="form-group labelify">
+                                        <label for="inputBillingLastName">{{ 'general.forms.last_name' | t }}</label>
+                                        <input type="text" v-model="input.billing_last_name" id="inputBillingLastName" class="form-control" name="billing_last_name">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div v-if="account_type && account_type.is_organization" class="form-group labelify">
+                                <label for="inputBillingCompany">{{ 'general.forms.organization_name' | t }}</label>
+                                <input type="text" v-model="input.billing_company" id="inputBillingCompany" class="form-control" name="billing_company">
+                            </div>
+
+                            <div class="">
+                                <div class="form-group labelify" :class="{ 'has-errors': errors.has('pay.billing_address1') }">
+                                    <address-lookup-input
+                                        id="inputBillingAddress1"
+                                        name="billing_address1"
+                                        v-model="input.billing_address1"
+                                        label="{{ 'general.forms.address' | t | escape }}"
+                                        placeholder="{{ 'general.forms.address_placeholder' | t | escape }}"
+                                        @place-change="fillAddressFields"
+                                    />
+                                </div>
+                                <div class="form-group labelify">
+                                    <label for="inputBillingAddress2">{{ 'general.forms.address_2' | t }}</label>
+                                    <input id="inputBillingAddress2" type="text" class="form-control" placeholder="{{ 'general.forms.address_2_placeholder' | t }}" name="billing_address2" v-model="input.billing_address2" x-autocompletetype="address-line2" autocompletetype="address-line2" autocorrect="off" spellcheck="off" autocapitalize="off">
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-8 labelify" :class="{ 'has-errors': errors.has('pay.billing_city') }">
+                                        <label for="inputBillingCity">{{ 'general.forms.city' | t }}</label>
+                                        <input id="inputBillingCity" type="text" class="form-control" name="billing_city" v-model="input.billing_city" v-validate.initial="'required'" x-autocompletetype="city" autocompletetype="city" autocorrect="off" spellcheck="off" autocapitalize="off">
+                                    </div>
+                                    <div class="form-group col-4 labelify" :class="{ 'has-errors': errors.has('pay.billing_zip') }">
+                                        <label for="inputBillingZip">
+                                            <template v-if="input.billing_country_code == 'US'">{{ 'general.forms.zip' | t }}</template>
+                                            <template v-else>{{ 'general.forms.postal' | t }}</template>
+                                        </label>
+                                        <input id="inputBillingZip" type="text" class="form-control" name="billing_zip" v-model="input.billing_zip" v-validate.initial="'required'" x-autocompletetype="postal-code" autocompletetype="postal-code" autocorrect="off" spellcheck="off" autocapitalize="off">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-7 labelify" :class="{ 'has-errors': errors.has('pay.billing_country_code') }">
+                                        <label for="inputBillingCountry">{{ 'general.forms.country' | t }}</label>
+                                        <select id="inputBillingCountry" class="form-control" name="billing_country_code" v-model="input.billing_country_code" v-validate.initial="'required'">
+                                            <option></option>
+                                            <option v-for="country in countries" :value="country.value">${ country.label }</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-5 labelify" :class="{ 'has-errors': errors.has('pay.billing_province_code') }">
+                                        <label for="inputBillingProvince">${ billing_province_label }</label>
+                                        <select v-if="billing_subdivisions" id="inputBillingProvince" class="form-control" name="billing_province_code" v-model="input.billing_province_code" v-validate.initial="billing_province_required">
+                                            <option></option>
+                                            <option v-for="(name, code) in billing_subdivisions" :value="code">${ name }</option>
+                                        </select>
+                                        <input v-else type="text" id="inputBillingProvince" class="form-control" name="billing_province_code" v-model="input.billing_province_code" v-validate="billing_province_required">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% if site.cover_costs_enabled and fundraising_page.product.cover_costs_enabled %}
+                        <div ref="cover_fees" class="card mb-4 {% if settings.animations %}wow fadeInUp{% endif %}">
+                            <div class="card-body">
+                                <div class="">
+                                    {% if site.cover_costs_ai_enabled %}
+                                        <div class="d-flex justify-content-between mb-3">
+                                            <h4 class="text-left mb-0">
+                                                + {{ site.cover_costs_checkout_label }}
+                                            </h4>
+                                            <a class="mt-1" style="color:inherit" href="#" data-toggle="modal" data-target="#dcc-information-modal"><i class="fa fa-info-circle ml-2 small"></i></a>
+                                        </div>
+                                        <p>{{ site.cover_costs_checkout_description }}</p>
+                                        <div class="form-group">
+                                            <label for="inputCoverCostsType" class="sr-only">{{ site.cover_costs_checkout_label }}</label>
+                                            <select id="inputCoverCostsType" class="form-control" name="cover_costs_type" v-model="input.cover_costs_type">
+                                                <option value="most_costs">{{ 'general.forms.cover_costs.most_costs' | t: amount: '${ money(cover_costs_amounts.most_costs) }' }}</option>
+                                                <option value="more_costs">{{ 'general.forms.cover_costs.more_costs' | t: amount: '${ money(cover_costs_amounts.more_costs) }' }}</option>
+                                                <option value="minimum_costs">{{ 'general.forms.cover_costs.minimum_costs' | t: amount: '${ money(cover_costs_amounts.minimum_costs) }' }}</option>
+                                                <option value="">{{ 'general.forms.cover_costs.no_thank_you' | t }}</option>
+                                            </select>
+                                        </div>
+                                    {% else %}
+                                    <div class="d-flex justify-content-between mb-3">
+                                        <h4 class="text-left mb-0">
+                                            {{ site.cover_costs_checkout_label }}
+                                        </h4>
+                                        <a class="mt-1" style="color:inherit" href="#" data-toggle="modal" data-target="#dcc-information-modal"><i class="fa fa-info-circle ml-2 small"></i></a>
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input id="inputCoverFees" type="checkbox" class="custom-control-input" v-model="input.cover_fees">
+                                        <label class="custom-control-label" for="inputCoverFees">
+                                            {{ site.cover_costs_checkout_description_with_amount | replace: "[$$$]", "<span class='font-weight-bold'>${ money(fees) }</span>" }}
+                                        </label>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    {% if site.gift_aid and fundraising_page.product.is_tax_receiptable %}
+                        <div v-if="is_uk_address" ref="gift_aid" class="card mb-4 {% if settings.animations %}wow fadeInUp{% endif %}" data-state="unchecked">
+                            <div class="card-body">
+                                <div class="">
+                                    <h4 class="text-left d-block mb-3">{{ settings.gift_aid_heading }}</h4>
+                                    <p class="text-sm">{{ settings.gift_aid_description }}</p>
+                                    <div class="custom-control custom-checkbox">
+                                        <input id="inputGiftAid" type="checkbox" class="custom-control-input" v-model="gift_aid">
+                                        <label class="custom-control-label" for="inputGiftAid">{{ settings.gift_aid_checkbox_label }}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    <div v-if="requires_captcha" class="mb-4 text-center">
+                        <vue-recaptcha class="d-inline-block" ref="recaptcha" sitekey="{{ site.recaptcha_site_key }}" @verify="input.recaptcha_response = $event"></vue-recaptcha>
+                    </div>
+
+                    <button class="btn btn-block btn-success btn-pill btn-lg"><i class="fa fa-lock"></i> {{ 'templates.fundraiser.donate_amount' | t: amount: '${ money(total_amt) }' }}</button>
+                </form>
+
+                <div class="text-center mt-3">
+                    {% include 'gc-lock' %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="report-page-modal" tabindex="-1" role="dialog" aria-labelledby="report-page-label">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="modal-create-account-label">{{ 'templates.fundraiser.report.report_this_page' | t }}</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<form action="{{ fundraising_page.permalink }}/report" method="post">
+				<input type="hidden" name="_token" value="{{ site.csrf_token }}" />
+
+				<div class="modal-body">
+					{{ 'templates.fundraiser.report.modal_description' | t }}
+
+					<div class="mt-4">
+						{% for reason in fundraising_page.report_reasons %}
+							<div class="radio">
+								<label>
+									<input type="radio" name="reason" value="{{ reason | escape }}"> {{ reason }}
+								</label>
+							</div>
+						{% endfor %}
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">{{ 'general.actions.close' | t }}</button>
+					<button type="submit" class="btn btn-primary">{{ 'templates.fundraiser.report.report_this_page' | t }}</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+{% include 'dcc-information-modal' %}
+
+<div class="modal fade" id="payment-overlay" tabindex="-1" role="dialog" aria-label="{{ 'templates.fundraiser.processing' | t }}" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+
+                <img class="spinner spinner-spin d-none" src="{{ 'spinner.gif' | asset_url }}" alt="">
+                <img class="spinner spinner-success d-none" src="{{ 'success.gif' | asset_url }}" alt="">
+
+            </div>
+        </div>
+    </div>
+</div>

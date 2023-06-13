@@ -1,0 +1,11 @@
+{
+  "hitParsingResult": [ {
+    "valid": true,
+    "parserMessage": [ ],
+    "hit": "/debug/collect?v=1\u0026tid=UA-XXXXXXXX-XX\u0026cid=McyX2UF3PjwRZ4tSuoarvzPa2VZdX1Vr\u0026uip=127.0.0.1\u0026ua=Symfony\u0026t=transaction\u0026ti=AM91UYE5CHU\u0026ta=DS\u0026tr=24.53\u0026ts=5.65\u0026tt=5.87\u0026cu=USD?_anon_uip=127.0.0.0"
+  } ],
+  "parserMessage": [ {
+    "messageType": "INFO",
+    "description": "Found 1 hit in the request."
+  } ]
+}

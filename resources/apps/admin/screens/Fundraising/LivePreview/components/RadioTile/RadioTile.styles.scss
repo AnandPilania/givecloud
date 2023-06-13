@@ -1,0 +1,17 @@
+.root {
+  @apply h-10 w-full max-w-[6.35rem] rounded-lg;
+  @apply flex items-center justify-center overflow-hidden;
+  @apply border bg-transparent border-theme;
+
+  &.checked {
+    @apply bg-theme;
+  }
+
+  .text {
+    @apply w-3/4 font-bold truncate text-center font-sans text-xs text-theme;
+
+    &.checked {
+      @apply text-white;
+    }
+  }
+}

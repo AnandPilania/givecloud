@@ -1,0 +1,31 @@
+.root {
+  @apply flex flex-col justify-center items-center;
+  @apply h-full;
+  @apply -mx-8;
+
+  background-color: #f4fbff;
+
+  .content {
+    @apply max-w-3xl;
+    @apply text-center;
+    @apply p-4;
+
+    .heading,
+    .description {
+      @apply text-gcb-700;
+    }
+
+    .heading,
+    .message {
+      @apply font-normal;
+    }
+
+    .description {
+      @apply font-light;
+    }
+
+    .message {
+      @apply text-6xl text-gcb-600;
+    }
+  }
+}

@@ -1,0 +1,22 @@
+.root {
+  @apply flex justify-center items-center cursor-pointer;
+  height: 95px;
+
+  &.small {
+    @apply font-medium;
+    height: 68px;
+  }
+
+  .tapToChange {
+    @apply absolute top-2 opacity-0 pointer-events-none;
+    @apply text-lg font-bold text-gray-500;
+    transition: all 400ms;
+    transition-delay: 250ms;
+    will-change: transform;
+
+    &.show {
+      @apply opacity-100 pointer-events-auto;
+      transform: translateY(-2rem);
+    }
+  }
+}

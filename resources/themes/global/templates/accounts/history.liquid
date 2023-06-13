@@ -1,0 +1,118 @@
+{% assign active_profile_menu = 'history' %}
+
+{% layout 'theme.profile' %}
+
+<h1 class="mt-0">{{ 'templates.accounts.history.my_donations_and_orders' | t }}</h1>
+
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>{{ 'templates.accounts.history.date' | t }}</th>
+                <th>{{ 'templates.accounts.history.number' | t }}</th>
+                <th class="text-right">{{ 'templates.accounts.history.amount' | t }}</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+                <tr>
+                    <td>{{ order.ordered_at | date: "short_month_ordinal_day_year" }}</td>
+                    <td>{{ order.order_number }}</td>
+                    <td class="text-right">
+                        {% if order.is_refunded %}
+                            <span class="text-danger"><i class='fa fa-reply mr-1'></i><span class="line-thru">{{ order.total_price | money : order.currency, 'currency_code' }}</span></span> {{ order.balance_amt | money : order.currency, 'currency_code' }}
+                         {% elsif order.is_partially_refunded %}
+                            <span class="text-danger"><i class='fa fa-reply mr-1'></i><span class="line-thru">{{ order.refunded_amt | money : order.currency, 'currency_code' }}</span></span> {{ order.balance_amt | money : order.currency, 'currency_code' }}
+                        {% else %}
+                            {{ order.total_price | money : order.currency, 'currency_code' }}
+                        {% endif %}
+                    </td>
+                    <td class="text-right"><a href="/contributions/{{ order.order_number }}"><i class="fa fa-search"></i> {{ 'general.actions.view' | t }}</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% if settings.external_donations_on_member_profile_show %}
+
+    <h1>{{ settings.external_donations_on_member_profile_header }}</h1>
+
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    {% if settings.external_donations_on_member_profile_columns contains "Date" %}
+                        <th>{{ 'templates.accounts.history.external_donations.date' | t }}</th>
+                    {% endif %}
+                    {% if settings.external_donations_on_member_profile_columns contains "Receipt Number" %}
+                        <th>{{ 'templates.accounts.history.external_donations.receipt_number' | t }}</th>
+                    {% endif %}
+                    {% if settings.external_donations_on_member_profile_columns contains "Reference" %}
+                        <th>{{ 'templates.accounts.history.external_donations.reference' | t }}</th>
+                    {% endif %}
+                    {% if settings.external_donations_on_member_profile_columns contains "Currency" %}
+                        <th>{{ 'templates.accounts.history.external_donations.currency' | t }}</th>
+                    {% endif %}
+                    {% if settings.external_donations_on_member_profile_columns contains "Amount" %}
+                        <th class="text-right">{{ 'templates.accounts.history.external_donations.amount' | t }}</th>
+                    {% endif %}
+                    {% if settings.external_donations_on_member_profile_columns contains "Fair Market Value" %}
+                        <th class="text-right">{{ 'templates.accounts.history.external_donations.fair_market_value' | t }}</th>
+                    {% endif %}
+                    {% if settings.external_donations_on_member_profile_columns contains "Net Donation" %}
+                        <th class="text-right">{{ 'templates.accounts.history.external_donations.net_donation' | t }}</th>
+                    {% endif %}
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for gift in account.external.gifts_paged.data %}
+                    <tr>
+                        {% if settings.external_donations_on_member_profile_columns contains "Date" %}
+                            <td>{{ gift.date | date: "short_month_ordinal_day_year" }}</td>
+                        {% endif %}
+                        {% if settings.external_donations_on_member_profile_columns contains "Receipt Number" %}
+                            <td>{{ gift.receipt_number }}</td>
+                        {% endif %}
+                        {% if settings.external_donations_on_member_profile_columns contains "Reference" %}
+                            <td>{{ gift.reference }}</td>
+                        {% endif %}
+                        {% if settings.external_donations_on_member_profile_columns contains "Currency" %}
+                            <td>{{ gift.currency }}</td>
+                        {% endif %}
+                        {% if settings.external_donations_on_member_profile_columns contains "Amount" %}
+                            <td class="text-right">{{ gift.amount | money }}</td>
+                        {% endif %}
+                        {% if settings.external_donations_on_member_profile_columns contains "Fair Market Value" %}
+                            <td class="text-right">{{ gift.fair_market_value | money }}</td>
+                        {% endif %}
+                        {% if settings.external_donations_on_member_profile_columns contains "Net Donation" %}
+                            <td class="text-right">{{ gift.amount - gift.fair_market_value | money }}</td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+                {% if account.external.gifts_paged.items == 0 %}
+                    <caption class="text-center">{{ 'templates.accounts.history.external_donations.no_records_to_display' | t }}</caption>
+                {% endif %}
+            </tbody>
+        </table>
+
+        {% if account.external.gifts_paged.pages > 0 %}
+            <ul class="pagination justify-content-center">
+                <li class="page-item {% if account.external.gifts_paged.previous.is_link == false %} disabled {% endif %}">
+                    <a class="page-link" href="{{ account.external.gifts_paged.previous.url }}" tabindex="-1">{{ account.external.gifts_paged.previous.title }}</a>
+                </li>
+                {% for page in account.external.gifts_paged.parts %}
+                    <li class="page-item d-none d-md-block {% if page.is_link == false %}disabled{% endif %}"><a class="page-link" href="{{ page.url }}">{{ page.title }}</a></li>
+                {% endfor %}
+                <li class="page-item {% if account.external.gifts_paged.next.is_link == false %} disabled {% endif %}">
+                    <a class="page-link" href="{{ account.external.gifts_paged.next.url }}" tabindex="-1">{{ account.external.gifts_paged.next.title }}</a>
+                </li>
+            </ul>
+        {% endif %}
+
+    </div>
+
+{% endif %}

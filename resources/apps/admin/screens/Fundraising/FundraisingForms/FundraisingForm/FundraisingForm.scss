@@ -1,0 +1,23 @@
+.imageContainer {
+  @apply aspect-w-10 aspect-h-7;
+
+  .image {
+    @apply object-center object-cover;
+  }
+}
+
+.textWrapper {
+  @apply flex items-center;
+
+  .text {
+    @apply sm:max-w-[160px];
+  }
+
+  .defaultFormIcon {
+    @apply text-brand-blue mr-2;
+  }
+}
+
+.sparklineContainer {
+  @apply hidden lg:flex lg:min-w-[126.5px];
+}

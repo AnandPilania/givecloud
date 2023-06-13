@@ -1,0 +1,39 @@
+.root {
+  @apply p-4 rounded-lg bg-opacity-90 my-0 mx-auto;
+
+  &.dark {
+    @apply bg-gray-900 text-white;
+  }
+
+  &.light {
+    @apply bg-white text-black;
+  }
+
+  > * {
+    @apply mb-4 text-center;
+  }
+
+  .heading {
+    @apply text-2xl;
+  }
+
+  .watchOnProviderSiteButton {
+    @apply rounded-lg py-3 px-5 text-white bg-opacity-90;
+
+    &.blue {
+      @apply bg-blue-700;
+    }
+    &.green {
+      @apply bg-green-700;
+    }
+    &.indigo {
+      @apply bg-indigo-700;
+    }
+    &.purple {
+      @apply bg-purple-700;
+    }
+    &.pink {
+      @apply bg-pink-700;
+    }
+  }
+}

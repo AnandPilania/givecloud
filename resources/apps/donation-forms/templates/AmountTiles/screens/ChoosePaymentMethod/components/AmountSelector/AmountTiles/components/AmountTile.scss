@@ -1,0 +1,7 @@
+.root {
+  @apply w-full mt-0 leading-none text-base font-medium;
+
+  svg {
+    @apply mr-1;
+  }
+}

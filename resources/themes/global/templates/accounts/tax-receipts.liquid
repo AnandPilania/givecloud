@@ -1,0 +1,43 @@
+{% assign active_profile_menu = 'tax-receipts' %}
+
+{% layout 'theme.profile' %}
+
+<h1 class="mt-0">{{ 'templates.accounts.tax_receipts.my_tax_receipts' | t }}</h1>
+
+{% for yr in receipts_by_year %}
+    <div class="mb-5">
+        <h2 class="mb-4 text-left">
+            <!--<a href="" class="pull-right btn btn-sm btn-primary"><i class="fa fa-file-o"></i> Consolidated {{ yr.year }} Receipt</a>-->
+            {{ yr.year }}
+        </h2>
+        
+        {% if yr.receipts.size > 0 %}
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>{{ 'templates.accounts.tax_receipts.number' | t }}</th>
+                            <th>{{ 'templates.accounts.tax_receipts.date' | t }}</th>
+                            <th class="text-right">{{ 'templates.accounts.tax_receipts.amount' | t }}</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for receipt in yr.receipts %}
+                            <tr>
+                                <td>{{ receipt.number }}</td>
+                                <td>{{ receipt.ordered_at | date: 'short_month_ordinal_day_year' }}</td>
+                                <td class="text-right">{{ receipt.amount | money }}</td>
+                                <td class="text-right"><a href="/account/tax-receipts/{{ receipt.id }}" target="_blank"><i class="fa fa-file"></i> {{ 'general.actions.view' | t }}</a></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <div class="my-5 text-muted text-lg">
+                {{ 'templates.accounts.tax_receipts.no_receipts_available' | t }}
+            </div>
+        {% endif %}
+    </div>
+{% endfor %}

@@ -1,0 +1,9 @@
+<?php
+
+namespace PayPal\EBLBaseComponents;
+
+class DoExpressCheckoutPaymentRequestDetailsType
+{
+    /** @var \PayPal\EBLBaseComponents\PaymentDetailsType[] */
+    public $PaymentDetails; // @phpstan-ignore-line
+}

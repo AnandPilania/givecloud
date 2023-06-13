@@ -1,0 +1,24 @@
+.content {
+  height: inherit;
+  @apply px-0 text-left;
+
+  .bulletItem {
+    @apply flex pl-6 mb-4;
+
+    .icon {
+      @apply bg-theme text-white rounded-full border-none mr-2;
+    }
+  }
+
+  .linkItem {
+    @apply mb-4;
+  }
+}
+
+.title {
+  @apply mt-4;
+}
+
+.footer {
+  @apply px-0 pb-0;
+}

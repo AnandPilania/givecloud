@@ -1,0 +1,17 @@
+.root {
+  @apply relative;
+  @apply flex flex-col flex-grow items-center;
+  @apply w-full;
+
+  > span {
+    @apply grow w-full h-full;
+
+    &:first-child {
+      @apply flex items-center justify-center min-h-[5rem];
+    }
+
+    &:nth-child(2) {
+      @apply grow-0;
+    }
+  }
+}

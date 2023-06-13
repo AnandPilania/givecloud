@@ -1,0 +1,68 @@
+{
+    "type": "video.asset.live_stream_completed",
+    "request_id": null,
+    "object": {
+        "type": "asset",
+        "id": "yFC02Cflp008JsEqvoCZKQmaQDR4V6B9GH01d6z5KoZpFQ"
+    },
+    "id": "838b1e3c-0b49-4cd6-acc9-416bf23b7569",
+    "environment": {
+        "name": "Development",
+        "id": "m4svp1"
+    },
+    "data": {
+        "tracks": [
+            {
+                "type": "video",
+                "max_width": 1920,
+                "max_height": 1080,
+                "max_frame_rate": 60,
+                "id": "m5JZCb9kSdO8lZ8St3zFABtFewkwh5KMwe8DUYHnROE"
+            },
+            {
+                "type": "audio",
+                "max_channels": 2,
+                "max_channel_layout": "stereo",
+                "id": "YyPy4IWJUAlvDAQZNwVFB1ZZKNHLIG2pJElPNryKszw"
+            }
+        ],
+        "test": true,
+        "status": "ready",
+        "recording_times": [
+            {
+                "started_at": {
+                    "seconds": 1616638956,
+                    "nanos": 471000000
+                },
+                "duration": 33.666
+            },
+            {
+                "started_at": {
+                    "seconds": 1616638998,
+                    "nanos": 825000000
+                },
+                "duration": 12.511
+            }
+        ],
+        "playback_ids": [
+            {
+                "policy": "public",
+                "id": "KkE1dfVWiyq6Ugm300e00Jf8NNPv1c00UqZ2pmbgiZTCRQ"
+            }
+        ],
+        "passthrough": "owls",
+        "mp4_support": "none",
+        "max_stored_resolution": "HD",
+        "max_stored_frame_rate": 60,
+        "master_access": "none",
+        "live_stream_id": "XBII5eTPbCS29XST8cx8vc9agY7tI800w0000WWuoLczu00",
+        "id": "yFC02Cflp008JsEqvoCZKQmaQDR4V6B9GH01d6z5KoZpFQ",
+        "duration": 46.276333,
+        "created_at": 1616638956,
+        "aspect_ratio": "16:9"
+    },
+    "created_at": "2021-03-25T02:28:32.000000Z",
+    "attempts": [],
+    "accessor_source": null,
+    "accessor": null
+}

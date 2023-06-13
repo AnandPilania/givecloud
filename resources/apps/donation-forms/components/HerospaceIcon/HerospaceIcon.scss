@@ -1,0 +1,15 @@
+.root {
+  @apply relative;
+  @apply flex items-center justify-center;
+  @apply w-20 h-20 mb-8 rounded-full;
+  background-color: rgba(var(--primary-colour-500-rgb), 0.15);
+  color: var(--primary-text-colour);
+
+  &.darkPrimaryColour {
+    background-color: rgba(var(--primary-colour-500-rgb), 0.15);
+  }
+
+  svg {
+    @apply w-10 h-10 align-top;
+  }
+}

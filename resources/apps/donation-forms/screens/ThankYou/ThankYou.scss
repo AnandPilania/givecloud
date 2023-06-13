@@ -1,0 +1,46 @@
+.root {
+  @apply relative;
+  @apply flex flex-col items-center justify-center;
+
+  .confetti {
+    @apply fixed inset-0 pointer-events-auto z-20 overflow-hidden;
+  }
+
+  h3 {
+    @apply mx-5;
+    @apply text-2xl font-extrabold leading-tight;
+    @apply text-center whitespace-pre-line;
+  }
+
+  p {
+    @apply mt-6 mx-8 text-lg leading-snug;
+    @apply text-center;
+  }
+
+  h4 {
+    @apply relative;
+    @apply w-full mt-12 mb-4;
+    @apply text-sm font-extrabold uppercase text-center;
+    @apply border-t border-gray-300;
+
+    span {
+      @apply relative -top-3;
+      @apply inline-block px-4;
+      @apply bg-white;
+    }
+  }
+
+  .socialLinks {
+    @apply flex;
+    @apply mb-4;
+
+    a {
+      @apply flex justify-center items-center;
+      @apply rounded-full;
+      @apply w-9 h-9;
+      @apply m-2;
+      background-color: var(--primary-colour-500);
+      color: var(--primary-colour-white-or-black);
+    }
+  }
+}

@@ -1,0 +1,1 @@
+export { TeamMemberTile } from './TeamMemberTile'

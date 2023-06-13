@@ -1,0 +1,27 @@
+.root {
+  .iconColumn {
+    @apply !pl-0;
+
+    .iconContainer {
+      @apply inline-block bg-slate-200 p-10 rounded-sm;
+    }
+  }
+
+  .copyButton {
+    @apply self-end mb-4;
+  }
+
+  .link {
+    @apply text-brand-blue;
+  }
+
+  .embedCodeContainer {
+    @apply inline-block;
+    @apply bg-slate-100 w-full rounded-md my-6 p-4 overflow-auto max-h-64;
+    @apply text-left whitespace-pre-wrap font-mono text-sm;
+  }
+}
+
+.footer {
+  @apply flex justify-end;
+}

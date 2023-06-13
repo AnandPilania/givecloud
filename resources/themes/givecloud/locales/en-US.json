@@ -1,0 +1,120 @@
+{
+  "general": {
+    "actions": {
+      "continue_below": "Continue below",
+      "close": "Close"
+    },
+    "forms": {
+      "account_holder_name": "Account Holder Name",
+      "account_holder_name_placeholder": "John Smith",
+      "account_holder_type": "Account Holder Type",
+      "account_holder_types": {
+        "company": "Company",
+        "individual": "Individual"
+      },
+      "account_type": "Account Type",
+      "account_no": "Account #",
+      "address": "Address",
+      "address_placeholder": "Street and number, P.O. box, c/o.",
+      "address_2": "Address 2",
+      "address_2_placeholder": "Apartment, suite, unit, building, floor, etc.",
+      "bank": "Bank",
+      "billing_address": "Billing Address",
+      "cardholder_name": "Cardholder Name",
+      "cardholder_name_placeholder": "John Smith",
+      "checking": "Checking",
+      "city": "City",
+      "countries": {
+        "canada": "Canada",
+        "mexico": "Mexico",
+        "united_states": "United States"
+      },
+      "country": "Country",
+      "credit_card_number": "Credit Card Number",
+      "credit_debit": "Credit / Debit",
+      "cvv": "CVV",
+      "email": "Email",
+      "expiry": "MM / YY",
+      "expiry_placeholder": "MM / YY",
+      "first_name": "First Name",
+      "institution_no": "Institution #",
+      "last_name": "Last Name",
+      "organization_name": "Organization Name",
+      "password": "Password",
+      "paypal": "PayPal",
+      "postal": "Postal",
+      "province": "Province",
+      "referral_source": "How'd you hear about us?",
+      "routing_no": "Routing #",
+      "savings": "Savings",
+      "state": "State",
+      "title": "Title",
+      "transit_no": "Transit #",
+      "we_support": "We support:",
+      "zip": "ZIP"
+    },
+    "give_with_confidence": "Encrypted & Secure. Give with Confidence.",
+    "powered_by_givecloud": "Powered by Givecloud."
+  },
+  "templates": {
+    "404": {
+      "close_this_window_and_send_text_again": "Please close this window and try sending your TEXT again.",
+      "link_has_expired": "This link has expired.",
+      "warning": "Warning!"
+    },
+    "payment_methods": {
+      "add": "Add a Payment Method",
+      "add_description": "Having a payment method linked to your account lets you quickly donate via TEXT or from the website without having to enter your payment information again.",
+      "add_payment_method": "Add payment method"
+    },
+    "sms": {
+      "signup": {
+        "already_have_an_account": "Already Have an Account?",
+        "click_here": "Click Here",
+        "dont_have_an_account": "Don't Have an Account?",
+        "login_to_account": "Login to account",
+        "login_to_your_account": "Login to Your Account",
+        "my_payment_method": "My Payment Method",
+        "other": "Other:",
+        "referral_source_other": "Other",
+        "save_and_continue": "Save and continue"
+      },
+      "thank_you": {
+        "close_this_window_and_send_text_again": "You may now close this window and try sending your TEXT again.",
+        "default_payment_method_successfully_added": "A default payment method has been successfully added to your account.",
+        "thank_you": "Thank you!"
+      }
+    }
+  },
+  "scripts": {
+    "templates": {
+      "signup": {
+        "please_wait_while_we_create_your_account": "Please wait while we create your account...",
+        "please_wait_while_we_login_to_your_account": "Please wait while we login to your account..."
+      },
+      "please_wait_while_your_payment_method_is_added": "Please wait while your payment method is added..."
+    },
+    "theme": {
+      "alert": "Alert",
+      "confirm": "Confirm",
+      "loading": "Loading...",
+      "no": "No",
+      "unknown_error_521": "Unknown error (521)",
+      "yes": "Yes"
+    }
+  },
+  "money_formats": {
+    "basic": "$0,0",
+    "compact": "$0,0[.]a",
+    "currency_code": "$0,0.00 [$$$]",
+    "default": "$0,0.00"
+  },
+  "date_formats": {
+    "calendar_short_month_day_year": "M d, yyyy",
+    "month_day": "F j",
+    "month_day_year": "F j, Y",
+    "short_month_day_year": "M j, Y",
+    "short_month_ordinal_day": "M jS",
+    "short_month_ordinal_day_year": "M jS, Y"
+  }
+}

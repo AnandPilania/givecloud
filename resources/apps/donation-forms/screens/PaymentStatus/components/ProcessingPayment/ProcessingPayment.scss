@@ -1,0 +1,47 @@
+.root {
+  @apply relative;
+  @apply flex flex-col items-center;
+  @apply mb-4 pt-[50%];
+
+  .spinner {
+    @apply relative;
+    @apply flex items-center justify-center;
+  }
+
+  svg {
+    width: calc(5rem + 12px);
+    height: calc(5rem + 12px);
+  }
+
+  &.darkPrimaryColour {
+    svg circle:nth-child(1) {
+      stroke: var(--primary-colour-200);
+    }
+
+    svg circle:nth-child(2) {
+      stroke: var(--primary-colour-500);
+    }
+  }
+
+  svg circle:nth-child(1) {
+    stroke: var(--primary-colour-400);
+  }
+
+  svg circle:nth-child(2) {
+    stroke: var(--primary-colour-700);
+  }
+
+  .icon {
+    @apply absolute inset-0;
+    @apply flex items-center justify-center;
+    color: var(--primary-text-colour);
+
+    svg {
+      @apply h-6;
+    }
+  }
+
+  p {
+    @apply mt-8 mx-4 text-lg font-bold leading-snug whitespace-pre-line;
+  }
+}

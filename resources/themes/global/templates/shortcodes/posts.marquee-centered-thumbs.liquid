@@ -1,0 +1,31 @@
+<div id="{{ id }}" class="owl-carousel owl-center-zoom owl-centered-heights">
+  {% for post in posts %}
+    <div class="mb-4">
+      <div class="card">
+        {% if post.feature_image.thumb %}
+            <img class="card-img-top" src="{{ post.feature_image.thumb }}" alt="{{ post.name }}">
+        {% endif %}
+
+        <div class="card-body text-center">
+
+          {% if post.excerpt %}
+            <p class="card-text">
+              {{ post.excerpt }}
+            </p>
+          {% endif %}
+
+          {% if post.title %}
+            <p class="card-text text-sm text-muted">
+              {{ post.title }}
+            </p>
+          {% endif %}
+
+          <div class="text-center">
+            <a href="{{ post.url }}" class="btn btn-outline-primary btn-pill px-4 d-inline-block m-1">{{ 'general.actions.read_more' | t }} <i class="fa fa-arrow-right"></i></a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div>

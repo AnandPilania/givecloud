@@ -1,0 +1,7 @@
+.root {
+  @apply rounded-full h-14 w-14 overflow-hidden cursor-pointer;
+
+  &.checked {
+    @apply border-blue-500 ring-2 ring-blue-500 ring-offset-2;
+  }
+}

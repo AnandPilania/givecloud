@@ -1,0 +1,32 @@
+{% if post.alternate_image %}
+    {% assign _header_image = post.alternate_image.full %}
+{% else %}
+    {% assign _header_image = post_type.feature_image.full %}
+{% endif %}
+
+{% include 'header-image', header_title: post.type_name, header_image: _header_image, header_crumb_1: post.type_name, header_crumb_1_url: post.type_handle %}
+
+<div class="page-content post-content">
+
+    <section class="my-5 container">
+        <div class="row">
+            <div class="col-12 col-md-3">
+                <div class="mb-3 text-center" style="background-image:url({{ post.feature_image.full }}); background-repeat: no-repeat; background-size: cover; background-position: center center; background-color:#ddd; width: 100%; padding-top: 100%; display: inline-block; position: relative; -webkit-border-radius: 50%; -moz-border-radius: 50%; border-radius: 50; overflow: hidden;"></div>
+            </div>
+            <div class="col-12 col-md-9">
+                <div class="mb-3">
+                    <h5>{{ post.title }}</h5>
+                    <hr class="mb-4" />
+                    <p><strong>{{ post.excerpt }}</strong></p>
+
+                    {{ post.content }}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% if post.show_sharing_links %}
+        <div class="container pb-4">{% sharing_links title: post.title, channels: settings.post_sharing_links_channels %}</div>
+    {% endif %}
+
+</div>

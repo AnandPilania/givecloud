@@ -1,0 +1,15 @@
+.root {
+  @apply absolute inset-0 z-30;
+  @apply flex flex-col items-center justify-center;
+  @apply transition-colors ease-in-out duration-300;
+  @apply text-8xl text-center;
+  @apply bg-white;
+
+  h3 {
+    @apply mb-4 text-2xl font-bold;
+  }
+
+  p {
+    @apply mx-6 text-base leading-snug whitespace-pre-wrap;
+  }
+}

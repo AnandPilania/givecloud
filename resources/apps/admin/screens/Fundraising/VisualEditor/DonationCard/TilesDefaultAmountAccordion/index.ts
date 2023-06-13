@@ -1,0 +1,1 @@
+export { TilesDefaultAmountAccordion } from './TilesDefaultAmountAccordion'

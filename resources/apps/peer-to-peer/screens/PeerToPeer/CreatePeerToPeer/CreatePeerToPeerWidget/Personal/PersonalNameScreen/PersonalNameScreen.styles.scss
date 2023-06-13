@@ -1,0 +1,15 @@
+.root {
+  @apply items-center;
+
+  .text {
+    @apply max-w-[10rem] text-center;
+  }
+
+  .content {
+    @apply h-full flex flex-col justify-center w-full;
+  }
+}
+
+.logo {
+  @apply object-cover h-8;
+}

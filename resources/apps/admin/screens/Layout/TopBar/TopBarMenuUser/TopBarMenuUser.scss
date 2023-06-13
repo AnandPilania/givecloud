@@ -1,0 +1,26 @@
+.root {
+  .header {
+    @apply flex flex-col px-4 pt-1 space-y-1;
+
+    .headerText,
+    .headerSubText {
+      @apply font-bold;
+    }
+
+    .headerText {
+      @apply text-sm;
+    }
+
+    .headerSubText {
+      @apply text-xs;
+    }
+
+    .headerEmail {
+      @apply text-xs font-normal;
+    }
+
+    .headerLocalTime {
+      @apply text-xs font-normal;
+    }
+  }
+}

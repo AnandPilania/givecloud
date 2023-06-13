@@ -1,0 +1,7 @@
+.root {
+  @apply flex items-center justify-center rounded-full font-bold px-2.5 text-white font-sans h-[19px] text-[10px] bg-theme;
+
+  &.inverted {
+    @apply bg-theme-light text-theme;
+  }
+}

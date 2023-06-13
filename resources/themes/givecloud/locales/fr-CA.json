@@ -1,0 +1,120 @@
+{
+  "general": {
+    "actions": {
+      "continue_below": "Continuer ci-dessous",
+      "close": "Fermer"
+    },
+    "forms": {
+      "account_holder_name": "Nom du titulaire du compte",
+      "account_holder_name_placeholder": "John Smith",
+      "account_holder_type": "Type de titulaire de compte",
+      "account_holder_types": {
+        "company": "Entreprise",
+        "individual": "Individuel"
+      },
+      "account_type": "Type de compte",
+      "account_no": "Compte #",
+      "address": "Adresse",
+      "address_placeholder": "Rue et numéro, boîte postale, chez.",
+      "address_2": "Adresse 2",
+      "address_2_placeholder": "Appartement, suite, unité, bâtiment, étage, etc.",
+      "bank": "Banque",
+      "billing_address": "adresse de facturation",
+      "cardholder_name": "Nom du titulaire",
+      "cardholder_name_placeholder": "John Smith",
+      "checking": "Compte-chèques",
+      "city": "Ville",
+      "countries": {
+        "canada": "Canada",
+        "mexico": "Mexique",
+        "united_states": "États-Unis"
+      },
+      "country": "Pays",
+      "credit_card_number": "Numéro de Carte de Crédit",
+      "credit_debit": "Crédit",
+      "cvv": "CVV",
+      "email": "Adresse courriel",
+      "expiry": "MM / AA",
+      "expiry_placeholder": "MM / AA",
+      "first_name": "Prénom",
+      "institution_no": "# d'établissement",
+      "last_name": "Nom de famille",
+      "organization_name": "Nom de l'organisation",
+      "password": "Mot de passe",
+      "paypal": "PayPal",
+      "postal": "Postal",
+      "province": "Province",
+      "referral_source": "Comment avez-vous entendu parler de nous?",
+      "routing_no": "# de routage",
+      "savings": "Compte d'épargne",
+      "state": "État",
+      "title": "Titre",
+      "transit_no": "# de Transit",
+      "we_support": "Nous soutenons :",
+      "zip": "ZIP"
+    },
+    "give_with_confidence": "Crypté et sécurisé. Donnez en toute confiance.",
+    "powered_by_givecloud": "Propulsé par Givecloud."
+  },
+  "templates": {
+    "404": {
+      "close_this_window_and_send_text_again": "Veuillez fermer cette fenêtre et réessayer d'envoyer votre message texte à nouveau.",
+      "link_has_expired": "Ce lien a expiré.",
+      "warning": "Attention !"
+    },
+    "payment_methods": {
+      "add": "Ajouter un mode de paiement",
+      "add_description": "Avoir un mode de paiement lié à votre compte vous permet de faire un don rapidement via MESSAGE TEXTE ou depuis le site Web sans avoir à saisir à nouveau vos informations de paiement.",
+      "add_payment_method": "Ajouter un mode de paiement"
+    },
+    "sms": {
+      "signup": {
+        "already_have_an_account": "Vous avez déjà un compte ?",
+        "click_here": "Cliquez ici",
+        "dont_have_an_account": "Vous n'avez pas de compte ?",
+        "login_to_account": "Connectez-vous au compte",
+        "login_to_your_account": "Connectez-vous à votre compte",
+        "my_payment_method": "Mon mode de paiement",
+        "other": "Autre :",
+        "referral_source_other": "Autre",
+        "save_and_continue": "Sauvegarder et continuer"
+      },
+      "thank_you": {
+        "close_this_window_and_send_text_again": "Vous pouvez maintenant fermer cette fenêtre et réessayer d'envoyer votre MESSAGE TEXTE.",
+        "default_payment_method_successfully_added": "Un mode de paiement par défaut a été ajouté avec succès à votre compte.",
+        "thank_you": "Merci !"
+      }
+    }
+  },
+  "scripts": {
+    "templates": {
+      "signup": {
+        "please_wait_while_we_create_your_account": "Veuillez patienter pendant que nous créons votre compte...",
+        "please_wait_while_we_login_to_your_account": "Veuillez patienter pendant que nous nous connectons à votre compte..."
+      },
+      "please_wait_while_your_payment_method_is_added": "Veuillez patienter pendant que votre mode de paiement est ajouté..."
+    },
+    "theme": {
+      "alert": "Alerte",
+      "confirm": "Confirmer",
+      "loading": "Chargement...",
+      "no": "Non",
+      "unknown_error_521": "Erreur inconnue (521)",
+      "yes": "Oui"
+    }
+  },
+  "money_formats": {
+    "basic": "0,0 $",
+    "compact": "0,0 $[.]a",
+    "currency_code": "0,0.00 $ [$$$]",
+    "default": "0,0.00 $"
+  },
+  "date_formats": {
+    "calendar_short_month_day_year": "M j, yyyy",
+    "month_day": "F j",
+    "month_day_year": "F j, Y",
+    "short_month_day_year": "M j, Y",
+    "short_month_ordinal_day": "M jS",
+    "short_month_ordinal_day_year": "M jS, Y"
+  }
+}

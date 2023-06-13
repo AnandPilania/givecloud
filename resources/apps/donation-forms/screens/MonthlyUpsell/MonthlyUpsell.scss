@@ -1,0 +1,28 @@
+.root {
+  @apply relative;
+  @apply flex flex-col items-center justify-center;
+
+  h3 {
+    @apply text-2xl font-extrabold leading-tight;
+    @apply text-center whitespace-pre-line;
+  }
+
+  p {
+    @apply mt-8 mb-6 mx-8 text-lg leading-snug;
+    @apply text-center;
+
+    &:nth-of-type(2) {
+      @apply mt-0;
+    }
+  }
+
+  .options {
+    @apply flex items-start justify-center space-x-2;
+    @apply w-full;
+  }
+
+  .noThanks {
+    @apply mt-8;
+    @apply text-lg underline text-gray-400;
+  }
+}

@@ -1,0 +1,22 @@
+.enter {
+  @apply transform transition ease-in-out duration-500 sm:duration-700;
+}
+.enterFrom {
+  @apply translate-x-full;
+}
+
+.enterTo {
+  @apply translate-x-0;
+}
+
+.leave {
+  @apply transform transition ease-in-out duration-500 sm:duration-300;
+}
+
+.leaveFrom {
+  @apply translate-x-0;
+}
+
+.leaveTo {
+  @apply translate-x-full;
+}

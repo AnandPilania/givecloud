@@ -1,0 +1,1 @@
+export { TemplateBrandingCard } from './TemplateBrandingCard'

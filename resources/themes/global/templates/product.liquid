@@ -1,0 +1,224 @@
+{% schema %}
+[
+    {
+        "name": "Customizations",
+        "settings": [
+            {
+                "type": "header",
+                "content": "Content"
+            },
+            {
+                "type": "image",
+                "name": "header_bg_image",
+                "label": "Background Image",
+                "info": "Background Image",
+                "size":"sm"
+            },
+            {
+                "type": "select",
+                "name": "page_content_location",
+                "label": "Content Location",
+                "info": "Where the page content should be located relative to the Product Information.",
+                "options": {
+                    "above": "Above",
+                    "below": "Below"
+                },
+                "default": "below",
+                "allow_blank": false,
+                "size":"sm"
+            }
+        ]
+    }
+]
+{% endschema %}
+
+{% asset 'https://cdn.givecloud.co/npm/ekko-lightbox@5.3.0/dist/ekko-lightbox.css' %}
+{% asset 'https://cdn.givecloud.co/npm/ekko-lightbox@5.3.0/dist/ekko-lightbox.min.js' %}
+
+{% if product.metadata.header_bg_image %}
+    {% assign header_image = product.metadata.header_bg_image %}
+{% else %}
+    {% assign header_image = product.feature_image.full %}
+{% endif %}
+
+{% if settings.header_style == 'overlay' or settings.header_style == 'overlay-gradient' %}
+    {% include 'header-image', header_title: '', header_image: header_image %}
+{% endif %}
+
+<div class="page-content">
+
+<div class="product-description product-description-{{ product.id }} container py-5 body-min-height">
+    <div class="d-lg-hidden d-xl-hidden mb-1">&nbsp;</div>
+
+    {% if product.page_content and product.metadata.page_content_location == 'above' %}
+        {{ product.page_content }}
+    {% endif %}
+
+    <div class="row">
+
+        <div class="col-lg-4 col-md-4">
+            <div class="w-100">
+                {% if product.feature_image %}
+                    <div class="mb-3 w-100">
+                        <a href="{{ product.feature_image.full }}" title="{{ product.feature_image.caption }}" data-toggle="lightbox" data-footer="{{ product.feature_image.caption }}" data-gallery="product-gallery">
+                            <img src="{{ product.feature_image | img_url: '340x' }}" class="w-100">
+                        </a>
+                    </div>
+                {% endif %}
+
+                <div class="row mb-3">
+                    {% for variant in product.variants %}
+                        {% for image in variant.images %}
+                            <div class="col-6 col-lg-4">
+                                <a href="{{ image.full }}" title="{{ image.caption }}" data-toggle="lightbox" data-footer="{{ image.caption }}" data-gallery="product-gallery"><img src="{{ image | img_url: 260 }}" class="w-100"></a>
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+            </div>
+
+            {% if product.goal_amount %}
+                <div class="mb-3">
+                    {% include 'product-goal', product: product %}
+                </div>
+            {% endif %}
+
+            {% include 'product-social-actions' %}
+        </div>
+
+        <!-- vertical spacer for desktop -->
+        <div class="col-lg-1 d-md-none col-12">&nbsp;</div>
+
+        <div class="col-lg-7 col-md-8 col-12">
+
+            <h1 class="text-left mt-0 mb-4">{{ product.name }}</h1>
+            {% if product.description %}<p>{{ product.description }}</p>{% endif %}
+
+            <form class="product-add-to-cart" method="post" novalidate>
+                <input type="hidden" name="product_id" value="{{ product.id }}">
+                <input type="hidden" name="recurring_frequency" value="">
+
+                <div class="mb-4">
+                    {% if product.qty_available %}
+                        {% include 'product-options', product: product %}
+                    {% elsif product.out_of_stock_message %}
+                        <p class="text-danger">{{ product.out_of_stock_message }}</p>
+                    {% else %}
+                        <p class="text-danger">{{ 'templates.product.sold_out' | t }}</p>
+                    {% endif %}
+                </div>
+
+                {% if product.enable_tributes %}
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            {% include 'product-tribute-fields', product: product, requires_vue_app: true %}
+                        </div>
+                    </div>
+                {% endif %}
+
+                {% if product.form_fields.size > 0 %}
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            {% include 'product-form-fields', product: product %}
+                        </div>
+                    </div>
+                {% endif %}
+
+                <div>
+                    <!-- desktop buttons -->
+                    <div class="d-none d-md-block mt-5">
+                        <div class="add-product-btns">
+                            {% unless product.hide_qty %}
+                                <div class="form-group labelify d-inline-block mb-3 mr-1" style="width:90px;">
+                                    <label for="p{{ product.id }}-variant-id">{{ 'templates.product.quantity' | t }}</label>
+                                    {% if settings.qty_selection_type == 'text' %}
+                                        <input type="text" class="form-control form-control-pill" name="quantity" value="1" required>
+                                    {% else %}
+                                        <select class="form-control" name="quantity" required>
+                                            {% for qty in (1 .. settings.qty_selection_limit) %}
+                                                <option value="{{ qty }}">{{ qty }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    {% endif %}
+                                </div>
+                            {% endunless %}
+
+                            <button type="submit" name="primary-btn" data-style="slide-up" class="mb-3 mr-1 btn btn-lg btn-primary btn-pill px-4" {% unless product.qty_available %}disabled{% endunless %}><i class="fa fa-plus"></i> {% if product.primary_button_label %}{{ product.primary_button_label }}{% else %}Add to {{ settings.cart_label }}{% endif %}</button>
+                            {% if product.alternate_button_label %}
+                                <br><button type="button" name="alternate-btn" value="{{ product.alternate_button_url | escape }}" class="mb-3 btn btn-outline-primary btn-pill px-4" data-spinner-color="{{ site.primary_color }}" {% unless product.qty_available %}disabled{% endunless %}>{{ product.alternate_button_label }}</button>
+                            {% endif %}
+                        </div>
+                        <div style="display:none;" class="add-product-success">
+                            <a href="/cart" class="btn btn-lg btn-pill btn-outline-primary mb-1">{{ 'templates.product.continue_to_payment' | t }} <i class="fa fa-arrow-right fa-fw"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- mobile buttons (fixed to bottom) -->
+                    <div class="d-flex d-sm-flex d-md-none shadow-sm fixed-bottom p-3 text-center bg-white align-items-center justify-content-between">
+                        <div class="circle-avatar-bg-sm mx-2" style="background-image:url('{{ product.feature_image.thumb }}');"></div>
+
+                        <div>
+                            <div class="add-product-btns mobile-add-product-buttons">
+                                <div class="d-flex flex-row align-items-center">
+                                    {% unless product.hide_qty %}
+                                        <div class="labelify d-inline-block align-top">
+                                            <label for="p{{ product.id }}-variant-id">{{ 'templates.product.quantity' | t }}</label>
+                                            {% if settings.qty_selection_type == 'text' %}
+                                                <input type="text" class="form-control" name="quantity" value="1" required>
+                                            {% else %}
+                                                <select class="form-control" name="quantity" required>
+                                                    {% for qty in (1 .. settings.qty_selection_limit) %}
+                                                        <option value="{{ qty }}">{{ qty }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            {% endif %}
+                                        </div>
+                                    {% endunless %}
+
+                                    <div class="d-flex flex-column ">
+                                        <button type="submit" name="primary-btn" data-style="slide-up" class="btn btn-primary {% unless product.alternate_button_label %}btn-lg{% endunless %}" {% unless product.qty_available %}disabled{% endunless %}><i class="fa fa-plus"></i> {% if product.primary_button_label %}{{ product.primary_button_label }}{% else %}Add to {{ settings.cart_label }}{% endif %}</button>
+                                        {% if product.alternate_button_label %}
+                                            <button type="button" name="alternate-btn" value="{{ product.alternate_button_url | escape }}" class="btn btn-outline-primary px-4" data-spinner-color="{{ site.primary_color }}" {% unless product.qty_available %}disabled{% endunless %}>{{ product.alternate_button_label }}</button>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="display:none;" class="add-product-success">
+                                <a href="/cart" class="btn btn-lg btn-pill btn-outline-primary mb-1">{{ 'templates.product.payment' | t }} <i class="fa fa-arrow-right fa-fw"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    {% if product.page_content and product.metadata.page_content_location != 'above' %}
+        <hr class="mx-3">
+
+        <div id="product-page-content">
+            {{ product.page_content }}
+        </div>
+    {% endif %}
+
+    {% if settings.product_featured_category and settings.product_featured_category.sub_categories.size > 0 %}
+        <hr class="mx-3">
+        <section class="section-light section-sm">
+            <div class="container">
+                <div class="row">
+                    {% for cat in settings.product_featured_category.sub_categories %}
+                        <div class="col-6 col-md-4 col-lg-3 my-1 {% if settings.animations %}wow fadeInUp{% endif %}" {% if settings.animations %}data-wow-delay="0.{{ forloop.index }}s"{% endif %}>
+                            {% include 'image-link-item', size: 'sm', text: cat.name, link: cat.url, image: cat.feature_image.thumb %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    {% endif %}
+</div>
+
+</div>

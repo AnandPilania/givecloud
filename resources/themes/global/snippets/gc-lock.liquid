@@ -1,0 +1,4 @@
+
+<div class="gc-lock{% if lock_style == 'dark' %}-dark{% endif %}">
+    {{ 'general.give_with_confidence' | t }}<br><span class="text-muted"><a href="https://givecloud.co/?utm_source={{ site.domain }}&utm_medium=gc-secure" target="_blank" rel="noopener">{{ 'general.powered_by_givecloud' | t }}</a>{% if site.partner.brand_phrase %} <a href="{{ site.partner.brand_url }}">{{ site.partner.brand_phrase }}</a>{% endif %}</span>
+</div>

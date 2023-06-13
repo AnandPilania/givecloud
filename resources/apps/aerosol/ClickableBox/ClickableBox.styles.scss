@@ -1,0 +1,24 @@
+.root {
+  @apply block hover:cursor-pointer text-inherit mb-8 rounded-xl;
+  @apply focus:outline-none focus:ring-brand-blue focus:ring-2 focus:ring-offset-2;
+
+  &.noMargin {
+    @apply mb-0;
+  }
+
+  .box {
+    &:hover {
+      box-shadow: 0 0 0 2px #015ffc;
+    }
+  }
+
+  &:hover {
+    div:global(.icon-container) {
+      @apply bg-brand-blue;
+    }
+
+    svg:global(.icon) {
+      @apply text-white;
+    }
+  }
+}

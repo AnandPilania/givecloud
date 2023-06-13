@@ -1,0 +1,7 @@
+.columns {
+  @apply border-b border-gray-300 sm:border-none;
+}
+
+.inputContainer {
+  @apply w-full flex flex-col sm:flex-row;
+}

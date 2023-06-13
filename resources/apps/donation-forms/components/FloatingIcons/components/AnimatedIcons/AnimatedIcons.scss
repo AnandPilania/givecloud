@@ -1,0 +1,36 @@
+.root {
+  @apply absolute top-0 left-0;
+  @apply pointer-events-none select-none;
+
+  &.center {
+    @apply flex justify-center items-center;
+    @apply w-full h-full;
+  }
+
+  > span {
+    @apply absolute top-0 left-0 w-full opacity-0;
+    @apply flex justify-center items-center;
+  }
+
+  .icon1 {
+    @apply -ml-4;
+    font-size: 0.6rem;
+  }
+
+  .icon2 {
+    @apply text-sm;
+  }
+
+  .icon3 {
+    @apply ml-4;
+    @apply text-xs;
+  }
+
+  img {
+    @apply w-4 h-auto;
+  }
+
+  &.large img {
+    @apply w-4 h-auto;
+  }
+}

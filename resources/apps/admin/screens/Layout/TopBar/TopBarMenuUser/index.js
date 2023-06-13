@@ -1,0 +1,1 @@
+export { TopBarMenuUser } from './TopBarMenuUser'

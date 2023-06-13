@@ -1,0 +1,21 @@
+.content {
+  height: inherit;
+
+  @apply px-0;
+
+  .list {
+    @apply my-4 text-left;
+
+    .address {
+      @apply block w-1/2 mt-4 ml-8;
+    }
+  }
+}
+
+.title {
+  @apply mt-4;
+}
+
+.footer {
+  @apply px-0 pb-0;
+}

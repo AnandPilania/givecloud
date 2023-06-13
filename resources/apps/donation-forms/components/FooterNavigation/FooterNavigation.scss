@@ -1,0 +1,23 @@
+.root {
+  @apply flex justify-between items-center;
+  @apply w-full;
+  @apply mt-0 mb-6 text-sm;
+
+  &.standardLayout {
+    @apply mb-10;
+  }
+
+  .callToAction {
+    @apply py-2;
+    @apply underline;
+    color: var(--primary-text-colour);
+  }
+
+  .currencySelector {
+    @apply -ml-2;
+  }
+
+  .footerLinks {
+    @apply py-2;
+  }
+}

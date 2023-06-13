@@ -1,0 +1,52 @@
+.root {
+  @apply bg-blue-100 rounded-full w-full h-6 p-1;
+
+  &.custom {
+    @apply bg-theme-light;
+  }
+
+  &.primary {
+    @apply bg-blue-100;
+  }
+
+  &.thin {
+    @apply h-4;
+
+    .barContainer .bar {
+      @apply h-2;
+    }
+  }
+
+  .barContainer {
+    @apply relative;
+
+    .bar {
+      @apply h-4 min-w-[1rem];
+      @apply rounded-full absolute;
+
+      &.fixed {
+        @apply z-20 max-w-full;
+
+        &.primary {
+          @apply bg-blue-600;
+        }
+
+        &.custom {
+          @apply bg-theme;
+        }
+      }
+
+      &.flexible {
+        @apply z-10;
+
+        &.primary {
+          @apply bg-blue-400;
+        }
+
+        &.custom {
+          @apply bg-theme brightness-150;
+        }
+      }
+    }
+  }
+}

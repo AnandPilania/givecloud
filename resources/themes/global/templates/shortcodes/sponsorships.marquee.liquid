@@ -1,0 +1,9 @@
+<div id="{{ id }}" class="owl-carousel" data-items="{{ sponsorees.size }}">
+    {% for sponsoree in sponsorees %}
+        {% include 'sponsorship-grid-item', child: sponsoree, match_height: 'products-marquee-item' %}
+    {% endfor %}
+</div>
+
+{% for sponsoree in sponsorees %}
+  {% include 'sponsorship-add-modal', child: sponsoree %}
+{% endfor %}

@@ -1,0 +1,17 @@
+.root {
+  min-height: 2rem !important;
+  background-color: #e63757 !important;
+  @apply font-bold text-lg text-white leading-tight;
+
+  :global(.Toastify__toast-icon) {
+    @apply ml-2 mr-4;
+  }
+
+  @media only screen and (min-width: 480px) {
+    border-radius: 50px !important;
+  }
+}
+
+:global(.Toastify__toast-container--top-center) {
+  @apply top-8;
+}

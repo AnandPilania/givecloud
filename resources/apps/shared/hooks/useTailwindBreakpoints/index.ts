@@ -1,0 +1,1 @@
+export { useTailwindBreakpoints } from './useTailwindBreakpoints'

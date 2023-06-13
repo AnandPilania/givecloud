@@ -1,0 +1,48 @@
+#!/usr/bin/env php
+<?php
+
+$inputFile = dirname(__DIR__) . '/clover.xml';
+
+if (! file_exists($inputFile)) {
+    exit;
+}
+
+$xml = new SimpleXMLElement(file_get_contents($inputFile));
+$metrics = $xml->xpath('//metrics');
+
+$totalElements = 0;
+$checkedElements = 0;
+
+foreach ($metrics as $metric) {
+    $totalElements += (int) $metric['elements'];
+    $checkedElements += (int) $metric['coveredelements'];
+}
+
+$payload = json_encode([
+    'run' => getenv('GITHUB_RUN_ID'),
+    'repo' => getenv('GITHUB_REPOSITORY'),
+    'branch' => str_replace('refs/heads/', '', getenv('GITHUB_REF')),
+    'commit' => getenv('GITHUB_SHA'),
+    'coverage' => $totalElements ? round($checkedElements / $totalElements * 100, 4) : 0,
+]);
+
+$ch = curl_init();
+
+curl_setopt_array($ch, [
+    CURLOPT_URL => 'https://missioncontrol.givecloud.com/api/v1/code-coverage',
+    CURLOPT_CUSTOMREQUEST => 'POST',
+    CURLOPT_POSTFIELDS => $payload,
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_HTTPHEADER => [
+        'Accept: application/json',
+        'Content-Type: application/json',
+        'Content-Length: ' . strlen($payload),
+        'X-Coverage-Signature: ' . hash_hmac('sha512', $payload, getenv('COVERAGE_SECRET')),
+    ],
+]);
+
+curl_exec($ch);
+
+if (curl_error($ch)) {
+    echo curl_error($ch);
+}

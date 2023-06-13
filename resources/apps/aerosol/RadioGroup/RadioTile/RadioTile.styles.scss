@@ -1,0 +1,27 @@
+.root {
+  @apply border rounded-md cursor-pointer flex justify-between w-full;
+
+  .children {
+    @apply ml-2 my-1 p-1;
+  }
+
+  &.default {
+    @apply border-gray-400;
+  }
+
+  &.checked {
+    @apply border-blue-500 ring-2 ring-blue-500;
+  }
+
+  &.disabled {
+    @apply ring-0 border-gray-400 text-gray-400 cursor-not-allowed;
+  }
+
+  .icon {
+    @apply bg-blue-500 text-white rounded-full m-1.5;
+
+    &.disabled {
+      @apply bg-gray-400;
+    }
+  }
+}

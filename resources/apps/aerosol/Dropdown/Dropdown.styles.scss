@@ -1,0 +1,11 @@
+.root {
+  @apply flex flex-col items-start;
+
+  &.marginBottom {
+    @apply mb-6;
+  }
+
+  &.fullWidth {
+    @apply w-full;
+  }
+}

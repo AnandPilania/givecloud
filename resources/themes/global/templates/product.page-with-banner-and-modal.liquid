@@ -1,0 +1,58 @@
+{% if settings.page_heading_bg_effect == 'darken' %}
+  {% assign page_heading_backround_overlay_css = 'linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), ' %}
+{% elsif settings.page_heading_bg_effect == 'darken_more' %}
+  {% assign page_heading_backround_overlay_css = 'linear-gradient( rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75) ), ' %}
+{% elsif settings.page_heading_bg_effect == 'lighten' %}
+  {% assign page_heading_backround_overlay_css = 'linear-gradient( rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5) ), ' %}
+{% elsif settings.page_heading_bg_effect == 'lighten_more' %}
+  {% assign page_heading_backround_overlay_css = 'linear-gradient( rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.75) ), ' %}
+{% endif %}
+
+{% if settings.page_heading_bg == 'image' %}
+  {% assign header_image = 'https://placeimg.com/1200/800/nature' %}
+{% elsif settings.page_heading_bg == 'feature_image' %}
+  {% assign header_image = product.feature_image.full %}
+{% elsif settings.page_heading_bg == 'color' %}
+  {% assign header_image = '' %}
+{% endif %}
+
+<section class="title-bar-xl" style="{% if header_image %}background: {{ page_heading_backround_overlay_css }} url('{{ header_image }}') no-repeat center center;{% endif %}">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <h1>{{ product.name }}{% if product.description %}<br><small>{{ product.description }}</small>{% endif %}</h1>
+
+        <div style="max-width:400px; width:80%;" class="mx-auto mb-4">
+            {% if product.goal_amount %}
+              {% include 'product-goal', product: product, goal_size: 'lg', goal_style:'outline', goal_color:'white' %}
+            {% endif %}
+        </div>
+
+        <!-- desktop buttons -->
+        <div class="d-none d-md-block text-center">
+            <button type="button" data-toggle="modal" data-target="#add-product-{{ product.id }}" name="button" value="primary-btn" class="mb-3 btn btn-xl btn-primary btn-pill px-4"><i class="fa fa-plus"></i> {% if product.primary_button_label %}{{ product.primary_button_label }}{% else %}{{ 'templates.product.add_to_cart' | t: cart_term: settings.cart_label }}{% endif %}</button>
+        </div>
+
+        <!-- mobile buttons (fixed to bottom) -->
+        <div class="mobile-add-product-buttons d-flex d-sm-flex d-md-none shadow-sm fixed-bottom p-3 text-center bg-white align-items-center justify-content-between">
+            <div class="circle-avatar-bg-sm mx-2" style="background-image:url('{% if product.feature_image %}{{ product.feature_image.thumb }}{% else %}https://placeimg.com/1200/800/nature{% endif %}');"></div>
+
+            <div>
+                <button type="button" data-toggle="modal" data-target="#add-product-{{ product.id }}" name="button" value="primary-btn" class="btn btn-primary {% unless product.alternate_button_label %}btn-lg{% endunless %} px-4"><i class="fa fa-plus"></i> {% if product.primary_button_label %}{{ product.primary_button_label }}{% else %}{{ 'templates.product.add_to_cart' | t: cart_term: settings.cart_label }}{% endif %}</button>
+            </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="page-content">
+
+<div class="container">
+    {{ product.page_content }}
+</div>
+
+</div>
+
+{% include 'product-add-modal', product: product %}

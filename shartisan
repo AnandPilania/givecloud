@@ -1,0 +1,13 @@
+#!/bin/bash
+
+if [ $# -lt 1 ]; then
+  echo "Usage: shartisan ds_account_name ..."
+  exit 1
+fi
+
+DIR="$(git rev-parse --show-toplevel)"
+
+export HTTP_X_GIVECLOUD_DOMAIN="$1"
+shift
+
+$DIR/artisan "$@"

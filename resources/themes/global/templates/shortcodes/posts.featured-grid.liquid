@@ -1,0 +1,33 @@
+{% if posts.size == 1 %}
+    {% assign grid_item_wrap_classes = "col-12" %}
+{% elsif posts.size == 2 %}
+    {% assign grid_item_wrap_classes = "col-sm-6 col-12" %}
+{% elsif posts.size == 3 %}
+    {% assign grid_item_wrap_classes = "col-md-4 col-sm-6 col-12" %}
+{% elsif posts.size > 3 %}
+    {% assign grid_item_wrap_classes = "col-lg-3 col-md-4 col-sm-6 col-12" %}
+{% endif%}
+
+{% assign match_height = 'posts-featured-grid' ~ post_type.id %}
+
+<div class="row posts-featured-grid">
+    {% for post in posts %}
+        <div class="{{ grid_item_wrap_classes }} wow fadeInUp" data-wow-delay="0.{{ forloop.index }}s">
+            {% if post.categories.size > 0 %}
+                <h5>{{ post.categories[0].name }}</h5>
+            {% else %}
+                <h5>&nbsp;</h5>
+            {% endif %}
+            
+            {% capture button_label %}
+                {% if post.metadata.embed_file %}
+                    <i class="fa fa-play"></i> Play
+                {% else %}
+                {{ 'general.actions.read_more' | t }} <i class="fa fa-arrow-right"></i>
+                {% endif %}
+            {% endcapture%}
+
+            {% include 'grid-item', image: post.feature_image.thumb, heading: post.title, description: post.excerpt, button_label: button_label, button_url: post.url, match_height: match_height %}
+        </div>
+    {% endfor %}
+</div>

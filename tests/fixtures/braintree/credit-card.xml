@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<credit-card>
+  <billing-address>
+    <id>8d</id>
+    <customer-id>495241242</customer-id>
+    <first-name nil="true"/>
+    <last-name nil="true"/>
+    <company nil="true"/>
+    <street-address>123 Melrose Street</street-address>
+    <extended-address nil="true"/>
+    <locality>Brooklyn</locality>
+    <region>NY</region>
+    <postal-code>11206</postal-code>
+    <country-code-alpha2>US</country-code-alpha2>
+    <country-code-alpha3>USA</country-code-alpha3>
+    <country-code-numeric>840</country-code-numeric>
+    <country-name>United States of America</country-name>
+    <phone-number nil="true"/>
+    <created-at type="datetime">2022-07-11T04:03:09Z</created-at>
+    <updated-at type="datetime">2022-07-11T04:03:09Z</updated-at>
+  </billing-address>
+  <bin>424242</bin>
+  <card-type>Visa</card-type>
+  <cardholder-name>Bob Hope</cardholder-name>
+  <commercial>Unknown</commercial>
+  <country-of-issuance>Unknown</country-of-issuance>
+  <created-at type="datetime">2022-07-27T06:57:12Z</created-at>
+  <customer-id>495241242</customer-id>
+  <customer-global-id>Y3VzdG9tZXJfNDk1MjQxMjQy</customer-global-id>
+  <customer-location>US</customer-location>
+  <debit>Unknown</debit>
+  <default type="boolean">true</default>
+  <durbin-regulated>Unknown</durbin-regulated>
+  <expiration-month>5</expiration-month>
+  <expiration-year>2030</expiration-year>
+  <expired type="boolean">false</expired>
+  <global-id>cGF5bWVudG1ldGhvZF9jY19mMm43cWQy</global-id>
+  <healthcare>Unknown</healthcare>
+  <image-url>https://assets.braintreegateway.com/payment_method_logo/visa.png?environment=sandbox</image-url>
+  <issuing-bank>Unknown</issuing-bank>
+  <last-4>4242</last-4>
+  <payroll>Unknown</payroll>
+  <prepaid>Unknown</prepaid>
+  <product-id>Unknown</product-id>
+  <subscriptions type="array"/>
+  <token>f2n7qd2</token>
+  <unique-number-identifier>0d181d979eaceef52ecae66dcbb23de2</unique-number-identifier>
+  <updated-at type="datetime">2022-07-27T06:57:12Z</updated-at>
+  <venmo-sdk type="boolean">false</venmo-sdk>
+  <verifications type="array">
+    <verification>
+      <status>verified</status>
+      <cvv-response-code>M</cvv-response-code>
+      <avs-error-response-code nil="true"/>
+      <avs-postal-code-response-code>M</avs-postal-code-response-code>
+      <avs-street-address-response-code>M</avs-street-address-response-code>
+      <gateway-rejection-reason nil="true"/>
+      <merchant-account-id>givecloud</merchant-account-id>
+      <processor-response-code>1000</processor-response-code>
+      <processor-response-text>Approved</processor-response-text>
+      <additional-processor-response nil="true"/>
+      <amount>0.00</amount>
+      <currency-iso-code>USD</currency-iso-code>
+      <processor-response-type>approved</processor-response-type>
+      <three-d-secure-info nil="true"/>
+      <id>3tsp5b5w</id>
+      <billing>
+        <first-name nil="true"/>
+        <last-name nil="true"/>
+        <company nil="true"/>
+        <street-address>123 Melrose Street</street-address>
+        <extended-address nil="true"/>
+        <locality>Brooklyn</locality>
+        <region>NY</region>
+        <postal-code>11206</postal-code>
+        <country-name>United States of America</country-name>
+      </billing>
+      <credit-card>
+        <token>f2n7qd2</token>
+        <bin>424242</bin>
+        <last-4>4242</last-4>
+        <card-type>Visa</card-type>
+        <expiration-month>5</expiration-month>
+        <expiration-year>2030</expiration-year>
+        <customer-location>US</customer-location>
+        <cardholder-name>Bob Hope</cardholder-name>
+        <unique-number-identifier>0d181d979eaceef52ecae66dcbb23de2</unique-number-identifier>
+        <account-type>credit</account-type>
+        <global-id>cGF5bWVudG1ldGhvZF9jY19mMm43cWQy</global-id>
+        <prepaid>Unknown</prepaid>
+        <healthcare>Unknown</healthcare>
+        <debit>Unknown</debit>
+        <durbin-regulated>Unknown</durbin-regulated>
+        <commercial>Unknown</commercial>
+        <payroll>Unknown</payroll>
+        <issuing-bank>Unknown</issuing-bank>
+        <country-of-issuance>Unknown</country-of-issuance>
+        <product-id>Unknown</product-id>
+      </credit-card>
+      <created-at type="datetime">2022-07-27T06:57:12Z</created-at>
+      <updated-at type="datetime">2022-07-27T06:57:12Z</updated-at>
+      <network-transaction-id>020220727065712</network-transaction-id>
+      <network-response-code>XX</network-response-code>
+      <network-response-text>sample network response text</network-response-text>
+      <global-id>dmVyaWZpY2F0aW9uXzN0c3A1YjV3</global-id>
+    </verification>
+  </verifications>
+  <is-network-tokenized type="boolean">false</is-network-tokenized>
+</credit-card>

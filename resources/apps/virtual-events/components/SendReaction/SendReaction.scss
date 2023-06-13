@@ -1,0 +1,31 @@
+.root {
+  @apply p-4 rounded-lg bg-gray-900 bg-opacity-90;
+
+  &.dark {
+    @apply bg-gray-900 text-white;
+  }
+
+  &.light {
+    @apply bg-white text-gray-900;
+  }
+
+  .heading {
+    @apply text-2xl mb-2 text-center;
+  }
+
+  .reactions {
+    @apply flex justify-center;
+
+    &.disabled {
+      @apply opacity-50;
+    }
+
+    .reactionButton {
+      @apply text-4xl mx-2;
+
+      &:focus {
+        @apply outline-none;
+      }
+    }
+  }
+}

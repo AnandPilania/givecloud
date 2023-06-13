@@ -1,0 +1,51 @@
+{% assign header_title = 'templates.404.404_page_not_found' | t %}
+{% include 'header-image', header_title: header_title, header_image: settings.error_header_image.full %}
+
+<div class="page-content error-page">
+
+    <div class="container py-3">
+        <h1>
+            {{ settings.error_heading }}<br>
+            <small>{{ settings.error_description }}</small>
+        </h1>
+
+        <div class="row my-5">
+
+            {% if settings.error_box_1_enabled %}
+                <div class="col-12 col-md">
+                    <div class="card mb-3 wow fadeInUp">
+                        <div class="card-body">
+                            <h3 class="card-title text-left">{{ settings.error_box_1_label }}</h3>
+                            {{ settings.error_box_1_body }}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+            {% if settings.error_box_2_enabled %}
+                <div class="col-12 col-md">
+                    <div class="card mb-3 wow fadeInUp">
+                        <div class="card-body">
+                            <h3 class="card-title text-left">{{ settings.error_box_2_label }}</h3>
+                            {{ settings.error_box_2_body }}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+            {% if settings.error_box_3_enabled %}
+                <div class="col-12 col-md">
+                    <div class="card mb-3 wow fadeInUp">
+                        <div class="card-body">
+                            <h3 class="card-title text-left">{{ settings.error_box_3_label }}</h3>
+                            {{ settings.error_box_3_body }}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>

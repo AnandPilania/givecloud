@@ -1,0 +1,11 @@
+.root {
+  @apply w-full;
+
+  &.borderBottom {
+    @apply border-b border-gray-200;
+  }
+
+  &.borderTop {
+    @apply border-t border-gray-200;
+  }
+}

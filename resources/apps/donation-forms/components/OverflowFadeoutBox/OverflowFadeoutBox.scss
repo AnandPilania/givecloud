@@ -1,0 +1,9 @@
+.root {
+  @apply relative overflow-auto;
+  mask-image: linear-gradient(to bottom, transparent, black 40px, black calc(100% - 50px), transparent);
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

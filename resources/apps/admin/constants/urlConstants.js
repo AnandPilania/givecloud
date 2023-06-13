@@ -1,0 +1,5 @@
+export const GIVECLOUD_UPDATES_URL = 'https://givecloud.co/updates'
+export const GIVECLOUD_HELP_URL = 'https://help.givecloud.com'
+export const TRAINING_VIDEOS_URL = 'https://onboarding.givecloud.com/training/welcome'
+export const TRUSTRAISING_URL = 'https://trustraising.org'
+export const CALENDLY_URL = 'https://calendly.com/givecloud-experts'

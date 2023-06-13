@@ -1,0 +1,219 @@
+{% layout 'theme' %}
+
+{% include 'header-image' %}
+
+{% if settings.sponsorship_show_age %}
+  {% assign birthday_date_format = 'date:month_day_year' %}
+{% else %}
+  {% assign birthday_date_format = 'date:month_day' %}
+{% endif %}
+
+<section class="mt-4">
+  <div class="container">
+
+    <div class="mb-5 text-center" style="margin-top:-140px;">
+
+      {% if sponsorship.thumbnail %}
+        <div class="avatar-xl" style="background-image:url('{{ sponsorship.thumbnail }}');"></div>
+      {% else %}
+        <div class="avatar-xl" style="background-color:#eee; color:#fff; text-align:center; padding-top:85px;"><i class="fa fa-camera fa-5x fa-fw"></i></div>
+      {% endif %}
+
+      <h1 class="mt-4">{% include 'sponsorship-name', fname: sponsorship.first_name, lname: sponsorship.last_name %}{% if settings.sponsorship_show_ref %}<br><small class="text-muted">{{ settings.sponsorship_ref_prefix }} {{ sponsorship.reference_number }}</small>{% endif %}</h1>
+
+      <div>
+        <!-- desktop buttons -->
+        <div class="d-none d-md-block mt-5">
+          {% assign child_in_cart = sponsorship | in_cart %}
+          {% if child_in_cart %}
+            <a href="#" class="btn btn-xl btn-pill btn-outline-primary disabled px-4"><i class="fa fa-check"></i> {{ 'templates.sponsorship.added' | t }}</a>
+          {% elsif sponsorship.sponsored %}
+            <a href="#" class="btn btn-xl btn-pill btn-outline-primary disabled px-4"><i class="fa fa-check"></i>
+                {% if settings.sponsorship_sponsored_label %}
+                    {{ settings.sponsorship_sponsored_label }}
+                {% else %}
+                    {{ 'templates.sponsorship.already_sponsored' | t }}
+                {% endif %}
+            </a>
+          {% else %}
+            <a href="#add-sponsorship-{{ sponsorship.id }}" data-toggle="modal" class="btn btn-xl btn-pill btn-primary px-4"><i class="fa fa-plus"></i>
+                {% if settings.sponsorship_sponsor_me_label %}
+                    {{ settings.sponsorship_sponsor_me_label }}
+                {% else %}
+                    {{ 'templates.sponsorship.sponsor_me' | t }}
+                {% endif %}
+            </a>
+          {% endif %}
+        </div>
+
+        <!-- mobile buttons (fixed to bottom) -->
+        <div class="d-flex d-sm-flex d-md-none border-top fixed-bottom p-3 text-center bg-white align-items-center justify-content-between">
+          <div class="circle-avatar-bg-sm mx-2" style="background-image:url('{% if sponsorship.thumbnail %}{{ sponsorship.thumbnail }}{% endif %}');"></div>
+          {% assign child_in_cart = sponsorship | in_cart %}
+          {% if child_in_cart %}
+            <a href="#" class="btn btn-xl btn-pill btn-outline-primary disabled px-4"><i class="fa fa-check"></i> {{ 'templates.sponsorship.added' | t }}</a>
+          {% elsif sponsorship.sponsored %}
+            <a href="#" class="btn btn-lg btn-pill btn-outline-primary disabled px-4"><i class="fa fa-check"></i>
+                {% if settings.sponsorship_sponsored_label %}
+                    {{ settings.sponsorship_sponsored_label }}
+                {% else %}
+                    {{ 'templates.sponsorship.already_sponsored' | t }}
+                {% endif %}
+            </a>
+          {% else %}
+            <a href="#add-sponsorship-{{ sponsorship.id }}" data-toggle="modal" class="btn btn-lg btn-pill btn-primary px-4"><i class="fa fa-plus"></i>
+                {% if settings.sponsorship_sponsor_me_label %}
+                    {{ settings.sponsorship_sponsor_me_label }}
+                {% else %}
+                    {{ 'templates.sponsorship.sponsor_me' | t }}
+                {% endif %}
+            </a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <div class="masonry-3 mb-5 sponsorship-masonry">
+
+      <div class="brick-container">
+        <div class="brick">
+          <div class="card border-secondary mb-4">
+            <div class="card-header text-white text-center bg-secondary border-secondary">
+              {{ 'templates.sponsorship.about_me' | t }}
+            </div>
+            <div class="card-body p-4 text-center text-info">
+              <span class="text-lg">
+                {{ 'templates.sponsorship.my_name_is_html' | t: first_name: sponsorship.first_name, last_name: sponsorship.last_name }}
+                {% if settings.sponsorship_show_age and settings.sponsorship_show_gender and sponsorship.age and sponsorship.gender %}
+                  {% if sponsorship.gender == 'F' %}
+                    {{ 'templates.sponsorship.child_description_female_with_age_html' | t: age: sponsorship.age }}
+                  {% else %}
+                    {{ 'templates.sponsorship.child_description_male_with_age_html' | t: age: sponsorship.age }}
+                  {% endif %}
+                {% elsif settings.sponsorship_show_age and sponsorship.age %}
+                  {{ 'templates.sponsorship.child_description_age_html' | t: age: sponsorship.age }}
+                {% elsif settings.sponsorship_show_gender and sponsorship.gender %}
+                  {% if sponsorship.gender == 'F' %}
+                    {{ 'templates.sponsorship.child_description_female_html' | t }}
+                  {% else %}
+                    {{ 'templates.sponsorship.child_description_male_html' | t }}
+                  {% endif %}
+                {% endif %}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {% if settings.sponsorship_show_birthday and sponsorship.birth_date %}
+        <div class="brick-container">
+          <div class="brick">
+            <div class="card border-secondary mb-4">
+              <div class="card-header text-white text-center bg-secondary border-secondary">
+                {{ 'templates.sponsorship.birthday' | t }}
+              </div>
+              <div class="card-body p-4 text-center text-info">
+                <i class="fa fa-5x fa-birthday-cake mb-3"></i><br>
+                {% assign birth_date = sponsorship.birth_date | date: birthday_date_format %}</span>
+                <span class="text-lg">{{ 'templates.sponsorship.my_birthday_is_html' | t: birth_date: birth_date }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+
+      {% if settings.sponsorship_show_map and settings.google_maps_api_key and sponsorship.latitude and sponsorship.longitude %}
+        <div class="brick-container">
+          <div class="brick">
+            <div class="card border-secondary mb-4">
+              <div class="card-header text-white text-center bg-secondary border-secondary">
+                {{ 'templates.sponsorship.geography' | t }}
+              </div>
+              <div class="card-body p-0">
+                {% if settings.sponsorship_map_type == 'static' %}
+                  <div style="width:100%; height:380px; background-image:url('https://maps.googleapis.com/maps/api/staticmap?center={{ sponsorship.latitude }},{{ sponsorship.longitude }}&zoom=4&scale=2&size=350x380&maptype=roadmap&markers=color:red%7C{{ sponsorship.latitude }},{{ sponsorship.longitude }}&key={{ settings.google_maps_api_key }}&style=feature:administrative|element:labels.text.fill|color:0x444444&style=feature:landscape|element:all|color:0xf2f2f2&style=feature:poi|element:all|visibility:off&style=feature:poi|element:labels.text|visibility:off&style=feature:road|element:all|saturation:-100|lightness:45&style=feature:road.highway|element:all|visibility:simplified&style=feature:road.arterial|element:labels.icon|visibility:off&style=feature:transit|element:all|visibility:off&style=feature:water|element:all|color:0xdbdbdb|visibility:on'); background-size:350px 380px; background-repeat:no-repeat; background-position:center center;"></div>
+                {% else %}
+                  <iframe
+                    width="100%"
+                    height="380"
+                    frameborder="0"
+                    style="border:0"
+                    src="https://www.google.com/maps/embed/v1/view?key={{ settings.google_maps_api_key }}&zoom=6&center={{ sponsorship.latitude }}, {{ sponsorship.longitude }}" allowfullscreen>
+                  </iframe>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+
+      {% for field in sponsorship.fields %}
+        <div class="brick-container">
+          <div class="brick">
+            <div class="card border-secondary mb-4">
+              <div class="card-header text-white text-center bg-secondary border-secondary">
+                {{ field.name }}
+              </div>
+              <div class="card-body p-4 text-center text-info">
+                {% if field.is_simple %}
+                  <p class="text-lg">{{ field.value }}</p>
+                {% elsif field.item.summary %}
+                  <p class="text-lg">{{ field.item.summary }}</p>
+                {% elsif field.item.name %}
+                  <p class="text-lg">{{ field.item.name }}</p>
+                {% endif %}
+              </div>
+              {% if field.item.link %}
+                <div class="card-body text-center border-top">
+                  <a class="card-link" href="{{ field.item.link }}" target="{{ field.item.target }}">{{ 'templates.sponsorship.more' | t }} <i class="fa fa-arrow-right fa-fw"></i></a>
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+
+    </div>
+
+    {% if sponsorship.biography %}
+
+      <div class="mb-5">
+          {% if settings.sponsorship_my_story_label %}
+              <h2>{{ settings.sponsorship_my_story_label }}</h2>
+          {% else %}
+              <h2>{{ 'templates.sponsorship.my_story' | t }}</h2>
+          {% endif %}
+        {{ sponsorship.biography }}
+      </div>
+
+      <div class="d-none d-md-block my-5 text-center">
+        {% assign child_in_cart = sponsorship | in_cart %}
+        {% if child_in_cart %}
+          <a href="#" class="btn btn-xl btn-pill btn-outline-primary disabled px-4"><i class="fa fa-check"></i> {{ 'templates.sponsorship.added' | t }}</a>
+        {% elsif sponsorship.sponsored %}
+          <a href="#" class="btn btn-xl btn-pill btn-outline-primary disabled px-4"><i class="fa fa-check"></i>
+              {% if settings.sponsorship_sponsored_label %}
+                  {{ settings.sponsorship_sponsored_label }}
+              {% else %}
+                  {{ 'templates.sponsorship.already_sponsored' | t }}
+              {% endif %}
+          </a>
+        {% else %}
+          <a href="#add-sponsorship-{{ sponsorship.id }}" data-toggle="modal" class="btn btn-xl btn-pill btn-primary px-4"><i class="fa fa-plus"></i>
+              {% if settings.sponsorship_sponsor_me_label %}
+                  {{ settings.sponsorship_sponsor_me_label }}
+              {% else %}
+                  {{ 'templates.sponsorship.sponsor_me' | t }}
+              {% endif %}
+
+          </a>
+        {% endif %}
+      </div>
+
+    {% endif %}
+
+  </div>
+
+</section>
+
+{% include 'sponsorship-add-modal', child: sponsorship %}

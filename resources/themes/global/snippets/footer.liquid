@@ -1,0 +1,108 @@
+<footer>
+  {% if settings.footer_columns %}
+    <div class="section-{% if settings.footer_scheme == 'light' %}light{% else %}dark{% endif %}">
+      <div class="container">
+        <div class="row">
+          {% if settings.footer_columns == '1' %}
+            <div class="col gutter-bottom">
+              {% if settings.footer_col_1_label %}
+                <h4>{{ settings.footer_col_1_label | escape }}</h4>
+              {% endif %}
+              {{ settings.footer_col_1_content }}
+            </div>
+          {% elsif settings.footer_columns == '2' %}
+            <div class="col-md-6 gutter-bottom">
+              {% if settings.footer_col_1_label %}
+                <h4>{{ settings.footer_col_1_label | escape }}</h4>
+              {% endif %}
+              {{ settings.footer_col_1_content }}
+            </div>
+            <div class="col-md-6 gutter-bottom">
+              {% if settings.footer_col_2_label %}
+                <h4>{{ settings.footer_col_2_label | escape }}</h4>
+              {% endif %}
+              {{ settings.footer_col_2_content }}
+            </div>
+          {% elsif settings.footer_columns == '3' %}
+            <div class="col-md-4 col-sm-12 gutter-bottom">
+              {% if settings.footer_col_1_label %}
+                <h4>{{ settings.footer_col_1_label | escape }}</h4>
+              {% endif %}
+              {{ settings.footer_col_1_content }}
+            </div>
+            <div class="col-md-4 col-sm-6 gutter-bottom">
+              {% if settings.footer_col_2_label %}
+                <h4>{{ settings.footer_col_2_label | escape }}</h4>
+              {% endif %}
+              {{ settings.footer_col_2_content }}
+            </div>
+            <div class="col-md-4 col-sm-6 gutter-bottom">
+              {% if settings.footer_col_3_label %}
+                <h4>{{ settings.footer_col_3_label | escape }}</h4>
+              {% endif %}
+              {{ settings.footer_col_3_content }}
+            </div>
+          {% elsif settings.footer_columns == '4' %}
+            <div class="col-md-6 col-lg-4 gutter-bottom">
+              {% if settings.footer_col_1_label %}
+                <h4>{{ settings.footer_col_1_label | escape }}</h4>
+              {% endif %}
+              {{ settings.footer_col_1_content }}
+            </div>
+            <div class="col-md-6 col-lg-2 gutter-bottom">
+              {% if settings.footer_col_2_label %}
+                <h4>{{ settings.footer_col_2_label | escape }}</h4>
+              {% endif %}
+              {{ settings.footer_col_2_content }}
+            </div>
+            <div class="col-md-6 col-lg-2 gutter-bottom">
+              {% if settings.footer_col_3_label %}
+                <h4>{{ settings.footer_col_3_label | escape }}</h4>
+              {% endif %}
+              {{ settings.footer_col_3_content }}
+            </div>
+            <div class="col-md-6 col-lg-4 gutter-bottom">
+              {% if settings.footer_col_4_label %}
+                <h4>{{ settings.footer_col_4_label | escape }}</h4>
+              {% endif %}
+              {{ settings.footer_col_4_content }}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  {% endif %}
+  <div class="section-{% if settings.footer_scheme == 'light' %}light{% else %}dark{% endif %} section-sm text-sm">
+    {% if settings.show_ssl_security or site.partner.brand_img %}
+      <div class="gutter-bottom text-center">
+        {% if site.partner.brand_img %}
+          <a href="{{ site.partner.brand_url }}" target="_blank"><img src="{{ site.partner.brand_img }}" class="gc-partner-brand-img"></a>
+        {% endif %}
+        {% include 'gc-lock', lock_style: settings.footer_scheme %}
+      </div>
+    {% endif %}
+
+    {% assign footer_menu = linklists.footer-menu %}
+    {% if settings.footer_credits or footer_menu.links.size > 0 %}
+      <div class="container">
+        <div class="d-flex">
+          {% if settings.footer_credits %}
+            <div class="p-0">
+              {{ settings.footer_credits }}
+            </div>
+          {% endif %}
+          {% if footer_menu.links.size > 0 %}
+            <div class="ml-auto p-0">
+              {% assign footer_menu = linklists.footer-menu %}
+              <ul class="nav">
+                {% for link in footer_menu.links %}
+                  <li class="nav-item"><a class="nav-link" href="{{ link.url }}" {% if link.target %}target="{{ link.target }}"{% endif %}>{{ link.title | escape }}</a></li>
+                {% endfor %}
+              </ul>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</footer>

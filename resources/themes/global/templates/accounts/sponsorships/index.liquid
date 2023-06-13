@@ -1,0 +1,73 @@
+{% assign active_profile_menu = 'sponsorships' %}
+
+{% layout 'theme.profile' %}
+
+<div class="mt-0 mb-5">
+    <h1>{{ 'templates.accounts.sponsorships.index.my_sponsorships' | t }}</h1>
+    <p>&nbsp;</p>
+</div>
+
+{% if account.sponsorships.size > 0 %}
+    <div class="row">
+        {% for sponsorship in account.sponsorships %}
+            <div class="col-md-4 col-sm-6">
+                <div class="card mb-4">
+                    {% if sponsorship.sponsee.thumbnail %}
+                        {% if settings.sponsorship_thumb_height != 'full' %}
+                            <div class="card-img-top" style="height:{{ settings.sponsorship_thumb_height }}px; background-position:center center; background-size:cover; background-image:url('{{ sponsorship.sponsee.thumbnail }}');"></div>
+                        {% else %}
+                            <img class="card-img-top" src="{{ sponsorship.sponsee.thumbnail }}" alt="{{ sponsorship.sponsee.first_name }}">
+                        {% endif %}
+                    {% else %}
+                        <div class="card-img-top text-center d-flex d-inline-block justify-content-center" style="height:{% if settings.sponsorship_thumb_height != 'full' %}{{ settings.sponsorship_thumb_height }}{% else %}250{% endif %}px; background-color:#eee; color:#fff;"><i class="align-self-center fa fa-camera fa-4x"></i></div>
+                    {% endif %}
+                    <div class="card-body border-top text-center">
+                        <h4 class="card-title">
+                            {{ sponsorship.sponsee.first_name }}
+                            {% if settings.sponsorship_show_ref and sponsorship.sponsee.reference_number %}
+                                <br><small class="text-muted">{{ settings.sponsorship_ref_prefix }} {{ sponsorship.sponsee.reference_number }}</small>
+                            {% endif %}
+                        </h4>
+
+                        {% if settings.sponsorship_show_age and sponsorship.sponsee.age %}
+                            <p class="card-text">
+                                {% if settings.sponsorship_show_age and settings.sponsorship_show_gender and sponsorship.sponsee.age and sponsorship.sponsee.gender %}
+                                    {% if sponsorship.sponsee.gender == 'F' %}
+                                        {{ 'templates.accounts.sponsorships.index.sponsee_female.age_html' | t: age: sponsorship.sponsee.age }}<br>
+                                    {% else %}
+                                        {{ 'templates.accounts.sponsorships.index.sponsee_male.age_html' | t: age: sponsorship.sponsee.age }}<br>
+                                    {% endif %}
+                                {% elsif settings.sponsorship_show_age and sponsorship.sponsee.age %}
+                                    {{ 'templates.accounts.sponsorships.index.sponsee.age_html' | t: age: sponsorship.sponsee.age }}<br>
+                                {% elsif settings.sponsorship_show_gender and sponsorship.sponsee.gender %}
+                                    {% if sponsorship.sponsee.gender == 'F' %}
+                                        {{ 'templates.accounts.sponsorships.index.sponsee_female.gender_html' }}<br>
+                                    {% else %}
+                                        {{ 'templates.accounts.sponsorships.index.sponsee_male.gender_html' }}<br>
+                                    {% endif %}
+                                {% endif %}
+
+                                {% if settings.sponsorship_show_birthday and sponsorship.sponsee.birth_date %}
+                                    {{ 'templates.accounts.sponsorships.index.sponsee.birth_date_html' | t: birth_date: sponsorship.sponsee.birth_date }}
+                                {% endif %}
+                            </p>
+                        {% endif %}
+
+                        <a href="/account/sponsorships/{{ sponsorship.id }}" class="btn btn-sm btn-outline-primary"><i class="fa fa-search"></i> View</a>
+                    </div>
+                    {% if sponsorship.subscription %}
+                        <div class="card-body border-top p-2 text-center">
+                            <small>
+                                {{ 'templates.accounts.sponsorships.index.next_charge' | t }}&nbsp;&nbsp;
+                                <strong>{{ 'templates.accounts.sponsorships.index.next_charge_on' | t: amount: sponsorship.subscription.amount, currency: subscription.currency, next_payment_date: sponsorship.subscription.next_payment_date }}</strong>
+                            </small>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <p class="text-lg text-muted text-center w-75 mx-auto">{{ 'templates.accounts.sponsorships.index.you_have_no_sponsorships' | t }}</p>
+    <p class="text-center"><a href="/sponsorship" class="btn btn-outline-primary">{{ 'templates.accounts.sponsorships.index.find_sponsorship' | t: sponsorship_child: site.synonyms.sponsorship_child }}</a></p>
+{% endif %}

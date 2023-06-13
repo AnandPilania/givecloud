@@ -1,0 +1,72 @@
+{% assign active_profile_menu = 'subscriptions' %}
+{% layout 'theme.profile' %}
+
+<div class="subscription-list">
+
+    <h1 class="mt-0">{{ 'templates.accounts.subscriptions.index.my_recurring_payments' | t }}</h1>
+
+    {% if subscriptions.size == 0 %}
+
+        <p class="text-lg text-muted text-center">{{ 'templates.accounts.subscriptions.index.no_recurring_payments' | t }}</p>
+
+    {% else %}
+
+        <div class="row">
+
+            {% for subscription in subscriptions %}
+                <div class="col-md-4 col-sm-6">
+                    <div class="card mb-4">
+                        {% if subscription.status == 'suspended' %}
+                            <div class="card-body rounded-top bg-warning font-weight-bold text-sm border-top p-2 text-center">
+                                {{ 'templates.accounts.subscriptions.index.status_paused' | t }}
+                            </div>
+                        {% elsif subscription.status == 'expired' %}
+                            <div class="card-body rounded-top bg-warning text-white font-weight-bold text-sm border-top p-2 text-center">
+                                {{ 'templates.accounts.subscriptions.index.status_expired' | t }}
+                            </div>
+                        {% elsif subscription.status == 'cancelled' %}
+                            <div class="card-body rounded-top bg-danger text-white font-weight-bold text-sm border-top p-2 text-center">
+                                {{ 'templates.accounts.subscriptions.index.status_cancelled' | t }}
+                            </div>
+                        {% endif %}
+
+                        <div class="card-body {% if subscription.status == 'active' %}rounded-top{% endif %} text-center text-white" style="background-size:cover; background: linear-gradient( rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6) ), url('{{ subscription.feature_image.thumb }}') center center;">
+                            <div class="my-4 {% if subscription.status == 'Suspended' %}text-warning{% endif %}">
+                                <a href="/account/subscriptions/{{ subscription.id }}" class="px-3 btn btn-outline-light btn-sm">
+                                    <div class="text-lg font-weight-bold">{{ subscription.total_amount | money : subscription.currency, 'currency_code' }}</div>
+                                    <div class="text-muted text-uppercase text-sm">{{ subscription.billing_period_abbreviation }}</div>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="text-sm {% if subscription.status == 'cancelled' %}rounded-bottom{% endif %} font-weight-bold py-3 bg-light text-center">
+                            {{ subscription.description }}
+                        </div>
+
+                        {% if subscription.status == 'active' %}
+                            <div class="card-body rounded-bottom text-sm border-top py-2 px-3">
+                                <div class="row gutter-sm">
+                                    <div class="col-6">
+                                        <strong><i class="fa fa-calendar-o"></i> {{ subscription.next_payment_date | date:'short_month_ordinal_day' }}</strong><br>
+                                        <small class="text-muted">{{ 'templates.accounts.subscriptions.index.next_charge' | t }}</small>
+                                    </div>
+                                    <div class="col-6 text-right">
+                                        {% if subscription.payment_method %}
+                                            <strong>{% include 'payment-method-icon', icon_size:'1x', account_type: subscription.payment_method.account_type %} {{ subscription.payment_method.account_number | slice: -4, 4 }}</strong>
+                                        {% else %}
+                                            <i class="fa fa-exclamation-circle"></i> {{ 'templates.accounts.subscriptions.index.method_missing' | t }}
+                                        {% endif %}
+                                        <br>
+                                        <small class="text-muted">{{ 'templates.accounts.subscriptions.index.method' | t }}</small>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+
+        </div>
+    {% endif %}
+
+</div>

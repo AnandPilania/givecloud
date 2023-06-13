@@ -1,0 +1,77 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://theming.givecloud.co/schemas/theme.json#",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "oneOf": [
+      {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9_]+$"
+          },
+          "theme_name": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64
+          },
+          "theme_description": {
+            "type": "string"
+          },
+          "theme_version": {
+            "type": "string",
+            "maxLength": 64
+          },
+          "theme_author": {
+            "type": "string",
+            "maxLength": 64
+          },
+          "theme_homepage": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "theme_name",
+          "theme_description",
+          "theme_version",
+          "theme_author",
+          "theme_homepage"
+        ],
+        "additionalProperties": false
+      },
+      {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64
+          },
+          "config": {
+            "type": "object"
+          },
+          "settings": {
+            "$ref": "http://theming.givecloud.co/schemas/settings.json#"
+          }
+        },
+        "required": ["name", "settings"],
+        "additionalProperties": false
+      },
+      {
+        "type": "object",
+        "properties": {
+          "include": {
+            "type": "string"
+          }
+        },
+        "required": ["include"],
+        "additionalProperties": false
+      }
+    ]
+  }
+}

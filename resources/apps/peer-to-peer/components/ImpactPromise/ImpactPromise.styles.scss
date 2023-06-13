@@ -1,0 +1,15 @@
+.root {
+  @apply flex flex-col items-center;
+  @apply border border-gray-300 rounded-lg;
+  @apply text-center px-1 mb-4;
+
+  > * {
+    @apply transform -translate-y-2;
+
+    &:first-child {
+      @apply bg-white;
+      @apply uppercase;
+      @apply px-3;
+    }
+  }
+}

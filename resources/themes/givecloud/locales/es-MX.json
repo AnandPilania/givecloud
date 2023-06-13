@@ -1,0 +1,120 @@
+{
+  "general": {
+    "actions": {
+      "continue_below": "Continuar abajo",
+      "close": "Cerca"
+    },
+    "forms": {
+      "account_holder_name": "nombre del titular de la cuenta",
+      "account_holder_name_placeholder": "John Smith",
+      "account_holder_type": "Tipo de titular de cuenta",
+      "account_holder_types": {
+        "company": "Empresa",
+        "individual": "Individual"
+      },
+      "account_type": "Tipo de cuenta",
+      "account_no": "Cuenta #",
+      "address": "Dirección",
+      "address_placeholder": "Calle y número, apartado de correos, c / o.",
+      "address_2": "Dirección 2",
+      "address_2_placeholder": "apartamento, suite, unidad, edificio, piso, etc.",
+      "bank": "Banco",
+      "billing_address": "Dirección de Envio",
+      "cardholder_name": "Nombre del titular de la tarjeta",
+      "cardholder_name_placeholder": "John Smith",
+      "checking": "Comprobación",
+      "city": "Ciudad",
+      "countries": {
+        "canada": "Canadá",
+        "mexico": "México",
+        "united_states": "Estados Unidos"
+      },
+      "country": "País",
+      "credit_card_number": "Número de tarjeta de crédito",
+      "credit_debit": "Credito debito",
+      "cvv": "CVV",
+      "email": "Email",
+      "expiry": "MM / AA",
+      "expiry_placeholder": "MM / AA",
+      "first_name": "Nombre",
+      "institution_no": "Institución #",
+      "last_name": "Apellido",
+      "organization_name": "Nombre de la empresa",
+      "password": "Contraseña",
+      "paypal": "PayPal",
+      "postal": "Código Postal",
+      "province": "Provincia",
+      "referral_source": "Cómo te enteraste de nosotros?",
+      "routing_no": "Enrutamiento #",
+      "savings": "Ahorros",
+      "state": "Estado",
+      "title": "Título",
+      "transit_no": "Tránsito #",
+      "we_support": "Aceptamos:",
+      "zip": "Código Postal"
+    },
+    "give_with_confidence": "Cifrado y seguro. Dar con confianza.",
+    "powered_by_givecloud": "Desarrollado por Givecloud."
+  },
+  "templates": {
+    "404": {
+      "close_this_window_and_send_text_again": "Cierre esta ventana e intente enviar su TEXTO nuevamente.",
+      "link_has_expired": "Este enlace ha expirado.",
+      "warning": "¡Advertencia!"
+    },
+    "payment_methods": {
+      "add": "añade un metodo de pago",
+      "add_description": "Tener un método de pago vinculado a su cuenta le permite donar rápidamente a través de TEXT o desde el sitio web sin tener que ingresar su información de pago nuevamente.",
+      "add_payment_method": "Añadir método de pago"
+    },
+    "sms": {
+      "signup": {
+        "already_have_an_account": "¿Ya tienes una cuenta?",
+        "click_here": "Haga clic aquí",
+        "dont_have_an_account": "¿No tienes una cuenta?",
+        "login_to_account": "Inicie sesión en la cuenta",
+        "login_to_your_account": "Ingrese a su cuenta",
+        "my_payment_method": "Mis métodos de pago",
+        "other": "Otro:",
+        "referral_source_other": "Otro",
+        "save_and_continue": "Guardar y continuar"
+      },
+      "thank_you": {
+        "close_this_window_and_send_text_again": "Ahora puede cerrar esta ventana e intentar enviar su TEXTO nuevamente.",
+        "default_payment_method_successfully_added": "Se ha agregado con éxito un método de pago predeterminado a su cuenta.",
+        "thank_you": "¡Gracias!"
+      }
+    }
+  },
+  "scripts": {
+    "templates": {
+      "signup": {
+        "please_wait_while_we_create_your_account": "Por favor espere mientras creamos su cuenta ...",
+        "please_wait_while_we_login_to_your_account": "Espere mientras iniciamos sesión en su cuenta ..."
+      },
+      "please_wait_while_your_payment_method_is_added": "Espere mientras se agrega su método de pago ..."
+    },
+    "theme": {
+      "alert": "Alerta",
+      "confirm": "Confirmar",
+      "loading": "Cargando...",
+      "no": "No",
+      "unknown_error_521": "Error desconocido (521)",
+      "yes": "si"
+    }
+  },
+  "money_formats": {
+    "basic": "$ 0,0",
+    "compact": "$ 0,0 [.] A",
+    "currency_code": "$ 0,0.00 [$$$]",
+    "default": "$ 0,0.00"
+  },
+  "date_formats": {
+    "calendar_short_month_day_year": "M d, aaaa",
+    "month_day": "F j",
+    "month_day_year": "F j, Y",
+    "short_month_day_year": "M j, Y",
+    "short_month_ordinal_day": "M jS",
+    "short_month_ordinal_day_year": "M jS, Y"
+  }
+}

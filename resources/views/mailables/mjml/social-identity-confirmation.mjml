@@ -1,0 +1,25 @@
+
+{% layout "layouts/app" %}
+
+{% block head %}
+<mj-preview>Linked accounts confirmation</mj-preview>
+{% endblock %}
+
+{% block content %}
+<mj-section css-class="box">
+  <mj-column>
+    <mj-text padding-bottom="0">
+      <h1>Hey {{ $user->firstname }},</h1>
+    </mj-text>
+    <mj-text color="#474747" font-size="18px" font-weight="300" padding-top="0">
+      Follow the link below to sign-in into your account through {{ ucfirst($provider) }}.
+    </mj-text>
+    <mj-text color="#474747" font-size="16px">
+      This link will be valid for <strong>{{ $ttl }} minutes</strong>.
+    </mj-text>
+    <mj-button background-color="#fc58af" color="white" font-weight="500" font-size="16px" padding="20px" border-radius="30px" href="{{ $url }}">
+      Confirm
+    </mj-button>
+  </mj-column>
+</mj-section>
+{% endblock %}

@@ -1,0 +1,7 @@
+.root {
+  @apply w-full h-0.5 bg-gray-300 mt-1 -mr-2 mb-1;
+
+  &.noMargin {
+    @apply my-0;
+  }
+}

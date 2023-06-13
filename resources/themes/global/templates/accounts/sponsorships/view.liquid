@@ -1,0 +1,245 @@
+{% include 'header-image', header_hide_on_mobile: true %}
+
+{% asset 'https://cdn.givecloud.co/npm/ekko-lightbox@5.3.0/dist/ekko-lightbox.css' %}
+{% asset 'https://cdn.givecloud.co/npm/ekko-lightbox@5.3.0/dist/ekko-lightbox.min.js' %}
+
+<div class="d-flex container justify-content-md-between justify-content-around mt-4 mt-md-3 mb-0 mb-md-3">
+    <div class="mx-3 d-none d-md-block">
+        <a href="/account/sponsorships" class="btn btn-sm btn-pill btn-outline-dark m-1 px-3 text-sm"><i class="fa fa-arrow-left"></i> {{ 'templates.accounts.sponsorships.view.back' | t }}</a>
+    </div>
+    <div class="mx-0 mx-md-3">
+
+        <a href="/account/sponsorships" class="btn d-inline-block d-md-none btn-sm btn-pill btn-outline-dark m-1 px-3 text-sm"><i class="fa fa-arrow-left"></i> {{ 'templates.accounts.sponsorships.view.back' | t }}</a>
+
+        {% if site.account_features contains 'view-subscriptions' %}
+            <a href="/account/subscriptions/{{ sponsorship.subscription.id }}" class="btn btn-sm btn-pill btn-primary m-1 px-3 text-sm"><i class="fa fa-gear"></i> {{ 'templates.accounts.sponsorships.view.billing' | t }}</a>
+        {% endif %}
+        {% if site.account_features contains 'end-sponsorships' %}
+            <a href="#end-sponsorship-modal" data-toggle="modal" class="btn btn-sm btn-pill btn-outline-primary m-1 px-3 text-sm"><i class="fa fa-ban"></i> {{ 'templates.accounts.sponsorships.view.end' | t }}</a>
+        {% endif %}
+    </div>
+</div>
+
+<section class="pt-4">
+  <div class="container body-min-height">
+
+    <div class="mb-5 text-center sponsorship-profile">
+
+      {% if sponsorship.sponsee.thumbnail %}
+        <div class="avatar-xl" style="background-image:url('{{ sponsorship.sponsee.thumbnail }}');"></div>
+      {% else %}
+        <div class="avatar-xl" style="background-color:#eee; color:#fff; text-align:center; padding-top:85px;"><i class="fa fa-camera fa-5x fa-fw"></i></div>
+      {% endif %}
+
+      <h1 class="mt-4">
+        {{ sponsorship.sponsee.full_name }}
+        {% if settings.sponsorship_show_ref and sponsorship.sponsee.reference_number %}
+          <br><small class="text-muted">{{ settings.sponsorship_ref_prefix }} {{ sponsorship.sponsee.reference_number }}</small>
+        {% endif %}
+      </h1>
+
+      <div class="d-flex justify-content-center">
+              <ul class="nav nav-pills" id="myTab" role="tablist">
+                  <li class="nav-item">
+                    <a class="nav-link btn m-1 btn-lg btn-outline-primary active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">{{ 'templates.accounts.sponsorships.view.profile' | t }}</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link btn m-1 btn-lg btn-outline-primary" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">{{ 'templates.accounts.sponsorships.view.updates' | t }}</a>
+                  </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="tab-content">
+          <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab">
+
+            <div class="masonry-3 pb-5 sponsorship-masonry">
+
+              <div class="brick-container">
+                <div class="brick">
+                  <div class="card border-secondary mb-4">
+                    <div class="card-header text-white text-center bg-secondary border-secondary">
+                      {{ 'templates.accounts.sponsorships.view.about_me' | t }}
+                    </div>
+                    <div class="card-body p-4 text-center text-info">
+                      <p class="text-lg">
+                        {{ 'templates.accounts.sponsorships.view.my_name_is_html' | t: first_name: sponsorship.sponsee.first_name, last_name: sponsorship.sponsee.last_name }}
+                        {% if settings.sponsorship_show_age and settings.sponsorship_show_gender and sponsorship.sponsee.age and sponsorship.sponsee.gender %}
+                            {% if sponsorship.sponsee.gender == 'F' %}
+                                {{ 'templates.accounts.sponsorships.view.sponsee_female.age_html' | t: age: sponsorship.sponsee.age }}<br>
+                            {% else %}
+                                {{ 'templates.accounts.sponsorships.view.sponsee_male.age_html' | t: age: sponsorship.sponsee.age }}<br>
+                            {% endif %}
+                        {% elsif settings.sponsorship_show_age and sponsorship.sponsee.age %}
+                            {{ 'templates.accounts.sponsorships.view.sponsee.age_html' | t: age: sponsorship.sponsee.age }}<br>
+                        {% elsif settings.sponsorship_show_gender and sponsorship.sponsee.gender %}
+                            {% if sponsorship.sponsee.gender == 'F' %}
+                                {{ 'templates.accounts.sponsorships.view.sponsee_female.gender_html' | t }}<br>
+                            {% else %}
+                                {{ 'templates.accounts.sponsorships.view.sponsee_male.gender_html' | t }}<br>
+                            {% endif %}
+                        {% endif %}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {% if settings.sponsorship_show_birthday and sponsorship.sponsee.birth_date %}
+                <div class="brick-container">
+                  <div class="brick">
+                    <div class="card border-secondary mb-4">
+                      <div class="card-header text-white text-center bg-secondary border-secondary">
+                        {{ 'templates.accounts.sponsorships.view.birthday' | t }}
+                      </div>
+                      <div class="card-body p-4 text-center text-info">
+                        <i class="fa fa-5x fa-birthday-cake mb-3"></i>
+                        <p class="text-lg">
+                            {{ 'templates.accounts.sponsorships.view.my_birthday_is' | t }}<br>
+                            <strong>{{ sponsorship.sponsee.birth_date | date: 'date:short_month_day_year' }}</strong>.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              {% endif %}
+
+              {% for field in sponsorship.sponsee.fields %}
+                <div class="brick-container">
+                  <div class="brick">
+                    <div class="card border-secondary mb-4">
+                      <div class="card-header text-white text-center bg-secondary border-secondary">
+                        {{ field.name }}
+                      </div>
+                      <div class="card-body p-4 text-center text-info">
+                        {% if field.is_simple %}
+                          <p class="text-lg">{{ field.value }}</p>
+                        {% elsif field.item.summary %}
+                          <p class="text-lg">{{ field.item.summary }}</p>
+                        {% elsif field.item.name %}
+                          <p class="text-lg">{{ field.item.name }}</p>
+                        {% endif %}
+                      </div>
+                      {% if field.item.link %}
+                        <div class="card-body text-center border-top">
+                          <a class="card-link" href="{{ field.item.link }}" target="{{ field.item.target }}">{{ 'templates.accounts.sponsorships.view.more' | t }} <i class="fa fa-arrow-right fa-fw"></i></a>
+                        </div>
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+
+            {% if sponsorship.sponsee.biography %}
+                <div class="mb-5">
+                    {% if settings.sponsorship_my_story_label %}
+                        <h2>{{ settings.sponsorship_my_story_label }}</h2>
+                    {% else %}
+                        <h2>{{ 'templates.accounts.sponsorships.view.my_story' | t }}</h2>
+                    {% endif %}
+
+                  {{ sponsorship.sponsee.biography }}
+                </div>
+            {% endif %}
+
+          </div>
+          <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+
+            {% if sponsorship.sponsee.timeline.size > 0 %}
+                <ul class="timeline">
+                    {% for post in sponsorship.sponsee.timeline %}
+                        {% assign forloop_even = forloop.index0 | modulo : 2 %}
+
+                        <li {% if forloop_even %}class="timeline-inverted"{% endif %}>
+                            <div class="timeline-badge"><i class="fa {{ post.icon_class }}"></i></div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4 class="timeline-title">{{ post.headline }}</h4>
+                                    {% if post.created_at %}
+                                        <p><small class="text-muted"><i class="fa fa-calendar-o"></i> {{ post.created_at | date: 'short_month_ordinal_day_year' }} <small>({{ post.created_at | date: 'humans' }})</small></small></p>
+                                    {% endif %}
+                                </div>
+                                <div class="timeline-body">
+                                    <p>{{ post.message }}</p>
+                                </div>
+                                {% if post.media.size > 0 %}
+                                    <div class="timeline-files {% if post.media.size == 1 %}masonry-1-col{% elsif post.media.size == 2 %}masonry-2-col{%else %}masonry-3-col{% endif %}">
+                                        {% for media in post.media %}
+                                            {% if media.is_image or media.content_type == 'application/pdf' %}
+                                                <a target="_blank" rel="noopener" href="{{ media.full }}" class="timeline-file" title="{{ media.caption }}" data-toggle="lightbox" data-footer="{{ media.caption }}" data-gallery="post-{{post.id}}-gallery"><img src="{{ media.thumb }}"></a>
+                                            {% elsif media.is_video or media.is_audio %}
+                                                <a target="_blank" rel="noopener" href="{{ media.full }}" class="timeline-file" title="{{ media.caption }}">
+                                                    <div class="placeholder">
+                                                        <i class="fa fa-play fa-2x"></i><div>{{ media.caption }}</div>
+                                                    </div>
+                                                </a>
+                                            {% else %}
+                                                <a target="_blank" rel="noopener" href="{{ media.full }}" class="timeline-file" title="{{ media.caption }}">
+                                                    <div class="placeholder">
+                                                        <i class="fa fa-file-o fa-2x"></i><div>{{ media.caption }}</div>
+                                                    </div>
+                                                </a>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="mt-5 text-center text-lg text-muted">{{ 'templates.accounts.sponsorships.view.no_updates_posted' | t }}</p>
+            {% endif %}
+
+          </div>
+        </div>
+
+  </div>
+
+</section>
+
+<!-- add product -->
+<div class="modal fade" id="end-sponsorship-modal" tabindex="-1" role="dialog" aria-labelledby="end-sponsorship-label" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-body">
+            <button type="button" class="close" data-dismiss="modal" aria-label="{{ 'general.actions.close' | t }}">
+            <span aria-hidden="true">&times;</span>
+            </button>
+            <h2 class="text-primary modal-title text-center" id="end-sponsorship-label">{{ 'templates.accounts.sponsorships.view.end_sponsorship' | t }}</h2>
+
+            <div class="d-flex w-75 my-4 mx-auto align-items-center">
+                {% if sponsorship.sponsee.thumbnail %}
+                    <div class="align-self-center circle-avatar-bg" style="background-image:url('{{ sponsorship.sponsee.thumbnail }}');"></div>
+                {% else %}
+                    <div class="align-self-center circle-avatar-bg" style="background-color:#eee; color:#fff; text-align:center; padding-top:85px;"><i class="fa fa-camera fa-5x fa-fw"></i></div>
+                {% endif %}
+                <div class="align-self-center bubble bubble-secondary p-3">
+                    {{ settings.sponsorship_ending_confirmation_message }}
+                </div>
+            </div>
+
+            <form method="post">
+                <input type="hidden" name="_token" value="{{ site.csrf_token }}" />
+
+                {% if site.sponsorship_end_reasons %}
+                    <div class="w-75 mx-auto my-3">
+                        {% for reason in site.sponsorship_end_reasons %}
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="reason-{{ forloop.index }}" name="reason" class="custom-control-input">
+                                <label class="custom-control-label" for="reason-{{ forloop.index }}">{{ reason }}</label>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <div class="text-center">
+                    <a href="#" data-dismiss="modal" class="btn btn-secondary font-weight-bold m-1 mb-3">{{ 'templates.accounts.sponsorships.view.keep_sponsoring' | t }}</a>
+                    <button type="submit" class="btn btn-outline-secondary m-1 mb-3">{{ 'templates.accounts.sponsorships.view.stop_sponsorship' | t }}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,67 @@
+.root {
+  @apply absolute inset-x-0 top-0 z-20;
+  @apply w-full min-w-[312px];
+  @apply bg-transparent;
+
+  .content {
+    @apply relative z-10;
+    @apply flex items-center justify-between flex-shrink-0;
+    @apply w-full h-[4.75rem] 2xl:h-[5.75rem] p-5 pb-2;
+  }
+
+  .background {
+    @apply absolute top-0 left-0;
+    @apply flex flex-col;
+    @apply w-full h-full;
+    @apply pointer-events-none;
+    div {
+      // necessary to prevent the
+      // scrollbar from being obfuscated
+      margin-left: 16px;
+      margin-right: 16px;
+    }
+  }
+
+  .solidBg {
+    @apply flex-grow;
+    @apply bg-white;
+  }
+
+  .gradientBg {
+    @apply flex-grow-0;
+    @apply h-8;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 90%);
+  }
+
+  .headerButton {
+    @apply relative;
+    @apply flex items-center justify-center;
+    @apply w-10 h-10;
+  }
+
+  button {
+    @apply flex items-center justify-center;
+    @apply w-10 h-10;
+    @apply rounded-full;
+    @apply transition ease-in-out duration-300;
+    @apply bg-transparent;
+
+    &:hover {
+      @apply bg-gray-200;
+    }
+
+    &:active {
+      @apply text-gray-500;
+    }
+  }
+
+  .backButton {
+    @apply h-8;
+    @apply text-gray-500;
+    @apply ml-0 mr-auto;
+  }
+
+  .localeDropdown {
+    @apply absolute left-4;
+  }
+}

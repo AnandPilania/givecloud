@@ -1,0 +1,68 @@
+{% schema %}
+[
+    {
+        "name": "Side-Bar Fields",
+        "settings": [
+            {
+                "type": "header",
+                "content": "Side-Bar Checkout: Basic"
+            },
+            {
+                "type": "product",
+                "name": "page_sidebar_product",
+                "label": "Product",
+                "info": "This is the product that will be available for purchase on this sidebar checkout."
+            },
+            {
+                "type": "select",
+                "name": "page_sidebar_location",
+                "label": "Sidebar Location",
+                "options": {
+                    "left": "Left",
+                    "right": "Right"
+                },
+                "default": "right",
+                "allow_blank": false,
+                "size":"sm"
+            }
+        ]
+    },
+    {
+        "include": "side-bar-checkout"
+    }
+]
+{% endschema %}
+
+
+{% include 'header-image-page', header_image: page.feature_image.full %}
+
+<div class="container gutter-top clearfix my-5">
+    <div class="row">
+        {% if page.metadata.page_sidebar_location == 'left' %}
+            <div class="col-12 col-md-5">
+                {% include 'side-bar-checkout', product: page.metadata.page_sidebar_product %}
+            </div>
+        {% endif %}
+
+        <div class="col-12 col-md-7 body-text">
+            {{ page.content }}
+        </div>
+
+        {% if page.metadata.page_sidebar_location == 'right' %}
+            <div class="col-12 col-md-5">
+                {% include 'side-bar-checkout', product: page.metadata.page_sidebar_product %}
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<div class="modal fade" id="payment-overlay" tabindex="-1" role="dialog" aria-label="Processing" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <img class="spinner spinner-spin d-none" src="{{ 'spinner.gif' | asset_url }}" alt="">
+                <img class="spinner spinner-success d-none" src="{{ 'success.gif' | asset_url }}" alt="">
+            </div>
+        </div>
+    </div>
+</div>

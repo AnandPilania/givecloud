@@ -1,0 +1,12 @@
+<div class="card">
+  <div class="card-body">
+
+      {% for post in posts %}
+        <article class=" {% unless forloop.last %}border-bottom{% endunless %}">
+          <h5 class="text-primary">{{ post.title }}</h5>
+          <p>{{ post.excerpt|truncate:70 }} <a href="{{ post.url }}">{{ 'templates.accounts.shortcodes.read_more_dots' | t }}</a></p>
+        </article>
+      {% endfor %}
+
+  </div>
+</div>

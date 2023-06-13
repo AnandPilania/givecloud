@@ -1,0 +1,31 @@
+.root {
+  @apply -ml-2 -mr-2 -mt-2 mb-4;
+
+  &.lastOfTypeMargin {
+    @apply last-of-type:mb-0 last:mb-0;
+  }
+
+  &.responsiveRows {
+    @apply block lg:flex mdlg:flex-col;
+  }
+
+  &.reverseWrap {
+    @apply flex lg:flex-row flex-col-reverse;
+  }
+
+  &.rowOnMobile {
+    @apply flex;
+  }
+
+  &.wrap {
+    @apply flex-wrap;
+  }
+}
+
+.isMarginless {
+  @apply m-0;
+}
+
+.rows {
+  @apply block sm:flex;
+}

@@ -1,0 +1,11 @@
+.root {
+  @apply flex flex-col mb-4;
+
+  .previewImage {
+    @apply max-w-[470px] mx-auto mb-10;
+  }
+}
+
+.footer {
+  @apply flex justify-end;
+}

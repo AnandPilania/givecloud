@@ -1,0 +1,43 @@
+.root {
+  @apply pointer-events-none;
+
+  .overlay {
+    @apply absolute inset-0 z-30 hidden;
+    @apply bg-black;
+  }
+
+  .content {
+    @apply absolute left-0 right-0 z-30;
+    box-shadow: none;
+
+    &.default {
+      @apply bottom-0;
+    }
+
+    &.fullHeight {
+      @apply top-0 h-full;
+    }
+  }
+
+  .inner {
+    height: inherit;
+    @apply p-6 pt-2 bg-white text-center flex flex-col items-center;
+  }
+
+  .closeBtn {
+    @apply py-2 px-4 mb-2;
+
+    .buttonBar {
+      @apply w-24 h-2 rounded border-0 bg-gray-400;
+    }
+  }
+
+  &.open {
+    @apply pointer-events-auto;
+
+    .inner {
+      box-shadow: rgb(0 0 0 / 20%) 0px 8px 10px -5px, rgb(0 0 0 / 14%) 0px 16px 24px 2px,
+        rgb(0 0 0 / 22%) 0px 6px 40px 15px;
+    }
+  }
+}

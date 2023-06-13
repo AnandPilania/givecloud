@@ -1,0 +1,26 @@
+{% layout "layouts/org" %}
+
+{% block content %}
+<mj-section css-class="box">
+  <mj-column>
+    <mj-text font-size="18px" padding-top="0">
+
+      <p>{{ __('frontend/mailables.greeting') }}
+        @if($order->hasMember())
+        <strong>{{ $order->member->first_name }},</strong>
+        @endif
+      </p>
+
+      <p>
+        {{ __('frontend/mailables.donation.intro') }} <strong>{{ $amount }}
+        {{ $order->currency }}</strong> {{ __('frontend/mailables.donation.processed') }} <strong>{{ $order->payment_type_description }}.</strong>
+        {{ $order->recurring_description }}
+      </p>
+
+      @if($thankYouMessage)
+        <p>{{ $thankYouMessage }}</p>
+      @endif
+    </mj-text>
+  </mj-column>
+</mj-section>
+{% endblock %}

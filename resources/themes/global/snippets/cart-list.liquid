@@ -1,0 +1,86 @@
+
+<div class="d-none d-md-block">
+    <div class="row no-gutters pb-1 mb-3 border-bottom">
+        <div class="col-8"><h4 class="cart-heading">{{ 'snippets.cart_list.item' | t }}</h4></div>
+        <div class="col-1 text-right"><h4 class="cart-heading">{{ 'snippets.cart_list.price' | t }}</h4></div>
+        <div class="col-2 text-center"><h4 class="cart-heading">{{ 'snippets.cart_list.qty' | t }}</h4></div>
+        <div class="col-1 text-right"><h4 class="cart-heading">{{ 'snippets.cart_list.total' | t }}</h4></div>
+    </div>
+</div>
+
+{% for item in cart.items %}
+    {% include 'cart-item' %}
+{% endfor %}
+
+<div class="d-none d-md-block">
+
+    {% if checkout.total_price %}
+        <div class="row no-gutters cart-total pb-2 mb-3 border-bottom">
+            <div class="col-2 offset-8 text-right"><h4 class="cart-heading">{{ 'snippets.cart_list.subtotal' | t }}</h4></div>
+            <div class="col-2 text-right">{{ checkout.subtotal_price | money }}</div>
+        </div>
+        <div class="row no-gutters pb-2 mb-3 border-bottom">
+            <div class="col-2 offset-8 text-right"><h4 class="cart-heading">{{ 'snippets.cart_list.shipping' | t }}</h4></div>
+            <div class="col-2 text-right">{{ checkout.shipping_price | money }}</div>
+        </div>
+        <div class="row no-gutters pb-2 mb-3 border-bottom">
+            <div class="col-2 offset-8 text-right"><h4 class="cart-heading">{{ 'snippets.cart_list.taxes' | t }}</h4></div>
+            <div class="col-2 text-right">{{ checkout.tax_price | money }}</div>
+        </div>
+    {% endif %}
+
+    <div class="row no-gutters pb-2 mb-3 font-weight-bold border-bottom">
+        <div class="col-2 offset-8 text-right"><h4 class="cart-heading">{{ 'snippets.cart_list.total_today' | t }}</h4></div>
+        <div class="col-2 text-right">{{ checkout.total_price | money }}</div>
+    </div>
+    
+    {% if cart.recurring_items %}
+        <div class="row no-gutters font-weight-bold pb-2 mb-3 border-bottom">
+            <div class="col-2 offset-8 text-right"><h4 class="cart-heading">{{ 'snippets.cart_list.total_recurring' | t }}</h4></div>
+            <div class="col-2 text-right">
+
+                {% assign recurring_day_amount       = 0 %}
+                {% assign recurring_week_amount      = 0 %}
+                {% assign recurring_bimonthly_amount = 0 %}
+                {% assign recurring_monthly_amount   = 0 %}
+                {% assign recurring_quarterly_amount = 0 %}
+                {% assign recurring_yearly_amount    = 0 %}
+
+                {% for item in cart.recurring_items %}
+                  {% if item.recurring_frequency == 'day' %}
+                      {% assign recurring_day_amount = recurring_day_amount | plus: item.recurring_amount %}
+                  {% elsif item.recurring_frequency == 'week' %}
+                      {% assign recurring_week_amount = recurring_week_amount | plus: item.recurring_amount %}
+                  {% elsif item.recurring_frequency == 'biweekly' %}
+                      {% assign recurring_biweekly_amount = recurring_biweekly_amount | plus: item.recurring_amount %}
+                  {% elsif item.recurring_frequency == 'monthly' %}
+                      {% assign recurring_monthly_amount = recurring_monthly_amount | plus: item.recurring_amount %}
+                  {% elsif item.recurring_frequency == 'quarterly' %}
+                      {% assign recurring_quarterly_amount = recurring_quarterly_amount | plus: item.recurring_amount %}
+                  {% elsif item.recurring_frequency == 'yearly' %}
+                      {% assign recurring_yearly_amount = recurring_yearly_amount | plus: item.recurring_amount %}
+                  {% endif %} 
+                {% endfor %}
+
+                {% if recurring_day_amount > 0 %}
+                    <div class="mb-1">{{ recurring_day_amount | money }}/{{ 'snippets.cart_list.day' | t }}</div>
+                {% endif %}
+                {% if recurring_week_amount > 0 %}
+                    <div class="mb-1">{{ recurring_week_amount | money }}/{{ 'snippets.cart_list.week' | t }}</div>
+                {% endif %}
+                {% if recurring_biweekly_amount > 0 %}
+                    <div class="mb-1">{{ recurring_biweekly_amount | money }}/{{ 'snippets.cart_list.bi_weekly' | t }}</div>
+                {% endif %}
+                {% if recurring_monthly_amount > 0 %}
+                    <div class="mb-1">{{ recurring_monthly_amount | money }}/{{ 'snippets.cart_list.month' | t }}</div>
+                {% endif %}
+                {% if recurring_quarterly_amount > 0 %}
+                    <div class="mb-1">{{ recurring_quarterly_amount | money }}/{{ 'snippets.cart_list.quarter' | t }}</div>
+                {% endif %}
+                {% if recurring_yearly_amount > 0 %}
+                    <div class="mb-1">{{ recurring_yearly_amount | money }}/{{ 'snippets.cart_list.year' | t }}</div>
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
+</div>

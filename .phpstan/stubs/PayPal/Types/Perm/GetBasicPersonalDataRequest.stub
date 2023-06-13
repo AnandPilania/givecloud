@@ -1,0 +1,12 @@
+<?php
+
+namespace PayPal\Types\Perm;
+
+class GetBasicPersonalDataRequest
+{
+    /** @var \PayPal\Types\Common\RequestEnvelope */
+    public $requestEnvelope; // @phpstan-ignore-line
+
+    /** @var \PayPal\Types\Perm\PersonalAttributeList */
+    public $attributeList;
+}

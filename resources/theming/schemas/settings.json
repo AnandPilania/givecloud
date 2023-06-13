@@ -1,0 +1,203 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://theming.givecloud.co/schema/settings.json#",
+  "type": "array",
+  "minItems": 1,
+  "items": {
+    "type": "object",
+    "oneOf": [
+      {
+        "type": "object",
+        "properties": {
+          "type": {"enum": ["header", "info", "warning", "danger"]},
+          "content": {"$ref": "#/definitions/content"}
+        },
+        "required": ["type", "content"],
+        "additionalProperties": false
+      },
+      {
+        "type": "object",
+        "properties": {
+          "type": {
+            "enum": [
+              "color",
+              "css",
+              "html",
+              "image",
+              "js",
+              "link",
+              "oembed",
+              "media",
+              "number",
+              "category",
+              "raw-html",
+              "text",
+              "selectize-tags"
+            ]
+          },
+          "name": {"$ref": "#/definitions/name"},
+          "revisable": {"type": "boolean"},
+          "label": {"$ref": "#/definitions/label"},
+          "info": {"$ref": "#/definitions/info"},
+          "placeholder": {"$ref": "#/definitions/placeholder"},
+          "size": {"$ref": "#/definitions/size"},
+          "default": {"type": "string"}
+        },
+        "required": ["type", "name", "label"],
+        "additionalProperties": false
+      },
+      {
+        "type": "object",
+        "properties": {
+          "type": {
+            "enum": ["product","variant"]
+          },
+          "name": {"$ref": "#/definitions/name"},
+          "revisable": {"type": "boolean"},
+          "label": {"$ref": "#/definitions/label"},
+          "info": {"$ref": "#/definitions/info"},
+          "placeholder": {"$ref": "#/definitions/placeholder"},
+          "size": {"$ref": "#/definitions/size"},
+          "default": {"type": "string"},
+          "multiple": {"type": "boolean"},
+          "is_donation": {"type": "boolean"}
+        },
+        "required": ["type", "name", "label"],
+        "additionalProperties": false
+      },
+      {
+        "type": "object",
+        "properties": {
+          "type": {
+            "enum": ["pledge-campaign"]
+          },
+          "name": {"$ref": "#/definitions/name"},
+          "revisable": {"type": "boolean"},
+          "label": {"$ref": "#/definitions/label"},
+          "info": {"$ref": "#/definitions/info"},
+          "placeholder": {"$ref": "#/definitions/placeholder"},
+          "size": {"$ref": "#/definitions/size"},
+          "default": {"type": "string"},
+          "multiple": {"type": "boolean"}
+        },
+        "required": ["type", "name", "label"],
+        "additionalProperties": false
+      },
+      {
+        "type": "object",
+        "properties": {
+          "type": {"enum": ["on-off"]},
+          "name": {"$ref": "#/definitions/name"},
+          "revisable": {"type": "boolean"},
+          "label": {"$ref": "#/definitions/label"},
+          "info": {"$ref": "#/definitions/info"},
+          "size": {"$ref": "#/definitions/size"},
+          "default": {"type": ["boolean"]}
+        },
+        "required": ["type","name","label"],
+        "additionalProperties": false
+      },
+      {
+        "type": "object",
+        "properties": {
+          "type": {"enum": ["event-date","map-pin"]},
+          "name": {"$ref": "#/definitions/name"},
+          "revisable": {"type": "boolean"},
+          "label": {"$ref": "#/definitions/label"},
+          "info": {"$ref": "#/definitions/info"}
+        },
+        "required": ["type", "name", "label"],
+        "additionalProperties": false
+      },
+      {
+        "type": "object",
+        "properties": {
+          "type": {"enum": ["multi", "multi-check", "select"]},
+          "name": {"$ref": "#/definitions/name"},
+          "revisable": {"type": "boolean"},
+          "label": {"$ref": "#/definitions/label"},
+          "info": {"$ref": "#/definitions/info"},
+          "placeholder": {"$ref": "#/definitions/placeholder"},
+          "size": {"$ref": "#/definitions/size"},
+          "options": {
+            "type": "object",
+            "minProperties": 1,
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "allow_blank": {"type": "boolean"},
+          "allow_other": {"type": "boolean"},
+          "default": {"type": "string"}
+        },
+        "required": ["type", "name", "label", "options"],
+        "additionalProperties": false
+      },
+      {
+        "type": "object",
+        "properties": {
+          "type": {"enum": ["multi-custom"]},
+          "name": {"$ref": "#/definitions/name"},
+          "revisable": {"type": "boolean"},
+          "label": {"$ref": "#/definitions/label"},
+          "info": {"$ref": "#/definitions/info"},
+          "placeholder": {"$ref": "#/definitions/placeholder"},
+          "size": {"$ref": "#/definitions/size"},
+          "options": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string"
+            }
+          },
+          "allow_blank": {"type": "boolean"},
+          "default": {
+            "type": "array",
+            "items": {"type": "string"}
+          }
+        },
+        "required": ["type", "name", "label"],
+        "additionalProperties": false
+      },
+      {
+        "type": "object",
+        "properties": {
+          "type": {"enum": ["nav_menu"]},
+          "name": {"$ref": "#/definitions/name"},
+          "revisable": {"type": "boolean"},
+          "label": {"$ref": "#/definitions/label"},
+          "info": {"$ref": "#/definitions/info"},
+          "placeholder": {"$ref": "#/definitions/placeholder"},
+          "size": {"$ref": "#/definitions/size"},
+          "allow_blank": {"type": "boolean"},
+          "default": {"type": "string"}
+        },
+        "required": ["type", "name", "label"],
+        "additionalProperties": false
+      }
+    ]
+  },
+  "definitions": {
+    "content": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]*[a-z0-9]$"
+    },
+    "label": {
+      "type": "string",
+      "maxLength": 64
+    },
+    "info": {
+      "type": "string"
+    },
+    "placeholder": {
+      "type": "string",
+      "maxLength": 64
+    },
+    "size": {
+      "enum": ["sm","md","lg"]
+    }
+  }
+}

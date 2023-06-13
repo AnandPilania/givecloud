@@ -1,0 +1,11 @@
+<div class="row">
+    {% for sponsoree in sponsorees %}
+        <div class="col-md-4 col-sm-6 col-12">
+        {% include 'sponsorship-grid-item', child: sponsoree %}
+    </div>
+  {% endfor %}
+</div>
+
+{% for sponsoree in sponsorees %}
+  {% include 'sponsorship-add-modal', child: sponsoree, match_height: 'sponsorship-grid' %}
+{% endfor %}

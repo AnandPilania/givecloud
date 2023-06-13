@@ -1,0 +1,51 @@
+<?php
+
+namespace PayPal\Service;
+
+class PermissionsService
+{
+    /**
+     * @param \PayPal\Types\Perm\RequestPermissionsRequest $requestPermissionsRequest
+     * @param mixed $apiCredential
+     * @return \PayPal\Types\Perm\RequestPermissionsResponse
+     */
+    public function RequestPermissions($requestPermissionsRequest, $apiCredential = null)
+    {
+    }
+
+    /**
+     * @param \PayPal\Types\Perm\GetAccessTokenRequest $getAccessTokenRequest
+     * @param mixed $apiCredential
+     * @return \PayPal\Types\Perm\GetAccessTokenResponse
+     */
+    public function GetAccessToken($getAccessTokenRequest, $apiCredential = null)
+    {
+    }
+
+    /**
+     * @param \PayPal\Types\Perm\GetPermissionsRequest $getPermissionsRequest
+     * @param mixed $apiCredential
+     * @return \PayPal\Types\Perm\GetPermissionsResponse
+     */
+    public function GetPermissions($getPermissionsRequest, $apiCredential = null)
+    {
+    }
+
+    /**
+     * @param \PayPal\Types\Perm\CancelPermissionsRequest $cancelPermissionsRequest
+     * @param mixed $apiCredential
+     * @return \PayPal\Types\Perm\CancelPermissionsResponse
+     */
+    public function CancelPermissions($cancelPermissionsRequest, $apiCredential = null)
+    {
+    }
+
+    /**
+     * @param \PayPal\Types\Perm\GetBasicPersonalDataRequest $getBasicPersonalDataRequest
+     * @param mixed $apiCredential
+     * @return \PayPal\Types\Perm\GetBasicPersonalDataResponse
+     */
+    public function GetBasicPersonalData($getBasicPersonalDataRequest, $apiCredential = null)
+    {
+    }
+}

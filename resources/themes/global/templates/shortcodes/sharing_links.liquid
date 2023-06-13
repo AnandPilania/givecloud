@@ -1,0 +1,5 @@
+<div class="sharing-links d-flex flex-column flex-xl-row justify-content-center">
+    {% for channel in channels %}
+        <span class="px-1 py-1"><a href="{{ channel.url }}" {% if channel.target %} target="{{ channel.target }}" {% endif %} class="btn btn-sm btn-pill px-3 btn-outline-primary">{% if hideicon == false %}<i class="fa {{ channel.icon }} {% if hidetext == false %} mr-2 {% endif %}"></i>{% endif %}{% if hidetext == false %}{{ 'templates.accounts.shortcodes.share_with_channel' | t: channel_name: channel.name }}{% endif %}</a></span>
+    {% endfor %}
+</div>

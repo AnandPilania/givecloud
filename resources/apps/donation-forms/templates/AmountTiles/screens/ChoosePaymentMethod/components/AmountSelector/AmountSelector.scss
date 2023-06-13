@@ -1,0 +1,9 @@
+.root {
+  @apply relative;
+  @apply flex flex-col flex-grow items-center justify-center;
+  @apply w-full mt-2;
+
+  .showVariants {
+    @apply mt-3;
+  }
+}

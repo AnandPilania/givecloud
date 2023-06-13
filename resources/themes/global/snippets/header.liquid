@@ -1,0 +1,19 @@
+<header class="{% if settings.header_width == 'full' %}header-full{% endif %} headroom headroom--top headroom--not-bottom">
+
+  {% if settings.theme_width == 'fixed' %}<div class="container master-container">{% endif %}
+
+      {% if settings.show_page_cap == '1' %}
+            {% include 'header-pagecap' %}
+      {% endif %}
+
+      {% include 'header-topbar' %}
+
+      {% include 'header-hero' %}
+
+    {% if settings.theme_width == 'fixed' %}</div>{% endif %}
+
+  {% include 'header-sidebar' %}
+
+</header>
+
+<div class="header-spacer {% if hero_menu.links.size > 0 %}with-hero{% endif %} {% if settings.show_page_cap == '1' %}with-top-bar-alt{% endif %}"></div>
